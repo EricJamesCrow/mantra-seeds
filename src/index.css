@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Overseer';
+  src: url('./fonts/Overseer.otf');
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('./fonts/Futura\ Bold\ font.ttf');
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('./fonts/Futura-CondensedLight.otf');
+}
