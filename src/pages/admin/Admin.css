@@ -1,0 +1,55 @@
+.admin-login-container {
+    background-color: #FEEED4;
+    text-align: center;
+    padding: 105px;
+}
+
+.admin-input {
+    align-self: center;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.36);
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.36);
+    border-radius: 5px; 
+    width: 193;
+    height: 45;
+}
+
+.admin-login-labels {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    color: #000000;
+    padding: 20px;
+}
+
+.admin-label {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 128px;
+    color: #000000;
+}
+
+.admin-login {
+    align-self: center;
+    margin-top: 50px;
+    width: 126px;
+    height: 40px;
+    color: #ffffff;
+    background: #DDB724;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    border: none;
+}
+
+.admin-login:hover {
+    background:#f2cd3e;
+    cursor: pointer;
+}

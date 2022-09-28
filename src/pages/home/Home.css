@@ -45,7 +45,9 @@ body {
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
-    border: none;
+    text-decoration: none;
+    text-align: center;
+    line-height: 60px;
 }
 
 .banner-shop-now:hover {
@@ -312,6 +314,7 @@ body {
     .banner-shop-now {
         width: 90px;
         height: 30px;
+        line-height: 30px;
         font-size: 10px;
         margin: 20px 0 25px 180px;
     }
@@ -365,6 +368,7 @@ body {
     .banner-shop-now {
         width: calc(90px * .8);
         height: calc(30px * .8);
+        line-height: calc(30px * .8);
         font-size: calc(10px * .8);
         margin: calc(20px * .8) 0 calc(25px * .8) calc(180px * .8);
     }

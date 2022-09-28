@@ -1,3 +1,6 @@
+// react
+import { Link } from 'react-router-dom'
+
 // styles
 import "./Home.css"
 
@@ -12,7 +15,7 @@ export default function Home() {
     <div className="banner">
         <div className="welcome">Welcome to</div>
         <div className="banner-title">MantraSeeds</div>
-        <button className="banner-shop-now">SHOP NOW</button>
+        <Link to="/shop" type="button" className="banner-shop-now">SHOP NOW</Link>
     </div>
     <div className="recent-products">
       <div className="recent-products-label">Recent Products</div>
