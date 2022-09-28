@@ -78,6 +78,94 @@ body {
     text-align: center;
 }
 
+.special-deals {
+    background: #FCE8A4;
+    padding-bottom: 40px;
+}
+
+.special-deals-label {
+    font-family: 'Southern Aire Personal Use Only';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 128px;
+    color: #447AB9;
+    padding-top: 50px;
+    padding-left: 50px;
+}
+
+.special-deals-products {
+    margin-top: 40px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: #FCE8A4;
+}
+
+.about {
+    background: #447AB9;
+    padding-bottom: 40px;
+}
+
+.about-label {
+    font-family: 'Southern Aire Personal Use Only';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 128px;
+    color: #FFFFFF;
+    padding-top: 50px;
+    padding-left: 50px;
+}
+
+.about-text {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 48px;
+    color: #FFFFFF;
+    margin: 20px 170px 0 170px;
+}
+
+.newsletter {
+    background: #FEEED4;
+    padding-bottom: 40px;
+}
+
+.newsletter-label {
+    font-family: 'Southern Aire Personal Use Only';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 128px;
+    color: #447AB9;
+    padding-top: 50px;
+    padding-left: 50px;
+}
+
+.newsletter-text {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 48px;
+    color: #447AB9;;
+    margin: 20px 170px 0 170px;
+}
+
+.copyright {
+    background: #325886;
+}
+
+.copyright div {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 36px;
+    color: #FFFFFF;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
 @media (max-width: 1500px) {
     .recent-product {
         grid-template-columns: 1fr 1fr 1fr 
