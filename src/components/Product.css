@@ -73,7 +73,7 @@
 
     .product .product-price {
         font-size: 28.8px;
-        margin: -35px 0 0 calc(250px * .8);
+        margin: calc(-35px * .8) 0 0 calc(250px * .8);
     }
     
     .add-to-cart-text {
