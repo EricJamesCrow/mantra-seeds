@@ -1,3 +1,6 @@
+// react
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+
 // styles
 import './App.css';
 
@@ -6,12 +9,22 @@ import Navbar from './components/Navbar';
 
 // pages
 import Home from "./pages/home/Home"
+import Admin from "./pages/admin/Admin"
+import Shop from "./pages/shop/Shop"
+import Contact from "./pages/contact/Contact"
 
 function App() {
   return (
     <>
+    <BrowserRouter>
       <Navbar className="navbar"/>
-      <Home/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin/>} />
+        <Route path="/shop" element={<Shop/>} />
+        <Route path="/contact" element={<Contact/>} />
+      </Routes>
+    </BrowserRouter>
     </>
   );
 }

@@ -73,6 +73,7 @@ nav {
     text-align: center;
     color: #FFFFFF;
     cursor: pointer;
+    text-decoration: none
 }
 
 .logo-container:hover {

@@ -1,5 +1,6 @@
 // react
 import { useState, useEffect } from 'react';
+import { NavLink, Link } from 'react-router-dom'
 
 // styles
 import "./Navbar.css"
@@ -11,7 +12,7 @@ import { faUser, faCartShopping} from '@fortawesome/free-solid-svg-icons'
 
 export default function Navbar() {
     const [isActive, setActive] = useState(false)
-    const [stickyClass, setStickyClass] = useState('relative');
+    const [stickyClass, setStickyClass] = useState('');
 
     useEffect(() => {
         window.addEventListener('scroll', stickNavbar);
@@ -45,7 +46,7 @@ export default function Navbar() {
     <div className="navbar-container">
         <div className="logo-container">
         <img src={Cannabis} className="cannabis"/>
-        <div className="title">MantraSeeds</div>
+        <Link to="/" className="title">MantraSeeds</Link>
         </div>
         <button href="#" className={"toggle-button"} onClick={displayMobileMenu}>
             <span className="bar"></span>
@@ -55,9 +56,15 @@ export default function Navbar() {
         <div className={"navbar-links"} 
         style={isActive ? {display: "flex"} : null}>
             <ul>
-            <li><a>Home</a></li>
-            <li><a>Shop</a></li>
-            <li><a>Contact</a></li>
+            <li>
+                <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+                <NavLink to="/shop" style={({ isActive }) => isActive ? {backgroundColor: "#82A7D6"} : null }>Shop</NavLink>
+            </li>
+            <li>
+                <NavLink to="/contact" style={({ isActive }) => isActive ? {backgroundColor: "#82A7D6"} : null }>Contact</NavLink>
+            </li>
             <li><FontAwesomeIcon 
             icon={faUser} 
             style={{
