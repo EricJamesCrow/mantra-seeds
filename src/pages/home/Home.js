@@ -41,6 +41,10 @@ export default function Home() {
           <div className="newsletter-text">
           Et vim falli omittam, mei aeterno mandamus vulputate ut. Sit quidam legimus nominavi et. Augue dissentias pro in, te indoctum conclusionemque sea, tation honestatis te vix. No has illud mucius mandamus, assum scribentur quo ad, eum an ignota dissentias.
           </div>
+          <div className="subscribe-container">
+          <input type="email" className="newsletter-email-input"></input>
+          <button className="newsletter-subscribe">SUBSCRIBE</button>
+          </div>
     </div>
     <div className="copyright">
       <div>© Mantra Seeds 2022</div>

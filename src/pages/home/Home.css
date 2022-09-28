@@ -142,6 +142,15 @@ body {
     padding-left: 50px;
 }
 
+.subscribe-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 40px 0 20px 0;
+    gap: 100px;
+}
+
 .newsletter-text {
     font-family: 'Futura';
     font-style: normal;
@@ -149,6 +158,34 @@ body {
     font-size: 48px;
     color: #447AB9;;
     margin: 20px 170px 0 170px;
+}
+
+.newsletter-email-input {
+    align-self: center;
+    width: 320px;
+    height: 40px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.36);
+}
+
+.newsletter-subscribe {
+    width: 180px;
+    height: 60px;
+    color: #ffffff;
+    background: #DDB724;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    border: none;
+}
+
+.newsletter-subscribe:hover {
+    background:#f2cd3e;
+    cursor: pointer;
 }
 
 .copyright {
