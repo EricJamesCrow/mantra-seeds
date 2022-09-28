@@ -7,6 +7,16 @@ body {
     padding: 0;
 }
 
+nav {
+    z-index: 999;
+}
+
+.sticky-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
 
 .navbar-container {
     display: flex;
@@ -118,5 +128,19 @@ body {
 
     .navbar-links li a {
         padding: .5rem 1rem;
+    }
+}
+
+@media (max-width: 310px) {
+    .title {
+        font-size: calc(38px * .8)
+    }  
+    .cannabis {
+        width: calc(45px * .8);
+        height: calc(45px * .8);
+    }
+    .toggle-button {
+        width: calc(30px * .8);
+        height: calc(21px * .8);
     }
 }

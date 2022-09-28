@@ -26,3 +26,8 @@ code {
   font-family: 'Futura';
   src: url('./fonts/Futura-CondensedLight.otf');
 }
+
+@font-face {
+  font-family: 'Southern Aire Personal Use Only';
+  src: url('./fonts/SouthernAire_Personal_Use_Only.ttf')
+}

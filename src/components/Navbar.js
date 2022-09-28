@@ -1,5 +1,5 @@
 // react
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // styles
 import "./Navbar.css"
@@ -11,6 +11,22 @@ import { faUser, faCartShopping} from '@fortawesome/free-solid-svg-icons'
 
 export default function Navbar() {
     const [isActive, setActive] = useState(false)
+    const [stickyClass, setStickyClass] = useState('relative');
+
+    useEffect(() => {
+        window.addEventListener('scroll', stickNavbar);
+    
+        return () => {
+          window.removeEventListener('scroll', stickNavbar);
+        };
+      }, []);
+
+    const stickNavbar = () => {
+    if (window !== undefined) {
+        let windowHeight = window.scrollY;
+        windowHeight > 150 ? setStickyClass('sticky-nav') : setStickyClass('');
+    }
+    };
 
     const shoppingCart = () => {
         console.log("Shopping cart works")
@@ -25,7 +41,7 @@ export default function Navbar() {
     }
 
   return (
-    <nav>
+    <nav className={`${stickyClass}`}>
     <div className="navbar-container">
         <div className="logo-container">
         <img src={Cannabis} className="cannabis"/>

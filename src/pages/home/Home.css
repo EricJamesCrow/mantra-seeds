@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #FEEED4;
+}
+
+.welcome {
+    font-family: 'Southern Aire Personal Use Only';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 128px;
+    align-self: center;
+    padding: 6.25rem 30rem 0 0;
+    color: #000000;
+}
+
+.banner-title {
+    align-self: center;
+    font-family: 'Overseer';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 128px;
+    color: #000000;
+}
+
+.banner-shop-now {
+    align-self: center;
+    margin: 20px 0 100px 800px;
+    width: 180px;
+    height: 60px;
+    color: #ffffff;
+    background: #DDB724;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    border: none;
+}
+
+.banner-shop-now:hover {
+    background:#f2cd3e;
+}
+
+.recent-products {
+    background:#82A7D6;
+}
+
+.recent-product {
+    margin-top: 40px;
+    justify-items: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+    background:  #82A7D6;
+}
+
+.recent-products-label {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    color: #FFFFFF;
+    padding-top: 40px;
+    text-align: center;
+}
+
+@media (max-width: 1500px) {
+    .recent-product {
+        grid-template-columns: 1fr 1fr 1fr 
+    }
+}
+
+@media (max-width: 1135px) {
+    .recent-product {
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 980px) {
+    .welcome {
+        padding: 50px 50px 0 0;
+    }
+    .banner-shop-now {
+        margin: 20px 0 50px 380px;
+    }
+}
+
+@media (max-width: 770px) {
+    .recent-product {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .welcome {
+        padding: 25px 25px 0px 0;
+        font-size: 64px;
+    }
+    .banner-shop-now {
+        width: 90px;
+        height: 30px;
+        font-size: 10px;
+        margin: 20px 0 25px 180px;
+    }
+    .banner-title {
+        font-size: 64px;
+    }
+}
+
+@media (max-width: 500px) {
+    .recent-products-label {
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 310px) {
+    .welcome {
+        font-size: calc(64px * .8);
+    }
+    .banner-title {
+        font-size: calc(64px * .8)
+    }
+    .recent-products-label {
+        font-size: calc(38px * .8);
+    }
+    .banner-shop-now {
+        width: calc(90px * .8);
+        height: calc(30px * .8);
+        font-size: calc(10px * .8);
+        margin: calc(20px * .8) 0 calc(25px * .8) calc(180px * .8);
+    }
+}
