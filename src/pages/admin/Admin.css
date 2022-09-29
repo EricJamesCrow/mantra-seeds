@@ -53,3 +53,10 @@
     background:#f2cd3e;
     cursor: pointer;
 }
+
+
+@media (max-width: 475px) {
+    .admin-label {
+        font-size: calc(128px * .4);
+    }
+}
