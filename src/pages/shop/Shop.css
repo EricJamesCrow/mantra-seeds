@@ -16,8 +16,23 @@ body {
     background: #FCE8A4;
     align-items: center;
     justify-content: center;
-    padding-top: 100px;
-    padding-left: 25px;
+    padding-top: 260px;
+    padding-left: 29px;
+    text-align: center;
+    position: none;
+    top: 0;
+    height: 0vh;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.store-sidebar-sticky {
+    grid-area: sidebar;
+    background: #FCE8A4;
+    align-items: center;
+    justify-content: center;
+    padding-top: 90px;
+    padding-left: 29px;
     text-align: center;
     position: sticky;
     top: 0;
