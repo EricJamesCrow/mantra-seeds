@@ -12,9 +12,9 @@ export default function Filters({ product, content }) {
       if (product === "Chakra") {
         return setClassHeight("520px")
       } else if(product === "Strain") {
-        return setClassHeight("250px")
+        return setClassHeight("255px")
       } else if(product === "THC") {
-        return setClassHeight("460px")
+        return setClassHeight("455px")
       }
     }
 
