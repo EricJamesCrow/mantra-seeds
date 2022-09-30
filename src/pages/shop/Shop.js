@@ -1,9 +1,14 @@
 // styles
 import "./Shop.css"
 
-// images
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+// chakras
+import Crown from "../../images/chakras/crown-chakra.svg"
+import ThirdEye from "../../images/chakras/third-eye-chakra.svg"
+import Throat from "../../images/chakras/throat-chakra.svg"
+import Heart from "../../images/chakras/heart-chakra.svg"
+import Solar from "../../images/chakras/solar-chakra.svg"
+import Sacral from "../../images/chakras/sacral-chakra.svg"
+import Root from "../../images/chakras/root-chakra.svg"
 
 // components
 import Product from "../../components/Product"
@@ -13,8 +18,16 @@ import Filters from "../../components/Filters"
 import { useState, useEffect } from 'react';
 
 export default function Store() {
-    const products = ["Chakra", "Strain", "THC"]
-    const [stickyClass, setStickyClass] = useState("store-sidebar");
+  const productCategories = ["Chakra", "Strain", "THC"]
+
+  const products = {"Chakra": [{"id": "1", "image": Crown, "text": "Crown", "textColor": "#8f009c"}, {"id": "2", "image": ThirdEye, "text": "ThirdEye", "textColor": "#00489c"},
+  {"id": "3", "image": Throat, "text": "Throat", "textColor": "#00b5db"}, {"id": "4", "image": Heart, "text": "Heart", "textColor": "#8cbf00"}, {"id": "5", "image": Solar, "text": "Solar", "textColor": "#e3c101"},
+  {"id": "6", "image": Sacral, "text": "Sacral", "textColor": "#ff9200"}, {"id": "7", "image": Root, "text": "Root", "textColor": "#e60000"}], "Strain": [{"id": "1", "image": Crown, "text": "Sativa", "textColor": "#8f009c"}, {"id": "2", "image": ThirdEye, "text": "Indica", "textColor": "#00489c"},
+  {"id": "3", "image": Throat, "text": "Hybird", "textColor": "#00b5db"}], "THC": [{"id": "1", "image": Crown, "text": "Delta-9", "textColor": "#8f009c"}, {"id": "2", "image": ThirdEye, "text": "Delta-8", "textColor": "#00489c"},
+  {"id": "3", "image": Throat, "text": "Delta-10", "textColor": "#00b5db"}, {"id": "4", "image": Heart, "text": "THCa", "textColor": "#8cbf00"}, {"id": "5", "image": Solar, "text": "THCv", "textColor": "#e3c101"},
+  {"id": "6", "image": Sacral, "text": "THCp", "textColor": "#ff9200"}]}
+
+  const [stickyClass, setStickyClass] = useState("store-sidebar");
 
     useEffect(() => {
       window.addEventListener('scroll', whatsWindowHeight);
@@ -36,11 +49,11 @@ export default function Store() {
         <div className="filter-products-container">
           <div className="filter-products-label">Filter Products</div>
           <div className="filter-products-buttons">
-           {products.map(product => (
+           {productCategories.map(product => (
             <Filters
               product={product}
-            />
-           ))}
+              content={products[product]}            />
+            ))}
           </div>
         </div>
         {/* <div className="categories">
@@ -61,7 +74,7 @@ export default function Store() {
       <div className="store-header">Choose Your Seeds</div>
       <div className="store-products">
         <div className="store-product">
-      {products.map(product => (
+      {productCategories.map(product => (
           <Product/>
         ))}
         </div>

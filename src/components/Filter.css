@@ -23,7 +23,6 @@
     width: 25px;
     height: 50px;
     background-color: #eee;
-    /* margin-left: 0; */
 }
 
 .filter-list-container img {
@@ -38,8 +37,9 @@
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
-    width: 40px;
+    width: 60px;
     line-height: 50px;
+    margin-right: 40px;
 }
 
 .filter-products-button-expanded {
