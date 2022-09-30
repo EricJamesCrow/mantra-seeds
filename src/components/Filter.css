@@ -1,25 +1,32 @@
 .filter-products-button {
-    display: flex;
-    justify-content: space-between;
     padding-top: 20px;
     padding-left: 20px;
     border-bottom: 1px solid #000000;
+    transition: height ease-in-out 300ms;
+    overflow: hidden;
+    height: 50px;
+}
+
+.filter-container {
+    display:flex;
     cursor: pointer;
-    transition: padding ease-in-out 250ms;
+}
+
+.filter-list-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 .filter-products-button-expanded {
-    display: flex;
-    justify-content: space-between;
     padding-top: 20px;
     padding-left: 20px;
     border-bottom: 1px solid #000000;
-    cursor: pointer;
-    padding-bottom: 200px;
-    transition: padding ease-in-out 250ms;
+    height: 280px;
+    overflow: hidden;
+    transition: height ease-in-out 300ms;
 }
 
-.filter-products-button button, .filter-products-button-expanded button {
+.filter-container button {
     background: none;
 	color: inherit;
 	border: none;
@@ -31,12 +38,21 @@
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
+    width: 50px;
+    padding-right: 250px;
+    background: #FEEED4;
 }
 
-.filter-products-button div, .filter-products-button-expanded div {
+.filter-container div {
     padding-right: 20px; 
     font-family: 'Futura';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
+}
+
+.filter-list-container input {
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
 }
