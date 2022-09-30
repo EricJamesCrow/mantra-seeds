@@ -40,8 +40,8 @@ export default function Filters({ product }) {
             {chakras.map(chakra => (
                 <div className="filter-list-container">
             <input type="checkbox"/>
-            <img />
-            <div>{chakra.text}</div>
+            <img src={chakra.image}/>
+            <div style={{ color: chakra.textColor }}>{chakra.text}</div>
             </div>
             ))}
           </div>
