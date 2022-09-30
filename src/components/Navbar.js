@@ -10,6 +10,8 @@ import Cannabis from "../images/cannabis-leaf.svg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faCartShopping} from '@fortawesome/free-solid-svg-icons'
 
+// style={({ isActive }) => isActive ? {backgroundColor: "#82A7D6"} : null }
+
 export default function Navbar() {
     const [isActive, setActive] = useState(false)
     const [stickyClass, setStickyClass] = useState('');
@@ -25,7 +27,7 @@ export default function Navbar() {
     const stickNavbar = () => {
     if (window !== undefined) {
         let windowHeight = window.scrollY;
-        windowHeight > 150 ? setStickyClass('sticky-nav') : setStickyClass('');
+        windowHeight > 150 ? setStickyClass('sticky-nav') : setStickyClass('sticky-nav');
     }
     };
 
@@ -42,7 +44,7 @@ export default function Navbar() {
     }
 
   return (
-    <nav className={`${stickyClass}`}>
+    <nav className={'sticky-nav'}>
     <div className="navbar-container">
         <div className="logo-container">
         <img src={Cannabis} className="cannabis"/>
@@ -60,10 +62,10 @@ export default function Navbar() {
                 <NavLink to="/">Home</NavLink>
             </li>
             <li>
-                <NavLink to="/shop" style={({ isActive }) => isActive ? {backgroundColor: "#82A7D6"} : null }>Shop</NavLink>
+                <NavLink to="/shop">Shop</NavLink>
             </li>
             <li>
-                <NavLink to="/contact" style={({ isActive }) => isActive ? {backgroundColor: "#82A7D6"} : null }>Contact</NavLink>
+                <NavLink to="/contact">Contact</NavLink>
             </li>
             <li><FontAwesomeIcon 
             icon={faUser} 

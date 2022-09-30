@@ -1,0 +1,103 @@
+body {
+    background: #FCE8A4;
+}
+
+.store-container {
+    display: grid;
+    grid-template-rows: 220px calc(100vh - 55px);
+    grid-template-columns: 360px auto;
+    grid-template-areas: 
+    'sidebar header'
+    'sidebar products';
+}
+
+.store-sidebar {
+    grid-area: sidebar;
+    background: #FCE8A4;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-left: 25px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    height: 0vh;
+    box-sizing: border-box;
+}
+
+.store-header {
+    font-family: 'Southern Aire Personal Use Only';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 128px;
+    color: #447AB9;
+    background: #FCE8A4;
+    text-align: center;
+    padding-top: 100px;
+    /* position: sticky;
+    top: 0;
+    height: 27vh;
+    box-sizing: border-box; */
+}
+
+
+.store-product {
+    grid-area: products; 
+    margin-top: 40px;
+    justify-items: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    background:  #FCE8A4;
+    padding-bottom: 40px;
+}
+
+.filter-products-container {
+    background: #FEEED4;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    height: 80vh;
+    width: 335px;
+}
+
+.filter-products-label {
+    padding-top: 20px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    color: #447AB9;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+}
+
+.category:hover {
+    transform: scale(1.2);
+}
+
+.category {
+    transition: all .2s ease-in-out;
+    width: 30%;
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.categories img {
+    width: 65px;
+    height: 65px;
+}
+
+.categories div {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    padding-bottom: 4px;
+}
