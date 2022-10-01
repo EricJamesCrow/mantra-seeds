@@ -2,11 +2,18 @@
 import "./Filter.css"
 
 // react
-import { useState } from 'react';
+import { useState, forwardRef, useImperativeHandle} from 'react';
 
-export default function Filters({ product, content }) {
+const Filters = forwardRef(({ product, content, closeMenu }, ref) => {
     const [clicked, setClicked] = useState(false)
     const [classHeight, setClassHeight] = useState("50px")
+
+    useImperativeHandle(ref, () =>({
+      callChildFunction() {
+          setClicked(false)
+          setClassHeight("50px")
+      }
+    }))
 
     const expandClass = () => {
       if (product === "Chakra") {
@@ -20,9 +27,10 @@ export default function Filters({ product, content }) {
 
     const expandMenu = () => {
         if(clicked === false) {
+          closeMenu()
           setClicked(true)
           expandClass()
-        } else {
+        } else if(clicked === true) {
           setClicked(false)
           setClassHeight("50px")
         }
@@ -46,4 +54,6 @@ export default function Filters({ product, content }) {
           </div>
           </div>
   )
-}
+})
+
+export default Filters

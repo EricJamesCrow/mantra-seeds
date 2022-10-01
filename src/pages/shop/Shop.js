@@ -15,7 +15,7 @@ import Product from "../../components/Product"
 import Filters from "../../components/Filters"
 
 // react
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Store() {
   const productCategories = ["Chakra", "Strain", "THC"]
@@ -29,6 +29,10 @@ export default function Store() {
 
   const [stickyClass, setStickyClass] = useState("store-sidebar");
 
+  const [argument, setArgument] = useState('')
+
+  const ChildRef = useRef([]);
+
     useEffect(() => {
       window.addEventListener('scroll', whatsWindowHeight);
   
@@ -41,6 +45,12 @@ export default function Store() {
       let windowHeight = window.scrollY;
       windowHeight > 170 ? setStickyClass('store-sidebar-sticky') : setStickyClass("store-sidebar");
       };
+
+    const closeMenu = () => {
+        ChildRef.Chakra.callChildFunction()
+        ChildRef.Strain.callChildFunction()
+        ChildRef.THC.callChildFunction()
+    }
     
     
   return (
@@ -51,8 +61,11 @@ export default function Store() {
           <div className="filter-products-buttons">
            {productCategories.map(product => (
             <Filters
+              key={product}
+              ref={theRef => ChildRef[product] = theRef}
               product={product}
-              content={products[product]}            />
+              content={products[product]}
+              closeMenu={closeMenu}/>
             ))}
           </div>
         </div>
