@@ -10,6 +10,9 @@ import Solar from "../../images/chakras/solar-chakra.svg"
 import Sacral from "../../images/chakras/sacral-chakra.svg"
 import Root from "../../images/chakras/root-chakra.svg"
 
+// images
+import Cannabis from "../../images/cannabis-outline.svg"
+
 // components
 import Product from "../../components/Product"
 import Filters from "../../components/Filters"
@@ -22,14 +25,12 @@ export default function Store() {
 
   const products = {"Chakra": [{"id": "1", "image": Crown, "text": "Crown", "textColor": "#8f009c"}, {"id": "2", "image": ThirdEye, "text": "ThirdEye", "textColor": "#00489c"},
   {"id": "3", "image": Throat, "text": "Throat", "textColor": "#00b5db"}, {"id": "4", "image": Heart, "text": "Heart", "textColor": "#8cbf00"}, {"id": "5", "image": Solar, "text": "Solar", "textColor": "#e3c101"},
-  {"id": "6", "image": Sacral, "text": "Sacral", "textColor": "#ff9200"}, {"id": "7", "image": Root, "text": "Root", "textColor": "#e60000"}], "Strain": [{"id": "1", "image": Crown, "text": "Sativa", "textColor": "#8f009c"}, {"id": "2", "image": ThirdEye, "text": "Indica", "textColor": "#00489c"},
-  {"id": "3", "image": Throat, "text": "Hybird", "textColor": "#00b5db"}], "THC": [{"id": "1", "image": Crown, "text": "Delta-9", "textColor": "#8f009c"}, {"id": "2", "image": ThirdEye, "text": "Delta-8", "textColor": "#00489c"},
-  {"id": "3", "image": Throat, "text": "Delta-10", "textColor": "#00b5db"}, {"id": "4", "image": Heart, "text": "THCa", "textColor": "#8cbf00"}, {"id": "5", "image": Solar, "text": "THCv", "textColor": "#e3c101"},
-  {"id": "6", "image": Sacral, "text": "THCp", "textColor": "#ff9200"}]}
+  {"id": "6", "image": Sacral, "text": "Sacral", "textColor": "#ff9200"}, {"id": "7", "image": Root, "text": "Root", "textColor": "#e60000"}], "Strain": [{"id": "1", "image": Cannabis, "text": "Sativa", "textColor": "#46b430"}, {"id": "2", "image": Cannabis, "text": "Indica", "textColor": "#46b430"},
+  {"id": "3", "image": Cannabis, "text": "Hybird", "textColor": "#46b430"}], "THC": [{"id": "1", "image": Cannabis, "text": "Delta-9", "textColor": "#46b430"}, {"id": "2", "image": Cannabis, "text": "Delta-8", "textColor": "#46b430"},
+  {"id": "3", "image": Cannabis, "text": "Delta-10", "textColor": "#46b430"}, {"id": "4", "image": Cannabis, "text": "THCa", "textColor": "#46b430"}, {"id": "5", "image": Cannabis, "text": "THCv", "textColor": "#46b430"},
+  {"id": "6", "image": Cannabis, "text": "THCp", "textColor": "#46b430"}]}
 
   const [stickyClass, setStickyClass] = useState("store-sidebar");
-
-  const [argument, setArgument] = useState('')
 
   const ChildRef = useRef([]);
 

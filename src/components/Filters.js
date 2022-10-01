@@ -47,7 +47,7 @@ const Filters = forwardRef(({ product, content, closeMenu }, ref) => {
             {content.map(stuff => (
                 <div className="filter-list-container">
             <input type="checkbox"/>
-            <img src={stuff.image}/>
+            <img src={stuff.image} style={ product !== "Chakra" ? {borderRadius: "none", border: "none"}: null}/>
             <div style={{ color: stuff.textColor }}>{stuff.text}</div>
             </div>
             ))}
