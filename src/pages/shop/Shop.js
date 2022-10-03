@@ -16,13 +16,17 @@ import Cannabis from "../../images/cannabis-outline.svg"
 // components
 import Product from "../../components/Product"
 import Filters from "../../components/Filters"
+import DropDown from "../../components/DropDown"
 
 // react
 import { useState, useEffect, useRef } from 'react';
 
 export default function Store() {
+  // dropdown menu
+  const [selected, setSelected] = useState("Sort by featured")
   const productCategories = ["Chakra", "Strain", "THC"]
 
+  // products information 
   const products = {"Chakra": [{"id": "1", "image": Crown, "text": "Crown", "textColor": "#8f009c"}, {"id": "2", "image": ThirdEye, "text": "ThirdEye", "textColor": "#00489c"},
   {"id": "3", "image": Throat, "text": "Throat", "textColor": "#00b5db"}, {"id": "4", "image": Heart, "text": "Heart", "textColor": "#8cbf00"}, {"id": "5", "image": Solar, "text": "Solar", "textColor": "#e3c101"},
   {"id": "6", "image": Sacral, "text": "Sacral", "textColor": "#ff9200"}, {"id": "7", "image": Root, "text": "Root", "textColor": "#e60000"}], "Strain": [{"id": "1", "image": Cannabis, "text": "Sativa", "textColor": "#46b430"}, {"id": "2", "image": Cannabis, "text": "Indica", "textColor": "#46b430"},
@@ -70,26 +74,15 @@ export default function Store() {
             ))}
           </div>
         </div>
-        {/* <div className="categories">
-          <div className="category">
-        <FontAwesomeIcon icon={faEye} style={{ fontSize: "50px", color: "#5E044F" }}/>
-        <div style={{ color: "#5E044F" }}>View All</div>
-        </div>
-        </div>
-          {chakras.map(chakra => (
-            <div className="categories">
-              <div className="category">
-            <img src={chakra.image}/>
-            <div style={ { color: chakra.textColor } }>{chakra.text}</div>
-            </div>
-            </div>
-          ))} */}
       </div>
       <div className="store-header">Choose Your Seeds</div>
       <div className="store-products">
+        <DropDown selected={selected} setSelected={setSelected}/>
         <div className="store-product">
       {productCategories.map(product => (
-          <Product/>
+          <Product
+          key={product}
+          />
         ))}
         </div>
       </div>
