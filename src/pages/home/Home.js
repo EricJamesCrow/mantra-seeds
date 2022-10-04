@@ -7,9 +7,10 @@ import "./Home.css"
 // components
 import Product from "../../components/Product"
 
-export default function Home() {
-  const products = ["weed", "weed", "weed", "weed", "weed", "weed", "weed", "weed"]
+// data
+import products from "../../data/product_data"
 
+export default function Home() {
   return (
     <>
     <div className="banner">
@@ -20,8 +21,10 @@ export default function Home() {
     <div className="recent-products">
       <div className="recent-products-label">Recent Products</div>
       <div className="recent-product">
-        {products.map(product => (
-          <Product/>
+        {products.slice(0, 8).map(product => (
+          <Product
+          item={product}
+          />
         ))}
         </div>
     </div>
@@ -29,7 +32,9 @@ export default function Home() {
       <div className="special-deals-label">Special Deals</div>
       <div className="special-deals-products">
         {products.slice(0, 3).map(product => (
-          <Product/>
+          <Product
+          item={product}
+          />
         ))}
       </div>
     </div>

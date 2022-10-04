@@ -4,6 +4,9 @@
     margin-right: 50px;
     position: relative;
     user-select: none;
+    font-family: 'Futura';
+    font-style: normal;
+    font-size: 20px;
 }
 
 .dropdown .dropdown-btn {

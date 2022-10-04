@@ -4,6 +4,18 @@ import "./Sidebar.css"
 // components
 import Filters from "./Filters"
 
+// chakras
+import Crown from "../images/chakras/crown-chakra.svg"
+import ThirdEye from "../images/chakras/third-eye-chakra.svg"
+import Throat from "../images/chakras/throat-chakra.svg"
+import Heart from "../images/chakras/heart-chakra.svg"
+import Solar from "../images/chakras/solar-chakra.svg"
+import Sacral from "../images/chakras/sacral-chakra.svg"
+import Root from "../images/chakras/root-chakra.svg"
+
+// images
+import Cannabis from "../images/cannabis-outline.svg"
+
 // react
 import { useState, useRef, useEffect } from "react"
 
@@ -37,6 +49,7 @@ export default function Sidebar() {
       const whatsWindowHeight = () => {
         let windowHeight = window.scrollY;
         windowHeight > 170 ? setStickyClass('store-sidebar-sticky') : setStickyClass("store-sidebar");
+        console.log(windowHeight)
         };
 
   return (

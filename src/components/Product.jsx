@@ -7,7 +7,8 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 
-export default function Product() {
+export default function Product( {item} ) {
+  console.log(item.price)
   return (
     <div className="product">
         <img src={Cannabis}/>
@@ -16,7 +17,7 @@ export default function Product() {
         <FontAwesomeIcon className="cart-icon" icon={faCartPlus} style={{color: "#ECEBE8"}}></FontAwesomeIcon>
         <div className="add-to-cart-text">Add to Cart</div>
         </div>
-        <div className="product-price">$4.20</div>
+        <div className="product-price">{`$${item.price}`}</div>
         </div>
     </div>
   )
