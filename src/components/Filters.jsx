@@ -4,7 +4,7 @@ import "./Filter.css"
 // react
 import { useState, forwardRef, useImperativeHandle} from 'react';
 
-const Filters = forwardRef(({ product, content, closeMenu }, ref) => {
+const Filters = forwardRef(({ product, content, closeMenu, updateFilter }, ref) => {
     const [clicked, setClicked] = useState(false)
     const [classHeight, setClassHeight] = useState("50px")
 
@@ -36,6 +36,14 @@ const Filters = forwardRef(({ product, content, closeMenu }, ref) => {
         }
       }
 
+    const handleChange = (event, stuff) => {
+      if (event.target.checked) {
+        updateFilter(stuff.text)
+      } else {
+        updateFilter('')
+      }
+    }
+
   return (
     <div key={product} 
           className={clicked ? "filter-products-button-expanded" : "filter-products-button"} style={ {height: classHeight }}>
@@ -46,7 +54,7 @@ const Filters = forwardRef(({ product, content, closeMenu }, ref) => {
           <div>
             {content.map(stuff => (
                 <div className="filter-list-container">
-            <input type="checkbox"/>
+            <input type="checkbox" onChange={(e) => handleChange(e, stuff)}/>
             <img src={stuff.image} style={ product !== "Chakra" ? {borderRadius: "none", border: "none"}: null}/>
             <div style={{ color: stuff.textColor }}>{stuff.text}</div>
             </div>

@@ -11,6 +11,7 @@ import Product from "../../components/Product"
 import products from "../../data/product_data"
 
 export default function Home() {
+  
   return (
     <>
     <div className="banner">

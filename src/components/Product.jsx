@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 
 export default function Product( {item} ) {
-  console.log(item.price)
   return (
     <div className="product">
         <img src={Cannabis}/>

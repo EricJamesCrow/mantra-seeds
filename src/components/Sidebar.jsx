@@ -19,7 +19,7 @@ import Cannabis from "../images/cannabis-outline.svg"
 // react
 import { useState, useRef, useEffect } from "react"
 
-export default function Sidebar() {
+export default function Sidebar({ updateFilter }) {
     const [stickyClass, setStickyClass] = useState("store-sidebar");
     const ChildRef = useRef([]);
 
@@ -49,7 +49,6 @@ export default function Sidebar() {
       const whatsWindowHeight = () => {
         let windowHeight = window.scrollY;
         windowHeight > 170 ? setStickyClass('store-sidebar-sticky') : setStickyClass("store-sidebar");
-        console.log(windowHeight)
         };
 
   return (
@@ -63,7 +62,8 @@ export default function Sidebar() {
           ref={theRef => ChildRef[product] = theRef}
           product={product}
           content={products[product]}
-          closeMenu={closeMenu}/>
+          closeMenu={closeMenu}
+          updateFilter={updateFilter}/>
         ))}
       </div>
     </div>

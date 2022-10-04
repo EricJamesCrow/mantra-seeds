@@ -15,10 +15,24 @@ import products from "../../data/product_data";
 export default function Store() {
   // dropdown menu
   const [selected, setSelected] = useState("Sort by featured")
+  const [filter, setFilter] = useState([])
+
+  const updateFilter = term => {
+    var index = filter.indexOf(term);
+    if(index !== -1) {
+      filter.splice(index, 1)
+      setFilter(filter)
+    } else {
+      setFilter(prevArray => [...prevArray, term])
+    }
+    console.log(filter)
+  }
       
   return (
     <div className="store-container">
-      <Sidebar/>
+      <Sidebar
+      updateFilter={updateFilter}
+      />
       <div className="store-header">Choose Your Seeds</div>
       <div className="store-products">
         <DropDown selected={selected} setSelected={setSelected}/>
