@@ -20,12 +20,11 @@ export default function Store() {
   const updateFilter = term => {
     var index = filter.indexOf(term);
     if(index !== -1) {
-      filter.splice(index, 1)
-      setFilter(filter)
+      var filterFiltered = filter.filter(v => v !== term)
+      setFilter(filterFiltered)
     } else {
       setFilter(prevArray => [...prevArray, term])
     }
-    console.log(filter)
   }
       
   return (
@@ -42,7 +41,8 @@ export default function Store() {
           key={product.id}
           item={product}
           />
-        ))}
+        )
+        ) }
         </div>
       </div>
     </div>

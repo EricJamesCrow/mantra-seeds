@@ -40,7 +40,7 @@ const Filters = forwardRef(({ product, content, closeMenu, updateFilter }, ref) 
       if (event.target.checked) {
         updateFilter(stuff.text)
       } else {
-        updateFilter('')
+        updateFilter(stuff.text)
       }
     }
 
