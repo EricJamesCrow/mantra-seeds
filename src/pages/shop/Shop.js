@@ -36,12 +36,15 @@ export default function Store() {
       <div className="store-products">
         <DropDown selected={selected} setSelected={setSelected}/>
         <div className="store-product">
-      {products.map(product => (
-          <Product
-          key={product.id}
-          item={product}
-          />
-        )
+      {products.map(product => {
+        if(filter.length !== 0) {
+          if(filter.indexOf(product.chakra) !== -1 || filter.indexOf(product.strain) !== -1 || filter.indexOf(product.thc) !== -1) {
+            return <Product key={product.id} item={product}/>
+          }
+        } else {
+          return <Product key={product.id} item={product}/>
+        }
+        }
         ) }
         </div>
       </div>

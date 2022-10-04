@@ -28,7 +28,7 @@ export default function Sidebar({ updateFilter }) {
     const products = {"Chakra": [{"id": "1", "image": Crown, "text": "Crown", "textColor": "#8f009c"}, {"id": "2", "image": ThirdEye, "text": "ThirdEye", "textColor": "#00489c"},
     {"id": "3", "image": Throat, "text": "Throat", "textColor": "#00b5db"}, {"id": "4", "image": Heart, "text": "Heart", "textColor": "#8cbf00"}, {"id": "5", "image": Solar, "text": "Solar", "textColor": "#e3c101"},
     {"id": "6", "image": Sacral, "text": "Sacral", "textColor": "#ff9200"}, {"id": "7", "image": Root, "text": "Root", "textColor": "#e60000"}], "Strain": [{"id": "1", "image": Cannabis, "text": "Sativa", "textColor": "#46b430"}, {"id": "2", "image": Cannabis, "text": "Indica", "textColor": "#46b430"},
-    {"id": "3", "image": Cannabis, "text": "Hybird", "textColor": "#46b430"}], "THC": [{"id": "1", "image": Cannabis, "text": "Delta-9", "textColor": "#46b430"}, {"id": "2", "image": Cannabis, "text": "Delta-8", "textColor": "#46b430"},
+    {"id": "3", "image": Cannabis, "text": "Hybrid", "textColor": "#46b430"}], "THC": [{"id": "1", "image": Cannabis, "text": "Delta-9", "textColor": "#46b430"}, {"id": "2", "image": Cannabis, "text": "Delta-8", "textColor": "#46b430"},
     {"id": "3", "image": Cannabis, "text": "Delta-10", "textColor": "#46b430"}, {"id": "4", "image": Cannabis, "text": "THCa", "textColor": "#46b430"}, {"id": "5", "image": Cannabis, "text": "THCv", "textColor": "#46b430"},
     {"id": "6", "image": Cannabis, "text": "THCp", "textColor": "#46b430"}]}
 

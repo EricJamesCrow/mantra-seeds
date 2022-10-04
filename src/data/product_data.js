@@ -15,7 +15,7 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
+        chakra: "ThirdEye",
         strain: "Indica",
         thc: "Delta-8"
     },
@@ -25,7 +25,7 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
+        chakra: "Throat",
         strain: "Hybrid",
         thc: "Delta-10"
     },
@@ -35,7 +35,7 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
+        chakra: "Heart",
         strain: "Sativa",
         thc: "THCa"
     },
@@ -45,7 +45,7 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",        
+        chakra: "Solar",        
         strain: "Indica",
         thc: "THCv"
     },
@@ -55,7 +55,7 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
+        chakra: "Sacral",
         strain: "Hybrid",
         thc: "THCp"
     },
@@ -65,7 +65,7 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
+        chakra: "Root",
         strain: "Sativa",
         thc: "Delta-8"
     },
@@ -85,8 +85,8 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
-        strain: "Indica",
+        chakra: "ThirdEye",
+        strain: "Sativa",
         thc: "Delta-9"
     },
     {
@@ -95,8 +95,8 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
-        strain: "Indica",
+        chakra: "Throat",
+        strain: "Sativa",
         thc: "Delta-9"
     },
     {
@@ -105,7 +105,7 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
+        chakra: "Heart",
         strain: "Indica",
         thc: "Delta-9"
     },
@@ -115,8 +115,8 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
-        strain: "Indica",
+        chakra: "Solar",
+        strain: "Hybrid",
         thc: "Delta-9"
     },
     {
@@ -125,7 +125,7 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
+        chakra: "Sacral",
         strain: "Indica",
         thc: "Delta-9"
     },
@@ -135,7 +135,7 @@ const products = [
         description: "A description about weed",
         price: '4.20',
         date: '10-3-2022',
-        chakra: "Crown",
+        chakra: "Root",
         strain: "Indica",
         thc: "Delta-9"
     },
