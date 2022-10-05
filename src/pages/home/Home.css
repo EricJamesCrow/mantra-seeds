@@ -308,7 +308,7 @@ body {
 
 @media (max-width: 600px) {
     .welcome {
-        padding: 25px 25px 0px 0;
+        padding: 75px 25px 0px 0;
         font-size: 64px;
     }
     .banner-shop-now {

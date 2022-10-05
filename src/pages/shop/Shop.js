@@ -28,6 +28,7 @@ export default function Store() {
   }
       
   return (
+    <>
     <div className="store-container">
       <Sidebar
       updateFilter={updateFilter}
@@ -55,5 +56,6 @@ export default function Store() {
         </div>
       </div>
     </div>
+    </>
   )
 }
