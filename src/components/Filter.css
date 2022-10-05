@@ -76,3 +76,187 @@
     font-size: 24px;
     line-height: 27px;
 }
+
+@media (max-width: 1525px) {
+    /* .filter-list-container {
+        padding-top: calc(10px * .9);
+        padding-right: calc(15px * .9);
+    } */
+    .filter-products-button {
+        /* padding-top: calc(20px * .9); */
+        padding-left: calc(5px * .9);
+        height: calc(50px * .9);
+    }
+    .filter-products-button-expanded {
+        /* padding-top: calc(20px * .9); */
+        padding-left: calc(5px * .9);
+        height: calc(520px * .9);
+    }
+    .filter-list-container input {
+        width: calc(25px * .9);
+        height: calc(50px * .9);
+    }
+    
+    .filter-list-container img {
+        width: calc(50px * .9);
+        height: calc(50px * .9);
+    }
+
+    .filter-container button {
+        font-size: calc(24px * .9);
+        width: calc(50px * .9);
+        padding-right: calc(260px * .9);
+    }
+
+    .filter-container div {
+        padding-right: calc(20px * .9); 
+        font-size: calc(24px * .9);
+        line-height: calc(27px * .9);
+    }
+    
+    .filter-list-container div {
+        font-size: calc(20px * .9);
+        width: calc(60px * .9);
+        padding-right: calc(20px * .9); 
+        line-height: calc(50px * .9);
+    }
+    
+}
+
+@media (max-width: 1080px) {
+    .filter-list-container {
+        /* padding-top: calc(10px * .8); */
+        padding-right: calc(15px * .8);
+    }
+    .filter-products-button {
+        /* padding-top: calc(20px * .8); */
+        padding-left: calc(5px * .8);
+        height: calc(50px * .8);
+    }
+    .filter-products-button-expanded {
+        /* padding-top: calc(20px * .8); */
+        padding-left: calc(5px * .8);
+        height: calc(520px * .8);
+    }
+    .filter-list-container input {
+        width: calc(25px * .8);
+        height: calc(50px * .8);
+    }
+    
+    .filter-list-container img {
+        width: calc(50px * .8);
+        height: calc(50px * .8);
+    }
+
+    .filter-container button {
+        font-size: calc(24px * .8);
+        width: calc(50px * .8);
+        padding-right: calc(260px * .8);
+    }
+
+    .filter-container div {
+        padding-right: calc(20px * .8); 
+        font-size: calc(24px * .8);
+        line-height: calc(27px * .8);
+    }
+    
+    .filter-list-container div {
+        font-size: calc(20px * .8);
+        width: calc(60px * .8);
+        padding-right: calc(20px * .8); 
+        line-height: calc(50px * .8);
+    }
+    
+}
+
+@media (max-width: 880px) {
+    .filter-list-container {
+        padding-top: 12px;
+        padding-right: calc(15px * .6);
+    }
+    .filter-products-button {
+        padding-top: 24px;
+        padding-left: calc(5px * .6);
+        height: calc(50px * .6);
+    }
+    .filter-products-button-expanded {
+        /* padding-top: calc(20px * .7); */
+        padding-left: calc(5px * .6);
+        height: calc(520px * .6);
+    }
+    .filter-list-container input {
+        width: calc(25px * .6);
+        height: calc(50px * .6);
+    }
+    
+    .filter-list-container img {
+        width: calc(50px * .6);
+        height: calc(50px * .6);
+    }
+
+    .filter-container button {
+        font-size: calc(24px * .8);
+        width: calc(50px * .6);
+        padding-right: calc(260px * .6);
+    }
+
+    .filter-container div {
+        padding-right: calc(20px * .6); 
+        font-size: calc(24px * .8);
+        line-height: calc(27px * .6);
+    }
+    
+    .filter-list-container div {
+        font-size: calc(20px * .8);
+        width: calc(60px * .6);
+        padding-right: calc(20px * .6); 
+        line-height: calc(50px * .6);
+    }
+    
+}
+
+@media (max-width: 525px) {
+    .filter-list-container {
+        padding-top: 12px;
+        padding-right: calc(15px * .5);
+    }
+    .filter-products-button {
+        padding-top: 24px;
+        padding-left: calc(5px * .5);
+        height: calc(50px * .5);
+    }
+    .filter-products-button-expanded {
+        /* padding-top: calc(20px * .7); */
+        padding-left: calc(5px * .5);
+        height: calc(520px * .5);
+    }
+    .filter-list-container input {
+        width: calc(25px * .5);
+        height: calc(50px * .5);
+    }
+    
+    .filter-list-container img {
+        width: calc(50px * .5);
+        height: calc(50px * .5);
+    }
+
+    .filter-container button {
+        font-size: calc(24px * .8);
+        width: calc(50px * .5);
+        padding-right: calc(260px * .5);
+    }
+
+    .filter-container div {
+        padding-right: calc(20px * .5); 
+        font-size: calc(24px * .8);
+        line-height: calc(27px * .5);
+    }
+    
+    .filter-list-container div {
+        font-size: calc(20px * .8);
+        width: calc(60px * .5);
+        padding-right: calc(20px * .5); 
+        line-height: calc(50px * .5);
+    }
+    
+}

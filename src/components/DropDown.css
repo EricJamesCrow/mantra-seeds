@@ -1,5 +1,5 @@
 .dropdown {
-    width: 300px;
+    width: 200px;
     margin-left: auto;
     margin-right: 50px;
     position: relative;
@@ -7,6 +7,7 @@
     font-family: 'Futura';
     font-style: normal;
     font-size: 20px;
+    height: 30px;
 }
 
 .dropdown .dropdown-btn {
@@ -22,7 +23,7 @@
 
 .dropdown .dropdown-content {
     position: absolute;
-    top: 105%;
+    top: 150%;
     left: 0;
     padding: 10px;
     background: #fff;
@@ -41,3 +42,72 @@
 .dropdown .dropdown-content .dropdown-item:hover {
     background: #f4f4f4;
 }
+
+@media (max-width: 1525px) {
+    .dropdown {
+        width: calc(200px * .9);
+        margin-right: calc(50px * .9);
+        margin-top: 30px;
+        font-size: calc(20px * .9);
+    }
+
+    .dropdown .dropdown-btn {
+        padding: calc(10px * .9) calc(15px * .9);
+    }
+    .dropdown .dropdown-content {
+        top: calc(150% * .9);
+        padding: calc(10px * .9);
+    }
+}
+
+@media (max-width: 1305px) {
+    .dropdown {
+        width: calc(200px * .8);
+        margin-right: calc(50px * .4);
+        margin-top: 30px;
+        font-size: calc(20px * .8);
+    }
+
+    .dropdown .dropdown-btn {
+        padding: calc(10px * .8) calc(15px * .8);
+    }
+    .dropdown .dropdown-content {
+        top: calc(150% * .8);
+        padding: calc(10px * .8);
+    }
+}
+
+/* @media (max-width: 1205px) {
+    .dropdown {
+        width: calc(200px * .7);
+        margin-right: calc(50px * .7);
+        margin-top: 30px;
+        font-size: calc(20px * .7);
+    }
+
+    .dropdown .dropdown-btn {
+        padding: calc(10px * .7) calc(15px * .7);
+    }
+    .dropdown .dropdown-content {
+        top: calc(150% * .7);
+        padding: calc(10px * .7);
+    }
+} */
+
+/* @media (max-width: 1200px) {
+    .dropdown {
+        width: calc(200px * .8);
+        margin-right: calc(50px * .8);
+        margin-top: 30px;
+        font-size: calc(20px * .8);
+    }
+
+    .dropdown .dropdown-btn {
+        padding: calc(10px * .8) calc(15px * .8);
+    }
+    .dropdown .dropdown-content {
+        top: calc(150% * .8);
+        padding: calc(10px * .8);
+    }
+    
+} */

@@ -9,12 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function Product( {item} ) {
   return (
-    <div className="product">
+    <div className="product-shop">
         <img src={Cannabis}/>
-        <div className="product-container">
-        <div className="add-to-cart">
+        <div className="product-container-shop">
+        <div className="add-to-cart-shop">
         <FontAwesomeIcon className="cart-icon" icon={faCartPlus} style={{color: "#ECEBE8"}}></FontAwesomeIcon>
-        <div className="add-to-cart-text">Add to Cart</div>
+        <div className="add-to-cart-text-shop">Add to Cart</div>
         </div>
         <div className="product-price">{`$${item.price}`}</div>
         </div>
