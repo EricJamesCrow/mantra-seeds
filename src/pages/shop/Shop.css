@@ -109,6 +109,19 @@ body {
     }
 }
 
+@media (max-width: 390px) {
+    .store-product {
+        grid-template-columns: 1fr; 
+    }
+    .store-header {
+        font-size: calc(128px * .5);
+    }
+    .store-container {
+        grid-template-rows: calc(220px * .6) calc(calc(100vh - 55px) * .6);
+        grid-template-columns: calc(360px * .3) auto;
+    }
+}
+
 /* @media (max-width: 1200px) {
     .store-container {
         grid-template-rows: calc(220px * .8) calc(calc(100vh - 55px) * .8);

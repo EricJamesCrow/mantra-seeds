@@ -260,3 +260,49 @@
     }
     
 }
+
+@media (max-width: 390px) {
+    .filter-list-container {
+        padding-top: 12px;
+        padding-right: calc(15px * .3);
+    }
+    .filter-products-button {
+        padding-top: 24px;
+        padding-left: calc(5px * .3);
+        height: calc(50px * .3);
+    }
+    .filter-products-button-expanded {
+        /* padding-top: calc(20px * .7); */
+        padding-left: calc(5px * .3);
+        height: calc(520px * .3);
+    }
+    .filter-list-container input {
+        width: calc(25px * .3);
+        height: calc(50px * .3);
+    }
+    
+    .filter-list-container img {
+        width: calc(50px * .3);
+        height: calc(50px * .3);
+    }
+
+    .filter-container button {
+        font-size: calc(24px * .5);
+        width: calc(50px * .3);
+        padding-right: calc(260px * .3);
+    }
+
+    .filter-container div {
+        padding-right: calc(20px * .3); 
+        font-size: calc(24px * .5);
+        line-height: calc(27px * .3);
+    }
+    
+    .filter-list-container div {
+        font-size: calc(20px * .5);
+        width: calc(60px * .3);
+        padding-right: calc(20px * .3); 
+        line-height: calc(50px * .3);
+    }
+    
+}
