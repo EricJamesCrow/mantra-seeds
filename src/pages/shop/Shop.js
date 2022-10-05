@@ -34,7 +34,13 @@ export default function Store() {
       />
       <div className="store-header">Choose Your Seeds</div>
       <div className="store-products">
+        <div className="store-buttons-container">
+        <button className="filter-products-mobile">
+          <div>Filter Products</div>
+          <div className="filter-products-mobile-plus">+</div>
+        </button>
         <DropDown selected={selected} setSelected={setSelected}/>
+        </div>
         <div className="store-product">
       {products.map(product => {
         if(filter.length !== 0) {

@@ -251,181 +251,31 @@
 
 @media (max-width: 980px) {
     .product-shop {
-        width: calc(360px * .7);
-        height: calc(375px * .7);
+        width: calc(360px * .8);
+        height: calc(375px * .8);
     }
     .product-shop img {
-        width: calc(280px * .7);
-        height: calc(300px * .7);
+        width: calc(280px * .8);
+        height: calc(300px * .8);
     }
     .product-shop .product-price {
-        font-size: calc(36px * .7);
-        margin: calc(-35px * .7) 0 0 calc(250px * .7);
+        font-size: calc(36px * .8);
+        margin: calc(-35px * .8) 0 0 calc(250px * .8);
     }
 
     .add-to-cart-text-shop {
-        font-size: calc(18px * .6);
-        padding: calc(10px * .7);
+        font-size: calc(18px * .7);
+        padding: calc(10px * .8);
     }
     
     .add-to-cart-shop {
-        padding: calc(5px * .7);
-        width: calc(110px * .7);
-        height: calc(30px * .7);
+        padding: calc(5px * .8);
+        width: calc(110px * .8);
+        height: calc(30px * .8);
     }
     .add-to-cart-shop .cart-icon {
-        width: calc(20px * .7);
-        height: calc(20px * .7);
-    }
-}
-
-@media (max-width: 880px) {
-    .product-shop {
-        width: calc(360px * .6);
-        height: calc(375px * .6);
-    }
-    .product-shop img {
-        width: calc(280px * .6);
-        height: calc(300px * .6);
-    }
-    .product-shop .product-price {
-        font-size: calc(36px * .6);
-        margin: calc(-35px * .6) 0 0 calc(250px * .58);
-    }
-
-    .add-to-cart-text-shop {
-        font-size: calc(18px * .55);
-        padding: calc(10px * .6);
-    }
-    
-    .add-to-cart-shop {
-        padding: calc(5px * .6);
-        width: calc(110px * .6);
-        height: calc(30px * .6);
-    }
-    .add-to-cart-shop .cart-icon {
-        width: calc(20px * .6);
-        height: calc(20px * .6);
-    }
-}
-
-@media (max-width: 780px) {
-    .product-shop {
-        width: calc(360px * .5);
-        height: calc(375px * .5);
-    }
-    .product-shop img {
-        width: calc(280px * .5);
-        height: calc(300px * .5);
-    }
-    .product-shop .product-price {
-        font-size: calc(36px * .5);
-        margin: calc(-35px * .5) 0 0 calc(250px * .46);
-    }
-
-    .add-to-cart-text-shop {
-        font-size: calc(18px * .45);
-        padding: calc(10px * .5);
-    }
-    
-    .add-to-cart-shop {
-        padding: calc(5px * .5);
-        width: calc(110px * .5);
-        height: calc(30px * .5);
-    }
-    .add-to-cart-shop .cart-icon {
-        width: calc(20px * .5);
-        height: calc(20px * .5);
-    }
-}
-
-@media (max-width: 700px) {
-    .product-shop {
-        width: calc(360px * .85);
-        height: calc(375px * .85);
-    }
-    .product-shop img {
-        width: calc(280px * .85);
-        height: calc(300px * .85);
-    }
-    .product-shop .product-price {
-        font-size: calc(36px * .85);
-        margin: calc(-35px * .85) 0 0 calc(250px * .85);
-    }
-
-    .add-to-cart-text-shop {
-        font-size: calc(18px * .8);
-        padding: calc(10px * .85);
-    }
-    
-    .add-to-cart-shop {
-        padding: calc(5px * .85);
-        width: calc(110px * .85);
-        height: calc(30px * .85);
-    }
-    .add-to-cart-shop .cart-icon {
-        width: calc(20px * .85);
-        height: calc(20px * .85);
-    }
-}
-
-@media (max-width: 620px) {
-    .product-shop {
-        width: calc(360px * .7);
-        height: calc(375px * .7);
-    }
-    .product-shop img {
-        width: calc(280px * .7);
-        height: calc(300px * .7);
-    }
-    .product-shop .product-price {
-        font-size: calc(36px * .7);
-        margin: calc(-35px * .7) 0 0 calc(250px * .7);
-    }
-
-    .add-to-cart-text-shop {
-        font-size: calc(18px * .65);
-        padding: calc(10px * .7);
-    }
-    
-    .add-to-cart-shop {
-        padding: calc(5px * .7);
-        width: calc(110px * .7);
-        height: calc(30px * .7);
-    }
-    .add-to-cart-shop .cart-icon {
-        width: calc(20px * .7);
-        height: calc(20px * .7);
-    }
-}
-
-@media (max-width: 390px) {
-    .product-shop {
-        width: calc(360px * .5);
-        height: calc(375px * .5);
-    }
-    .product-shop img {
-        width: calc(280px * .5);
-        height: calc(300px * .5);
-    }
-    .product-shop .product-price {
-        font-size: calc(36px * .5);
-        margin: calc(-35px * .5) 0 0 calc(250px * .5);
-    }
-
-    .add-to-cart-text-shop {
-        font-size: calc(18px * .45);
-        padding: calc(10px * .5);
-    }
-    
-    .add-to-cart-shop {
-        padding: calc(5px * .5);
-        width: calc(110px * .5);
-        height: calc(30px * .5);
-    }
-    .add-to-cart-shop .cart-icon {
-        width: calc(20px * .5);
-        height: calc(20px * .5);
+        width: calc(20px * .8);
+        height: calc(20px * .8);
     }
 }
 
