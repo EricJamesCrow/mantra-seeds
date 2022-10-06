@@ -1,5 +1,7 @@
 // react
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import Carousel from 'react-bootstrap/Carousel';
 
 // styles
 import "./Home.css"
@@ -11,6 +13,11 @@ import Product from "../../components/Product"
 import products from "../../data/product_data"
 
 export default function Home() {
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
   
   return (
     <>
