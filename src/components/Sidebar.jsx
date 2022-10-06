@@ -49,8 +49,8 @@ export default function Sidebar({ updateFilter }) {
       const whatsWindowHeight = () => {
         let windowHeight = window.scrollY;
         windowHeight > 170 ? setStickyClass('store-sidebar-sticky') : setStickyClass("store-sidebar");
-        let viewportWidth = window.innerWidth;
-        console.log(viewportWidth)
+        // let viewportWidth = window.innerHeight;
+        // console.log(viewportWidth)
         };
 
   return (

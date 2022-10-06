@@ -24,7 +24,7 @@ export default function Home() {
   };
 
   const isMobile = useMediaQuery({
-    query: '(max-width: 420px)'
+    query: '(max-width: 1366px)'
   })
   
   return (
