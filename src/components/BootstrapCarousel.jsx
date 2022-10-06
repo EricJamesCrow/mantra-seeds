@@ -5,7 +5,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Product from "../components/Product"
 
 // styles
-import "./BootstrapCarousel.css"
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function BootstrapCarousel( { items } ) {
   const [index, setIndex] = useState(0);
