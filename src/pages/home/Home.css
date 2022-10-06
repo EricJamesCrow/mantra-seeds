@@ -355,15 +355,18 @@ body {
     }
 }
 
+@media (max-width: 390px) {
+    .recent-products-label {
+        font-size: calc(38px * .8);
+    }
+}
+
 @media (max-width: 310px) {
     .welcome {
         font-size: calc(64px * .8);
     }
     .banner-title {
         font-size: calc(64px * .8)
-    }
-    .recent-products-label {
-        font-size: calc(38px * .8);
     }
     .banner-shop-now {
         width: calc(90px * .8);

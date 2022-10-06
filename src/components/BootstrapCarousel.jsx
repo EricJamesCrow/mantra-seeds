@@ -17,7 +17,7 @@ export default function BootstrapCarousel( { items } ) {
   return (
     <Carousel activeIndex={index} onSelect={handleSelect} style={{ width: '390px', height: '360px', display: 'flex', alignItem: 'center' }}>
       {items.map( item => (
-        <Carousel.Item style={{ width: '340px', marginLeft: '50px'}}>
+        <Carousel.Item style={{ width: '340px', marginLeft: '50px'}} interval={2000}>
       <Product
         item={item}
       />
