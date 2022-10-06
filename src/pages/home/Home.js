@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
+import { useMediaQuery } from 'react-responsive'
 
 // styles
 import "./Home.css"
@@ -18,6 +19,10 @@ export default function Home() {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+
+  const isMobile = useMediaQuery({
+    query: '(min-width: 390px)'
+  })
   
   return (
     <>
