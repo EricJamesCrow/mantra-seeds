@@ -54,11 +54,16 @@ export default function Home() {
     <div className="special-deals">
       <div className="special-deals-label">Special Deals</div>
       <div className="special-deals-products">
-        {products.slice(0, 3).map(product => (
+        {!isMobile && products.slice(0, 3).map(product => (
           <Product
           item={product}
           />
         ))}
+        {isMobile && 
+        <BootstrapCarousel
+        items={products.slice(0, 3)}
+        />
+        }
       </div>
     </div>
     <div className="about">
