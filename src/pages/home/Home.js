@@ -10,8 +10,6 @@ import "./Home.css"
 import Product from "../../components/Product"
 import BootstrapCarousel from "../../components/BootstrapCarousel"
 
-import Carousel from 'react-bootstrap/Carousel';
-
 // images
 import Cannabis from "../../images/cannabis-leaf-green.svg"
 
@@ -26,7 +24,7 @@ export default function Home() {
   };
 
   const isMobile = useMediaQuery({
-    query: '(max-width: 390px)'
+    query: '(max-width: 420px)'
   })
   
   return (
@@ -38,7 +36,7 @@ export default function Home() {
     </div>
     <div className="recent-products">
       <div className="recent-products-label">Recent Products</div>
-      <div className={!isMobile ? "recent-product" : "recent-product"}>
+      <div className={!isMobile ? "recent-product" : "recent-product-mobile"}>
         {!isMobile && products.slice(0, 8).map(product => (
           <Product
           item={product}
@@ -53,7 +51,7 @@ export default function Home() {
     </div>
     <div className="special-deals">
       <div className="special-deals-label">Special Deals</div>
-      <div className="special-deals-products">
+      <div className={!isMobile ? "special-deals-products" : null}>
         {!isMobile && products.slice(0, 3).map(product => (
           <Product
           item={product}
