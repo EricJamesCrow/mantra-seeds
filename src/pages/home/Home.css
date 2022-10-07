@@ -48,7 +48,8 @@ body {
     height: 10vw;
     line-height: 10vw;
     font-size: 3.5vw;
-    margin: 6.6vw 0 4vw 60vw;
+    margin: 2vw 0 4vw 0;
+    
 }
 
 .banner-shop-now:hover {
@@ -217,7 +218,7 @@ body {
 
 @media screen and (min-width: 620px) {
     .welcome {
-        padding: 10vw 10vw 0 0;
+        padding: 10vw 0 0 0;
         margin-bottom: -1vw;
         font-size: 11vw;
     }
@@ -231,7 +232,7 @@ body {
         height: 5vw;
         line-height: 5vw;
         font-size: 1.75vw;
-        margin: 3.3vw 0 2vw 30vw;
+        margin: 3.3vw 0 2vw 30;
     }
 
     .recent-products {
@@ -323,10 +324,110 @@ body {
     }
 }
 
-@media screen and (min-width: 960px) {
-
-}
-
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 980px) {
+    .welcome {
+        padding: 7.5vw 0 0 0;
+        margin-bottom: -0.75vw;
+        font-size: 8.25vw;
+    }
     
+    .banner-title {
+        font-size: 6.75vw;
+    }
+    
+    .banner-shop-now {
+        width: 11.25vw;
+        height: 3.75vw;
+        line-height: 3.75vw;
+        font-size: 1.3125vw;
+        margin: 2.475vw 0 1.5vw 0;
+    }
+
+    .recent-products {
+        padding-bottom: 3.75vw;
+    }
+    
+    .recent-product {
+        /* margin-top: 40px;
+        justify-items: center;
+        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 20px;
+        background:  #82A7D6; */
+    }
+    
+    .recent-product-mobile {
+    }
+    
+    .recent-products-label {
+        font-size: 2.7vw;
+        padding: 1.875vw 0 1.875vw 0;
+    }
+    
+    .special-deals {
+        padding-bottom: 7.5vw;
+    }
+    
+    .special-deals-label {
+        font-size: 10vw;
+        padding: 3.75vw 0 3.75vw 0;
+    }
+    
+    .about {
+        padding-bottom: 3.75vw;
+    }
+    
+    .about-label {
+        font-size: 10vw;
+        padding: 1.2vw 0 1.2vw 0;
+    }
+    
+    .about-text {
+        font-size: 3vw;
+        margin: 0.25vw 10vw 0 10vw;
+    }
+    
+    .newsletter {
+        padding-bottom: 4.75vw;
+    }
+    
+    .newsletter-label {
+        font-size: 10vw;
+        padding: 1.2vw 0 1.2vw 0;
+    }
+    
+    .subscribe-container {
+        padding: 4.75vw 0 2.4vw 0;
+        gap: 1.65vw;
+    }
+    
+    .newsletter-text {
+        font-size: 3vw;
+        margin: 0.25vw 10vw 0 10vw;
+    }
+    
+    .newsletter-email-input {
+        border: .12vw solid rgba(0, 0, 0, 0.36);
+        border-radius: 0.595vw; 
+        width: 25vw;
+        height: 4vw;
+        font-size: 2.5vw;
+    }
+    
+    .newsletter-email-input:focus {
+        border: 0.18vw solid rgba(0, 0, 0, 0.36);
+    }
+    
+    .newsletter-subscribe {
+        width: 9.75vw;
+        height: 4vw;
+        font-size: 1.3vw;
+    }
+
+    .copyright div {
+        font-size:3vw;
+        padding-top: 3.5vw;
+        padding-bottom: 3vw;
+    }
 }
