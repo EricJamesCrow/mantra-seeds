@@ -17,11 +17,6 @@ import Cannabis from "../../images/cannabis-leaf-green.svg"
 import products from "../../data/product_data"
 
 export default function Home() {
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
 
   useEffect(() => {
     window.addEventListener('scroll', whatsWindowHeight);
@@ -31,10 +26,17 @@ export default function Home() {
     };
   }, []);
 
+  const isDesktop =  useMediaQuery({ query: '(min-width: 980px)' })
+  const isTablet =  useMediaQuery({ query: '(min-width: 620px)' })
+  // const isMobile = useMediaQuery({ query: '(max-width: 620px)'} )
+
   const whatsWindowHeight = () => {
     let viewportHeight = window.innerHeight;
     let viewportWidth = window.innerWidth;
-    console.log(viewportWidth / viewportHeight >= 0.8)
+    console.log(viewportWidth)
+    console.log(`isDesktop: ${isDesktop}`)
+    console.log(`isTablet: ${isTablet}`)
+    // console.log(`isMobile: ${isMobile}`)
     };
 
   const isMobile =  useMediaQuery({
@@ -51,12 +53,12 @@ export default function Home() {
     <div className="recent-products">
       <div className="recent-products-label">Recent Products</div>
       <div className={!isMobile ? "recent-product" : "recent-product-mobile"}>
-        {!isMobile && products.slice(0, 8).map(product => (
+        {/* {products.slice(0, 8).map(product => (
           <Product
           item={product}
           />
-        ))}
-        {isMobile && 
+        ))} */}
+        {
         <BootstrapCarousel
         items={products.slice(0, 8)}
         />
@@ -66,12 +68,12 @@ export default function Home() {
     <div className="special-deals">
       <div className="special-deals-label">Special Deals</div>
       <div className={!isMobile ? "special-deals-products" : null}>
-        {!isMobile && products.slice(0, 3).map(product => (
+        {/* {products.slice(0, 3).map(product => (
           <Product
           item={product}
           />
-        ))}
-        {isMobile && 
+        ))} */}
+        {
         <BootstrapCarousel
         items={products.slice(0, 3)}
         />

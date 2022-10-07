@@ -366,12 +366,12 @@ body {
     }
     
     .special-deals {
-        padding-bottom: 7.5vw;
+        padding-bottom: 3.75vw;
     }
     
     .special-deals-label {
-        font-size: 10vw;
-        padding: 3.75vw 0 3.75vw 0;
+        font-size: 7.5vw;
+        padding: 3.75vw 0 2vw 0;
     }
     
     .about {
@@ -379,12 +379,12 @@ body {
     }
     
     .about-label {
-        font-size: 10vw;
-        padding: 1.2vw 0 1.2vw 0;
+        font-size: 7.5vw;
+        padding: 3vw 0 1.2vw 0;
     }
     
     .about-text {
-        font-size: 3vw;
+        font-size: 2.5vw;
         margin: 0.25vw 10vw 0 10vw;
     }
     
@@ -393,8 +393,8 @@ body {
     }
     
     .newsletter-label {
-        font-size: 10vw;
-        padding: 1.2vw 0 1.2vw 0;
+        font-size: 7.5vw;
+        padding: 3vw 0 1.2vw 0;
     }
     
     .subscribe-container {
@@ -403,30 +403,30 @@ body {
     }
     
     .newsletter-text {
-        font-size: 3vw;
+        font-size: 2.5vw;
         margin: 0.25vw 10vw 0 10vw;
     }
     
     .newsletter-email-input {
-        border: .12vw solid rgba(0, 0, 0, 0.36);
+        border: .1vw solid rgba(0, 0, 0, 0.36);
         border-radius: 0.595vw; 
         width: 25vw;
-        height: 4vw;
-        font-size: 2.5vw;
+        height: 3vw;
+        font-size: 1.875vw;
     }
     
     .newsletter-email-input:focus {
-        border: 0.18vw solid rgba(0, 0, 0, 0.36);
+        border: 0.2vw solid rgba(0, 0, 0, 0.36);
     }
     
     .newsletter-subscribe {
         width: 9.75vw;
-        height: 4vw;
+        height: 3vw;
         font-size: 1.3vw;
     }
 
     .copyright div {
-        font-size:3vw;
+        font-size: 2.2vw;
         padding-top: 3.5vw;
         padding-bottom: 3vw;
     }
