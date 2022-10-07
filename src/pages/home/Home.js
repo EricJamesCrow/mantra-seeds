@@ -1,6 +1,6 @@
 // react
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
 // styles
@@ -23,7 +23,21 @@ export default function Home() {
     setIndex(selectedIndex);
   };
 
-  const isMobile = useMediaQuery({
+  useEffect(() => {
+    window.addEventListener('scroll', whatsWindowHeight);
+
+    return () => {
+      window.removeEventListener('scroll', whatsWindowHeight);
+    };
+  }, []);
+
+  const whatsWindowHeight = () => {
+    let viewportHeight = window.innerHeight;
+    let viewportWidth = window.innerWidth;
+    console.log(viewportWidth / viewportHeight >= 0.8)
+    };
+
+  const isMobile =  useMediaQuery({
     query: '(max-width: 1366px)'
   })
   

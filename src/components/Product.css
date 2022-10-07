@@ -65,3 +65,44 @@
     width: 4.1vw;
     height: 4.1vw;
 }
+
+@media screen (min-width: 620px) {
+    .product-container-shop {
+        margin: 0.73vw 0 0 0.73vw;
+    }
+    
+    .product-shop {
+        width: 34.25vw;
+        height: 35.7vw;
+        border: 0.235vw solid #000000;
+        box-shadow: 0 0.476vw 0.476vw rgba(0, 0, 0, 0.25);
+        border-radius: 0.595vw;
+    }
+    .product-shop img {
+        width: 28.7vw;
+        height: 30.75vw;
+    }
+    .product-shop .product-price {
+        margin: -3.5vw 0 0 24.5vw;
+        font-size: 3.69vw;
+    }
+    
+    .add-to-cart-text-shop {
+        padding: 0.365vw;
+        font-size: 1.65vw;
+    }
+    
+    .add-to-cart-shop {
+        border: 0.035vw solid #000000;
+        border-radius: 0.035vw;
+        border-radius: 0.168vw;
+        padding: 0.5vw;
+        width: 11.25vw;
+        height: 3vw;
+    }
+
+    .add-to-cart-shop .cart-icon {
+        width: 2vw;
+        height: 2vw;
+    }
+}
