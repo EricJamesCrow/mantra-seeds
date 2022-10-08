@@ -1,6 +1,6 @@
 // react
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
 // styles
@@ -17,6 +17,10 @@ import Cannabis from "../../images/cannabis-leaf-green.svg"
 import products from "../../data/product_data"
 
 export default function Home() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     window.addEventListener('scroll', whatsWindowHeight);

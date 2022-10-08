@@ -15,6 +15,7 @@ import Shop from "./pages/shop/Shop"
 import Contact from "./pages/contact/Contact"
 
 function App() {
+
   return (
     <>
     <BrowserRouter>

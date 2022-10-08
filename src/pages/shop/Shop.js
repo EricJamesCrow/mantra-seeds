@@ -7,7 +7,7 @@ import DropDown from "../../components/DropDown"
 import Sidebar from "../../components/Sidebar"
 
 // react
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // data
 import products from "../../data/product_data";
@@ -16,6 +16,10 @@ export default function Store() {
   // dropdown menu
   const [selected, setSelected] = useState("Sort by featured")
   const [filter, setFilter] = useState([])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const updateFilter = term => {
     var index = filter.indexOf(term);
