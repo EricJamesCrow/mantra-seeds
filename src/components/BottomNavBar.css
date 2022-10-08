@@ -1,0 +1,29 @@
+.bottom-nav {
+    background: #447AB9;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+}
+
+.bottom-nav a {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    min-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-nav a svg {
+    transition: background-color 0.1s ease-in-out;
+}
+
+/* .bottom-nav a svg:hover {
+    background-color: #82A7D6;
+} */

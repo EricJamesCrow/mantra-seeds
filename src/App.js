@@ -6,6 +6,7 @@ import './App.css';
 
 // components
 import Navbar from './components/Navbar';
+import BottomNavBar from './components/BottomNavBar'
 
 // pages
 import Home from "./pages/home/Home"
@@ -17,7 +18,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <Navbar className="navbar"/>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin/>} />
@@ -27,6 +28,7 @@ function App() {
       <div className="copyright">
       <div>© Mantra Seeds 2022</div>
     </div>
+    <BottomNavBar/>
     </BrowserRouter>
     </>
   );

@@ -50,6 +50,7 @@ nav {
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .navbar-links li:hover {
@@ -94,6 +95,7 @@ nav {
     justify-content: space-between;
     width: 30px;
     height: 21px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .toggle-button .bar {

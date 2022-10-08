@@ -28,15 +28,10 @@ export default function Home() {
 
   const isDesktop =  useMediaQuery({ query: '(min-width: 980px)' })
   const isTablet =  useMediaQuery({ query: '(min-width: 620px)' })
-  // const isMobile = useMediaQuery({ query: '(max-width: 620px)'} )
 
   const whatsWindowHeight = () => {
     let viewportHeight = window.innerHeight;
     let viewportWidth = window.innerWidth;
-    console.log(viewportWidth)
-    console.log(`isDesktop: ${isDesktop}`)
-    console.log(`isTablet: ${isTablet}`)
-    // console.log(`isMobile: ${isMobile}`)
     };
 
   const isMobile =  useMediaQuery({
