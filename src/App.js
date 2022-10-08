@@ -24,6 +24,9 @@ function App() {
         <Route path="/shop" element={<Shop/>} />
         <Route path="/contact" element={<Contact/>} />
       </Routes>
+      <div className="copyright">
+      <div>© Mantra Seeds 2022</div>
+    </div>
     </BrowserRouter>
     </>
   );

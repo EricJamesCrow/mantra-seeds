@@ -103,6 +103,48 @@ nav {
     border-radius: 10px;
 }
 
+.store-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background: #447AB9;
+    border-bottom: 0.5px solid #000000;
+    padding: 5px 0 5px 15px;
+    height: 60px;
+}
+
+.store-header {
+    font-family: 'Southern Aire Personal Use Only';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    color: #fff;
+    text-align: center;
+    margin: auto;
+}
+
+.filter-products-mobile {
+    background: #82A7D6;
+    border-radius: 5px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+	border: none;
+	cursor: pointer;
+    margin: auto;
+    display: inline-block;
+}
+
+.filter-products-mobile:hover {
+    background-color: #9EB8DA;
+}
+
+.filter-products-mobile div {
+    text-align: center;
+}
+
 @media (max-width: 980px) {
     .toggle-button {
         display: flex;

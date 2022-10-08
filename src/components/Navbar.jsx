@@ -1,6 +1,7 @@
 // react
 import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 // styles
 import "./Navbar.css"
@@ -15,6 +16,23 @@ import { faUser, faCartShopping} from '@fortawesome/free-solid-svg-icons'
 export default function Navbar() {
     const [isActive, setActive] = useState(false)
     const [stickyClass, setStickyClass] = useState('');
+
+    const [isShopping, setIsShopping] = useState(false)
+    const location = useLocation();
+
+    const shopping = () => {
+        if(location.pathname === "/shop") {
+            setIsShopping(true)
+        } else {
+            setIsShopping(false)
+        }
+    }
+
+
+    useEffect(() => {
+        shopping()
+    })
+
 
     useEffect(() => {
         window.addEventListener('scroll', stickNavbar);
@@ -86,6 +104,14 @@ export default function Navbar() {
             </ul>
         </div>
     </div>
+    {isShopping && !isActive &&
+        <div className="store-banner">
+        <div className="store-header">Store</div>
+        <button className="filter-products-mobile">
+          <div>Filter Products</div>
+        </button>
+    </div>
+    }
     </nav>
   )
 }

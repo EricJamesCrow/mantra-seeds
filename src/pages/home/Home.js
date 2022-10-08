@@ -96,9 +96,6 @@ export default function Home() {
           <button className="newsletter-subscribe">SUBSCRIBE</button>
           </div>
     </div>
-    <div className="copyright">
-      <div>© Mantra Seeds 2022</div>
-    </div>
     </>
   )
 }
