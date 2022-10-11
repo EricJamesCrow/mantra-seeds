@@ -19,12 +19,12 @@
 }
 
 .filter-products-label {
-    padding-top: 10px;
     font-family: 'Futura';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     color: #ffffff;
+    clear: both;
 }
 
 .filter-products-buttons {

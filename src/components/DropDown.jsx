@@ -12,7 +12,7 @@ export default function DropDown({ selected, setSelected }) {
     const [isActive, setIsActive] = useState(false)
     const options = ["Sort by featured", "Sort by newest", "Sort by price: high to low", "Sort by price: low to high"]
 
-  return ReactDom.createPortal(
+  return (
     <div className="dropdown">
         <div className="dropdown-btn" 
         onClick={(e) => setIsActive(!isActive)}>

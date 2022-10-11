@@ -3,6 +3,7 @@ import "./Sidebar.css"
 
 // components
 import Filters from "./Filters"
+import DropDown from "./DropDown"
 
 // chakras
 import Crown from "../images/chakras/crown-chakra.svg"
@@ -23,6 +24,7 @@ import { useState, useRef, useEffect } from "react"
 
 export default function Sidebar({ updateFilter }) {
     const [stickyClass, setStickyClass] = useState("store-sidebar");
+    const [selected, setSelected] = useState("Sort by featured")
     const ChildRef = useRef([]);
 
     // products information 
@@ -59,15 +61,19 @@ export default function Sidebar({ updateFilter }) {
   return (
     <div className="store-sidebar">
     <div className="filter-products-container">
+    <div>
     <FontAwesomeIcon 
             icon={faXmark} 
             style={{
                 color: "#FFF",
                 fontSize: "1.6rem",
                 float: "right",
-                marginRight: "5px",
+                marginTop: "2px",
+                marginRight: "10px",
                 cursor: "pointer"}}/>
       <div className="filter-products-label">Filter Products</div>
+      <DropDown selected={selected} setSelected={setSelected} className="filter-products-dropdown"/>
+      </div>
       <div className="filter-products-buttons">
        {productCategories.map(product => (
         <Filters
