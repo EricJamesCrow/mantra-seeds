@@ -3,9 +3,6 @@
     padding-top: 135px;
 }
 
-.store-products {
-}
-
 .store-product {
     /* padding-right: 10px; */
     grid-template-columns: 1fr; 

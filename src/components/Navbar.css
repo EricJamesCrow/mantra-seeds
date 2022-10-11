@@ -147,6 +147,12 @@ nav {
     text-align: center;
 }
 
+.filter-products__modal {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
 @media (max-width: 980px) {
     .toggle-button {
         display: flex;

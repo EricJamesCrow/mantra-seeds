@@ -15,6 +15,8 @@ import Root from "../images/chakras/root-chakra.svg"
 
 // images
 import Cannabis from "../images/cannabis-outline.svg"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 // react
 import { useState, useRef, useEffect } from "react"
@@ -55,8 +57,16 @@ export default function Sidebar({ updateFilter }) {
         };
 
   return (
-    <div className={stickyClass} style={{ paddingTop: stickyClass[0], position: stickyClass[1] }}>
+    <div className="store-sidebar">
     <div className="filter-products-container">
+    <FontAwesomeIcon 
+            icon={faXmark} 
+            style={{
+                color: "#FFF",
+                fontSize: "1.6rem",
+                float: "right",
+                marginRight: "5px",
+                cursor: "pointer"}}/>
       <div className="filter-products-label">Filter Products</div>
       <div className="filter-products-buttons">
        {productCategories.map(product => (

@@ -1,10 +1,11 @@
 .filter-products-button {
-    padding-top: 20px;
     padding-left: 5px;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #fff;
     transition: height ease-in-out 300ms;
     overflow: hidden;
     height: 50px;
+    width: 44%;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .filter-container {
@@ -15,19 +16,19 @@
 .filter-list-container {
     display: flex;
     justify-content: space-between;
-    padding-top: 10px;
-    padding-right: 15px;
+    gap: 16px;
 }
 
 .filter-list-container input {
-    width: 25px;
-    height: 50px;
+    width: 20px;
+    /* height: 25px; */
     background-color: #eee;
 }
 
 .filter-list-container img {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 50%;
+    margin: auto 0;
     border-radius: 50%;
     border: 0.5px solid #000000;
 }
@@ -35,20 +36,25 @@
 .filter-list-container div {
     font-family: 'Futura';
     font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    width: 60px;
+    font-weight: 400;
+    font-size: 16px;
+    width: 80px;
     line-height: 50px;
-    margin-right: 40px;
+	text-shadow:
+		-0.5px -0.5px 0 #000,
+		0.5px -0.5px 0 #000,
+		-0.5px 0.5px 0 #000,
+		0.5px 0.5px 0 #000;
 }
 
 .filter-products-button-expanded {
-    padding-top: 20px;
     padding-left: 5px;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #fff;
     height: 520px;
+    width: 44%;
     overflow: hidden;
     transition: height ease-in-out 300ms;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .filter-container button {
@@ -62,247 +68,18 @@
     font-family: 'Futura';
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 16px;
     width: 50px;
-    padding-right: 260px;
-    background: #FEEED4;
+    padding-right: 100px;
+    color: #fff;
+    background: #447AB9;
 }
 
 .filter-container div {
-    padding-right: 20px; 
     font-family: 'Futura';
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 27px;
-}
-
-@media (max-width: 1525px) {
-    /* .filter-list-container {
-        padding-top: calc(10px * .9);
-        padding-right: calc(15px * .9);
-    } */
-    .filter-products-button {
-        /* padding-top: calc(20px * .9); */
-        padding-left: calc(5px * .9);
-        height: calc(50px * .9);
-    }
-    .filter-products-button-expanded {
-        /* padding-top: calc(20px * .9); */
-        padding-left: calc(5px * .9);
-        height: calc(520px * .9);
-    }
-    .filter-list-container input {
-        width: calc(25px * .9);
-        height: calc(50px * .9);
-    }
-    
-    .filter-list-container img {
-        width: calc(50px * .9);
-        height: calc(50px * .9);
-    }
-
-    .filter-container button {
-        font-size: calc(24px * .9);
-        width: calc(50px * .9);
-        padding-right: calc(260px * .9);
-    }
-
-    .filter-container div {
-        padding-right: calc(20px * .9); 
-        font-size: calc(24px * .9);
-        line-height: calc(27px * .9);
-    }
-    
-    .filter-list-container div {
-        font-size: calc(20px * .9);
-        width: calc(60px * .9);
-        padding-right: calc(20px * .9); 
-        line-height: calc(50px * .9);
-    }
-    
-}
-
-@media (max-width: 1080px) {
-    .filter-list-container {
-        /* padding-top: calc(10px * .8); */
-        padding-right: calc(15px * .8);
-    }
-    .filter-products-button {
-        /* padding-top: calc(20px * .8); */
-        padding-left: calc(5px * .8);
-        height: calc(50px * .8);
-    }
-    .filter-products-button-expanded {
-        /* padding-top: calc(20px * .8); */
-        padding-left: calc(5px * .8);
-        height: calc(520px * .8);
-    }
-    .filter-list-container input {
-        width: calc(25px * .8);
-        height: calc(50px * .8);
-    }
-    
-    .filter-list-container img {
-        width: calc(50px * .8);
-        height: calc(50px * .8);
-    }
-
-    .filter-container button {
-        font-size: calc(24px * .8);
-        width: calc(50px * .8);
-        padding-right: calc(260px * .8);
-    }
-
-    .filter-container div {
-        padding-right: calc(20px * .8); 
-        font-size: calc(24px * .8);
-        line-height: calc(27px * .8);
-    }
-    
-    .filter-list-container div {
-        font-size: calc(20px * .8);
-        width: calc(60px * .8);
-        padding-right: calc(20px * .8); 
-        line-height: calc(50px * .8);
-    }
-    
-}
-
-@media (max-width: 880px) {
-    .filter-list-container {
-        padding-top: 12px;
-        padding-right: calc(15px * .6);
-    }
-    .filter-products-button {
-        padding-top: 24px;
-        padding-left: calc(5px * .6);
-        height: calc(50px * .6);
-    }
-    .filter-products-button-expanded {
-        /* padding-top: calc(20px * .7); */
-        padding-left: calc(5px * .6);
-        height: calc(520px * .6);
-    }
-    .filter-list-container input {
-        width: calc(25px * .6);
-        height: calc(50px * .6);
-    }
-    
-    .filter-list-container img {
-        width: calc(50px * .6);
-        height: calc(50px * .6);
-    }
-
-    .filter-container button {
-        font-size: calc(24px * .8);
-        width: calc(50px * .6);
-        padding-right: calc(260px * .6);
-    }
-
-    .filter-container div {
-        padding-right: calc(20px * .6); 
-        font-size: calc(24px * .8);
-        line-height: calc(27px * .6);
-    }
-    
-    .filter-list-container div {
-        font-size: calc(20px * .8);
-        width: calc(60px * .6);
-        padding-right: calc(20px * .6); 
-        line-height: calc(50px * .6);
-    }
-    
-}
-
-@media (max-width: 525px) {
-    .filter-list-container {
-        padding-top: 12px;
-        padding-right: calc(15px * .5);
-    }
-    .filter-products-button {
-        padding-top: 24px;
-        padding-left: calc(5px * .5);
-        height: calc(50px * .5);
-    }
-    .filter-products-button-expanded {
-        /* padding-top: calc(20px * .7); */
-        padding-left: calc(5px * .5);
-        height: calc(520px * .5);
-    }
-    .filter-list-container input {
-        width: calc(25px * .5);
-        height: calc(50px * .5);
-    }
-    
-    .filter-list-container img {
-        width: calc(50px * .5);
-        height: calc(50px * .5);
-    }
-
-    .filter-container button {
-        font-size: calc(24px * .8);
-        width: calc(50px * .5);
-        padding-right: calc(260px * .5);
-    }
-
-    .filter-container div {
-        padding-right: calc(20px * .5); 
-        font-size: calc(24px * .8);
-        line-height: calc(27px * .5);
-    }
-    
-    .filter-list-container div {
-        font-size: calc(20px * .8);
-        width: calc(60px * .5);
-        padding-right: calc(20px * .5); 
-        line-height: calc(50px * .5);
-    }
-    
-}
-
-@media (max-width: 390px) {
-    .filter-list-container {
-        padding-top: 12px;
-        padding-right: calc(15px * .3);
-    }
-    .filter-products-button {
-        padding-top: 24px;
-        padding-left: calc(5px * .3);
-        height: calc(50px * .3);
-    }
-    .filter-products-button-expanded {
-        /* padding-top: calc(20px * .7); */
-        padding-left: calc(5px * .3);
-        height: calc(520px * .3);
-    }
-    .filter-list-container input {
-        width: calc(25px * .3);
-        height: calc(50px * .3);
-    }
-    
-    .filter-list-container img {
-        width: calc(50px * .3);
-        height: calc(50px * .3);
-    }
-
-    .filter-container button {
-        font-size: calc(24px * .5);
-        width: calc(50px * .3);
-        padding-right: calc(260px * .3);
-    }
-
-    .filter-container div {
-        padding-right: calc(20px * .3); 
-        font-size: calc(24px * .5);
-        line-height: calc(27px * .3);
-    }
-    
-    .filter-list-container div {
-        font-size: calc(20px * .5);
-        width: calc(60px * .3);
-        padding-right: calc(20px * .3); 
-        line-height: calc(50px * .3);
-    }
-    
+    color: #fff;
 }

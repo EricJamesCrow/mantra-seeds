@@ -7,11 +7,7 @@ import { useMediaQuery } from 'react-responsive'
 import "./Home.css"
 
 // components
-import Product from "../../components/Product"
 import BootstrapCarousel from "../../components/BootstrapCarousel"
-
-// images
-import Cannabis from "../../images/cannabis-leaf-green.svg"
 
 // data
 import products from "../../data/product_data"
@@ -29,9 +25,6 @@ export default function Home() {
       window.removeEventListener('scroll', whatsWindowHeight);
     };
   }, []);
-
-  const isDesktop =  useMediaQuery({ query: '(min-width: 980px)' })
-  const isTablet =  useMediaQuery({ query: '(min-width: 620px)' })
 
   const whatsWindowHeight = () => {
     let viewportHeight = window.innerHeight;

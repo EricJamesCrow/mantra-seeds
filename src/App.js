@@ -1,5 +1,6 @@
 // react
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useState } from 'react';
 
 // styles
 import './App.css';
@@ -15,15 +16,29 @@ import Shop from "./pages/shop/Shop"
 import Contact from "./pages/contact/Contact"
 
 function App() {
+  const [filter, setFilter] = useState([])
+
+  const updateFilter = term => {
+    var index = filter.indexOf(term);
+    if(index !== -1) {
+      var filterFiltered = filter.filter(v => v !== term)
+      setFilter(filterFiltered)
+    } else {
+      setFilter(prevArray => [...prevArray, term])
+    }
+  }
+
 
   return (
     <>
     <BrowserRouter>
-      <Navbar/>
+      <Navbar
+      updateFilter={updateFilter}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin/>} />
-        <Route path="/shop" element={<Shop/>} />
+        <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/contact" element={<Contact/>} />
       </Routes>
       <div className="copyright">

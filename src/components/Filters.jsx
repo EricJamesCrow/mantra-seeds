@@ -6,22 +6,22 @@ import { useState, forwardRef, useImperativeHandle} from 'react';
 
 const Filters = forwardRef(({ product, content, closeMenu, updateFilter }, ref) => {
     const [clicked, setClicked] = useState(false)
-    const [classHeight, setClassHeight] = useState("50px")
+    const [classHeight, setClassHeight] = useState("25px")
 
     useImperativeHandle(ref, () =>({
       callChildFunction() {
           setClicked(false)
-          setClassHeight("50px")
+          setClassHeight("25px")
       }
     }))
 
     const expandClass = () => {
       if (product === "Chakra") {
-        return setClassHeight("520px")
+        return setClassHeight("380px")
       } else if(product === "Strain") {
-        return setClassHeight("255px")
+        return setClassHeight("180px")
       } else if(product === "THC") {
-        return setClassHeight("455px")
+        return setClassHeight("330px")
       }
     }
 
@@ -32,7 +32,7 @@ const Filters = forwardRef(({ product, content, closeMenu, updateFilter }, ref) 
           expandClass()
         } else if(clicked === true) {
           setClicked(false)
-          setClassHeight("50px")
+          setClassHeight("25px")
         }
       }
 

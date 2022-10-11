@@ -11,12 +11,13 @@ import Cannabis from "../images/cannabis-leaf.svg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faCartShopping} from '@fortawesome/free-solid-svg-icons'
 
-// style={({ isActive }) => isActive ? {backgroundColor: "#82A7D6"} : null }
+// components
+import Sidebar from "./Sidebar"
 
-export default function Navbar() {
+export default function Navbar( { updateFilter } ) {
     const [isActive, setActive] = useState(false)
-    const [stickyClass, setStickyClass] = useState('');
-
+    const [showModal, setShowModal] = useState(false)
+    
     const [isShopping, setIsShopping] = useState(false)
     const location = useLocation();
 
@@ -33,28 +34,8 @@ export default function Navbar() {
         shopping()
     })
 
-
-    useEffect(() => {
-        window.addEventListener('scroll', stickNavbar);
-    
-        return () => {
-          window.removeEventListener('scroll', stickNavbar);
-        };
-      }, []);
-
-    const stickNavbar = () => {
-    if (window !== undefined) {
-        let windowHeight = window.scrollY;
-        windowHeight > 150 ? setStickyClass('sticky-nav') : setStickyClass('sticky-nav');
-    }
-    };
-
-    const shoppingCart = () => {
-        console.log("Shopping cart works")
-    }
-
-    const userProfile = () => {
-        console.log("User profile works")
+    const runShowModal = () => {
+        setShowModal(!showModal)
     }
 
     const displayMobileMenu = () => {
@@ -62,7 +43,7 @@ export default function Navbar() {
     }
 
   return (
-    <nav className={'sticky-nav'}>
+    <nav className='sticky-nav'>
     <div className="navbar-container">
         <div className="logo-container">
         <img src={Cannabis} className="cannabis"/>
@@ -91,16 +72,14 @@ export default function Navbar() {
                 color: "#FFF",
                 fontSize: "1.6rem",
                 padding: "15px 20px",
-                cursor: "pointer"}}
-                onClick={userProfile}/></li>
+                cursor: "pointer"}}/></li>
             <li><FontAwesomeIcon 
             icon={faCartShopping} 
             style={{
                 color: "#FFF",
                 fontSize: "1.6rem",
                 padding: "15px 20px",
-                cursor: "pointer"}} 
-                onClick={shoppingCart}/></li>
+                cursor: "pointer"}}/></li>
             </ul>
         </div>
     </div>
@@ -108,8 +87,15 @@ export default function Navbar() {
         <div className="store-banner">
         <div className="store-header">Store</div>
         <button className="filter-products-mobile">
-          <div>Filter Products</div>
+          <div onClick={runShowModal}>Filter Products</div>
         </button>
+    </div>
+    }
+    {showModal && isShopping &&
+    <div className="filter-products__modal">
+    <Sidebar
+    updateFilter={updateFilter}
+    />
     </div>
     }
     </nav>

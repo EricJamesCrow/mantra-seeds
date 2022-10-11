@@ -2,7 +2,7 @@
 import "./DropDown.css"
 
 // react
-import { useState } from 'react'
+import ReactDom, { useState } from 'react'
 
 // images
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +12,7 @@ export default function DropDown({ selected, setSelected }) {
     const [isActive, setIsActive] = useState(false)
     const options = ["Sort by featured", "Sort by newest", "Sort by price: high to low", "Sort by price: low to high"]
 
-  return (
+  return ReactDom.createPortal(
     <div className="dropdown">
         <div className="dropdown-btn" 
         onClick={(e) => setIsActive(!isActive)}>

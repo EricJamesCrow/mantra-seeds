@@ -3,7 +3,6 @@ import "./Shop.css"
 
 // components
 import Product from "../../components/Product"
-import DropDown from "../../components/DropDown"
 import Sidebar from "../../components/Sidebar"
 
 // react
@@ -12,24 +11,25 @@ import { useState, useEffect } from 'react';
 // data
 import products from "../../data/product_data";
 
-export default function Store() {
+export default function Store( { filter } ) {
   // dropdown menu
   const [selected, setSelected] = useState("Sort by featured")
-  const [filter, setFilter] = useState([])
+  // const [filter, setFilter] = useState([])
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  const updateFilter = term => {
-    var index = filter.indexOf(term);
-    if(index !== -1) {
-      var filterFiltered = filter.filter(v => v !== term)
-      setFilter(filterFiltered)
-    } else {
-      setFilter(prevArray => [...prevArray, term])
-    }
-  }
+  // const updateFilter = term => {
+  //   var index = filter.indexOf(term);
+  //   if(index !== -1) {
+  //     var filterFiltered = filter.filter(v => v !== term)
+  //     setFilter(filterFiltered)
+  //   } else {
+  //     setFilter(prevArray => [...prevArray, term])
+  //   }
+  // }
+
       
   return (
     <>
