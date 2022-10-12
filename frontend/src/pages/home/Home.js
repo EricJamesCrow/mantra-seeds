@@ -2,6 +2,8 @@
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import { useProductsContext } from "../../hooks/UseProductsContext";
+
 
 // styles
 import "./Home.css"
@@ -9,10 +11,21 @@ import "./Home.css"
 // components
 import BootstrapCarousel from "../../components/BootstrapCarousel"
 
-// data
-import products from "../../data/product_data"
-
 export default function Home() {
+  const {products, dispatch} = useProductsContext()
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await fetch('/api/products')
+      const json = await response.json()
+
+      if (response.ok) {
+        dispatch({type: 'SET_PRODUCTS', payload: json})
+      }
+    }
+
+    fetchProducts()
+  }, [])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -50,7 +63,7 @@ export default function Home() {
           item={product}
           />
         ))} */}
-        {
+        {products &&
         <BootstrapCarousel
         items={products.slice(0, 8)}
         />
@@ -65,7 +78,7 @@ export default function Home() {
           item={product}
           />
         ))} */}
-        {
+        {products &&
         <BootstrapCarousel
         items={products.slice(0, 3)}
         />
