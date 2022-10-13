@@ -47,7 +47,7 @@ const createProduct = async (req, res) => {
         emptyFields.push('thc')
     }
     if(emptyFields.length > 0) {
-        return res.status(400).sjon({ error: 'Please fill in all the fields', emptyFields})
+        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields})
     }
 
     // add doc to db
