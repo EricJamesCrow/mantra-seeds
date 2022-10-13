@@ -6,7 +6,7 @@ import Product from "../../components/Product"
 
 // react
 import { useEffect } from 'react';
-import { useProductsContext } from "../../hooks/UseProductsContext";
+import { useProductsContext } from "../../hooks/useProductsContext";
 
 export default function Store( { filter } ) {
   const {products, dispatch} = useProductsContext()

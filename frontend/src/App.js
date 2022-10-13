@@ -8,6 +8,9 @@ import './App.css';
 // components
 import Navbar from './components/Navbar';
 import BottomNavBar from './components/BottomNavBar'
+import Login from './pages/user/Login'
+import Signup from './pages/user/Signup'
+import Profile from './pages/profile/Profile'
 
 // pages
 import Home from "./pages/home/Home"
@@ -40,6 +43,9 @@ function App() {
         <Route path="/admin" element={<Admin/>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/contact" element={<Contact/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup/>} />
+        <Route path="/profile" element={<Profile/>} />
       </Routes>
       <div className="copyright">
       <div>© Mantra Seeds 2022</div>

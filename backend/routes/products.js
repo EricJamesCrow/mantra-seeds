@@ -6,6 +6,7 @@ const {
     deleteProduct,
     updateProduct
 } = require("../controllers/productController")
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
 
@@ -23,5 +24,7 @@ router.delete('/:id', deleteProduct)
 
 // UPDATE a product
 router.patch('/:id', updateProduct)
+
+router.use(requireAuth)
 
 module.exports = router
