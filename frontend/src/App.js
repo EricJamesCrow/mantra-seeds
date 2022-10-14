@@ -1,6 +1,7 @@
 // react
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { useState } from 'react';
+import { useAuthContext } from './hooks/useAuthContext';
 
 // styles
 import './App.css';
@@ -20,6 +21,7 @@ import Contact from "./pages/contact/Contact"
 
 function App() {
   const [filter, setFilter] = useState([])
+  const { user } = useAuthContext()
 
   const updateFilter = term => {
     var index = filter.indexOf(term);
@@ -43,8 +45,8 @@ function App() {
         <Route path="/admin" element={<Admin/>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/contact" element={<Contact/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<Signup/>} />
+        <Route path="/login" element={!user ? <Login/> : <Navigate to="/"/>} />
+        <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/"/>} />
         <Route path="/profile" element={<Profile/>} />
       </Routes>
       <div className="copyright">
