@@ -9,10 +9,11 @@ import "./Navbar.css"
 // images
 import Cannabis from "../images/cannabis-leaf.svg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faCartShopping} from '@fortawesome/free-solid-svg-icons'
+import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 // components
 import Sidebar from "./Sidebar"
+import LoginModel from "./LoginModel"
 
 export default function Navbar( { updateFilter } ) {
     const [isActive, setActive] = useState(false)
@@ -20,6 +21,8 @@ export default function Navbar( { updateFilter } ) {
     
     const [isShopping, setIsShopping] = useState(false)
     const location = useLocation();
+
+    const [showLogin, setShowLogin] = useState(true)
 
     const shopping = () => {
         if(location.pathname === "/shop") {
@@ -83,7 +86,8 @@ export default function Navbar( { updateFilter } ) {
             </ul>
         </div>
     </div>
-    {isShopping && !isActive &&
+    {showLogin && <LoginModel/>}
+    {isShopping && !isActive && !showLogin &&
         <div className="store-banner">
         <div className="store-header">Store</div>
         <button className="filter-products-mobile">

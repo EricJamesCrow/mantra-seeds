@@ -1,12 +1,25 @@
 import { useAuthContext } from "../../hooks/useAuthContext"
 import { Link } from 'react-router-dom'
+import { useLogout } from '../../hooks/useLogout'
 
 export default function Profile() {
   const { user } = useAuthContext()
 
+  const { logout } = useLogout()
+
+  const handleClick = () => {
+    logout()
+  }
+
   return (
     <div>
-      {user && <span style={{paddingTop: "200px", paddingBottom: "280px", display: 'grid', textAlign: 'center'}}>{user.email}</span>}
+      {user && <>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', justifyContent: 'center', alignItems: 'center', paddingTop: "200px", paddingBottom: "280px"}}>
+      <span>{user.email}</span>
+      <button onClick={handleClick}>Logout</button>
+      </div>
+      </>
+      }
       {!user && 
       <div style={{paddingTop: "200px", paddingBottom: "280px", display: 'grid', textAlign: 'center'}}>
         <Link to="/login">Login</Link>

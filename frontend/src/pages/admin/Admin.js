@@ -1,9 +1,17 @@
+// react
+import { useAuthContext } from '../../hooks/useAuthContext';
+
 // styles
 import "./Admin.css"
 
 export default function Admin() {
+  const { user } = useAuthContext()
+
+  console.log(user)
+  
   return (
     <>
+    {user && <>
     <div className="admin-login-container">
       <div className="banner-title">Mantra Seeds</div>
       <div className="admin-label">ADMIN</div>
@@ -18,6 +26,7 @@ export default function Admin() {
         <div className="copyright">
         <div>© Mantra Seeds 2022</div>
       </div>
+      </>}   
       </>
   )
 }
