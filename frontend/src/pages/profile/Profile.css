@@ -1,0 +1,80 @@
+.profile-header {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 10px 10px 10px;
+}
+
+.profile-header button {
+    width: 100px;
+    height: 40px;
+    background: #F1F1F1;
+    border: 1px solid #9F9F9F;
+    color: black;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    transition: background-color 250ms;
+}
+
+.profile-header button:hover {
+    cursor: pointer;
+    background: #e0e0e0;
+}
+
+.profile-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    gap: 8px 10px;
+    padding-bottom: 25px;
+}
+
+.profile-buttons a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: #00D0C8;
+    color: white; 
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 70%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+    padding: 10px 0 10px 0;
+    transition: all .2s ease-in-out; 
+}
+
+.profile-buttons a:hover {
+    cursor: pointer;
+    transform: scale(1.05); 
+}
+
+.profile-buttons a svg {
+    height: 80px;
+    padding-top: 5px;
+    color: white;
+}
+
+.div-span {
+    background: #D9D9D9;
+    width: 100%;
+    height: 10px;
+}
+
+.quick-account-access-text {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    padding-left: 10px;
+}
