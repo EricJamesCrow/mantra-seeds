@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useLogin } from '../hooks/useLogin'
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 // material ui
 import TextField from '@mui/material/TextField';
@@ -39,13 +40,16 @@ export default function LoginModel( { showSignupFields, setShowLogin }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {login, error, isLoading} = useLogin()
+    const { user } = useAuthContext()
     let navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         await login(email, password)
         navigate('/profile')
-        setShowLogin(false) 
+        if(user) {
+          setShowLogin(false) 
+        }
     }
 
     const handleClose = () => {
