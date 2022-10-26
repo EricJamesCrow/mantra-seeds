@@ -44,6 +44,7 @@
     width: 90%;
     height: 45px;
     background: #AAAAAA;
+    color: black;
     border: none;
     font-family: 'Futura';
     font-style: normal;
@@ -78,6 +79,7 @@
     height: 45px;
     background: #F1F1F1;
     border: 1px solid #9F9F9F;
+    color: black;
     font-family: 'Futura';
     font-style: normal;
     font-weight: 700;
