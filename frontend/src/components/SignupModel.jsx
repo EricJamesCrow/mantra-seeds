@@ -1,6 +1,6 @@
 // react
 import { useState } from 'react'
-import { useLogin } from '../hooks/useLogin'
+import { useSignup } from '../hooks/useSignup'
 import { Link, useNavigate } from 'react-router-dom'
 
 // material ui
@@ -9,7 +9,7 @@ import { styled } from '@mui/material/styles';
 import Checkbox from '@mui/material/Checkbox';
 
 // styles
-import "./LoginModel.css"
+import "./SignupModel.css"
 
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -35,26 +35,26 @@ const CssTextField = styled(TextField)({
     },
   });
 
-export default function LoginModel( { showSignupFields, setShowLogin }) {
+export default function LoginModel( { showSignupFields, setShowSignup } ) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {login, error, isLoading} = useLogin()
+    const {signup, error, isLoading} = useSignup()
     let navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await login(email, password)
-        navigate('/profile') 
+        await signup(email, password)
+        navigate('/profile')
     }
 
     const handleClose = () => {
-        setShowLogin(false)
+      setShowSignup(false)
     }
 
   return (
     <>
     <div className="log-in-banner">
-    <div>LOG IN TO MANTRA SEEDS</div>
+    <div>SIGN UP</div>
     <FontAwesomeIcon
         onClick={handleClose}
         icon={faXmark} 
@@ -65,7 +65,7 @@ export default function LoginModel( { showSignupFields, setShowLogin }) {
         marginRight: "10px",
         cursor: "pointer"}}/>
     </div>
-    <form className="login-fields" onSubmit={handleSubmit}>
+    <form className="login-fields" handleSubmit={handleSubmit}>
     <div style={{width: "90%"}}>
     <CssTextField id="outlined-email-input" 
                label="Email" 
@@ -74,7 +74,6 @@ export default function LoginModel( { showSignupFields, setShowLogin }) {
                style = {{width: "100%", paddingBottom: "5px"}}
                 onChange={(e) => setEmail(e.target.value)}
                 value={email} />
-    <Link>Help find my account</Link>
     </div>
     <div style = {{width: "90%", paddingTop: "20px"}}>
     <CssTextField id="outlined-password-input" 
@@ -85,20 +84,18 @@ export default function LoginModel( { showSignupFields, setShowLogin }) {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
     />
-    <Link>Help find my password</Link>
     </div>
     <div style={{ display: "flex", alignItems: "center", color: "#454545", marginRight: "auto"}}>
     <Checkbox 
     disableElevation
     disableRipple/>
-    <div>Remember my email</div>
+    <Link>I agree to the terms and conditions.</Link>
     </div>
-    <button disabled={isLoading}>LOG IN</button>
-    {error && <div className="error">{error}</div>}
+    <button disabled={isLoading}>CREATE ACCOUNT</button>
     </form>
     <div className="signup-instead">
-        <div>Don't have an account?</div>
-        <button onClick={showSignupFields}>Sign up</button>
+        <div>Have an account?</div>
+        <button onClick={showSignupFields}>Log in</button>
     </div>
     </>
   )

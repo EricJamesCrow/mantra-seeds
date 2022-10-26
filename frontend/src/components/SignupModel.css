@@ -62,7 +62,7 @@
     flex-flow: column;
     align-items: center;
     background: #F1F1F1;
-    height: 180px;
+    height: 250px;
 }
 
 .signup-instead div {
@@ -89,9 +89,4 @@
 .signup-instead button:hover {
     cursor: pointer;
     background: #e0e0e0;
-}
-
-.error {
-    padding-top: 20px;
-    color: #ff7e75;
 }

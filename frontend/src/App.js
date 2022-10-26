@@ -1,6 +1,6 @@
 // react
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useAuthContext } from './hooks/useAuthContext';
 
 // styles
@@ -22,6 +22,7 @@ import Contact from "./pages/contact/Contact"
 function App() {
   const [filter, setFilter] = useState([])
   const { user } = useAuthContext()
+  const ChildRef = useRef([]);
 
   const updateFilter = term => {
     var index = filter.indexOf(term);
@@ -33,12 +34,25 @@ function App() {
     }
   }
 
+  const showLogin = () => {
+    ChildRef.navbar.callChildFunction()
+  }
+
+  const DoSomethingWrapper = ({ children }) => {
+    useEffect(() => {
+      showLogin();
+    }, []);
+    return children;
+  };
+
 
   return (
     <>
     <BrowserRouter>
       <Navbar
+      key={"navbar"}
       updateFilter={updateFilter}
+      ref={theRef => ChildRef["navbar"] = theRef}
       />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -47,7 +61,9 @@ function App() {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/login" element={!user ? <Login/> : <Navigate to="/profile"/>} />
         <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/profile"/>} />
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile" 
+        element={user ? <Profile/> : <DoSomethingWrapper><Navigate to="/"/></DoSomethingWrapper>} 
+        />
       </Routes>
       <div className="copyright">
       <div>© Mantra Seeds 2022</div>

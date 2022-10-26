@@ -1,7 +1,8 @@
 // react
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { NavLink, Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 // styles
 import "./Navbar.css"
@@ -14,15 +15,25 @@ import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 // components
 import Sidebar from "./Sidebar"
 import LoginModel from "./LoginModel"
+import SignupModel from "./SignupModel"
 
-export default function Navbar( { updateFilter } ) {
+const Navbar = forwardRef(( { updateFilter }, ref ) => {
     const [isActive, setActive] = useState(false)
     const [showModal, setShowModal] = useState(false)
     
     const [isShopping, setIsShopping] = useState(false)
     const location = useLocation();
 
-    const [showLogin, setShowLogin] = useState(true)
+    const [showLogin, setShowLogin] = useState(false)
+    const [showSignup, setShowSignup] = useState(false)
+
+    const { user } = useAuthContext()
+
+    useImperativeHandle(ref, () =>({
+        callChildFunction() {
+            setShowLogin(true)
+        }
+      }))
 
     const shopping = () => {
         if(location.pathname === "/shop") {
@@ -30,6 +41,11 @@ export default function Navbar( { updateFilter } ) {
         } else {
             setIsShopping(false)
         }
+    }
+
+    const showSignupFields = () => {
+        setShowLogin(!showLogin)
+        setShowSignup(!showSignup)
     }
 
 
@@ -86,7 +102,15 @@ export default function Navbar( { updateFilter } ) {
             </ul>
         </div>
     </div>
-    {showLogin && <LoginModel/>}
+    {!user && showLogin && <LoginModel
+    showSignupFields={showSignupFields}
+    setShowLogin={setShowLogin}
+    />}
+    {!user && showSignup && 
+    <SignupModel
+    showSignupFields={showSignupFields}
+    setShowSignup={setShowSignup}
+    />}
     {isShopping && !isActive && !showLogin &&
         <div className="store-banner">
         <div className="store-header">Store</div>
@@ -104,4 +128,7 @@ export default function Navbar( { updateFilter } ) {
     }
     </nav>
   )
-}
+})
+
+export default Navbar
+

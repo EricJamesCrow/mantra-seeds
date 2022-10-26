@@ -1,9 +1,10 @@
 import { useAuthContext } from "../../hooks/useAuthContext"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useLogout } from '../../hooks/useLogout'
 
 export default function Profile() {
   const { user } = useAuthContext()
+  let navigate = useNavigate()
 
   const { logout } = useLogout()
 
