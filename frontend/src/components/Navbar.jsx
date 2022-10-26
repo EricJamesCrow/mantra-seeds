@@ -32,6 +32,10 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
     useImperativeHandle(ref, () =>({
         callChildFunction() {
             setShowLogin(true)
+        },
+        bottomNavBarFunction() { 
+            setShowLogin(false)
+            setShowSignup(false)     
         }
       }))
 
@@ -60,6 +64,14 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
     const displayMobileMenu = () => {
         setActive(!isActive)
     }
+
+    useEffect(() => {
+        if(showLogin || showSignup) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "scroll";
+        }
+    })
 
   return (
     <nav className='sticky-nav'>

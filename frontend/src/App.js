@@ -38,6 +38,10 @@ function App() {
     ChildRef.navbar.callChildFunction()
   }
 
+  const hideLogin = () => {
+    ChildRef.navbar.bottomNavBarFunction()
+  }
+
   const DoSomethingWrapper = ({ children }) => {
     useEffect(() => {
       showLogin();
@@ -68,7 +72,9 @@ function App() {
       <div className="copyright">
       <div>© Mantra Seeds 2022</div>
     </div>
-    <BottomNavBar/>
+    <BottomNavBar
+    hideLogin={hideLogin}
+    />
     </BrowserRouter>
     </>
   );

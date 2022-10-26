@@ -45,6 +45,7 @@ export default function LoginModel( { showSignupFields, setShowSignup } ) {
         e.preventDefault()
         await signup(email, password)
         navigate('/profile')
+        setShowSignup(false)
     }
 
     const handleClose = () => {

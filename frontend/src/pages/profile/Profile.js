@@ -9,6 +9,7 @@ export default function Profile() {
   const { logout } = useLogout()
 
   const handleClick = () => {
+    navigate('/')
     logout()
   }
 
