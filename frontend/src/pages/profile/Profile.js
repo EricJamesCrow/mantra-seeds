@@ -9,9 +9,6 @@ import React, { useEffect, useState } from "react"
 // components
 import Product from "../../components/Product"
 
-// data
-import ProductData from "../../data/product_data"
-
 // styles
 import "./Profile.css"
 
