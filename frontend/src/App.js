@@ -1,7 +1,8 @@
 // react
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuthContext } from './hooks/useAuthContext';
+import { useProductsContext } from "./hooks/useProductsContext"
 
 // styles
 import './App.css';
@@ -66,7 +67,7 @@ function App() {
         <Route path="/login" element={!user ? <Login/> : <Navigate to="/profile"/>} />
         <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/profile"/>} />
         <Route path="/profile" 
-        element={user ? <Profile/> : <DoSomethingWrapper><Navigate to="/"/></DoSomethingWrapper>} 
+        element={JSON.parse(localStorage.getItem('user')) ? <Profile/> : <DoSomethingWrapper><Navigate to="/"/></DoSomethingWrapper>} 
         />
       </Routes>
       <div className="copyright">

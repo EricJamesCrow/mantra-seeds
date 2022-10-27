@@ -20,7 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 // react
-import { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect } from "react"
 
 export default function Sidebar({ updateFilter }) {
     const [stickyClass, setStickyClass] = useState("store-sidebar");

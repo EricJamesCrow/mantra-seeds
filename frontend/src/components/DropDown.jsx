@@ -2,7 +2,7 @@
 import "./DropDown.css"
 
 // react
-import ReactDom, { useState } from 'react'
+import React, { useState } from 'react'
 
 // images
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'

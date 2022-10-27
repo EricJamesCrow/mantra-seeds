@@ -1,6 +1,6 @@
 // react
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { useProductsContext } from "../../hooks/useProductsContext";
 

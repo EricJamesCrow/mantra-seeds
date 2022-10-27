@@ -1,6 +1,16 @@
 import { useAuthContext } from "../../hooks/useAuthContext"
+import { useProductsContext } from "../../hooks/useProductsContext"
 import { Link, useNavigate } from 'react-router-dom'
 import { useLogout } from '../../hooks/useLogout'
+
+// react
+import React, { useEffect, useState } from "react"
+
+// components
+import Product from "../../components/Product"
+
+// data
+import ProductData from "../../data/product_data"
 
 // styles
 import "./Profile.css"
@@ -13,6 +23,20 @@ import { faMagnifyingGlass, faShoppingCart, faUser, faList } from '@fortawesome/
 export default function Profile() {
   const { user } = useAuthContext()
   let navigate = useNavigate()
+  const {products, dispatch} = useProductsContext()
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await fetch('/api/products')
+      const json = await response.json()
+
+      if (response.ok) {
+        dispatch({type: 'SET_PRODUCTS', payload: json})
+      }
+    }
+
+    fetchProducts()
+  }, [])
 
   const { logout } = useLogout()
 
@@ -48,14 +72,33 @@ export default function Profile() {
             </Link>)}
       </div>
       <div className="quick-account-access">
-        <div className="div-span"></div>
         <div className="quick-account-access-text">Your Orders</div>
+        <div className="media-scroller">
+        {
+          products && products.map(product => <Product key={product.id} item={product}/>)
+        }
+        </div>
         <div className="div-span"></div>
         <div className="quick-account-access-text">Your Cart</div>
+        <div className="media-scroller">
+        {
+          products && products.map(product => <Product key={product.id} item={product}/>)
+        }
+        </div>
         <div className="div-span"></div>
         <div className="quick-account-access-text">Your Account</div>
+        <div className="media-scroller">
+        {
+          products && products.map(product => <Product key={product.id} item={product}/>)
+        }
+        </div>
         <div className="div-span"></div>
         <div className="quick-account-access-text">Your Lists</div>
+        <div className="media-scroller">
+        {
+          products && products.map(product => <Product key={product.id} item={product}/>)
+        }
+        </div>
       </div>
       </>
       }

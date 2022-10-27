@@ -2,7 +2,7 @@
 import "./Filter.css"
 
 // react
-import { useState, forwardRef, useImperativeHandle} from 'react';
+import React, { useState, forwardRef, useImperativeHandle} from 'react';
 
 const Filters = forwardRef(({ product, content, closeMenu, updateFilter }, ref) => {
     const [clicked, setClicked] = useState(false)

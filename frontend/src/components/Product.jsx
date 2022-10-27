@@ -1,6 +1,9 @@
 // styles
 import "./Product.css"
 
+//react
+import React from "react"
+
 // images
 import Cannabis from "../images/cannabis-leaf-green.svg"
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'

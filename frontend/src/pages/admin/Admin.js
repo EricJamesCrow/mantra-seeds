@@ -1,5 +1,6 @@
 // react
 import { useAuthContext } from '../../hooks/useAuthContext';
+import React from "react"
 
 // styles
 import "./Admin.css"

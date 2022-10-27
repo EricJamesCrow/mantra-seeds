@@ -5,6 +5,9 @@ import "./Shop.css"
 import Product from "../../components/Product"
 
 // react
+import React from "react"
+
+// react
 import { useEffect } from 'react';
 import { useProductsContext } from "../../hooks/useProductsContext";
 
