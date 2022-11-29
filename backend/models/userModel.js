@@ -13,11 +13,16 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    role: {
+        type: Number,
+        required: false
     }
 })
 
 // static signup method
 userSchema.statics.signup = async function(email, password) {
+// Create a conditional that blocks the creation of a new user with an admin role
 
     // validation
     if (!email || !password) {
