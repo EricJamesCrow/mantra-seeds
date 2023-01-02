@@ -31,7 +31,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
-    gap: 8px 10px;
+    gap: 8px 0px;
     padding-bottom: 25px;
 }
 
@@ -40,7 +40,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background: #00D0C8;
+    background: #DDB724;
     color: white; 
     font-family: 'Futura';
     font-style: normal;
@@ -48,9 +48,9 @@
     font-size: 16px;
     text-decoration: none;
     border-radius: 5px;
-    width: 70%;
+    width: 90%;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
-    padding: 10px 0 10px 0;
+    padding: 10px 0 20px 0;
     transition: all .2s ease-in-out; 
 }
 
