@@ -6,6 +6,12 @@ import { useLogin } from '../../hooks/useLogin'
 // styles
 import "./Admin.css"
 
+// components
+import Overview from "./Overview"
+import Orders from "./Orders"
+import Products from "./Products"
+import Analytics from "./Analytics"
+
 export default function Admin() {
   const { user } = useAuthContext()
   const [selectedButton, setSelectedButton] = useState('Overview');
@@ -63,7 +69,7 @@ export default function Admin() {
       </>}
       {user && user.role === 1 && <>
     <div className="admin-dashboard-container">
-      <div>ADMIN DASHBOARD</div>
+      <div className="admin-dashboard-text">ADMIN DASHBOARD</div>
       {['Overview', 'Orders', 'Products', 'Analytics'].map((label) => (
           <button
             className={`admin-button ${selectedButton === label ? 'selected' : ''}`}
@@ -72,12 +78,12 @@ export default function Admin() {
             {label}
           </button>
         ))}
-      <div className="admin-dashboard">
-        {selectedButton === 'Overview' && <div>Overview</div>}
-        {selectedButton === 'Orders' && <div>Orders</div>}
-        {selectedButton === 'Products' && <div>Products</div>}
-        {selectedButton === 'Analytics' && <div>Analytics</div>}
-      </div>
+      <>
+        {selectedButton === 'Overview' && <Overview/>}
+        {selectedButton === 'Orders' && <Orders/>}
+        {selectedButton === 'Products' && <Products/>}
+        {selectedButton === 'Analytics' && <Analytics/>}
+      </>
       </div>
       </>}   
       </>

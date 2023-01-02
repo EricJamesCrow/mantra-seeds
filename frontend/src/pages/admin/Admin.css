@@ -58,7 +58,7 @@
     background-color: #F1F1F1;
 }
 
-.admin-dashboard-container div {
+.admin-dashboard-text {
    padding: 80px 0 20px 0; 
    text-align: center;
    font-family: 'Futura';
@@ -81,11 +81,6 @@
     width: 25%;
     border: none;
     cursor: pointer;
-    vertical-align: top;
-}
-
-.admin-dashboard {
-    height: 10%;
 }
 
 .admin-button:hover {
