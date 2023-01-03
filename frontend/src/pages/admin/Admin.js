@@ -7,10 +7,10 @@ import { useLogin } from '../../hooks/useLogin'
 import "./Admin.css"
 
 // components
-import Overview from "./Overview"
-import Orders from "./Orders"
-import Products from "./Products"
-import Analytics from "./Analytics"
+import Overview from "./pages/Overview"
+import Orders from "./pages/Orders"
+import Products from "./pages/Products"
+import Analytics from "./pages/Analytics"
 
 export default function Admin() {
   const { user } = useAuthContext()
