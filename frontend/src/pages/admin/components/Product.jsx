@@ -14,7 +14,7 @@ export default function Product() {
       <img src={Cannabis} style={{ width: '60%', height: '60%', margin: 'auto' }} />
             <div style={{ padding: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div>$11.99</div>
+                <div className="product-price">$11.99</div>
                 <button>More Info</button>
               </div>
             </div>

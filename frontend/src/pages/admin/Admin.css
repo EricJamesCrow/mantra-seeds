@@ -81,6 +81,7 @@
     width: 25%;
     border: none;
     cursor: pointer;
+    color: black;
 }
 
 .admin-button:hover {

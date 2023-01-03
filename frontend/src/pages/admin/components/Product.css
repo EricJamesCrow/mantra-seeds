@@ -36,3 +36,10 @@
     font-weight: 700;
     font-size: 18px;
 }
+
+.product-price {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+}
