@@ -6,6 +6,7 @@ import './Overview.css'
 
 // components 
 import Order from "../components/Order"
+import Product from "../components/Product"
 
 // images
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
@@ -35,11 +36,7 @@ export default function Overview() {
     </div>
     <div className="recent-orders">
       <div className="recent-orders-div">Recent Products</div>
-      <div className="recent-product">
-        <div>Indica Seeds</div>
-        <img src={Cannabis}/>
-        <button>More Info</button>
-      </div>
+      <Product/>
       <button className="recent-orders-button">See all</button>
     </div>
     </>
