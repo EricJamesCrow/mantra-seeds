@@ -8,8 +8,6 @@ import './Overview.css'
 import Order from "../components/Order"
 import Product from "../components/Product"
 
-// images
-import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
 export default function Overview() {
   const {products, dispatch} = useProductsContext()
