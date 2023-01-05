@@ -86,9 +86,17 @@ export default function AddProductModel({ setShowAddProduct }) {
           onClick={() => setShowAddProduct(false)} // toggle showAddProduct when close button is clicked
         />
     </div>
-    <form className="add-product-fields" onSubmit={handleSubmit}>
-    <img src={Cannabis} style={{ width: '20%', height: '20%', margin: 'auto' }} />
-    <button className="add-product-fields-btn">Upload Image</button>
+    <div className="add-product-fields">
+    <form onSubmit={handleSubmit}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+  <img src={Cannabis} style={{ width: '20%', height: '20%' }} />
+  <button className="add-product-fields-btn">
+    Upload Image
+  </button>
+</div>
+
+
+
     <Grid container spacing={3} style={{ padding: '10px 20px' }}>
   <Grid item xs={6}>
     <CssTextField id="outlined-name-input" 
@@ -151,10 +159,11 @@ export default function AddProductModel({ setShowAddProduct }) {
     />
   </Grid>
 </Grid>
-    </form>
-    <div className="signup-instead"> 
+<div className="signup-instead"> 
         <button>SUBMIT</button>
     </div> 
+    </form>
+    </div>
     </>
   )
 }
