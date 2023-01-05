@@ -26,10 +26,8 @@ export default function Orders() {
   return (
     <>
         {
-      products.map( item => 
-        <div>
+      products && products.map( item => 
       <Order key={item.id}/> 
-      </div>
       )    
       }
     </>

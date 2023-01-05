@@ -1,6 +1,6 @@
-// react
 import { useAuthContext } from '../../hooks/useAuthContext';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../../hooks/useLogin'
 
 // styles
@@ -12,15 +12,24 @@ import Orders from "./pages/Orders"
 import Products from "./pages/Products"
 import Analytics from "./pages/Analytics"
 
+
+function toTitleCase(str) {
+  return str.replace(
+    /\w\S*/g,
+    function(txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    }
+  );
+}
+
 export default function Admin() {
   const { user } = useAuthContext()
   const [selectedButton, setSelectedButton] = useState('Overview');
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const {login, error, isLoading} = useLogin()
-
-  const buttonLabels = ['Overview', 'Orders', 'Products', 'Analytics'];
 
   const handleSubmit = async (e) => {
       e.preventDefault()
@@ -29,8 +38,17 @@ export default function Admin() {
   }
 
   const handleButtonClick = (label) => {
-    setSelectedButton(label);
+    setSelectedButton(toTitleCase(label));
+    navigate(`#${label.toLowerCase()}`);
+    console.log(selectedButton)
   };
+  
+  const selectedButtonFromURL = window.location.hash.slice(1);
+
+  useEffect(() => {
+    const selectedButtonFromURL = window.location.hash.slice(1);
+    handleButtonClick(selectedButtonFromURL || 'Overview');
+  }, []);
   
   return (
     <>

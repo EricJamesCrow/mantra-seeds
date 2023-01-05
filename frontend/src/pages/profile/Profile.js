@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useLogout } from '../../hooks/useLogout'
 
 // react
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 
 // components
 import Product from "../../components/Product"
