@@ -40,7 +40,6 @@ export default function Admin() {
   const handleButtonClick = (label) => {
     setSelectedButton(toTitleCase(label));
     navigate(`#${label.toLowerCase()}`);
-    console.log(selectedButton)
   };
   
   const selectedButtonFromURL = window.location.hash.slice(1);

@@ -13,6 +13,7 @@ import BottomNavBar from './components/BottomNavBar'
 import Login from './pages/user/Login'
 import Signup from './pages/user/Signup'
 import Profile from './pages/profile/Profile'
+import EditProductModel from "./pages/admin/components/EditProductModel"
 
 // pages
 import Home from "./pages/home/Home"
@@ -62,6 +63,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin/>} />
+        <Route path="/admin/products/:id" element={<EditProductModel/>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/login" element={!user ? <Login/> : <Navigate to="/profile"/>} />

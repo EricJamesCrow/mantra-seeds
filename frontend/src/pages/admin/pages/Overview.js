@@ -34,7 +34,11 @@ export default function Overview() {
     </div>
     <div className="recent-orders">
       <div className="recent-orders-div">Recent Products</div>
-      <Product/>
+      {
+      products && products.slice(0, 1).map(item => (
+        <Product key={item.id} item={item} className="product-item" />
+      ))
+      }
       <button className="recent-orders-button">See all</button>
     </div>
     </>

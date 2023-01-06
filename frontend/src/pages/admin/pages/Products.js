@@ -54,7 +54,7 @@ export default function Products() {
       </div>
       {
         products && products.map( item => 
-            <Product key={item.id} item={item}  className="product-item"/> 
+            <Product key={item.id} item={item} className="product-item"/> 
         )    
       }
       { showAddProduct && (
