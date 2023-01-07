@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useProductsContext } from "../../../hooks/useProductsContext";
 
 // material ui
 import TextField from '@mui/material/TextField';
@@ -43,6 +44,8 @@ export default function AddProductModel({ setShowAddProduct }) {
 
     const [error, setError] = useState(null)
 
+    const { dispatch } = useProductsContext()
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -67,6 +70,7 @@ export default function AddProductModel({ setShowAddProduct }) {
             setThc('')
             setError(null)
             console.log('new product added')
+            dispatch({type: 'CREATE_PRODUCT', payload: json})
         }
     }
 

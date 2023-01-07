@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate} from 'react-router-dom'
 import { useProductsContext } from "../../../hooks/useProductsContext";
-
-// material ui
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
 
 // styles
 import "./EditProductModel.css"
@@ -22,11 +18,24 @@ export default function EditProductModel() {
     const [strain, setStrain] = useState('')
     const [thc, setThc] = useState('')
 
-    const [error, setError] = useState(null)
-
-    // useParams
     const { id } = useParams()
     const [product, setProduct] = useState('')
+    const { dispatch } = useProductsContext()
+
+    const navigate = useNavigate();
+
+    const handleDelete = async () => {
+        const response = await fetch('/api/products/' + product._id, {
+            method: 'DELETE',
+        })
+        const json = await response.json()
+
+        if (response.ok) {
+            dispatch({type: 'DELETE_PRODUCT', payload: json})
+            navigate(-1); // Won't navigate to previous page if refresh is hit first.
+        }
+    }
+
 
     useEffect(() => {
         const url = '/api/products/'+id;
@@ -37,11 +46,11 @@ export default function EditProductModel() {
             .then((data) => {
                 setProduct(data)
             })
-    }, [])
+    }, [id])
       
   return (
     <>
-    <div style={{ position: 'fixed', top: 50, left: 0, right: 0, bottom: 0, zIndex: 1 }}>
+    <div style={{ marginTop: '50px', zIndex: 1 }}>
     <div className="add-product">
     <div>{product.name}</div>
     <FontAwesomeIcon
@@ -52,18 +61,25 @@ export default function EditProductModel() {
             float: "right",
             marginRight: "10px",
             cursor: "pointer"
-          }} 
+          }}
+          onClick={() => navigate(-1)}
         />
     </div>
-    <div className="add-product-fields">
+    <div className="edit-product-fields">
     <form>
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
     <div className="edit-product-image-border">
+        <button onClick={(e) => e.preventDefault()}>edit</button>
   <img src={Cannabis} />
   </div>
+  <div className="edit-product-description-border">
+        <button onClick={(e) => e.preventDefault()}>edit</button>
+  <div>{product.description}</div>
+  </div>
+  <button className="remove-product-btn" onClick={handleDelete}>REMOVE</button>
 </div>
 <div className="signup-instead"> 
-        <button>SAVE CHANGES</button>
+        <button onClick={(e) => e.preventDefault()}>SAVE CHANGES</button>
     </div> 
     </form>
     </div>

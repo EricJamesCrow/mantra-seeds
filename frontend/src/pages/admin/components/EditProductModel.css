@@ -3,8 +3,93 @@
     border: 1px solid #000000;
     border-radius: 5px;
     text-align: center;
-    width: 150%;
-    margin-top: -20px;
+    width: 175px;
+    margin-top: 0px;
+    position: relative;
+}
+
+.edit-product-description-border {
+    background: #F1F1F1;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    text-align: center;
+    width: 350px;
+    margin-top: 20px;
+    position: relative;
+    color: black;
+}
+
+.edit-product-description-border div {
+    padding: 10px 35px 5px 5px;
+    font-size: 20px;
+}
+
+.edit-product-description-border button {
+    all: unset;
+    right: 7%;
+    cursor: pointer;
+    background: #D9D9D9;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 0px 5px 0px 5px;
+    transition: all .1s ease-in-out;
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+}
+
+.edit-product-description-border button:hover {
+    background: #b7b6b6;
+}
+
+.remove-product-btn {
+    all: unset;
+    right: 7%;
+    cursor: pointer;
+    border-radius: 2px;
+    margin: 50px;
+    padding: 5px 10px 5px 10px;
+    transition: all .1s ease-in-out;
+    color: white;
+    background: #FA8072;
+    border-radius: 5px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.remove-product-btn:hover {
+    background: #FFACA2;
+}
+
+
+.edit-product-image-border button {
+    all: unset;
+    right: 7%;
+    cursor: pointer;
+    background: #D9D9D9;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 0px 5px 0px 5px;
+    transition: all .1s ease-in-out;
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+}
+
+.edit-product-image-border button:hover {
+    background: #b7b6b6;
 }
 
 .add-product {
@@ -26,7 +111,7 @@
     margin: 0 auto;
 }
 
-.add-product-fields {
+.edit-product-fields {
     display: flex;
     flex-direction: column;
     align-items: center;
