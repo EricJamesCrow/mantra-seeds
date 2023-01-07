@@ -9,6 +9,21 @@
     height: 50px;
 }
 
+.success-message {
+    position: fixed; /* position the message in the center of the screen */
+    top: 50%;
+    left: 50%;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+    background-color: #1DD767; /* set the background color to green */
+    color: white; /* set the text color to white */
+    padding: 15px; /* add some padding to the message */
+    border-radius: 10px; /* add rounded corners */
+    opacity: 0; /* initially hide the message by setting the opacity to 0 */
+    transition: opacity 1s ease-out; /* add a transition to the opacity property */
+    z-index: 999; /* set a high z-index to ensure the message is on top of everything else */
+}
+
 .add-product div {
     margin: auto 20px;
 }

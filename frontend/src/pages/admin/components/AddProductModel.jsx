@@ -47,32 +47,43 @@ export default function AddProductModel({ setShowAddProduct }) {
     const { dispatch } = useProductsContext()
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        const product = {name, description, price, chakra, strain, thc}
-
-        const response = await fetch('/api/products', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(product),
-        })
-        const json = await response.json()
-
-        if (!response.ok) {
-            setError(json.error)
-        }
-        if (response.ok) {
-            setName('')
-            setDescription('')
-            setPrice('')
-            setChakra('')
-            setStrain('')
-            setThc('')
-            setError(null)
-            console.log('new product added')
-            dispatch({type: 'CREATE_PRODUCT', payload: json})
-        }
-    }
+      e.preventDefault();
+    
+      const product = { name, description, price, chakra, strain, thc };
+    
+      const response = await fetch("/api/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(product),
+      });
+      const json = await response.json();
+    
+      if (!response.ok) {
+        setError(json.error);
+      }
+      if (response.ok) {
+        setName("");
+        setDescription("");
+        setPrice("");
+        setChakra("");
+        setStrain("");
+        setThc("");
+        setError(null);
+        console.log("new product added");
+        dispatch({ type: "CREATE_PRODUCT", payload: json });
+    
+        // show the success message
+        const successMessage = document.querySelector(".success-message");
+        successMessage.textContent = "PRODUCT ADDED"; // set the message text
+        successMessage.style.opacity = 1; // make the message visible
+    
+        // hide the success message after 2 seconds
+        setTimeout(() => {
+          successMessage.style.opacity = 0;
+        }, 2000);
+      }
+    };
+    
 
   return (
     <>
@@ -92,6 +103,7 @@ export default function AddProductModel({ setShowAddProduct }) {
     </div>
     <div className="add-product-fields">
     <form onSubmit={handleSubmit}>
+    <div className="success-message"></div>
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
   <img src={Cannabis} style={{ width: '20%', height: '20%' }} />
   <button className="add-product-fields-btn">
