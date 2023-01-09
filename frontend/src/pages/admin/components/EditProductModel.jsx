@@ -9,6 +9,7 @@ import "./EditProductModel.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
+import Crown from "../../../images/chakras/crown-chakra.svg"
 
 export default function EditProductModel() {
     const [name, setName] = useState('')
@@ -21,6 +22,12 @@ export default function EditProductModel() {
     const { id } = useParams()
     const [product, setProduct] = useState('')
     const { dispatch } = useProductsContext()
+    
+    var productAttributes = {
+      "Price": product.price,
+      "Strain": product.strain,
+      "THC": product.thc
+    }
 
     const navigate = useNavigate();
 
@@ -47,6 +54,10 @@ export default function EditProductModel() {
                 setProduct(data)
             })
     }, [id])
+
+    useEffect(() => {
+      productAttributes = {"Price": product.price, "Strain": product.strain, "THC": product.thc}
+    }, [product])
       
   return (
     <>
@@ -76,9 +87,21 @@ export default function EditProductModel() {
         <button onClick={(e) => e.preventDefault()}>edit</button>
   <div>{product.description}</div>
   </div>
+  <div className="edit-product-attributes-container">
+    <img className="edit-product-chakra" src={Crown}>
+    </img>
+    <div className="edit-product-attribute-btns">
+    {Object.entries(productAttributes).map(([key, value]) => (
+  <div className="edit-product-attribute" onClick={() => console.log(productAttributes)}>
+    <div>{key}: {value}</div>
+    <button className="edit-product-attribute-edit" onClick={(e) => e.preventDefault()}>edit</button>
+  </div>
+))}
+    </div>
+  </div>
   <button className="remove-product-btn" onClick={handleDelete}>REMOVE</button>
 </div>
-<div className="signup-instead"> 
+<div className="save-changes"> 
         <button onClick={(e) => e.preventDefault()}>SAVE CHANGES</button>
     </div> 
     </form>
