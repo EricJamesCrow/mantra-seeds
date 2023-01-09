@@ -7,6 +7,7 @@ const {
     updateProduct
 } = require("../controllers/productController")
 const requireAuth = require('../middleware/requireAuth')
+const requireAuthAdmin = require('../middleware/requireAuthAdmin')
 
 const router = express.Router()
 
@@ -17,13 +18,13 @@ router.get('/', getProducts)
 router.get('/:id', getProduct)
 
 // POST a new product
-router.post('/', createProduct)
+router.post('/', requireAuthAdmin, createProduct)
 
 // DELETE a product
-router.delete('/:id', deleteProduct)
+router.delete('/:id', requireAuthAdmin, deleteProduct)
 
 // UPDATE a product
-router.patch('/:id', updateProduct)
+router.patch('/:id', requireAuthAdmin, updateProduct)
 
 router.use(requireAuth)
 
