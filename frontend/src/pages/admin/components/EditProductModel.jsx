@@ -23,11 +23,11 @@ export default function EditProductModel() {
     const [product, setProduct] = useState('')
     const { dispatch } = useProductsContext()
     
-    var productAttributes = {
+    const [productAttributes, setProductAttributes] = useState({
       "Price": product.price,
       "Strain": product.strain,
       "THC": product.thc
-    }
+    })
 
     const navigate = useNavigate();
 
@@ -43,6 +43,21 @@ export default function EditProductModel() {
         }
     }
 
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+    
+      const response = await fetch('/api/products/' + product._id, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, description, price, chakra, strain, thc })
+      })
+      const json = await response.json()
+    
+      if (response.ok) {
+        dispatch({ type: 'UPDATE_PRODUCT', payload: json })
+        navigate(-1) // Won't navigate to previous page if refresh is hit first.
+      }
+    }
 
     useEffect(() => {
         const url = '/api/products/'+id;
@@ -56,7 +71,13 @@ export default function EditProductModel() {
     }, [id])
 
     useEffect(() => {
-      productAttributes = {"Price": product.price, "Strain": product.strain, "THC": product.thc}
+      setProductAttributes({"Price": product.price, "Strain": product.strain, "THC": product.thc})
+      setName(product.name)
+      setDescription(product.description)
+      setPrice(product.price)
+      setChakra(product.chakra)
+      setStrain(product.strain)
+      setThc(product.thc)
     }, [product])
       
   return (
@@ -92,17 +113,32 @@ export default function EditProductModel() {
     </img>
     <div className="edit-product-attribute-btns">
     {Object.entries(productAttributes).map(([key, value]) => (
-  <div className="edit-product-attribute" onClick={() => console.log(productAttributes)}>
-    <div>{key}: {value}</div>
+  <div className="edit-product-attribute">
+    <div contentEditable="true" onBlur={(e) => {
+      switch(key) {
+        case "Price":
+          setPrice(e.target.innerText);
+          break;
+        case "Strain":
+          setStrain(e.target.innerText);
+          break;
+        case "THC":
+          setThc(e.target.innerText);
+          break;
+        default:
+          break;
+      }
+    }}>{key}: {value}</div>
     <button className="edit-product-attribute-edit" onClick={(e) => e.preventDefault()}>edit</button>
   </div>
 ))}
+
     </div>
   </div>
   <button className="remove-product-btn" onClick={handleDelete}>REMOVE</button>
 </div>
 <div className="save-changes"> 
-        <button onClick={(e) => e.preventDefault()}>SAVE CHANGES</button>
+        <button onClick={handleSubmit}>SAVE CHANGES</button>
     </div> 
     </form>
     </div>
