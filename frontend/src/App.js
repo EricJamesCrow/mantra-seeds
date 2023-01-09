@@ -63,7 +63,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin/>} />
-        <Route path="/admin/products/:id" element={<EditProductModel/>} />
+        {user && user.role === 1 ?  <Route path="/admin/products/:id" element={<EditProductModel/>} /> : null}
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/login" element={!user ? <Login/> : <Navigate to="/profile"/>} />
