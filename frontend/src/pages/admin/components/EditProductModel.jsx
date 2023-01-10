@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 import { useProductsContext } from "../../../hooks/useProductsContext";
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 // styles
 import "./EditProductModel.css"
@@ -31,9 +32,15 @@ export default function EditProductModel() {
 
     const navigate = useNavigate();
 
+    const { user } = useAuthContext() // JWT token in local storage
+    const token = user.token;
+
     const handleDelete = async () => {
         const response = await fetch('/api/products/' + product._id, {
             method: 'DELETE',
+            headers: {
+              'Authorization': `${token}` // set the authorization header
+            }
         })
         const json = await response.json()
 
@@ -48,7 +55,9 @@ export default function EditProductModel() {
     
       const response = await fetch('/api/products/' + product._id, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          "Authorization": token,
+          "Content-Type": "application/json" },
         body: JSON.stringify({ name, description, price, chakra, strain, thc })
       })
       const json = await response.json()

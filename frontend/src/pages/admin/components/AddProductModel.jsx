@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useProductsContext } from "../../../hooks/useProductsContext";
+import { useAuthContext } from '../../../hooks/useAuthContext';
 
 // material ui
 import TextField from '@mui/material/TextField';
@@ -46,6 +47,9 @@ export default function AddProductModel({ setShowAddProduct }) {
 
     const { dispatch } = useProductsContext()
 
+    const { user } = useAuthContext() // JWT token in local storage
+    const token = user.token;
+
     const handleSubmit = async (e) => {
       e.preventDefault();
     
@@ -53,7 +57,9 @@ export default function AddProductModel({ setShowAddProduct }) {
     
       const response = await fetch("/api/products", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Authorization": token,
+          "Content-Type": "application/json" },
         body: JSON.stringify(product),
       });
       const json = await response.json();
