@@ -3,6 +3,7 @@ import "./Product.css"
 
 //react
 import React from "react"
+import { Link } from 'react-router-dom'
 
 // images
 import Cannabis from "../images/cannabis-leaf-green.svg"
@@ -12,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function Product( {item} ) {
   return (
+    <Link to={`/shop/products/${item._id}`} style={{ textDecoration: "none", color: "inherit" }}>
     <div className="product-shop">
         <img src={Cannabis}/>
         <div className="product-container-shop">
@@ -22,5 +24,6 @@ export default function Product( {item} ) {
         <div className="product-price">{`$${item.price}`}</div>
         </div>
     </div>
+    </Link>
   )
 }

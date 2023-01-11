@@ -1,0 +1,206 @@
+.view-product-image-border {
+    border-radius: 5px;
+    text-align: center;
+    width: 175px;
+    margin-top: 0px;
+    position: relative;
+    background: #FEEED4;
+    border: 2px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.view-product-description-border {
+    background: #F1F1F1;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    text-align: center;
+    width: 90vw;
+    margin-top: 20px;
+    position: relative;
+    color: black;
+}
+
+.view-product-description-border div {
+    padding: 10px 35px 5px 5px;
+    font-size: 20px;
+}
+
+.view-product-description-border button {
+    all: unset;
+    right: 7%;
+    cursor: pointer;
+    background: #D9D9D9;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 0px 5px 0px 5px;
+    transition: all .1s ease-in-out;
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+}
+
+.view-product-description-border button:hover {
+    background: #b7b6b6;
+}
+
+.view-product-attributes-container {
+    margin-top: 20px;
+    margin-left: 5%;
+    width: 100%;
+}
+
+.view-product-attributes-container > div:first-child {
+    float: left;
+}
+
+.view-product-attributes-container > div:last-child {
+    float: right;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    color: black;
+}
+
+
+.view-product-chakra {
+    width: 20%;
+}
+
+.view-product-attribute {
+	cursor: pointer;
+    background: #ADD8E6;
+    border-radius: 13px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    color: black;
+    display: flex;
+    /* width: 40%; */
+    align-items: center;
+    justify-content: center;
+    flex-grow: 0.2;
+    height: 35%;
+    margin: 0 5px 5px 5px;
+}
+
+.view-product-attribute:hover {
+    background: #CFEAF3;
+}
+
+.view-product-attribute-edit {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    background: #D9D9D9;
+    border-radius: 2px;
+    font-size: 14px;
+    padding: 0px 5px 0px 5px;
+    transition: all .1s ease-in-out;
+    height: 60%;
+    margin-left: 5px;
+}
+
+.view-product-attribute-edit:hover {
+    background: #b7b6b6;
+}
+
+.view-product-image-border button {
+    all: unset;
+    right: 7%;
+    cursor: pointer;
+    background: #D9D9D9;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    border-radius: 2px;
+    padding: 0px 5px 0px 5px;
+    transition: all .1s ease-in-out;
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+}
+
+.view-product-image-border button:hover {
+    background: #b7b6b6;
+}
+
+.view-product {
+    display: flex;
+    background: #F1F1F1;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    align-items: center;
+    height: 50px;
+}
+
+.view-product > div:first-child {
+    margin: auto 20px;
+}
+
+.view-product-quantity {
+    margin-left: auto;
+    margin-right: 10px;
+    color: #1DD767;
+}
+
+.view-product-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding-top: 25px;  
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    color: #00756A;
+}
+
+.reviews {
+    display: flex; 
+    background: #F1F1F1;
+    height: 180px;
+    width: 100%;
+    margin-top: 25%;
+    flex-flow: row wrap;
+    align-content: space-between;
+}
+
+
+.reviews div:first-child {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: black;
+    margin: 5px auto 0 5px;
+}
+
+.reviews button:last-child {
+	border: none;
+	padding: 0;
+	cursor: pointer;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration-line: underline;
+    color: #000000;
+    margin: 5px 5px 0 auto;
+}

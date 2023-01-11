@@ -13,9 +13,16 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    transition: all .2s ease-in-out; 
     /* width: 74%;
     height: 74%; */
 }
+
+.product-shop:hover {
+    cursor: pointer;
+    transform: scale(1.03); 
+}
+
 .product-shop img {
     width: 57.43589743589743vw;
     height: 61.53846153846154vw;
