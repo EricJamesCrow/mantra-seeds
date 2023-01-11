@@ -21,6 +21,7 @@ import Home from "./pages/home/Home"
 import Admin from "./pages/admin/Admin"
 import Shop from "./pages/shop/Shop"
 import Contact from "./pages/contact/Contact"
+import Cart from "./pages/cart/Cart"
 
 function App() {
   const [filter, setFilter] = useState([])
@@ -69,6 +70,7 @@ function App() {
         <Route path="/shop/products/:id" element={<ProductPage/>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/contact" element={<Contact/>} />
+        <Route path="/cart" element={<Cart/>} />
         <Route path="/login" element={!user ? <Login/> : <Navigate to="/profile"/>} />
         <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/profile"/>} />
         <Route path="/profile" 

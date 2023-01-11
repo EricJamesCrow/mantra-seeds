@@ -31,7 +31,7 @@ export default function BottomNavBar( { hideLogin } ) {
                 padding: "15px 20px",
                 cursor: "pointer"}}/>
         </NavLink>
-        <NavLink to="/shop" onClick={hideLogin}><FontAwesomeIcon 
+        <NavLink to="/cart" onClick={hideLogin}><FontAwesomeIcon 
             icon={faCartShopping} 
             style={{
                 color: location.pathname === "/shop" ? "#AECAED" : "#FFF",

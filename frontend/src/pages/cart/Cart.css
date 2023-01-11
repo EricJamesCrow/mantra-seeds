@@ -1,0 +1,71 @@
+.add-product {
+    display: flex;
+    background: #F1F1F1;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    align-items: center;
+    height: 50px;
+}
+
+.add-product div {
+    margin: auto 20px;
+}
+
+.add-product svg {
+    margin: 0 auto;
+}
+
+.edit-product-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding-top: 25px;  
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    color: #00756A;
+}
+
+.save-changes {
+    display: flex; 
+    flex-flow: column;
+    align-items: center;
+    background: #F1F1F1;
+    height: 180px;
+}
+
+.save-changes div {
+    padding-top: 20px;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.save-changes button {
+    width: 60%;
+    height: 50px;
+    background: #F1F1F1;
+    border: 1px solid #9F9F9F;
+    color: black;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 30px;
+    transition: background-color 250ms;
+}
+
+.save-changes button:hover {
+    cursor: pointer;
+    background: #e0e0e0;
+}
+
+.error {
+    padding-top: 20px;
+    color: #ff7e75;
+}
