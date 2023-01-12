@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const addItemToCart = async (req, res) => {
     const { user } = req.body;
     const { product, quantity, price } = req.body.cartItems[0];
+    console.log(req.body)
     if (!user || !product || !quantity || !price) {
         return res.status(400).json({ error: "Missing required parameters" });
     }
