@@ -4,7 +4,7 @@ const useAddToCart = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const addToCart = async (id, product, quantity) => {
+    const addToCart = async (id, product, quantity, price) => {
         setLoading(true);
         try {
             // Make a post request to the addItemToCart endpoint on the backend
@@ -13,7 +13,7 @@ const useAddToCart = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     user:  id,
-                    cartItems: [{ product, quantity }]
+                    cartItems: [{ product, quantity, price }]
                 })
             });
             const json = await response.json();

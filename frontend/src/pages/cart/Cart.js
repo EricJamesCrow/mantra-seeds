@@ -13,7 +13,28 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 // Components
 import Order from './components/Order'
 
+
 export default function Cart() {
+  const { user } = useAuthContext() // JWT token in local storage
+  const [cart, setCart] = useState('')
+
+  useEffect(() => {
+    if(user){
+    const url = '/api/carts/'+user.cart;
+    fetch(url)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            setCart(data.cartItems)
+        })
+      }
+}, [user])
+
+  useEffect(() => {
+    console.log(cart)
+  }, [cart])
+
   return (
     <>
     <div style={{ marginTop: '50px', zIndex: 1 }}>
@@ -29,7 +50,9 @@ export default function Cart() {
           }}
         />
     </div>
-    <Order/>
+    {cart && cart.map(item => (
+  <Order key={item._id} item={item} />
+))}
   <div className="customer-cart-whitespace"></div>
     <div className="cart-checkout-container-container">
     <div className="cart-checkout-container"> 

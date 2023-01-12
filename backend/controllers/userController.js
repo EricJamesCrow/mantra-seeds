@@ -17,10 +17,14 @@ const loginUser = async (req, res) => {
 
         const role = user.role
 
+        const id = user._id
+
+        const cart = user.cart
+
         if(role) {
-            res.status(200).json({email, token, role})
+            res.status(200).json({id, email, token, cart, role})
         } else {
-            res.status(200).json({email, token})  
+            res.status(200).json({id, email, cart, token})  
         }
     } catch (error) {
         res.status(400).json({error: error.message})

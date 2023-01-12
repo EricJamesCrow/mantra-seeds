@@ -10,9 +10,8 @@ import "./ProductPage.css"
 
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark, faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../images/cannabis-leaf-green.svg"
-import Crown from "../images/chakras/crown-chakra.svg"
 
 export default function ProductPage() {
     const { id } = useParams()
@@ -31,10 +30,6 @@ export default function ProductPage() {
             })
     }, [id])
 
-    useEffect(() => {
-      console.log(user)
-    }, [user])
-      
   return (
     <>
     <div style={{ marginTop: '50px', zIndex: 1 }}>
@@ -51,7 +46,7 @@ export default function ProductPage() {
   <div>{product.description}</div>
   </div>
   <div className="view-product-attributes-container">
-  <div className="add-to-cart-shop" onClick={() => addToCart(user._id, product._id, 1)}>
+  <div className="add-to-cart-shop" onClick={() => addToCart(user.id, product._id, 1, product.price)}>
         <FontAwesomeIcon className="cart-icon" icon={faCartPlus} style={{color: "#ECEBE8"}}></FontAwesomeIcon>
         <div className="add-to-cart-text-shop">Add to Cart</div>
         </div>
