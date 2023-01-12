@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate} from 'react-router-dom'
-import { useProductsContext } from "../hooks/useProductsContext";
+import { useParams } from 'react-router-dom'
+
+// hooks
 import { useAuthContext } from '../hooks/useAuthContext';
+import useAddToCart from '../hooks/useAddToCart';
 
 // styles
 import "./ProductPage.css"
@@ -12,26 +14,9 @@ import { faXmark, faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../images/cannabis-leaf-green.svg"
 import Crown from "../images/chakras/crown-chakra.svg"
 
-export default function EditProductModel() {
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
-    const [chakra, setChakra] = useState('')
-    const [strain, setStrain] = useState('')
-    const [thc, setThc] = useState('')
-
+export default function ProductPage() {
     const { id } = useParams()
     const [product, setProduct] = useState('')
-    const { dispatch } = useProductsContext()
-    
-    const [productAttributes, setProductAttributes] = useState({
-      "Price": product.price,
-      "Strain": product.strain,
-      "THC": product.thc
-    })
-
-    const navigate = useNavigate();
-
     const { user } = useAuthContext() // JWT token in local storage
 
     useEffect(() => {
@@ -44,16 +29,6 @@ export default function EditProductModel() {
                 setProduct(data)
             })
     }, [id])
-
-    useEffect(() => {
-      setProductAttributes({"Price": product.price, "Strain": product.strain, "THC": product.thc})
-      setName(product.name)
-      setDescription(product.description)
-      setPrice(product.price)
-      setChakra(product.chakra)
-      setStrain(product.strain)
-      setThc(product.thc)
-    }, [product])
       
   return (
     <>
