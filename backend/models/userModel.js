@@ -17,6 +17,10 @@ const userSchema = new Schema({
     role: {
         type: Number,
         required: false
+    },
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false
     }
 })
 

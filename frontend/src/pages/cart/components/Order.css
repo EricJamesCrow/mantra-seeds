@@ -1,0 +1,44 @@
+.cart-customer-order {
+    transition: background-color 100ms;
+    padding: 0.5rem 0 0.5rem 0;
+}
+
+.cart-customer-order:hover {
+    background: #F1F1F1;
+    cursor: pointer;
+}
+
+.cart-customer-order-details {
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-areas: 
+    "a a a a b b b b"
+    "a a a a c c c c"
+    "a a a a c c c c"
+    "a a a a d d d d";
+}
+
+.cart-customer-order-details div:first-child {
+    grid-area: a;
+    margin-left: 0.5rem;
+}
+
+.cart-customer-order-product-purchased {
+    grid-area: b;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    color: black;
+    margin-right: 1rem;
+    width: 100%;
+}
+
+.cart-customer-order-details div:last-child {
+    grid-area: d;
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: black;
+}

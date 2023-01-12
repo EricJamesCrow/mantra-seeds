@@ -9,52 +9,11 @@ import "./Cart.css"
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import Cannabis from "../../images/cannabis-leaf-green.svg"
-import Crown from "../../images/chakras/crown-chakra.svg"
+
+// Components
+import Order from './components/Order'
 
 export default function Cart() {
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
-    const [chakra, setChakra] = useState('')
-    const [strain, setStrain] = useState('')
-    const [thc, setThc] = useState('')
-
-    const { id } = useParams()
-    const [product, setProduct] = useState('')
-    const { dispatch } = useProductsContext()
-    
-    const [productAttributes, setProductAttributes] = useState({
-      "Price": product.price,
-      "Strain": product.strain,
-      "THC": product.thc
-    })
-
-    const navigate = useNavigate();
-
-    const { user } = useAuthContext() // JWT token in local storage
-
-    useEffect(() => {
-        const url = '/api/products/'+id;
-        fetch(url)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                setProduct(data)
-            })
-    }, [id])
-
-    useEffect(() => {
-      setProductAttributes({"Price": product.price, "Strain": product.strain, "THC": product.thc})
-      setName(product.name)
-      setDescription(product.description)
-      setPrice(product.price)
-      setChakra(product.chakra)
-      setStrain(product.strain)
-      setThc(product.thc)
-    }, [product])
-      
   return (
     <>
     <div style={{ marginTop: '50px', zIndex: 1 }}>
@@ -70,13 +29,14 @@ export default function Cart() {
           }}
         />
     </div>
-    <div>
-
+    <Order/>
+  <div className="customer-cart-whitespace"></div>
+    <div className="cart-checkout-container-container">
+    <div className="cart-checkout-container"> 
+          <div>Subtotal:</div>
+          <div>$36</div>
     </div>
-    <div className="edit-product-fields">
-    <div className="save-changes"> 
-        <button>CHECKOUT</button>
-    </div>
+    <button>CHECKOUT</button>
     </div>
     </div>
     </>
