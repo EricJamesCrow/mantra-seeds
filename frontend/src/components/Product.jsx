@@ -10,8 +10,13 @@ import Cannabis from "../images/cannabis-leaf-green.svg"
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+// hooks
+import { useAuthContext } from '../hooks/useAuthContext';
+
 
 export default function Product( {item} ) {
+  const { user } = useAuthContext()
+
   return (
     <Link to={`/shop/products/${item._id}`} style={{ textDecoration: "none", color: "inherit" }}>
     <div className="product-shop">

@@ -30,7 +30,6 @@ export default function Store( { filter } ) {
 
     fetchProducts()
   }, [])
-
       
   return (
     <>

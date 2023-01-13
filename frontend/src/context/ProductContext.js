@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react'
+import React, { createContext, useReducer } from 'react'
 
 export const ProductsContext = createContext()
 
@@ -31,7 +31,7 @@ export const ProductsContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(productsReducer, {
         products: null
     })
-
+    console.log(state)
     return (
         <ProductsContext.Provider value={{...state, dispatch}}>
             { children }

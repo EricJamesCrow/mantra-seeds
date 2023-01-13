@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate} from 'react-router-dom'
-import { useProductsContext } from "../../hooks/useProductsContext";
+import React, { useEffect } from 'react'
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useCartContext } from '../../hooks/useCartContext'
 
 // styles
 import "./Cart.css"
@@ -16,24 +15,22 @@ import Order from './components/Order'
 
 export default function Cart() {
   const { user } = useAuthContext() // JWT token in local storage
-  const [cart, setCart] = useState('')
+  const { cartItems, dispatch } = useCartContext()
 
-  useEffect(() => {
-    if(user){
-    const url = '/api/carts/'+user.cart;
-    fetch(url)
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            setCart(data.cartItems)
-        })
+    useEffect(() => {
+      const fetchCart = async () => {
+        const response = await fetch('/api/carts/'+user.cart)
+        const json = await response.json()
+
+        if (response.ok) {
+          dispatch({type: 'SET_CART', payload: json.cartItems})
+        }
       }
-}, [user])
+      if(user) {
+        fetchCart()
+      }
+    }, [user])
 
-  useEffect(() => {
-    console.log(cart)
-  }, [cart])
 
   return (
     <>
@@ -50,7 +47,7 @@ export default function Cart() {
           }}
         />
     </div>
-    {cart && cart.map(item => (
+    {cartItems && cartItems.map(item => (
   <Order key={item._id} item={item} />
 ))}
   <div className="customer-cart-whitespace"></div>
