@@ -9,6 +9,9 @@ const router = express.Router()
 // add a new cart
 router.post('/', addItemToCart)
 
+// delete item from a cart
+router.post('/:id', removeItemFromCart)
+
 // get a single cart
 router.get('/:id', getUserCart)
 
