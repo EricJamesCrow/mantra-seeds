@@ -17,7 +17,7 @@ export default function ProductPage() {
     const { id } = useParams()
     const [product, setProduct] = useState('')
     const { user } = useAuthContext() // JWT token in local storage
-    const { loading, error, addToCart } = useAddToCart();
+    const { addToCart } = useAddToCart();
 
     useEffect(() => {
         const url = '/api/products/'+id;
@@ -46,7 +46,9 @@ export default function ProductPage() {
   <div>{product.description}</div>
   </div>
   <div className="view-product-attributes-container">
-  <div className="add-to-cart-shop" onClick={() => addToCart(user.id, product._id, 1, product.price)}>
+  <div className="add-to-cart-shop" 
+  onClick={() => addToCart(user.id, product._id, 1, product.price)}
+  >
         <FontAwesomeIcon className="cart-icon" icon={faCartPlus} style={{color: "#ECEBE8"}}></FontAwesomeIcon>
         <div className="add-to-cart-text-shop">Add to Cart</div>
         </div>

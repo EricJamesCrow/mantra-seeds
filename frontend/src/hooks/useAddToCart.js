@@ -1,8 +1,11 @@
 import { useState } from 'react';
 
+import { useCartContext } from './useCartContext';
+
 const useAddToCart = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const { cartItems, dispatch } = useCartContext()
 
     const addToCart = async (id, product, quantity, price) => {
         setLoading(true);
@@ -17,8 +20,6 @@ const useAddToCart = () => {
                 })
             });
             const json = await response.json();
-            // Update the cart state
-            // ...
             setLoading(false);
         } catch (err) {
             setError(err);

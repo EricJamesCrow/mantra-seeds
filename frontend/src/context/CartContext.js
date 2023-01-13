@@ -8,26 +8,6 @@ const cartReducer = (state, action) => {
             return {
                 cartItems: action.payload
             };
-        case 'ADD_ITEM':
-            return {
-                ...state,
-                cartItems: [...state.cartItems, action.payload],
-            };
-        case 'DELETE_ITEM':
-            return {
-                ...state,
-                cartItems: state.cartItems.filter((item) => item._id !== action.payload._id),
-            };
-        case 'UPDATE_ITEM':
-            return {
-                ...state,
-                cartItems: state.cartItems.map((item) => {
-                    if (item._id === action.payload._id) {
-                        return action.payload;
-                    }
-                    return item;
-                }),
-            };
         default:
             return state;
     }

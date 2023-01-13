@@ -31,7 +31,6 @@ export default function Cart() {
       }
     }, [user])
 
-
   return (
     <>
     <div style={{ marginTop: '50px', zIndex: 1 }}>
