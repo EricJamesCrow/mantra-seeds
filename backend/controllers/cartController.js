@@ -54,7 +54,7 @@ const removeItemFromCart = async (req, res) => {
                 cart.cartItems.pull(cartItem);
                 cart.markModified('cartItems');
                 await cart.save();
-                return res.status(200).json({ message: "Item removed from cart" });
+                return res.status(200).json(cartItem);
             }
         }
     } catch (error) {
