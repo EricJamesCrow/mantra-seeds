@@ -31,6 +31,10 @@ export default function Cart() {
       }
     }, [user])
 
+    useEffect(() => {
+      // Listen for changes in the cart items and re-render the page
+  }, [cartItems]);
+
   return (
     <>
     <div style={{ marginTop: '50px', zIndex: 1 }}>

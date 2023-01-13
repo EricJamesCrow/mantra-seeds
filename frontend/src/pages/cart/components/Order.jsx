@@ -40,7 +40,6 @@ export default function Order( { item } ) {
   });
     const json = await response.json(); // need to refactor backend so the response is the cart object
     if(response.ok) {
-      console.log(json)
       dispatch({type: 'DELETE_ITEM', payload: json});
     }
   }

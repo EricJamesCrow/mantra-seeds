@@ -45,7 +45,6 @@ export default function EditProductModel() {
         const json = await response.json()
 
         if (response.ok) {
-            console.log(json)
             dispatch({type: 'DELETE_PRODUCT', payload: json})
             navigate(-1); // Won't navigate to previous page if refresh is hit first.
         }

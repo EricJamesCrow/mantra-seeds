@@ -8,6 +8,10 @@ const cartReducer = (state, action) => {
             return {
                 cartItems: action.payload
             };
+        case 'UPDATE_CART':
+            return {
+                cartItems: action.payload
+            }
         case 'DELETE_ITEM':
             return {
             ...state,
