@@ -10,11 +10,13 @@ import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
 // hooks
 import { useAuthContext } from '../../../hooks/useAuthContext'
+import { useCartContext } from '../../../hooks/useCartContext'
 
 export default function Order( { item } ) {
   const [product, setProduct] = useState('')
   const [hover, setHover] = useState(false);
   const { user } = useAuthContext()
+  const { dispatch } = useCartContext()
 
   useEffect(() => {
     const url = '/api/products/'+item.product;
@@ -36,9 +38,10 @@ export default function Order( { item } ) {
           product: product._id
       })
   });
-    const json = await response.json();
+    const json = await response.json(); // need to refactor backend so the response is the cart object
     if(response.ok) {
-      console.log("Item deleted successfully")
+      console.log(json)
+      dispatch({type: 'DELETE_ITEM', payload: json});
     }
   }
 
