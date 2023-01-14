@@ -11,7 +11,7 @@ const cartReducer = (state, action) => {
         case 'UPDATE_CART':
             return {
                 cartItems: action.payload
-            }
+            };
         case 'DELETE_ITEM':
             return {
             ...state,
@@ -26,8 +26,6 @@ export const CartContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(cartReducer, {
         cartItems: null,
     });
-
-    console.log('CartContext state: ', state)
 
     return (
         <CartContext.Provider value={{ ...state, dispatch }}>

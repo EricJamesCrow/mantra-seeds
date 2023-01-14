@@ -23,6 +23,9 @@ import Shop from "./pages/shop/Shop"
 import Contact from "./pages/contact/Contact"
 import Cart from "./pages/cart/Cart"
 
+// stripe component
+import StripeContainer from './stripe/StripeContainer'
+
 function App() {
   const [filter, setFilter] = useState([])
   const { user } = useAuthContext()
@@ -68,6 +71,7 @@ function App() {
         {user && user.role === 1 ?  <Route path="/admin/products/:id" element={<EditProductModel/>} /> : null}
         <Route path="/shop/products/:id" element={<ProductPage/>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
+        <Route path="/cart/checkout" element={<StripeContainer/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/cart" element={<Cart/>} />
         <Route path="/login" element={!user ? <Login/> : <Navigate to="/profile"/>} />

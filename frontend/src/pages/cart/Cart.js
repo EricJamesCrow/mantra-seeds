@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useCartContext } from '../../hooks/useCartContext'
 
@@ -59,7 +60,7 @@ export default function Cart() {
           <div>Subtotal:</div>
           <div>$36</div>
     </div>
-    <button>CHECKOUT</button>
+    <Link to="/cart/checkout" type="button">CHECKOUT</Link>
     </div>
     </div>
     </>

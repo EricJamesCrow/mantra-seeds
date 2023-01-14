@@ -57,7 +57,7 @@
     margin: 5px 5px 0 auto;
 }
 
-.cart-checkout-container-container button {
+.cart-checkout-container-container a {
     width: 60%;
     height: 50px;
     background: #F1F1F1;
@@ -70,9 +70,13 @@
     margin-top: 30px;
     transition: background-color 250ms;
     margin-bottom: 3rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.cart-checkout-container-container button:hover {
+.cart-checkout-container-container a:hover {
     cursor: pointer;
     background: #e0e0e0;
 }
