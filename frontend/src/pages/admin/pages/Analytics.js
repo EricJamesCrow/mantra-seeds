@@ -5,6 +5,6 @@ import "./Analytics.css"
 
 export default function Analytics() {
   return (
-    <div className="analytics-component">Analytics Component</div>
+    <div className="analytics-component">Analytics Coming Soon!</div>
   )
 }
