@@ -101,12 +101,6 @@ export default function Profile() {
       </div>
       </>
       }
-      {!user && 
-      <div style={{paddingTop: "200px", paddingBottom: "280px", display: 'grid', textAlign: 'center'}}>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
-      </div>
-      }
     </div>
   )
 }

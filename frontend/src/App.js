@@ -2,7 +2,6 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuthContext } from './hooks/useAuthContext';
-import { useProductsContext } from "./hooks/useProductsContext"
 
 // styles
 import './App.css';
@@ -10,8 +9,6 @@ import './App.css';
 // components
 import Navbar from './components/Navbar';
 import BottomNavBar from './components/BottomNavBar'
-import Login from './pages/user/Login'
-import Signup from './pages/user/Signup'
 import Profile from './pages/profile/Profile'
 import EditProductModel from "./pages/admin/components/EditProductModel"
 import ProductPage from "./components/ProductPage"
@@ -82,8 +79,6 @@ function App() {
         <Route path="/cart/checkout" element={<StripeContainer/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/cart" element={<ScrollToTop><Cart/></ScrollToTop>} />
-        <Route path="/login" element={!user ? <Login/> : <Navigate to="/profile"/>} />
-        <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/profile"/>} />
         <Route path="/profile" 
         element={JSON.parse(localStorage.getItem('user')) ? <ScrollToTop><Profile/></ScrollToTop> : <DoSomethingWrapper><Navigate to="/"/></DoSomethingWrapper>} 
         />
