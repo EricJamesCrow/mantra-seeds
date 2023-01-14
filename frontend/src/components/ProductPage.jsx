@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../images/cannabis-leaf-green.svg"
 
+const PRODUCTS_API_URL = '/api/products/'
+
 export default function ProductPage() {
     const { id } = useParams()
     const [product, setProduct] = useState('')
@@ -20,7 +22,7 @@ export default function ProductPage() {
     const { addToCart } = useAddToCart();
 
     useEffect(() => {
-        const url = '/api/products/'+id;
+        const url = PRODUCTS_API_URL+id;
         fetch(url)
             .then((response) => {
                 return response.json();

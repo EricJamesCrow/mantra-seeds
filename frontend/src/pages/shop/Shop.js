@@ -11,6 +11,8 @@ import React from "react"
 import { useEffect } from 'react';
 import { useProductsContext } from "../../hooks/useProductsContext";
 
+const PRODUCTS_API_URL = '/api/products/'
+
 export default function Store( { filter } ) {
   const {products, dispatch} = useProductsContext()
 
@@ -20,7 +22,7 @@ export default function Store( { filter } ) {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch('/api/products')
+      const response = await fetch(PRODUCTS_API_URL)
       const json = await response.json()
 
       if (response.ok) {

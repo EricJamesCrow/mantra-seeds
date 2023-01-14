@@ -16,6 +16,8 @@ import "./Profile.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faShoppingCart, faUser, faList } from '@fortawesome/free-solid-svg-icons'
 
+const PRODUCTS_API_URL = '/api/products/'
+
 
 export default function Profile() {
   const { user } = useAuthContext()
@@ -24,7 +26,7 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch('/api/products')
+      const response = await fetch(PRODUCTS_API_URL)
       const json = await response.json()
 
       if (response.ok) {

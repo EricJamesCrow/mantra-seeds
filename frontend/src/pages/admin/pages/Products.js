@@ -8,6 +8,8 @@ import "./Products.css"
 import Product from "../components/Product"
 import AddProductModel from '../components/AddProductModel';
 
+const PRODUCTS_API_URL = '/api/products/'
+
 export default function Products() {
   const {products, dispatch} = useProductsContext()
 
@@ -23,7 +25,7 @@ export default function Products() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch('/api/products')
+      const response = await fetch(PRODUCTS_API_URL)
       const json = await response.json()
 
       if (response.ok) {

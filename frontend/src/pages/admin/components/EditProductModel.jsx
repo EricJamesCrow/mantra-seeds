@@ -12,6 +12,8 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 import Crown from "../../../images/chakras/crown-chakra.svg"
 
+const PRODUCTS_API_URL = '/api/products/'
+
 export default function EditProductModel() {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
@@ -36,7 +38,7 @@ export default function EditProductModel() {
     const token = user.token;
 
     const handleDelete = async () => {
-        const response = await fetch('/api/products/' + product._id, {
+        const response = await fetch(PRODUCTS_API_URL + product._id, {
             method: 'DELETE',
             headers: {
               'Authorization': `${token}` // set the authorization header
@@ -53,7 +55,7 @@ export default function EditProductModel() {
     const handleSubmit = async (e) => {
       e.preventDefault()
     
-      const response = await fetch('/api/products/' + product._id, {
+      const response = await fetch(PRODUCTS_API_URL + product._id, {
         method: 'PATCH',
         headers: { 
           "Authorization": token,
@@ -69,7 +71,7 @@ export default function EditProductModel() {
     }
 
     useEffect(() => {
-        const url = '/api/products/'+id;
+        const url = PRODUCTS_API_URL+id;
         fetch(url)
             .then((response) => {
                 return response.json();
@@ -92,7 +94,7 @@ export default function EditProductModel() {
   return (
     <>
     <div style={{ marginTop: '50px', zIndex: 1 }}>
-    <div className="add-product">
+    <div className="edit-product">
     <div>{product.name}</div>
     <FontAwesomeIcon
           icon={faXmark} 

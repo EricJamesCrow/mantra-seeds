@@ -11,12 +11,14 @@ import "./Home.css"
 // components
 import BootstrapCarousel from "../../components/BootstrapCarousel"
 
+const PRODUCTS_API_URL = '/api/products/'
+
 export default function Home() {
   const {products, dispatch} = useProductsContext()
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch('/api/products')
+      const response = await fetch(PRODUCTS_API_URL)
       const json = await response.json()
 
       if (response.ok) {

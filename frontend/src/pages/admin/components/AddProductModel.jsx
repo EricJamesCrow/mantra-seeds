@@ -15,6 +15,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
+const PRODUCTS_API_URL = '/api/products/'
+
 const CssTextField = styled(TextField)({
     '& label.Mui-focused': {
       color: '#00D0C8',
@@ -55,7 +57,7 @@ export default function AddProductModel({ setShowAddProduct }) {
     
       const product = { name, description, price, chakra, strain, thc };
     
-      const response = await fetch("/api/products", {
+      const response = await fetch(PRODUCTS_API_URL, {
         method: "POST",
         headers: { 
           "Authorization": token,
