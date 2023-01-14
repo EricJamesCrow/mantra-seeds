@@ -151,6 +151,8 @@
 
 .view-product > div:first-child {
     margin: auto 20px;
+    font-weight: 500;
+    font-size: 24px;
 }
 
 .view-product-quantity {

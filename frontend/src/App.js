@@ -56,6 +56,14 @@ function App() {
     return children;
   };
 
+  const ScrollToTop = ({ children }) => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [children]);
+  
+    return children;
+  };
+
 
   return (
     <>
@@ -69,15 +77,15 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin/>} />
         {user && user.role === 1 ?  <Route path="/admin/products/:id" element={<EditProductModel/>} /> : null}
-        <Route path="/shop/products/:id" element={<ProductPage/>} />
+        <Route path="/shop/products/:id" element={<ScrollToTop><ProductPage/></ScrollToTop>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/cart/checkout" element={<StripeContainer/>} />
         <Route path="/contact" element={<Contact/>} />
-        <Route path="/cart" element={<Cart/>} />
+        <Route path="/cart" element={<ScrollToTop><Cart/></ScrollToTop>} />
         <Route path="/login" element={!user ? <Login/> : <Navigate to="/profile"/>} />
         <Route path="/signup" element={!user ? <Signup/> : <Navigate to="/profile"/>} />
         <Route path="/profile" 
-        element={JSON.parse(localStorage.getItem('user')) ? <Profile/> : <DoSomethingWrapper><Navigate to="/"/></DoSomethingWrapper>} 
+        element={JSON.parse(localStorage.getItem('user')) ? <ScrollToTop><Profile/></ScrollToTop> : <DoSomethingWrapper><Navigate to="/"/></DoSomethingWrapper>} 
         />
       </Routes>
       <div className="copyright">

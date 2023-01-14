@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
 
 // styles
 import './Order.css'
@@ -12,6 +14,9 @@ import Cannabis from "../../../images/cannabis-leaf-green.svg"
 import { useAuthContext } from '../../../hooks/useAuthContext'
 import { useCartContext } from '../../../hooks/useCartContext'
 
+const CARTS_API_URL = '/api/carts/'
+const PRODUCTS_API_URL = '/api/products/'
+
 export default function Order( { item } ) {
   const [product, setProduct] = useState('')
   const [hover, setHover] = useState(false);
@@ -19,7 +24,7 @@ export default function Order( { item } ) {
   const { dispatch } = useCartContext()
 
   useEffect(() => {
-    const url = '/api/products/'+item.product;
+    const url = PRODUCTS_API_URL+item.product;
     fetch(url)
         .then((response) => {
             return response.json();
@@ -30,7 +35,7 @@ export default function Order( { item } ) {
 }, [])
 
   const handleDelete = async () => { 
-    const response = await fetch('/api/carts/'+item._id, {
+    const response = await fetch(CARTS_API_URL+item._id, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -60,6 +65,7 @@ export default function Order( { item } ) {
           onMouseLeave={() => setHover(false)}
           onClick={handleDelete}
         />
+        <Link to={`/shop/products/${item.product}`} style={{ textDecoration: "none"}}>
         <div className="cart-customer-order-details">
         <div className="view-product-image-border">
       <img src={Cannabis} />
@@ -67,6 +73,7 @@ export default function Order( { item } ) {
       <div className="cart-customer-order-product-purchased">{`x${item.quantity} ${product.name}`}</div>
       <div>{`$${item.price}`}</div>
   </div>
+  </Link>
   </div>
   )
 }
