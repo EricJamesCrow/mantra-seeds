@@ -19,9 +19,7 @@ import Admin from "./pages/admin/Admin"
 import Shop from "./pages/shop/Shop"
 import Contact from "./pages/contact/Contact"
 import Cart from "./pages/cart/Cart"
-
-// stripe component
-import StripeContainer from './stripe/StripeContainer'
+import Checkout from "./pages/checkout/Checkout"
 
 function App() {
   const [filter, setFilter] = useState([])
@@ -76,7 +74,7 @@ function App() {
         {user && user.role === 1 ?  <Route path="/admin/products/:id" element={<EditProductModel/>} /> : null}
         <Route path="/shop/products/:id" element={<ScrollToTop><ProductPage/></ScrollToTop>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
-        <Route path="/cart/checkout" element={<StripeContainer/>} />
+        <Route path="/cart/checkout" element={<ScrollToTop><Checkout/></ScrollToTop>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/cart" element={<ScrollToTop><Cart/></ScrollToTop>} />
         <Route path="/profile" 
