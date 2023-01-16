@@ -80,6 +80,7 @@ export default function CheckoutForm() {
   };
 
   const paymentElementOptions = {
+    supportedPaymentMethods: ['card', 'googlePay', 'ideal', 'giropay', 'sepa_debit', 'bancontact', 'eps', 'p24', 'alipay', 'wechat'],
     layout: "tabs"
   }
 
