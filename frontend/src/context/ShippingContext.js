@@ -8,6 +8,14 @@ export const shippingReducer = (state, action) => {
             return {
                 shipping: action.payload
             }
+        case 'UPDATE_SHIPPING':
+            return {
+                ...state,
+                shipping: {
+                    ...state.shipping,
+                    ...action.payload
+                }
+            }    
         default:
             return state
     }
