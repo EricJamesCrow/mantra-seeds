@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // hooks
 import { useShippingContext } from '../../../hooks/useShippingContext';
@@ -7,6 +7,7 @@ const shippingMethods = [  { name: "USPS Priority", price: 799, delivery: "" }, 
 
 export default function Shipping( { setSelectedLink }) {
     const { shipping } = useShippingContext();
+    const [selectedShipping, setSelectedShipping] = useState(null);
 
     useEffect(() => {
         const today = new Date();
@@ -22,6 +23,10 @@ export default function Shipping( { setSelectedLink }) {
         });
 
     }, []);
+
+    const handleShippingSelection = (method) => {
+        setSelectedShipping(method.price);
+    }
 
   return (
     <>
@@ -46,7 +51,7 @@ export default function Shipping( { setSelectedLink }) {
     <div>SHIPPING METHOD</div>
     {shippingMethods.map(c => (
     <div className="shipping-method">
-    <input type="radio" name="shipping-method"/>
+    <input type="radio" name="shipping-method" onClick={() => handleShippingSelection(c)}/>
         <div>
             <div>{c.name}</div>
             <div>{c.delivery}</div>
