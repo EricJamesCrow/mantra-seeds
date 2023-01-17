@@ -20,6 +20,7 @@ export default function ProductPage() {
     const [product, setProduct] = useState('')
     const { user } = useAuthContext() // JWT token in local storage
     const { addToCart } = useAddToCart();
+    const price = (product.price/100).toFixed(2)
 
     useEffect(() => {
         const url = PRODUCTS_API_URL+id;
@@ -54,7 +55,7 @@ export default function ProductPage() {
         <FontAwesomeIcon className="cart-icon" icon={faCartPlus} style={{color: "#ECEBE8"}}></FontAwesomeIcon>
         <div className="add-to-cart-text-shop">Add to Cart</div>
         </div>
-        <div>{`$${product.price}`}</div>
+        <div>{`$${price}`}</div>
   </div>
 </div>
 <div className="reviews">

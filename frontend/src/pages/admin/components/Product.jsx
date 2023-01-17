@@ -8,6 +8,7 @@ import "./Product.css"
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
 export default function Product( {item} ) {
+  const price = (item.price/100).toFixed(2)
   return (
     <Link to={`/admin/products/${item._id}`} style={{ textDecoration: "none", color: "inherit" }}>
     <div className="recent-product">
@@ -16,7 +17,7 @@ export default function Product( {item} ) {
       <img src={Cannabis} style={{ width: '60%', height: '60%', margin: 'auto' }} />
             <div style={{ padding: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div className="product-price">${item.price}</div>
+                <div className="product-price">${price}</div>
                 <button>More Info</button>
               </div>
             </div>

@@ -10,13 +10,8 @@ import Cannabis from "../images/cannabis-leaf-green.svg"
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-// hooks
-import { useAuthContext } from '../hooks/useAuthContext';
-
-
 export default function Product( {item} ) {
-  const { user } = useAuthContext()
-
+  const price = (item.price/100).toFixed(2)
   return (
     <Link to={`/shop/products/${item._id}`} style={{ textDecoration: "none", color: "inherit" }}>
     <div className="product-shop">
@@ -26,7 +21,7 @@ export default function Product( {item} ) {
         <FontAwesomeIcon className="cart-icon" icon={faCartPlus} style={{color: "#ECEBE8"}}></FontAwesomeIcon>
         <div className="add-to-cart-text-shop">Add to Cart</div>
         </div>
-        <div className="product-price">{`$${item.price}`}</div>
+        <div className="product-price">{`$${price}`}</div>
         </div>
     </div>
     </Link>

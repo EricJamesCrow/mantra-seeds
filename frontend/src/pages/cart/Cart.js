@@ -36,6 +36,14 @@ export default function Cart() {
       // Listen for changes in the cart items and re-render the page
   }, [cartItems]);
 
+
+  let subtotal = 0;
+  if (cartItems) {
+      cartItems.forEach(item => {
+          subtotal += parseFloat(item.price) * item.quantity;
+      });
+  }
+
   return (
     <>
     <div style={{ marginTop: '50px', zIndex: 1 }}>
@@ -58,7 +66,7 @@ export default function Cart() {
     <div className="cart-checkout-container-container">
     <div className="cart-checkout-container"> 
           <div>Subtotal:</div>
-          <div>$36</div>
+          <div>${(subtotal/100).toFixed(2)}</div>
     </div>
     <Link to="/cart/checkout" type="button">CHECKOUT</Link>
     </div>

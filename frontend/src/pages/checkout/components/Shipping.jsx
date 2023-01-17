@@ -3,21 +3,23 @@ import React, { useEffect } from 'react'
 // hooks
 import { useShippingContext } from '../../../hooks/useShippingContext';
 
-const shippingMethods = [  { name: "USPS Priority", price: 7.99, delivery: "" },  { name: "USPS Next Day Air", price: 22.99, delivery: "" },];
+const shippingMethods = [  { name: "USPS Priority", price: 799, delivery: "" },  { name: "USPS Next Day Air", price: 2299, delivery: "" },];
 
 export default function Shipping( { setSelectedLink }) {
     const { shipping } = useShippingContext();
 
-    // useEffect(() => {
-    //     const today = new Date();
-    //     if (shippingMethods.name === "USPS Priority") {
-    //         const delivery = new Date();
-    //         delivery.setDate(today.getDate() + 2);
-    //     } else if (shippingMethods.name === "USPS Next Day Air") {
-    //         const delivery = new Date();
-    //         delivery.setDate(today.getDate() + 1);
-    //     }
-    // }, []);
+    useEffect(() => {
+        const today = new Date();
+        shippingMethods.forEach(method => {
+            let delivery = new Date();
+            if(method.name === "USPS Priority") {
+                delivery.setDate(today.getDate() + 2);
+            } else if(method.name === "USPS Next Day Air") {
+                delivery.setDate(today.getDate() + 1);
+            }
+            method.delivery = delivery.toDateString();
+        });
+    }, []);
 
   return (
     <>
@@ -45,9 +47,9 @@ export default function Shipping( { setSelectedLink }) {
     <input type="radio" name="shipping-method"/>
         <div>
             <div>{c.name}</div>
-            <div>Estimated delivery Tuesday, Jan 24-Thursday, Feb 23</div>
+            <div>{c.delivery}</div>
         </div>
-        <div>$7.99</div>
+        <div>${(c.price/100).toFixed(2)}</div>
     </div>
     ))
     }

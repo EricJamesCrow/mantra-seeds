@@ -22,6 +22,7 @@ export default function Order( { item } ) {
   const [hover, setHover] = useState(false);
   const { user } = useAuthContext()
   const { dispatch } = useCartContext()
+  const price = (item.price/100).toFixed(2)
 
   useEffect(() => {
     const url = PRODUCTS_API_URL+item.product;
@@ -71,7 +72,7 @@ export default function Order( { item } ) {
       <img src={Cannabis} />
       </div>
       <div className="cart-customer-order-product-purchased">{`x${item.quantity} ${product.name}`}</div>
-      <div>{`$${item.price}`}</div>
+      <div>{`$${price}`}</div>
   </div>
   </Link>
   </div>

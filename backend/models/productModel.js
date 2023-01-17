@@ -12,7 +12,7 @@ const productSchema = new Schema({
         required: false
     },
     price: {
-        type: String,
+        type: Number,
         required: true
     },
     chakra: {

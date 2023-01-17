@@ -55,7 +55,7 @@ export default function AddProductModel({ setShowAddProduct }) {
     const handleSubmit = async (e) => {
       e.preventDefault();
     
-      const product = { name, description, price, chakra, strain, thc };
+      const product = { name, description, price: parseInt(price*100), chakra, strain, thc };
     
       const response = await fetch(PRODUCTS_API_URL, {
         method: "POST",
