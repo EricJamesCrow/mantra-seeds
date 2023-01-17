@@ -21,11 +21,11 @@ const cartSchema = new mongoose.Schema({
             required: true
         }
     }],
-    // subtotal: {
-    //     type: Number,
-    //     ref: 'Subtotal',
-    //     required: false
-    // }
+    subtotal: {
+        type: Number,
+        ref: 'Subtotal',
+        required: false
+    }
 }, {
     timestamps: true
 });

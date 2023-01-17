@@ -15,7 +15,8 @@ const addItemToCart = async (req, res) => {
         if (!cart) {
             const newCart = new Cart({
                 user,
-                cartItems: [{ product, quantity, price }]
+                cartItems: [{ product, quantity, price }],
+                subtotal: price * quantity
             });
             await newCart.save();
             await User.findByIdAndUpdate(user, { cart: newCart._id }); 
@@ -24,8 +25,10 @@ const addItemToCart = async (req, res) => {
             const cartItem = cart.cartItems.find(c => c.product.equals(product))
             if (cartItem) {
                 cartItem.quantity += quantity;
+                cart.subtotal += price * quantity;
             } else {
                 cart.cartItems.push({ product, quantity, price });
+                cart.subtotal += price * quantity;
             }
             cart.markModified('cartItems');
             await cart.save();           
@@ -51,6 +54,7 @@ const removeItemFromCart = async (req, res) => {
             if (!cartItem) {
                 return res.status(404).json({ error: "Item not found in cart" });
             } else {
+                cart.subtotal -= cartItem.price * cartItem.quantity;
                 cart.cartItems.pull(cartItem);
                 cart.markModified('cartItems');
                 await cart.save();
