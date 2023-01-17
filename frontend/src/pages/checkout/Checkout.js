@@ -31,7 +31,7 @@ export default function Checkout() {
         const json = await response.json()
 
         if (response.ok) {
-          dispatch({type: 'SET_CART', payload: json.cartItems})
+          dispatch({type: 'SET_CART', payload: json})
         }
       }
       if(user) {
