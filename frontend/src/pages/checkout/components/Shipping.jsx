@@ -25,7 +25,8 @@ export default function Shipping( { setSelectedLink }) {
     }, []);
 
     const handleShippingSelection = (method) => {
-        setSelectedShipping(method.price);
+        setSelectedShipping(method);
+        console.log(method)
     }
 
   return (
