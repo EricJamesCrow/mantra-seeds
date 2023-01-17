@@ -203,3 +203,12 @@
     padding-top: 1rem;
     padding-right: 1rem;
 }
+
+/* even more css */
+.change-link {
+    cursor: pointer;
+  }
+  
+  .change-link:hover {
+    color: #f1f1f1;
+  }

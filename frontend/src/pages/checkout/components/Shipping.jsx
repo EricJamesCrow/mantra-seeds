@@ -1,25 +1,28 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+
+// hooks
+import { useShippingContext } from '../../../hooks/useShippingContext';
 
 export default function Shipping( { setSelectedLink }) {
     const shippingMethods = ["USPS Priority", "USPS Next Day Air"]
+    const { shipping } = useShippingContext();
+
   return (
     <>
     <div className="checkout-shipping-container">
         <div className="checkout-contact-info-links">
         <div>Contact</div>
         <div>
-            <div>insertemailhere@email.com</div>
-            <div>Change</div>
+            <div>{shipping.email}</div>
+            <div className="change-link" onClick={() => setSelectedLink("INFO")}>Change</div>
         </div>
         </div>
         <div className="seperator"></div>
         <div className="checkout-contact-info-links">
         <div>Ship To</div>
         <div>
-            <div>1024 Address, Santa Cruz CA
-95065-9623, United States</div>
-            <div>Change</div>
+            <div>{`${shipping.address}, ${shipping.city} ${shipping.state} ${shipping.zip}, United States`}</div>
+            <div className="change-link" onClick={() => setSelectedLink("INFO")}>Change</div>
         </div>
         </div>
     </div>

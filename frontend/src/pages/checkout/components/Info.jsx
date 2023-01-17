@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 
 // material ui
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
+
+// hooks
+import { useShippingContext } from '../../../hooks/useShippingContext';
 
 const CssTextField = styled(TextField)({
     '& label.Mui-focused': {
@@ -26,7 +28,9 @@ const CssTextField = styled(TextField)({
   });
 
 export default function Info( { setSelectedLink }) {
-    const [email, setEmail] = useState('')
+    const { shipping, dispatch } = useShippingContext();
+
+    const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [company, setCompany] = useState("");
@@ -52,10 +56,24 @@ export default function Info( { setSelectedLink }) {
 
     const submitForm = (event) => {
       event.preventDefault();
-      console.log({ email, firstName, lastName, company, address, apt, city, state, zip, phone });
+      const formData = { email, firstName, lastName, company, address, apt, city, state, zip, phone };
+      dispatch({ type: 'SET_SHIPPING', payload: formData });
       setSelectedLink("SHIPPING")
     }
 
+    useEffect(() => {
+      setEmail(shipping.email);
+      setFirstName(shipping.firstName);
+      setLastName(shipping.lastName);
+      setCompany(shipping.company);
+      setAddress(shipping.address);
+      setApt(shipping.apt);
+      setCity(shipping.city);
+      setState(shipping.state);
+      setZip(shipping.zip);
+      setPhone(shipping.phone);
+      }, [shipping])
+      
   return (
     <form className="shipping-details-form" onSubmit={submitForm}>
     <div>
