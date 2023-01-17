@@ -17,8 +17,10 @@ export default function Shipping( { setSelectedLink }) {
             } else if(method.name === "USPS Next Day Air") {
                 delivery.setDate(today.getDate() + 1);
             }
-            method.delivery = delivery.toDateString();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            method.delivery = "Estimated delivery " + delivery.toLocaleDateString("en-US", options);
         });
+
     }, []);
 
   return (
