@@ -83,7 +83,7 @@
     padding: 1rem 0 0.5rem 0.5rem;
 }
 
-.checkout-checkout-container-container a {
+.checkout-checkout-container-container button {
     width: 80%;
     height: 50px;
     background: #F1F1F1;
@@ -102,7 +102,7 @@
     justify-content: center;
 }
 
-.checkout-checkout-container-container a:hover {
+.checkout-checkout-container-container button:hover {
     cursor: pointer;
     background: #e0e0e0;
 }

@@ -15,7 +15,7 @@ import StripeContainer from './components/stripe/StripeContainer'
 
 export default function Checkout() {
   const { user } = useAuthContext() // JWT token in local storage
-  const { cartItems, dispatch } = useCartContext()
+  const { dispatch } = useCartContext()
   const [selectedLink, setSelectedLink] = useState("INFO");
   const checkoutLinks = ["CART", "INFO", "SHIPPING", "PAYMENT"]
   const navigate = useNavigate();
