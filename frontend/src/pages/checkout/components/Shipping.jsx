@@ -26,7 +26,6 @@ export default function Shipping( { setSelectedLink }) {
     }
 
     useEffect(() => {
-        console.log(shipping)
     }, [shipping]);
 
     const handleSubmit = () => {
@@ -34,25 +33,35 @@ export default function Shipping( { setSelectedLink }) {
         setSelectedLink("PAYMENT")
     }
 
+    const shippingInfo = [
+        {
+          title: "Contact",
+          value: shipping.email,
+          onClick: () => setSelectedLink("INFO")
+        },
+        {
+          title: "Ship To",
+          value: `${shipping.address}, ${shipping.city} ${shipping.state} ${shipping.zip}, United States`,
+          onClick: () => setSelectedLink("INFO")
+        }
+      ];
+
   return (
     <>
-    <div className="checkout-shipping-container">
-        <div className="checkout-contact-info-links">
-        <div>Contact</div>
+  <div className="checkout-shipping-container">
+    {shippingInfo.map((info, index) => (
+        <>
+      <div key={index} className="checkout-contact-info-links">
+        <div>{info.title}</div>
         <div>
-            <div>{shipping.email}</div>
-            <div className="change-link" onClick={() => setSelectedLink("INFO")}>Change</div>
+          <div>{info.value}</div>
+          <div className="change-link" onClick={info.onClick}>Change</div>
         </div>
-        </div>
-        <div className="seperator"></div>
-        <div className="checkout-contact-info-links">
-        <div>Ship To</div>
-        <div>
-            <div>{`${shipping.address}, ${shipping.city} ${shipping.state} ${shipping.zip}, United States`}</div>
-            <div className="change-link" onClick={() => setSelectedLink("INFO")}>Change</div>
-        </div>
-        </div>
-    </div>
+      </div>
+      {index !== shippingInfo.length - 1 && <div className="seperator"></div>}
+      </>
+    ))}
+  </div>
     <div className="shipping-methods">
     <div>SHIPPING METHOD</div>
     {shippingMethods.map(c => (

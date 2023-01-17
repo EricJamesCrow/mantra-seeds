@@ -9,16 +9,14 @@ import "./Checkout.css"
 // components
 import Info from "./components/Info"
 import Shipping from "./components/Shipping"
-
-// stripe component
-import StripeContainer from './components/stripe/StripeContainer'
+import Payment from "./components/Payment"
 
 // hooks
 import { useShippingContext } from '../../hooks/useShippingContext';
 
 export default function Checkout() {
   const { user } = useAuthContext() // JWT token in local storage
-  const { dispatch } = useCartContext()
+  const { cartItems, dispatch } = useCartContext()
   const { shipping } = useShippingContext()
   const [selectedLink, setSelectedLink] = useState("INFO");
   const checkoutLinks = ["CART", "INFO", "SHIPPING", "PAYMENT"]
@@ -69,7 +67,7 @@ export default function Checkout() {
     </>
     }
     {selectedLink === "PAYMENT" &&
-        <StripeContainer/>
+        <Payment setSelectedLink={setSelectedLink} cart={cartItems}/>
     }
     </div>
     </>
