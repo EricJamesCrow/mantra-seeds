@@ -53,12 +53,13 @@ export default function Payment( { setSelectedLink, cart } ) {
       }, [])
 
       useEffect(() => {
+        const total = ((cart.subtotal+shipping.shippingPrice)/100).toFixed(2)
         if(products) {
           const productsInCart = cart.cartItems.map(item => {
             const product = products.find(p => p._id === item.product);
             return `x${item.quantity} ${product.name} - $${(product.price/100).toFixed(2)}<br>`;
           });
-          productsInCart.push(`Subtotal: $${(cart.subtotal/100).toFixed(2)}`);
+          productsInCart.push(`Total: $${total}`);
           setProductsInCart(productsInCart);
         }
       }, [products])
