@@ -17,10 +17,15 @@ const cartSchema = new mongoose.Schema({
             required: true
         },
         price: {
-            type: String,
+            type: Number,
             required: true
         }
-    }]
+    }],
+    // subtotal: {
+    //     type: Number,
+    //     ref: 'Subtotal',
+    //     required: false
+    // }
 }, {
     timestamps: true
 });
