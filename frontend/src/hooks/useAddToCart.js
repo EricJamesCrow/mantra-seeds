@@ -20,7 +20,7 @@ const useAddToCart = () => {
                 })
             });
             const json = await response.json();
-            dispatch({type: 'UPDATE_CART', payload: json.cart.cartItems})
+            dispatch({type: 'UPDATE_CART', payload: json.cart})
             setLoading(false);
         } catch (err) {
             setError(err);

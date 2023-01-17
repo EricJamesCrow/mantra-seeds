@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -39,13 +39,13 @@ export default function BottomNavBar({ hideLogin }) {
             <FontAwesomeIcon
                 icon={faCartShopping}
                 style={{
-                    color: location.pathname === "/shop" ? "#AECAED" : "#FFF",
+                    color: location.pathname === "/cart" ? "#AECAED" : "#FFF",
                     fontSize: "1.6rem",
                     padding: "15px 20px",
                     cursor: "pointer"
                 }}
             />
-            { cartItems && cartItems.length > 0 && 
+            { cartItems && cartItems.cartItems.length > 0 && 
             <div style={{
                 position: 'absolute',
                 top: '5px',
@@ -59,7 +59,7 @@ export default function BottomNavBar({ hideLogin }) {
                 height: '20px',
                 textAlign: 'center',
                 lineHeight: '15px',
-            }}>{cartItems.length}</div>
+            }}>{cartItems.cartItems.length}</div>
             }
         </div>
         </NavLink>

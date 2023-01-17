@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useCartContext } from '../../hooks/useCartContext'
@@ -17,6 +17,7 @@ import Order from './components/Order'
 export default function Cart() {
   const { user } = useAuthContext() // JWT token in local storage
   const { cartItems, dispatch } = useCartContext()
+  const [ subtotal, setSubtotal ] = useState(null)
 
     useEffect(() => {
       const fetchCart = async () => {
@@ -24,7 +25,8 @@ export default function Cart() {
         const json = await response.json()
 
         if (response.ok) {
-          dispatch({type: 'SET_CART', payload: json.cartItems})
+          setSubtotal((json.subtotal/100).toFixed(2))
+          dispatch({type: 'SET_CART', payload: json})
         }
       }
       if(user) {
@@ -34,15 +36,10 @@ export default function Cart() {
 
     useEffect(() => {
       // Listen for changes in the cart items and re-render the page
+      if(cartItems) {
+        setSubtotal((cartItems.subtotal/100).toFixed(2))
+      }
   }, [cartItems]);
-
-
-  let subtotal = 0;
-  if (cartItems) {
-      cartItems.forEach(item => {
-          subtotal += parseFloat(item.price) * item.quantity;
-      });
-  }
 
   return (
     <>
@@ -59,14 +56,14 @@ export default function Cart() {
           }}
         />
     </div>
-    {cartItems && cartItems.map(item => (
+    {cartItems && cartItems.cartItems.map(item => (
   <Order key={item._id} item={item} />
 ))}
   <div className="customer-cart-whitespace"></div>
     <div className="cart-checkout-container-container">
     <div className="cart-checkout-container"> 
           <div>Subtotal:</div>
-          <div>${(subtotal/100).toFixed(2)}</div>
+          <div>${subtotal}</div>
     </div>
     <Link to="/cart/checkout" type="button">CHECKOUT</Link>
     </div>
