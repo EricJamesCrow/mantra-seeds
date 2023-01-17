@@ -62,8 +62,7 @@ export default function Shipping( { setSelectedLink }) {
     }
     </div>
     <div className="checkout-checkout-container-container">
-    <button type="button" onClick={() => setSelectedLink("PAYMENT")}>CONTINUE TO PAYMENT</button>
-    </div>
+    <button type="button" onClick={() => selectedShipping ? setSelectedLink("PAYMENT") : null}>CONTINUE TO PAYMENT</button>    </div>
     </>
   )
 }
