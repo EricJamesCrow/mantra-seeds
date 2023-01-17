@@ -62,6 +62,7 @@ export default function Info( { setSelectedLink }) {
     }
 
     useEffect(() => {
+      try {
       setEmail(shipping.email);
       setFirstName(shipping.firstName);
       setLastName(shipping.lastName);
@@ -72,8 +73,11 @@ export default function Info( { setSelectedLink }) {
       setState(shipping.state);
       setZip(shipping.zip);
       setPhone(shipping.phone);
+    } catch (e) {
+      console.log(e)
+    }
       }, [shipping])
-      
+
   return (
     <form className="shipping-details-form" onSubmit={submitForm}>
     <div>

@@ -13,9 +13,13 @@ import Shipping from "./components/Shipping"
 // stripe component
 import StripeContainer from './components/stripe/StripeContainer'
 
+// hooks
+import { useShippingContext } from '../../hooks/useShippingContext';
+
 export default function Checkout() {
   const { user } = useAuthContext() // JWT token in local storage
   const { dispatch } = useCartContext()
+  const { shipping } = useShippingContext()
   const [selectedLink, setSelectedLink] = useState("INFO");
   const checkoutLinks = ["CART", "INFO", "SHIPPING", "PAYMENT"]
   const navigate = useNavigate();
@@ -51,9 +55,10 @@ export default function Checkout() {
     {checkoutLinks.map(c => (
         <button
         className={selectedLink === c ? 'selected-checkout-link' : null}
-        onClick={() => setSelectedLink(c)}
+        onClick={() => c === "CART" || shipping ? setSelectedLink(c) : null}
         >{c}</button>
     ))}
+
     </div>
     </div>
     {selectedLink === 'INFO' &&
