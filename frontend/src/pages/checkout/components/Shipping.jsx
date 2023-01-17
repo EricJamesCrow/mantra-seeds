@@ -9,20 +9,17 @@ export default function Shipping( { setSelectedLink }) {
     const { shipping } = useShippingContext();
     const [selectedShipping, setSelectedShipping] = useState(null);
 
-    useEffect(() => {
-        const today = new Date();
-        shippingMethods.forEach(method => {
-            let delivery = new Date();
-            if(method.name === "USPS Priority") {
-                delivery.setDate(today.getDate() + 2);
-            } else if(method.name === "USPS Next Day Air") {
-                delivery.setDate(today.getDate() + 1);
-            }
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            method.delivery = "Estimated delivery " + delivery.toLocaleDateString("en-US", options);
-        });
-
-    }, []);
+    const today = new Date();
+    shippingMethods.forEach(method => {
+        let delivery = new Date();
+        if(method.name === "USPS Priority") {
+            delivery.setDate(today.getDate() + 2);
+        } else if(method.name === "USPS Next Day Air") {
+            delivery.setDate(today.getDate() + 1);
+        }
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        method.delivery = "Estimated delivery " + delivery.toLocaleDateString("en-US", options);
+    });
 
     const handleShippingSelection = (method) => {
         setSelectedShipping(method);
