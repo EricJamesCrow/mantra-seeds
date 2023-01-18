@@ -3,16 +3,9 @@ import React, { useEffect, useState } from 'react'
 // stripe component
 import StripeContainer from './stripe/StripeContainer'
 
-// hooks
-import { useShippingContext } from '../../../hooks/useShippingContext';
-import { useProductsContext } from "../../../hooks/useProductsContext";
-
 const PRODUCTS_API_URL = '/api/products/'
 
-export default function Payment( { setSelectedLink, cart } ) {   
-    const { shipping } = useShippingContext(); 
-    const {products, dispatch} = useProductsContext();
-
+export default function Payment( { setSelectedLink, cart, shipping, products, dispatchProducts } ) {   
     const [ productsInCart, setProductsInCart ] = useState(null)
 
     const shippingInfo = [
@@ -45,7 +38,7 @@ export default function Payment( { setSelectedLink, cart } ) {
           const json = await response.json()
     
           if (response.ok) {
-            dispatch({type: 'SET_PRODUCTS', payload: json})
+            dispatchProducts({type: 'SET_PRODUCTS', payload: json})
           }
         }
     

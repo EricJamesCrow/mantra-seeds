@@ -14,7 +14,7 @@ import { useProductsContext } from "../../hooks/useProductsContext";
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function Store( { filter } ) {
-  const {products, dispatch} = useProductsContext()
+  const {products, dispatchProducts} = useProductsContext()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -26,7 +26,7 @@ export default function Store( { filter } ) {
       const json = await response.json()
 
       if (response.ok) {
-        dispatch({type: 'SET_PRODUCTS', payload: json})
+        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
       }
     }
 

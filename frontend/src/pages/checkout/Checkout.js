@@ -13,11 +13,13 @@ import Payment from "./components/Payment"
 
 // hooks
 import { useShippingContext } from '../../hooks/useShippingContext';
+import { useProductsContext } from '../../hooks/useProductsContext';
 
 export default function Checkout() {
   const { user } = useAuthContext() // JWT token in local storage
   const { cartItems, dispatch } = useCartContext()
   const { shipping } = useShippingContext()
+  const { products, dispatchProducts } = useProductsContext()
   const [selectedLink, setSelectedLink] = useState("INFO");
   const checkoutLinks = ["CART", "INFO", "SHIPPING", "PAYMENT"]
   const navigate = useNavigate();
@@ -60,14 +62,14 @@ export default function Checkout() {
     </div>
     </div>
     {selectedLink === 'INFO' &&
-    <Info setSelectedLink={setSelectedLink}/>}
+    <Info setSelectedLink={setSelectedLink} shipping={shipping}/>}
     {selectedLink === 'SHIPPING' &&
     <>
-    <Shipping setSelectedLink={setSelectedLink} cart={cartItems}/>
+    <Shipping setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts} dispatch={dispatch}/>
     </>
     }
     {selectedLink === "PAYMENT" &&
-        <Payment setSelectedLink={setSelectedLink} cart={cartItems}/>
+        <Payment setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts}/>
     }
     </div>
     </>

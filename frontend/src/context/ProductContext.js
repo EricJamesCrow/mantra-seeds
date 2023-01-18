@@ -28,12 +28,12 @@ export const productsReducer = (state, action) => {
 }
 
 export const ProductsContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(productsReducer, {
+    const [state, dispatchProducts] = useReducer(productsReducer, {
         products: null
     })
 
     return (
-        <ProductsContext.Provider value={{...state, dispatch}}>
+        <ProductsContext.Provider value={{...state, dispatchProducts}}>
             { children }
         </ProductsContext.Provider>
     )

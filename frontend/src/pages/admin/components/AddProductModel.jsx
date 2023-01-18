@@ -47,7 +47,7 @@ export default function AddProductModel({ setShowAddProduct }) {
 
     const [error, setError] = useState(null)
 
-    const { dispatch } = useProductsContext()
+    const { dispatchProducts } = useProductsContext()
 
     const { user } = useAuthContext() // JWT token in local storage
     const token = user.token;
@@ -78,7 +78,7 @@ export default function AddProductModel({ setShowAddProduct }) {
         setThc("");
         setError(null);
         console.log("new product added");
-        dispatch({ type: "CREATE_PRODUCT", payload: json });
+        dispatchProducts({ type: "CREATE_PRODUCT", payload: json });
     
         // show the success message
         const successMessage = document.querySelector(".success-message");

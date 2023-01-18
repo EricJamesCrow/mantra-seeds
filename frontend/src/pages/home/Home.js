@@ -14,7 +14,7 @@ import BootstrapCarousel from "../../components/BootstrapCarousel"
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function Home() {
-  const {products, dispatch} = useProductsContext()
+  const {products, dispatchProducts} = useProductsContext()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -22,7 +22,7 @@ export default function Home() {
       const json = await response.json()
 
       if (response.ok) {
-        dispatch({type: 'SET_PRODUCTS', payload: json})
+        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
       }
     }
 

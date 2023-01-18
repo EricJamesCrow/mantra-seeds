@@ -24,7 +24,7 @@ export default function EditProductModel() {
 
     const { id } = useParams()
     const [product, setProduct] = useState('')
-    const { dispatch } = useProductsContext()
+    const { dispatchProducts } = useProductsContext()
     
     const [productAttributes, setProductAttributes] = useState({
       "Price": product.price,
@@ -47,7 +47,7 @@ export default function EditProductModel() {
         const json = await response.json()
 
         if (response.ok) {
-            dispatch({type: 'DELETE_PRODUCT', payload: json})
+            dispatchProducts({type: 'DELETE_PRODUCT', payload: json})
             navigate(-1); // Won't navigate to previous page if refresh is hit first.
         }
     }
@@ -65,7 +65,7 @@ export default function EditProductModel() {
       const json = await response.json()
     
       if (response.ok) {
-        dispatch({ type: 'UPDATE_PRODUCT', payload: json })
+        dispatchProducts({ type: 'UPDATE_PRODUCT', payload: json })
         navigate(-1) // Won't navigate to previous page if refresh is hit first.
       }
     }

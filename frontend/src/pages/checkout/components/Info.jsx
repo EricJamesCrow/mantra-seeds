@@ -27,8 +27,8 @@ const CssTextField = styled(TextField)({
     },
   });
 
-export default function Info( { setSelectedLink }) {
-    const { shipping, dispatch } = useShippingContext();
+export default function Info( { setSelectedLink, shipping }) {
+    const { dispatch } = useShippingContext();
 
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("");

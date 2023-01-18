@@ -10,7 +10,7 @@ import Order from "../components/Order"
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function Orders() {
-  const {products, dispatch} = useProductsContext()
+  const {products, dispatchProducts} = useProductsContext()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -18,7 +18,7 @@ export default function Orders() {
       const json = await response.json()
 
       if (response.ok) {
-        dispatch({type: 'SET_PRODUCTS', payload: json})
+        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
       }
     }
 

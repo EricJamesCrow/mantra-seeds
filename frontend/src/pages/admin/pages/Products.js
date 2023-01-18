@@ -11,7 +11,7 @@ import AddProductModel from '../components/AddProductModel';
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function Products() {
-  const {products, dispatch} = useProductsContext()
+  const {products, dispatchProducts} = useProductsContext()
 
   const [showAddProduct, setShowAddProduct] = useState(() => {
     // retrieve showAddProduct value from localStorage on initial render
@@ -29,7 +29,7 @@ export default function Products() {
       const json = await response.json()
 
       if (response.ok) {
-        dispatch({type: 'SET_PRODUCTS', payload: json})
+        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
       }
     }
 

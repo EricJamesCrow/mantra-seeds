@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-// hooks
-import { useShippingContext } from '../../../hooks/useShippingContext';
-import { useProductsContext } from "../../../hooks/useProductsContext";
-
 const shippingMethods = [  { shippingName: "USPS Priority", shippingPrice: 799, delivery: "" },  { shippingName: "USPS Next Day Air", shippingPrice: 2299, delivery: "" },];
 
 const PRODUCTS_API_URL = '/api/products/'
 
-export default function Shipping( { setSelectedLink, cart }) {
-    const { shipping, dispatch } = useShippingContext();
-    const {products, productsDispatch} = useProductsContext();
+export default function Shipping( { setSelectedLink, cart, shipping, dispatch, products, dispatchProducts }) {
     const [selectedShipping, setSelectedShipping] = useState(null);
     const [ productsInCart, setProductsInCart ] = useState(null)
 
@@ -30,9 +24,6 @@ export default function Shipping( { setSelectedLink, cart }) {
         setSelectedShipping({shippingName, shippingPrice});
     }
 
-    useEffect(() => {
-    }, [shipping]);
-
     const handleSubmit = () => {
         dispatch({type: 'UPDATE_SHIPPING', payload: selectedShipping})
         setSelectedLink("PAYMENT")
@@ -49,11 +40,11 @@ export default function Shipping( { setSelectedLink, cart }) {
           value: `${shipping.address}, ${shipping.city} ${shipping.state} ${shipping.zip}, United States`,
           onClick: () => setSelectedLink("INFO")
         },
-        // {
-        //     title: "Order Summary",
-        //     value: productsInCart !== null ? <div dangerouslySetInnerHTML={{__html: productsInCart.join('<br>')}} /> : null,
-        //     onClick: () => setSelectedLink("CART")
-        // }
+        {
+            title: "Order Summary",
+            value: productsInCart !== null ? <div dangerouslySetInnerHTML={{__html: productsInCart.join('<br>')}} /> : null,
+            onClick: () => setSelectedLink("CART")
+        }
       ];
 
       useEffect(() => {
@@ -62,7 +53,7 @@ export default function Shipping( { setSelectedLink, cart }) {
           const json = await response.json()
     
           if (response.ok) {
-            productsDispatch({type: 'SET_PRODUCTS', payload: json})
+            dispatchProducts({type: 'SET_PRODUCTS', payload: json})
           }
         }
     
@@ -70,13 +61,13 @@ export default function Shipping( { setSelectedLink, cart }) {
       }, [])
 
       useEffect(() => {
-        const total = ((cart.subtotal+shipping.shippingPrice)/100).toFixed(2)
+        const total = ((cart.subtotal)/100).toFixed(2)
         if(products) {
           const productsInCart = cart.cartItems.map(item => {
             const product = products.find(p => p._id === item.product);
             return `x${item.quantity} ${product.name} - $${(product.price/100).toFixed(2)}<br>`;
           });
-          productsInCart.push(`Total: $${total}`);
+          productsInCart.push(`Subtotal: $${total}`);
           setProductsInCart(productsInCart);
         }
       }, [products])
