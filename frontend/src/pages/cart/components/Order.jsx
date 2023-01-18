@@ -10,18 +10,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
-// hooks
-import { useAuthContext } from '../../../hooks/useAuthContext'
-import { useCartContext } from '../../../hooks/useCartContext'
-
 const CARTS_API_URL = '/api/carts/'
 const PRODUCTS_API_URL = '/api/products/'
 
-export default function Order( { item } ) {
+export default function Order( { item, dispatchCart, user } ) {
   const [product, setProduct] = useState('')
   const [hover, setHover] = useState(false);
-  const { user } = useAuthContext()
-  const { dispatch } = useCartContext()
   const price = (item.price/100).toFixed(2)
 
   useEffect(() => {
@@ -46,7 +40,7 @@ export default function Order( { item } ) {
   });
     const json = await response.json(); // need to refactor backend so the response is the cart object
     if(response.ok) {
-      dispatch({type: 'DELETE_ITEM', payload: json});
+      dispatchCart({type: 'DELETE_ITEM', payload: json});
     }
   }
 

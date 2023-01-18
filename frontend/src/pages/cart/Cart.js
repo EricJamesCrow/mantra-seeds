@@ -57,7 +57,7 @@ export default function Cart() {
         />
     </div>
     {cartItems && cartItems.cartItems.map(item => (
-  <Order key={item._id} item={item} />
+  <Order key={item._id} item={item} dispatchCart={dispatchCart} user={user}/>
 ))}
   <div className="customer-cart-whitespace"></div>
     <div className="cart-checkout-container-container">
