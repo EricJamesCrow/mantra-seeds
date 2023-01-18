@@ -16,7 +16,7 @@ import Order from './components/Order'
 
 export default function Cart() {
   const { user } = useAuthContext() // JWT token in local storage
-  const { cartItems, dispatch } = useCartContext()
+  const { cartItems, dispatchCart } = useCartContext()
   const [ subtotal, setSubtotal ] = useState(null)
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function Cart() {
 
         if (response.ok) {
           setSubtotal((json.subtotal/100).toFixed(2))
-          dispatch({type: 'SET_CART', payload: json})
+          dispatchCart({type: 'SET_CART', payload: json})
         }
       }
       if(user) {

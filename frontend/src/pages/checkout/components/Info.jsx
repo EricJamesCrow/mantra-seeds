@@ -27,8 +27,7 @@ const CssTextField = styled(TextField)({
     },
   });
 
-export default function Info( { setSelectedLink, shipping }) {
-    const { dispatch } = useShippingContext();
+export default function Info( { setSelectedLink, shipping, dispatchShipping }) {
 
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("");
@@ -57,7 +56,7 @@ export default function Info( { setSelectedLink, shipping }) {
     const submitForm = (event) => {
       event.preventDefault();
       const formData = { email, firstName, lastName, company, address, apt, city, state, zip, phone };
-      dispatch({ type: 'SET_SHIPPING', payload: formData });
+      dispatchShipping({ type: 'SET_SHIPPING', payload: formData });
       setSelectedLink("SHIPPING")
     }
 

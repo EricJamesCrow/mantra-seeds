@@ -4,7 +4,7 @@ const shippingMethods = [  { shippingName: "USPS Priority", shippingPrice: 799, 
 
 const PRODUCTS_API_URL = '/api/products/'
 
-export default function Shipping( { setSelectedLink, cart, shipping, dispatch, products, dispatchProducts }) {
+export default function Shipping( { setSelectedLink, cart, shipping, dispatchShipping, products, dispatchProducts }) {
     const [selectedShipping, setSelectedShipping] = useState(null);
     const [ productsInCart, setProductsInCart ] = useState(null)
 
@@ -25,7 +25,7 @@ export default function Shipping( { setSelectedLink, cart, shipping, dispatch, p
     }
 
     const handleSubmit = () => {
-        dispatch({type: 'UPDATE_SHIPPING', payload: selectedShipping})
+        dispatchShipping({type: 'UPDATE_SHIPPING', payload: selectedShipping})
         setSelectedLink("PAYMENT")
     }
 

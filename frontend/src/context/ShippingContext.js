@@ -22,12 +22,12 @@ export const shippingReducer = (state, action) => {
 }
 
 export const ShippingContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(shippingReducer, {
+    const [state, dispatchShipping] = useReducer(shippingReducer, {
         shipping: null
     })
 
     return (
-        <ShippingContext.Provider value={{...state, dispatch}}>
+        <ShippingContext.Provider value={{...state, dispatchShipping}}>
             { children }
         </ShippingContext.Provider>
     )

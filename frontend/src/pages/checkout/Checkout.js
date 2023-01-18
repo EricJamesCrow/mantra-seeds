@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { useCartContext } from '../../hooks/useCartContext'
 import { useNavigate } from 'react-router-dom';
 
 // styles
@@ -14,16 +12,17 @@ import Payment from "./components/Payment"
 // hooks
 import { useShippingContext } from '../../hooks/useShippingContext';
 import { useProductsContext } from '../../hooks/useProductsContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useCartContext } from '../../hooks/useCartContext'
 
 export default function Checkout() {
   const { user } = useAuthContext() // JWT token in local storage
-  const { cartItems, dispatch } = useCartContext()
-  const { shipping } = useShippingContext()
+  const { cartItems, dispatchCart } = useCartContext()
+  const { shipping, dispatchShipping } = useShippingContext()
   const { products, dispatchProducts } = useProductsContext()
   const [selectedLink, setSelectedLink] = useState("INFO");
   const checkoutLinks = ["CART", "INFO", "SHIPPING", "PAYMENT"]
   const navigate = useNavigate();
-
 
     useEffect(() => {
       const fetchCart = async () => {
@@ -31,7 +30,7 @@ export default function Checkout() {
         const json = await response.json()
 
         if (response.ok) {
-          dispatch({type: 'SET_CART', payload: json})
+          dispatchCart({type: 'SET_CART', payload: json})
         }
       }
       if(user) {
@@ -62,10 +61,10 @@ export default function Checkout() {
     </div>
     </div>
     {selectedLink === 'INFO' &&
-    <Info setSelectedLink={setSelectedLink} shipping={shipping}/>}
+    <Info setSelectedLink={setSelectedLink} shipping={shipping} dispatchShipping={dispatchShipping}/>}
     {selectedLink === 'SHIPPING' &&
     <>
-    <Shipping setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts} dispatch={dispatch}/>
+    <Shipping setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts} dispatchShipping={dispatchShipping}/>
     </>
     }
     {selectedLink === "PAYMENT" &&

@@ -5,7 +5,7 @@ import { useCartContext } from './useCartContext';
 const useAddToCart = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const { cartItems, dispatch } = useCartContext()
+    const { cartItems, dispatchCart } = useCartContext()
 
     const addToCart = async (id, product, quantity, price) => {
         setLoading(true);
@@ -20,7 +20,7 @@ const useAddToCart = () => {
                 })
             });
             const json = await response.json();
-            dispatch({type: 'UPDATE_CART', payload: json.cart})
+            dispatchCart({type: 'UPDATE_CART', payload: json.cart})
             setLoading(false);
         } catch (err) {
             setError(err);
