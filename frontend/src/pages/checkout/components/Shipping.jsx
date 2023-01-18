@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react'
 
 // hooks
 import { useShippingContext } from '../../../hooks/useShippingContext';
+import { useProductsContext } from "../../../hooks/useProductsContext";
 
 const shippingMethods = [  { shippingName: "USPS Priority", shippingPrice: 799, delivery: "" },  { shippingName: "USPS Next Day Air", shippingPrice: 2299, delivery: "" },];
 
-export default function Shipping( { setSelectedLink }) {
+const PRODUCTS_API_URL = '/api/products/'
+
+export default function Shipping( { setSelectedLink, cart }) {
     const { shipping, dispatch } = useShippingContext();
+    const {products, productsDispatch} = useProductsContext();
     const [selectedShipping, setSelectedShipping] = useState(null);
+    const [ productsInCart, setProductsInCart ] = useState(null)
 
     const today = new Date();
     shippingMethods.forEach(method => {
@@ -43,8 +48,38 @@ export default function Shipping( { setSelectedLink }) {
           title: "Ship To",
           value: `${shipping.address}, ${shipping.city} ${shipping.state} ${shipping.zip}, United States`,
           onClick: () => setSelectedLink("INFO")
-        }
+        },
+        // {
+        //     title: "Order Summary",
+        //     value: productsInCart !== null ? <div dangerouslySetInnerHTML={{__html: productsInCart.join('<br>')}} /> : null,
+        //     onClick: () => setSelectedLink("CART")
+        // }
       ];
+
+      useEffect(() => {
+        const fetchProducts = async () => {
+          const response = await fetch(PRODUCTS_API_URL)
+          const json = await response.json()
+    
+          if (response.ok) {
+            productsDispatch({type: 'SET_PRODUCTS', payload: json})
+          }
+        }
+    
+        fetchProducts()
+      }, [])
+
+      useEffect(() => {
+        const total = ((cart.subtotal+shipping.shippingPrice)/100).toFixed(2)
+        if(products) {
+          const productsInCart = cart.cartItems.map(item => {
+            const product = products.find(p => p._id === item.product);
+            return `x${item.quantity} ${product.name} - $${(product.price/100).toFixed(2)}<br>`;
+          });
+          productsInCart.push(`Total: $${total}`);
+          setProductsInCart(productsInCart);
+        }
+      }, [products])
 
   return (
     <>

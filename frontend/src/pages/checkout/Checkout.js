@@ -63,7 +63,7 @@ export default function Checkout() {
     <Info setSelectedLink={setSelectedLink}/>}
     {selectedLink === 'SHIPPING' &&
     <>
-    <Shipping setSelectedLink={setSelectedLink}/>
+    <Shipping setSelectedLink={setSelectedLink} cart={cartItems}/>
     </>
     }
     {selectedLink === "PAYMENT" &&
