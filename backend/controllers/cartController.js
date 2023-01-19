@@ -1,5 +1,6 @@
 const Cart = require('../models/cartModel')
 const User = require('../models/userModel')
+const Product = require('../models/productModel')
 const mongoose = require('mongoose')
 
 const addItemToCart = async (req, res) => {
@@ -8,6 +9,22 @@ const addItemToCart = async (req, res) => {
     
     if (!user || !product || !quantity || !price) {
         return res.status(400).json({ error: "Missing required parameters" });
+    }
+
+    // Find the product
+    const foundProduct = await Product.findById(product);
+
+    // If the product is not found, return an error message
+    if (!foundProduct) {
+        return res.status(404).json({ error: "Invalid product" });
+    }
+
+    if (isNaN(quantity) || typeof quantity !== 'number') {
+        return res.status(400).json({ error: "Invalid quantity" });
+    }
+
+    if (isNaN(price) || typeof price !== 'number') {
+        return res.status(400).json({ error: "Invalid quantity" });
     }
 
     try {
@@ -39,12 +56,21 @@ const addItemToCart = async (req, res) => {
     }
 };
 
+
 const removeItemFromCart = async (req, res) => {
     const { user, product } = req.body;
     if (!user || !product) {
         return res.status(400).json({ error: "Missing required parameters" });
     }
 
+    // Find the product
+    const foundProduct = await Product.findById(product);
+
+    // If the product is not found, return an error message
+    if (!foundProduct) {
+        return res.status(404).json({ error: "Invalid product" });
+    }
+    
     try {
         const cart = await Cart.findOne({ user });
         if (!cart) {

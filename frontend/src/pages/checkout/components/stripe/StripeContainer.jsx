@@ -8,7 +8,7 @@ import "./StripeContainer.css";
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 
-export default function App() {
+export default function StripeContainer( { cart } ) {
   const [clientSecret, setClientSecret] = useState("");
   const [stripePromise, setStripePromise] = useState(null)
 
@@ -25,7 +25,7 @@ export default function App() {
     fetch("/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+      body: JSON.stringify({ items: cart }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
