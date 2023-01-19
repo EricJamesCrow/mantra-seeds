@@ -1,0 +1,23 @@
+.order-success-container {
+    margin-top: 50px;
+    height: 100vh;
+}
+
+.order-success-container > div:first-child {
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.order-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    font-family: 'Futura';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+}
