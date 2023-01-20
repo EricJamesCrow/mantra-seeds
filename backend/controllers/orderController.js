@@ -38,6 +38,8 @@ const createOrder = async (req, res) => {
 };
 
 const getOrder = async (req, res) => {
+    console.log(PUBLIC_KEY)
+    console.log(PRIVATE_KEY)
     const { id } = req.params;
     const order = await Order.findById(id);
 
