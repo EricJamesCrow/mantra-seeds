@@ -8,39 +8,39 @@ const orderSchema = new mongoose.Schema({
     },
     address:{
         firstName: {
-            type: Object,
+            type: String,
             required: true
         },
         lastName: {
-            type: Object,
+            type: String,
             required: true
         },
         street: {
-            type: Object,
+            type: String,
             required: true
         },
         apt: {
-            type: Object,
+            type: String,
             required: false
         },
         city: {
-            type: Object,
+            type: String,
             required: true
         },
         state: {
-            type: Object,
+            type: String,
             required: true
         },
         zip: {
-            type: Object,
+            type: String,
             required: true
         },
         company: {
-            type: Object,
+            type: String,
             required: false
         },
         phone: {
-            type: Object,
+            type: String,
             required: false
         }
     },
