@@ -71,7 +71,7 @@ export default function LoginModel( { showSignupFields, setShowSignup } ) {
         marginRight: "10px",
         cursor: "pointer"}}/>
     </div>
-    <form className="login-fields" handleSubmit={handleSubmit}>
+    <form className="login-fields" onSubmit={handleSubmit}>
     <div style={{width: "90%"}}>
     <CssTextField id="outlined-email-input" 
                label="Email" 
@@ -98,6 +98,7 @@ export default function LoginModel( { showSignupFields, setShowSignup } ) {
     <Link>I agree to the terms and conditions.</Link>
     </div>
     <button disabled={isLoading}>CREATE ACCOUNT</button>
+    {error && <div className="error">{error}</div>}
     </form>
     <div className="signup-instead">
         <div>Have an account?</div>

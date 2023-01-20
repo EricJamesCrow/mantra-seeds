@@ -82,6 +82,7 @@ function App() {
         <Route path="/profile" 
         element={JSON.parse(localStorage.getItem('user')) ? <ScrollToTop><Profile/></ScrollToTop> : <DoSomethingWrapper><Navigate to="/"/></DoSomethingWrapper>} 
         />
+        {/* <Route path="/profile"element={<ScrollToTop><Profile/></ScrollToTop>}/> */}
       </Routes>
       <div className="copyright">
       <div>© Mantra Seeds 2022</div>
