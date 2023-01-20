@@ -1,7 +1,5 @@
-const cryptoJS = require('crypto-js');
 const crypto = require('crypto');
 const fs = require('fs');
-require('dotenv').config();
 const Order = require('../models/orderModel');
 
 const PRIVATE_KEY = fs.readFileSync('./private.pem', 'utf8');
@@ -10,17 +8,15 @@ const PUBLIC_KEY = fs.readFileSync('./public.pem', 'utf8');
 const createOrder = async (req, res) => {
     const { user, items, email, shipping, payment, total } = req.body;
     let { address } = req.body;
-  
+
     // encrypt each property of the address object
     Object.keys(address).forEach(property => {
-        const iv = cryptoJS.lib.WordArray.random(128/8);
-        const secret = process.env.SECRET;
-        const key = cryptoJS.SHA256(secret);
-        const ciphertext = cryptoJS.AES.encrypt(address[property], key, { iv: iv });
-        address[property] = {
-            encrypted: ciphertext.toString(),
-            iv: iv.toString()
-        };
+        const buffer = Buffer.from(address[property], 'utf8');
+        const encrypted = crypto.publicEncrypt({ key: PUBLIC_KEY, padding: crypto.constants.RSA_PKCS1_OAEP_PADDING }, buffer);
+        // address[property] = {
+        //     property: encrypted.toString('base64'),
+        // };
+        address[property] = encrypted.toString('base64')
     });
 
     // create order
@@ -38,8 +34,6 @@ const createOrder = async (req, res) => {
 };
 
 const getOrder = async (req, res) => {
-    console.log(PUBLIC_KEY)
-    console.log(PRIVATE_KEY)
     const { id } = req.params;
     const order = await Order.findById(id);
 
@@ -48,17 +42,15 @@ const getOrder = async (req, res) => {
     }
 
     const address = order.address;
-
-    for (const i in address) {
-        if(i.encrypted && i.iv) {
-            const element = address.i;
-            const iv = cryptoJS.enc.Hex.parse(element.iv);
-            const secret = process.env.SECRET;
-            const key = cryptoJS.SHA256(secret);
-            const plaintext = cryptoJS.AES.decrypt(element.encrypted, key, { iv: iv }).toString(cryptoJS.enc.Utf8);
-            i = plaintext;
+    // decrypt each property of the address object
+    Object.keys(address).forEach(property => {
+        if (address[property]) {
+            const buffer = Buffer.from(address[property], 'base64');
+            const decrypted = crypto.privateDecrypt({ key: PRIVATE_KEY, passphrase: process.env.PASSPHRASE, padding: crypto.constants.RSA_PKCS1_OAEP_PADDING }, buffer);
+            address[property] = decrypted.toString('utf8');
         }
-    }
+    });
+
     order.address = address;
 
     res.status(200).json(order);
