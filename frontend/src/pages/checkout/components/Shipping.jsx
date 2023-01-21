@@ -9,12 +9,16 @@ export default function Shipping( { setSelectedLink, cart, shipping, dispatchShi
 
     const today = new Date()
     
-    const handleShippingSelection = (provider, service_level, amount) => {
-        setSelectedShipping(`${provider} ${service_level}`, amount);
+    const handleShippingSelection = (e) => {
+        setSelectedShipping(e);
     }
 
     const handleSubmit = () => {
-        dispatchShipping({type: 'UPDATE_SHIPPING', payload: selectedShipping})
+        console.log(selectedShipping)
+        dispatchShipping({type: 'UPDATE_SHIPPING', payload: {
+          shippingName: `${selectedShipping.provider} ${selectedShipping.service_level}`,
+          shippingPrice: selectedShipping.amount
+        }})
         setSelectedLink("PAYMENT")
     }
 

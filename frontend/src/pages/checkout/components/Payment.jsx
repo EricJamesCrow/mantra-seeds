@@ -21,7 +21,7 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
         },
         {
             title: "Method",
-            value: `${shipping.shippingName} - $${(shipping.shippingPrice/100).toFixed(2)}`,
+            value: `${shipping.shippingName} - $${shipping.shippingPrice}`,
             onClick: () => setSelectedLink("SHIPPING") 
         },
         {
@@ -46,7 +46,7 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
       }, [])
 
       useEffect(() => {
-        const total = ((cart.subtotal+shipping.shippingPrice)/100).toFixed(2)
+        const total = ((cart.subtotal+shipping.shippingPrice*100)/100).toFixed(2)
         if(products) {
           const productsInCart = cart.cartItems.map(item => {
             const product = products.find(p => p._id === item.product);
