@@ -44,7 +44,7 @@ export default function StripeContainer( { cart, shipping } ) {
     <div className="stripe-container">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm cart={cart} shipping={shipping}/>
         </Elements>
       )}
     </div>

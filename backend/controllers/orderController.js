@@ -28,6 +28,7 @@ fs.writeFileSync('./public.pem', publicKey);
 */
 
 const createOrder = async (req, res) => {
+    console.log('this gets triggered')
     const { user, items, email, shipping, payment, total } = req.body;
     let { address } = req.body;
 

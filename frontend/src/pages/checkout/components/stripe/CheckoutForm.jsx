@@ -7,7 +7,7 @@ import {
   useElements
 } from "@stripe/react-stripe-js";
 
-export default function CheckoutForm() {
+export default function CheckoutForm( { cart, shipping } ) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -16,6 +16,8 @@ export default function CheckoutForm() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    console.log(cart)
+    console.log(shipping)
     if (!stripe) {
       return;
     }
@@ -65,6 +67,40 @@ export default function CheckoutForm() {
         receipt_email: email,
       },
     });
+
+    if(!error) {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        body: JSON.stringify({
+          user: cart.user,
+          address: { 
+            firstName: shipping.firstName,
+            lastName: shipping.lastName,
+            street: shipping.address,
+            city: shipping.city,
+            state: shipping.state,
+            zip: shipping.zip
+          },
+          items: cart.cartItems,
+          shipping: {
+            delivery: shipping.shippingName,
+            price: shipping.shippingPrice,
+            expected: shipping.shippingPrice // fix this, need expected delivery date
+          },
+          email: shipping.email,
+          payment: 'Stripe'
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Order created successfully!");
+      } else {
+        console.log("Failed to create order: " + data.error);
+      }
+    }
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
