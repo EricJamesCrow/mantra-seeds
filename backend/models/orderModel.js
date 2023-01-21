@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const orderSchema = new mongoose.Schema({
     user: {
@@ -106,6 +107,30 @@ const orderSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+
+orderSchema.statics.validateOrder = async function(user, address, items, email, shipping, payment, total) {
+    // validation
+    if (!user || !address || !items || !email || !shipping || !payment) {
+        throw Error('All fields must be filled');
+    }
+    if (!validator.isEmail(email)) {
+        throw Error('Email is not valid');
+    }
+    for (const key in address) {
+        if (!address[key]) {
+            throw Error(`Address ${key} is required`);
+        }
+    }
+    items.forEach(item => {
+        if (!validator.isNumeric(item.quantity.toString()) || !validator.isNumeric(item.price.toString())) {
+            throw Error('Quantity and Price must be numbers');
+        }
+    });
+    if (!validator.isNumeric(shipping.price.toString())) {
+        throw Error('Shipping Price must be a number');
+    }
+};
+
 
 orderSchema.pre('save', function(next) {
     // Generate random order number

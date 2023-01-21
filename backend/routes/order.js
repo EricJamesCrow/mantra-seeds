@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/', requireAuthAdmin, getAllOrders)
 
-router.get('/:id', getOrder)
+router.get('/:id', requireAuth, getOrder)
 
 router.post('/', requireAuth, createOrder)
 

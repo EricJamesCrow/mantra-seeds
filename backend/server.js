@@ -7,6 +7,7 @@ const productsRoutes = require('./routes/products')
 const userRoutes = require('./routes/user')
 const cartRoutes = require('./routes/cart')
 const orderRoutes = require('./routes/order')
+const shippingRoutes = require('./routes/shipping')
 
 // express app
 const app = express()
@@ -24,6 +25,7 @@ app.use('/api/products', productsRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/carts', cartRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/shipping', shippingRoutes)
 
 const calculateOrderAmount = (items) => {
     // Replace this constant with a calculation of the order's amount

@@ -31,6 +31,13 @@ const createOrder = async (req, res) => {
     const { user, items, email, shipping, payment, total } = req.body;
     let { address } = req.body;
 
+    // check the user role
+    if (req.role !== 1 && req.user._id.toString() !== user) {
+        return res.status(401).json({ error: 'You are not authorized to create this order' });
+    }
+
+    try {
+    await Order.validateOrder(user, address, items, email, shipping, payment)
     // encrypt each property of the address object
     Object.keys(address).forEach(property => {
         const buffer = Buffer.from(address[property], 'utf8');
@@ -50,6 +57,9 @@ const createOrder = async (req, res) => {
     });
 
     res.status(200).json(order);
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
 };
 
 const getOrder = async (req, res) => {
@@ -58,6 +68,11 @@ const getOrder = async (req, res) => {
 
     if (!order) {
         return res.status(404).json({ error: 'No such order' });
+    }
+
+    // check the user role
+    if (req.role !== 1 && req.user._id.toString() !== order.user.toString()) {
+        return res.status(401).json({ error: 'You are not authorized to access this order' });
     }
 
     const address = order.address;

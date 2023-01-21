@@ -1,27 +1,16 @@
 import React, { useEffect, useState } from 'react'
 
-const shippingMethods = [  { shippingName: "USPS Priority", shippingPrice: 799, delivery: "" },  { shippingName: "USPS Next Day Air", shippingPrice: 2299, delivery: "" },];
-
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function Shipping( { setSelectedLink, cart, shipping, dispatchShipping, products, dispatchProducts }) {
     const [selectedShipping, setSelectedShipping] = useState(null);
     const [ productsInCart, setProductsInCart ] = useState(null)
+    const [ shippingMethods, setShippingMethods ] = useState([])
 
-    const today = new Date();
-    shippingMethods.forEach(method => {
-        let delivery = new Date();
-        if(method.name === "USPS Priority") {
-            delivery.setDate(today.getDate() + 2);
-        } else if(method.name === "USPS Next Day Air") {
-            delivery.setDate(today.getDate() + 1);
-        }
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        method.delivery = "Estimated delivery " + delivery.toLocaleDateString("en-US", options);
-    });
+    const today = new Date()
     
-    const handleShippingSelection = ({shippingName, shippingPrice}) => {
-        setSelectedShipping({shippingName, shippingPrice});
+    const handleShippingSelection = (provider, service_level, amount) => {
+        setSelectedShipping(`${provider} ${service_level}`, amount);
     }
 
     const handleSubmit = () => {
@@ -72,6 +61,36 @@ export default function Shipping( { setSelectedLink, cart, shipping, dispatchShi
         }
       }, [products])
 
+
+      // Shipping API
+      const calculateShipping = async (shipping) => {
+        console.log(shipping)
+        const response = await fetch('/api/shipping', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({shipping})
+        })
+        const shippingOptions = await response.json()
+
+        if(!response.ok) {
+          console.log(shippingOptions.error)
+        }
+
+        if(response.ok) {
+          shippingOptions.forEach(method => {
+            let delivery = new Date();
+            delivery.setDate(today.getDate() + parseInt(method.estimated_days));
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            method.estimated_days = "Estimated delivery " + delivery.toLocaleDateString("en-US", options);
+        });
+          setShippingMethods(shippingOptions)
+        }
+      }
+
+      useEffect(() => {
+        calculateShipping(shipping);
+    }, []);
+
   return (
     <>
   <div className="checkout-shipping-container">
@@ -94,10 +113,10 @@ export default function Shipping( { setSelectedLink, cart, shipping, dispatchShi
     <div className="shipping-method">
     <input type="radio" name="shipping-method" onClick={() => handleShippingSelection(c)}/>
         <div>
-            <div>{c.shippingName}</div>
-            <div>{c.delivery}</div>
+            <div>{`${c.provider} ${c.service_level}`}</div>
+            <div>{c.estimated_days}</div>
         </div>
-        <div>${(c.shippingPrice/100).toFixed(2)}</div>
+        <div>${c.amount}</div>
     </div>
     ))
     }
