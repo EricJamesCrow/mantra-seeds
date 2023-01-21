@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const requireAuth = require('../middleware/requireAuth')
 const shippo = require('shippo')(process.env.SHIPPO_API_KEY);
 
 const calculateShipping = async (req, res) => {
