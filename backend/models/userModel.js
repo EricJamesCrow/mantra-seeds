@@ -26,8 +26,6 @@ const userSchema = new Schema({
 
 // static signup method
 userSchema.statics.signup = async function(email, password) {
-// Create a conditional that blocks the creation of a new user with an admin role
-
     // validation
     if (!email || !password) {
         throw Error('All fields must be filled')

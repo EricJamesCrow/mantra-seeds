@@ -73,7 +73,7 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
       </>
     ))}
   </div>
-    <StripeContainer items={cart}/>
+    <StripeContainer cart={cart} shipping={shipping}/>
     </>
   )
 }

@@ -1,21 +1,23 @@
 const express = require('express')
 const router = express.Router()
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
+const Cart = require('../models/cartModel')
 
-const calculateOrderAmount = (items) => {
-    // Replace this constant with a calculation of the order's amount
-    // Calculate the order total on the server to prevent
-    // people from directly manipulating the amount on the client
-    return 1400;
+const calculateOrderAmount = async (id, shippingPrice) => {
+    const finalShippingPrice = parseFloat(shippingPrice) * 100
+    const cart = await Cart.findOne({ id });
+    if(!cart) {
+        throw Error(`Cart ${id} not found`)
+    }
+    return cart.subtotal + finalShippingPrice;
   };
 
 const createPaymentIntent =  async (req, res) => {
   try {
-    const { items } = req.body;
-    console.log(items)
+    const { items, shipping } = req.body;
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: calculateOrderAmount(items),
+      amount: await calculateOrderAmount(items._id, shipping.shippingPrice),
       currency: "usd",
       automatic_payment_methods: {
         enabled: true,

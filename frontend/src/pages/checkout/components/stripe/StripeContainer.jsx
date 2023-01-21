@@ -8,7 +8,7 @@ import "./StripeContainer.css";
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 
-export default function StripeContainer( { cart } ) {
+export default function StripeContainer( { cart, shipping } ) {
   const [clientSecret, setClientSecret] = useState("");
   const [stripePromise, setStripePromise] = useState(null)
 
@@ -22,10 +22,11 @@ export default function StripeContainer( { cart } ) {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("/api/payments", {
+    // console.log(cart)
+    fetch("/api/payments/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: cart }),
+      body: JSON.stringify({ items: cart, shipping: shipping}),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));

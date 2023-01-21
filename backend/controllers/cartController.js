@@ -92,23 +92,6 @@ const removeItemFromCart = async (req, res) => {
     }
 };
 
-const calculateTotal = async (userId) => {
-    try {
-        const cart = await Cart.findOne({ user: userId });
-        if (!cart) {
-            return 0;
-        }
-        let total = 0;
-        cart.cartItems.forEach(item => {
-            total += item.quantity * item.price;
-        });
-        return total;
-    } catch (error) {
-        return error;
-    }
-};
-
-
 const getUserCart = async (req, res) => {
     const { id } = req.params 
 
