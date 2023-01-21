@@ -14,7 +14,6 @@ export default function Shipping( { setSelectedLink, cart, shipping, dispatchShi
     }
 
     const handleSubmit = () => {
-        console.log(selectedShipping)
         dispatchShipping({type: 'UPDATE_SHIPPING', payload: {
           shippingName: `${selectedShipping.provider} ${selectedShipping.service_level}`,
           shippingPrice: selectedShipping.amount
@@ -68,7 +67,6 @@ export default function Shipping( { setSelectedLink, cart, shipping, dispatchShi
 
       // Shipping API
       const calculateShipping = async (shipping) => {
-        console.log(shipping)
         const response = await fetch('/api/shipping', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
