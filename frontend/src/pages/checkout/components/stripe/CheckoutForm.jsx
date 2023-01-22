@@ -7,7 +7,7 @@ import {
   useElements
 } from "@stripe/react-stripe-js";
 
-export default function CheckoutForm( { cart, shipping } ) {
+export default function CheckoutForm( { cart, shipping, user } ) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -15,9 +15,9 @@ export default function CheckoutForm( { cart, shipping } ) {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const token = user.token;
+
   useEffect(() => {
-    console.log(cart)
-    console.log(shipping)
     if (!stripe) {
       return;
     }
@@ -65,11 +65,17 @@ export default function CheckoutForm( { cart, shipping } ) {
         // Make sure to change this to your payment completion page
         return_url: "http://localhost:3000/cart/checkout/order-success",
         receipt_email: email,
+        redirect: 'if_required'
       },
+    }).then(async () => {
+      console.log("the then function is triggered")
+      createOrder()
+    }).catch((error) => {
+      console.log("Error: " + error);
     });
 
-    if(!error) {
-      const response = await fetch("/api/orders", {
+    const createOrder = async () => {
+      const response = await fetch("/api/orders/", {
         method: "POST",
         body: JSON.stringify({
           user: cart.user,
@@ -90,9 +96,9 @@ export default function CheckoutForm( { cart, shipping } ) {
           email: shipping.email,
           payment: 'Stripe'
         }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { 
+          "Authorization": token,
+          "Content-Type": "application/json" },
       });
       const data = await response.json();
       if (response.ok) {
@@ -100,7 +106,7 @@ export default function CheckoutForm( { cart, shipping } ) {
       } else {
         console.log("Failed to create order: " + data.error);
       }
-    }
+  }
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to

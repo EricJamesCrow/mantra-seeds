@@ -5,7 +5,7 @@ import StripeContainer from './stripe/StripeContainer'
 
 const PRODUCTS_API_URL = '/api/products/'
 
-export default function Payment( { setSelectedLink, cart, shipping, products, dispatchProducts } ) {   
+export default function Payment( { setSelectedLink, cart, shipping, products, dispatchProducts, user } ) {   
     const [ productsInCart, setProductsInCart ] = useState(null)
 
     const shippingInfo = [
@@ -73,7 +73,7 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
       </>
     ))}
   </div>
-    <StripeContainer cart={cart} shipping={shipping}/>
+    <StripeContainer cart={cart} shipping={shipping} user={user}/>
     </>
   )
 }

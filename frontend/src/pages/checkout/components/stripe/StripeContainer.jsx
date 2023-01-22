@@ -8,7 +8,7 @@ import "./StripeContainer.css";
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 
-export default function StripeContainer( { cart, shipping } ) {
+export default function StripeContainer( { cart, shipping, user } ) {
   const [clientSecret, setClientSecret] = useState("");
   const [stripePromise, setStripePromise] = useState(null)
 
@@ -44,7 +44,7 @@ export default function StripeContainer( { cart, shipping } ) {
     <div className="stripe-container">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm cart={cart} shipping={shipping}/>
+          <CheckoutForm cart={cart} shipping={shipping} user={user}/>
         </Elements>
       )}
     </div>

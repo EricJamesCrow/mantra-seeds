@@ -68,7 +68,7 @@ export default function Checkout() {
     </>
     }
     {selectedLink === "PAYMENT" &&
-        <Payment setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts}/>
+        <Payment setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts} user={user}/>
     }
     </div>
     </>
