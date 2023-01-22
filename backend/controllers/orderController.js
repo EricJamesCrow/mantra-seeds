@@ -28,7 +28,7 @@ fs.writeFileSync('./public.pem', publicKey);
 */
 
 const createOrder = async (req, res) => {
-    console.log('this gets triggered')
+    console.log('create order gets triggered')
     const { user, items, email, shipping, payment, total } = req.body;
     let { address } = req.body;
 
@@ -38,7 +38,7 @@ const createOrder = async (req, res) => {
     }
 
     try {
-    await Order.validateOrder(user, address, items, email, shipping, payment)
+    // await Order.validateOrder(user, address, items, email, shipping, payment)
     // encrypt each property of the address object
     Object.keys(address).forEach(property => {
         const buffer = Buffer.from(address[property], 'utf8');
@@ -59,6 +59,7 @@ const createOrder = async (req, res) => {
 
     res.status(200).json(order);
     } catch (error) {
+        console.log(error);
         res.status(400).json({error: error.message})
     }
 };
