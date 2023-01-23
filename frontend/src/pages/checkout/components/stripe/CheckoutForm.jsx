@@ -65,7 +65,7 @@ export default function CheckoutForm( { cart, shipping, user } ) {
         shipping: {
           delivery: shipping.shippingName,
           price: shipping.shippingPrice,
-          expected: shipping.shippingPrice // fix this, need expected delivery date
+          // expected: shipping.shippingPrice // fix this, need expected delivery date
         },
         email: shipping.email,
         payment: 'Stripe'
