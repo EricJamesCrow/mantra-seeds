@@ -15,8 +15,6 @@ export default function CheckoutForm( { cart, shipping, user } ) {
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const token = user.token;
-
   useEffect(() => {
     if (!stripe) {
       return;
@@ -34,7 +32,6 @@ export default function CheckoutForm( { cart, shipping, user } ) {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
-          createOrder();
           break;
         case "processing":
           setMessage("Your payment is processing.");
@@ -48,40 +45,6 @@ export default function CheckoutForm( { cart, shipping, user } ) {
       }
     });
   }, [stripe]);
-
-  const createOrder = async () => {
-    const response = await fetch("/api/orders/", {
-      method: "POST",
-      body: JSON.stringify({
-        user: cart.user,
-        address: { 
-          firstName: shipping.firstName,
-          lastName: shipping.lastName,
-          street: shipping.address,
-          city: shipping.city,
-          state: shipping.state,
-          zip: shipping.zip
-        },
-        items: cart.cartItems,
-        shipping: {
-          delivery: shipping.shippingName,
-          price: shipping.shippingPrice,
-          // expected: shipping.shippingPrice // fix this, need expected delivery date
-        },
-        email: shipping.email,
-        payment: 'Stripe'
-      }),
-      headers: { 
-        "Authorization": token,
-        "Content-Type": "application/json" },
-    });
-    const data = await response.json();
-    if (response.ok) {
-      console.log("Order created successfully!");
-    } else {
-      console.log("Failed to create order: " + data.error);
-    }
-}
 
   const handleSubmit = async (e) => {
     e.preventDefault();

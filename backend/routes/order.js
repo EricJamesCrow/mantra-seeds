@@ -1,13 +1,11 @@
 const express = require('express')
-const { createOrder, getOrder, getAllOrders } = require("../controllers/orderController")
+const { getOrder, getAllOrders } = require("../controllers/orderController")
 const requireAuth = require('../middleware/requireAuth')
-const requireAuthAdmin = require('../middleware/requireAuthAdmin')
+const requireAdmin = require('../middleware/requireAdmin')
 const router = express.Router()
 
-router.get('/', requireAuthAdmin, getAllOrders)
+router.get('/', requireAdmin, getAllOrders)
 
 router.get('/:id', requireAuth, getOrder)
-
-router.post('/', requireAuth, createOrder)
 
 module.exports = router

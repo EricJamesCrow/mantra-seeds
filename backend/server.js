@@ -7,13 +7,13 @@ const userRoutes = require('./routes/user')
 const cartRoutes = require('./routes/cart')
 const orderRoutes = require('./routes/order')
 const shippingRoutes = require('./routes/shipping')
-const paymentRoutes = require('./routes/payment')
+const stripeRoutes = require('./routes/stripe')
 
 // express app
 const app = express()
 
 // middleware
-app.use('/api/payments/webhook', express.raw({type: 'application/json'}))
+app.use('/api/stripe/webhook', express.raw({type: 'application/json'}))
 app.use(express.json())
 
 app.use((req, res, next) => {
@@ -27,8 +27,9 @@ app.use('/api/user', userRoutes)
 app.use('/api/carts', cartRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/shipping', shippingRoutes)
-app.use('/api/payments', paymentRoutes)
+app.use('/api/stripe', stripeRoutes)
 
+// stripe public key
 app.get("/config", (req, res) => {
     res.send({
         publishableKey: process.env.STRIPE_PUB_KEY,

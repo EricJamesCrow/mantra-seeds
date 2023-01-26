@@ -23,10 +23,28 @@ export default function StripeContainer( { cart, shipping, user } ) {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     // console.log(cart)
-    fetch("/api/payments/", {
+    fetch("/api/stripe/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: cart, shipping: shipping}),
+      body: JSON.stringify({
+        user: cart.user,
+        address: { 
+          firstName: shipping.firstName,
+          lastName: shipping.lastName,
+          street: shipping.address,
+          city: shipping.city,
+          state: shipping.state,
+          zip: shipping.zip
+        },
+        items: cart,
+        shipping: {
+          delivery: shipping.shippingName,
+          price: shipping.shippingPrice,
+          // expected: shipping.shippingPrice // fix this, need expected delivery date
+        },
+        email: shipping.email,
+        payment: 'Stripe'
+      }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));

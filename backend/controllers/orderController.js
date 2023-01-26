@@ -3,7 +3,6 @@ const fs = require('fs');
 const Order = require('../models/orderModel');
 
 const PRIVATE_KEY = fs.readFileSync('./private.pem', 'utf8');
-const PUBLIC_KEY = fs.readFileSync('./public.pem', 'utf8');
 
 /*
 const fs = require('fs');
@@ -26,43 +25,6 @@ const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
 fs.writeFileSync('./private.pem', privateKey);
 fs.writeFileSync('./public.pem', publicKey);
 */
-
-const createOrder = async (req, res) => {
-    console.log('create order gets triggered')
-    const { user, items, email, shipping, payment, total } = req.body;
-    let { address } = req.body;
-
-    // check the user role
-    if (req.role !== 1 && req.user._id.toString() !== user) {
-        return res.status(401).json({ error: 'You are not authorized to create this order' });
-    }
-
-    try {
-    // await Order.validateOrder(user, address, items, email, shipping, payment)
-    // encrypt each property of the address object
-    Object.keys(address).forEach(property => {
-        const buffer = Buffer.from(address[property], 'utf8');
-        const encrypted = crypto.publicEncrypt({ key: PUBLIC_KEY, padding: crypto.constants.RSA_PKCS1_OAEP_PADDING }, buffer);
-        address[property] = encrypted.toString('base64')
-    });
-
-    // create order
-    const order = await Order.create({
-        user,
-        items,
-        email,
-        shipping,
-        payment,
-        total,
-        address
-    });
-
-    res.status(200).json(order);
-    } catch (error) {
-        console.log(error);
-        res.status(400).json({error: error.message})
-    }
-};
 
 const getOrder = async (req, res) => {
     const { id } = req.params;
@@ -115,5 +77,5 @@ const getAllOrders = async (req, res) => {
 };
 
 
-module.exports = { createOrder, getOrder, getAllOrders }
+module.exports = { getOrder, getAllOrders }
 

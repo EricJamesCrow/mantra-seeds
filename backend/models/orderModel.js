@@ -108,6 +108,25 @@ const orderSchema = new mongoose.Schema({
     timestamps: true
 });
 
+orderSchema.statics.createOrder = async (user, address, items, email, shipping, payment, total) => {
+    try {
+    // await Order.validateOrder(user, address, items, email, shipping, payment)
+
+    // create order
+    const order = await Order.create({
+        user,
+        address,
+        items,
+        email,
+        shipping,
+        payment,
+        total,
+    });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 orderSchema.statics.validateOrder = async function(user, address, items, email, shipping, payment, total) {
     // validation
     if (!user || !address || !items || !email || !shipping || !payment) {

@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
-const Cart = require('../models/cartModel')
 const endpointSecret = process.env.STRIPE_WEBHOOK_ENDPOINT
+
+// models
+const Cart = require('../models/cartModel')
+const Order = require('../models/orderModel')
 
 const calculateOrderAmount = async (id, shippingPrice) => {
     const finalShippingPrice = parseFloat(shippingPrice) * 100
@@ -13,20 +16,23 @@ const calculateOrderAmount = async (id, shippingPrice) => {
     return cart.subtotal + finalShippingPrice;
   };
 
-const createPaymentIntent =  async (req, res) => {
+const createPaymentIntent = async (req, res) => {
   try {
-    const { items, shipping } = req.body;
+    const { address, items, shipping, email, payment } = req.body;
+    const id = items._id
+    await Cart.encryptAddress(address)
+    await Cart.findOneAndUpdate({ id }, { $set: { address: address, email: email, shipping: shipping } }, { new: true });
 
     const customer = await stripe.customers.create({
       metadata: {
-        userId: items.user,
-        address: JSON.stringify(shipping)
+        cart: id,
+        payment: payment
       }
     });
 
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: await calculateOrderAmount(items._id, shipping.shippingPrice),
+      amount: await calculateOrderAmount(id, shipping.price),
       currency: "usd",
       customer: customer.id,
       automatic_payment_methods: {
@@ -47,7 +53,7 @@ const createPaymentIntent =  async (req, res) => {
   };
   
 
-router.post('/webhook', (request, response) => {
+const webhook = async (request, response) => {
   let event = request.body;
   // Only verify the event if you have an endpoint secret defined.
   // Otherwise use the basic event deserialized with JSON.parse
@@ -72,20 +78,32 @@ router.post('/webhook', (request, response) => {
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object;
       console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
-      stripe.customers.retrieve(paymentIntent.customer)
-                  .then((customer) => {
-                    console.log(customer)
-                    console.log('Metadata: ', customer.metadata)
-                  }).catch(err => console.log(err))
       // Then define and call a method to handle the successful payment intent.
       // handlePaymentIntentSucceeded(paymentIntent);
+    //   if (event.type === 'payment_intent.succeeded') {
+    //     const paymentIntent = event.data.object;
+    //     if (!hasEnoughInventory(paymentIntent.items)) {
+    //         await stripe.paymentIntents.cancel(paymentIntent.id, {
+    //             cancellation_reason: 'inventory'
+    //         });
+    //     } else {
+    //         // handle successful payment
+    //     }
+    // }
       break;
     case 'payment_method.attached':
       const paymentMethod = event.data.object;
-      console.log(`PaymentAttached for ${paymentIntent.amount} was successful!`);
+      console.log(`PaymentAttached for ${paymentMethod.amount} was successful!`);
       // Then define and call a method to handle the successful attachment of a PaymentMethod.
       // handlePaymentMethodAttached(paymentMethod);
       break;
+    case 'charge.succeeded':
+      const data = event.data.object;
+      stripe.customers.retrieve(data.customer)
+                  .then( async (customer) => {
+                    await createOrder(customer.metadata.cart, data);
+                  }).catch(err => console.log(err))
+      console.log(`Charge for ${data.amount} was successful`)
     default:
       // Unexpected event type
       console.log(`Unhandled event type ${event.type}.`);
@@ -93,8 +111,26 @@ router.post('/webhook', (request, response) => {
 
   // Return a 200 response to acknowledge receipt of the event
   response.send();
-});
+};
+
+const createOrder = async (id, data) => {
+  try {
+    const cart = await Cart.findOne({ id });
+    const user = cart.user;
+    const address = cart.address;
+    const items = cart.cartItems;
+    const email = cart.email;
+    const shipping = cart.shipping;
+    const payment = data.payment_intent;
+    const total = data.amount;
+    await Order.createOrder(user, address, items, email, shipping, payment, total);
+    await Cart.deleteCart(id);
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
 router.post("/", createPaymentIntent)
+router.post("/webhook", webhook)
 
 module.exports = router

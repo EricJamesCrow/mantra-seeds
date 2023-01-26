@@ -20,7 +20,6 @@ import Shop from "./pages/shop/Shop"
 import Contact from "./pages/contact/Contact"
 import Cart from "./pages/cart/Cart"
 import Checkout from "./pages/checkout/Checkout"
-import ConfirmingOrder from './pages/checkout/ConfirmingOrder';
 import OrderSuccess from './pages/checkout/OrderSuccess'
 
 function App() {
@@ -77,7 +76,6 @@ function App() {
         <Route path="/shop/products/:id" element={<ScrollToTop><ProductPage/></ScrollToTop>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/cart/checkout" element={<ScrollToTop><Checkout/></ScrollToTop>} />
-        <Route path="/cart/checkout/confirming-order" element={<ScrollToTop><ConfirmingOrder/></ScrollToTop>} />
         <Route path="/cart/checkout/order-success" element={<ScrollToTop><OrderSuccess/></ScrollToTop>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/cart" element={<ScrollToTop><Cart/></ScrollToTop>} />
