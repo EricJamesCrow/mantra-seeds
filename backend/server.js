@@ -13,6 +13,7 @@ const paymentRoutes = require('./routes/payment')
 const app = express()
 
 // middleware
+app.use('/api/payments/webhook', express.raw({type: 'application/json'}))
 app.use(express.json())
 
 app.use((req, res, next) => {
@@ -27,7 +28,6 @@ app.use('/api/carts', cartRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/shipping', shippingRoutes)
 app.use('/api/payments', paymentRoutes)
-
 
 app.get("/config", (req, res) => {
     res.send({

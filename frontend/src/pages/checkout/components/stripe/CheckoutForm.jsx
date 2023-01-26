@@ -34,6 +34,7 @@ export default function CheckoutForm( { cart, shipping, user } ) {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
+          createOrder();
           break;
         case "processing":
           setMessage("Your payment is processing.");
@@ -93,18 +94,13 @@ export default function CheckoutForm( { cart, shipping, user } ) {
 
     setIsLoading(true);
 
-    const { error } = await stripe.confirmPayment({
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
         return_url: "http://localhost:3000/cart/checkout/order-success",
-        receipt_email: email,
-        redirect: 'if_required'
+        receipt_email: email
       },
-    }).then(async () => {
-      createOrder()
-    }).catch((error) => {
-      console.log("Error: " + error);
     });
 
     // This point will only be reached if there is an immediate error when
