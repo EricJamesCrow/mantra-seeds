@@ -68,7 +68,7 @@
 }
 
 .shipping-details-form div:first-child div:last-child {
-    padding-bottom: 0.5rem;
+    padding-bottom: 1.5rem;
     padding-left: 0.75rem;
     font-size: 12px;
     width: 8rem;
@@ -80,7 +80,7 @@
 }
 
 .shipping-address-label {
-    padding: 1rem 0 0.5rem 0.5rem;
+    padding: 1rem 0 1.5rem 0.5rem;
 }
 
 .checkout-checkout-container-container button {
@@ -113,9 +113,11 @@
 }
 
 .checkout-shipping-container {
-    background: #D9D9D9;
+    background: #ffffff;
     margin: 1rem auto;
     width: 80%;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
 .checkout-contact-info-links {

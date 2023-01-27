@@ -4,7 +4,7 @@
 }
 
 .cart-customer-order:hover {
-    background: #F1F1F1;
+    background: rgba(217, 217, 217, 0.65);
 }
 
 .cart-customer-order-details {
@@ -30,6 +30,7 @@
     font-size: 20px;
     color: black;
     width: 10rem;
+    text-align: center;
 }
 
 .cart-customer-order-details div:last-child {
@@ -39,4 +40,5 @@
     font-weight: 500;
     font-size: 20px;
     color: black;
+    text-align: right;
 }

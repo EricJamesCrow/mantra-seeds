@@ -8,24 +8,28 @@ import { styled } from '@mui/material/styles';
 import { useShippingContext } from '../../../hooks/useShippingContext';
 
 const CssTextField = styled(TextField)({
-    '& label.Mui-focused': {
-      color: '#black',
+  backgroundColor: '#FFFFFF',
+  borderRadius: '4px',
+  '& label.Mui-focused': {
+    color: '#black',
+  },
+  '& .MuiInput-underline:after': {
+  //   borderBottomColor: 'green',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      // borderColor: 'red',
+      // backgroundColor: '#FFFFFF',
     },
-    '& .MuiInput-underline:after': {
-    //   borderBottomColor: 'green',
+    '&:hover fieldset': {
+      // borderColor: 'yellow',
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        // borderColor: 'red',
-      },
-      '&:hover fieldset': {
-        // borderColor: 'yellow',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#black',
-      },
+    '&.Mui-focused fieldset': {
+      borderColor: '#black',
     },
-  });
+  },
+});
+
 
 export default function Info( { setSelectedLink, shipping, dispatchShipping }) {
 
@@ -90,7 +94,7 @@ export default function Info( { setSelectedLink, shipping, dispatchShipping }) {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required={true}
-            style = {{width: "90%", paddingBottom: "5px", marginLeft: "1rem", marginTop: "0.2rem"}} />
+            style = {{width: "90%", marginBottom: "5px", marginLeft: "1rem"}} />
     <div className="shipping-address-label">SHIPPING ADDRESS</div>
     {shippingDetailsMap.map(({ label, value, setValue }) => (
     <CssTextField 
@@ -99,7 +103,7 @@ export default function Info( { setSelectedLink, shipping, dispatchShipping }) {
     value={value}
     onChange={(e) => setValue(e.target.value)}
     required={!label.includes("optional")}
-    style = {{width: "90%", paddingBottom: "1rem", marginLeft: "1rem"}} 
+    style = {{width: "90%", marginBottom: "1rem", marginLeft: "1rem"}} 
     />
     ))}
     <div className="checkout-checkout-container-container">

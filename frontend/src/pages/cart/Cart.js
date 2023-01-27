@@ -62,8 +62,8 @@ export default function Cart() {
   <div className="customer-cart-whitespace"></div>
     <div className="cart-checkout-container-container">
     <div className="cart-checkout-container"> 
-          <div>Subtotal:</div>
-          <div>${subtotal}</div>
+          <div></div>
+          <div>Subtotal: ${subtotal}</div>
     </div>
     <Link to="/cart/checkout" type="button">CHECKOUT</Link>
     </div>
