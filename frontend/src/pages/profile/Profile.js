@@ -22,7 +22,7 @@ const PRODUCTS_API_URL = '/api/products/'
 export default function Profile() {
   const { user } = useAuthContext()
   let navigate = useNavigate()
-  const {products, dispatch} = useProductsContext()
+  const {products, dispatchProducts} = useProductsContext()
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,11 +30,12 @@ export default function Profile() {
       const json = await response.json()
 
       if (response.ok) {
-        dispatch({type: 'SET_PRODUCTS', payload: json})
+        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
       }
     }
 
     fetchProducts()
+    console.log(user)
   }, [])
 
   const { logout } = useLogout()

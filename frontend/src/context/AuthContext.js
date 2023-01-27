@@ -36,7 +36,11 @@ export const AuthContextProvider = ({ children }) => {
         }
     
         if (user) {
+            try {
             fetchUser(user)
+            } catch(err) {
+                console.log(err)
+            }
         }
     }, [])
     

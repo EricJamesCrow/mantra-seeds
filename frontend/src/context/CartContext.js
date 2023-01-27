@@ -55,8 +55,6 @@ export const CartContextProvider = ({ children }) => {
         fetchCart()
       }
     }, [user])
-
-    console.log('CartContext state: ', state)
     
     return (
         <CartContext.Provider value={{ ...state, dispatchCart }}>

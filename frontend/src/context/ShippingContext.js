@@ -26,8 +26,6 @@ export const ShippingContextProvider = ({ children }) => {
         shipping: null
     })
 
-    console.log('ShippingContext state: ', state)
-
     return (
         <ShippingContext.Provider value={{...state, dispatchShipping}}>
             { children }

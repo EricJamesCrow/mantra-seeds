@@ -32,8 +32,6 @@ export const ProductsContextProvider = ({ children }) => {
         products: null
     })
 
-    console.log('ProductsContext state: ', state)
-
     return (
         <ProductsContext.Provider value={{...state, dispatchProducts}}>
             { children }
