@@ -122,6 +122,7 @@ orderSchema.statics.createOrder = async (user, address, items, email, shipping, 
         payment,
         total,
     });
+    return order;
     } catch (error) {
         console.log(error);
     }

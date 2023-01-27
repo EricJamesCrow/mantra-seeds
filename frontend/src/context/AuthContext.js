@@ -20,11 +20,26 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'))
-
+        const fetchUser = async (user) => {
+            const headers = {
+                'Authorization': user.token
+            }
+            const response = await fetch('/api/user/'+user.id, { headers });
+            const json = await response.json();
+    
+            if(response.ok) {
+                // merge the json data with the user object
+                const updatedUser = {...user, ...json}
+                // update the state with the merged data
+                dispatch({ type: 'LOGIN', payload: updatedUser})
+            }
+        }
+    
         if (user) {
-            dispatch({ type: 'LOGIN', payload: user})
+            fetchUser(user)
         }
     }, [])
+    
 
     console.log('AuthContext state: ', state)
 

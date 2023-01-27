@@ -6,6 +6,7 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_ENDPOINT
 // models
 const Cart = require('../models/cartModel')
 const Order = require('../models/orderModel')
+const User = require('../models/userModel')
 
 const calculateOrderAmount = async (id, shippingPrice) => {
     const finalShippingPrice = parseFloat(shippingPrice) * 100
@@ -78,6 +79,7 @@ const webhook = async (request, response) => {
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object;
       console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
+      /* create check inventory function */
       // Then define and call a method to handle the successful payment intent.
       // handlePaymentIntentSucceeded(paymentIntent);
     //   if (event.type === 'payment_intent.succeeded') {
@@ -123,7 +125,10 @@ const createOrder = async (id, data) => {
     const shipping = cart.shipping;
     const payment = data.payment_intent;
     const total = data.amount;
-    await Order.createOrder(user, address, items, email, shipping, payment, total);
+    const order = await Order.createOrder(user, address, items, email, shipping, payment, total);
+    console.log(order)
+    await User.findOneAndUpdate({ user }, { $set: { order: order._id } }, { new: true });
+    // create update inventory function
     await Cart.deleteCart(id);
   } catch (error) {
     throw new Error(error);
