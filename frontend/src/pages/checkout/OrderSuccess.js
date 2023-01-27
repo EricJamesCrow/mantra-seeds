@@ -1,4 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
+// library for intuitive date formatting
+import moment from 'moment'
 
 // hooks
 import { useAuthContext } from '../../hooks/useAuthContext';
@@ -7,14 +10,25 @@ import './OrderSuccess.css'
 
 export default function OrderSuccess() {
   const { user } = useAuthContext()
-    const orderDetails = [
-        { title: "Order Total", value: "$420" },
-        { title: "Order Date", value: "1/18/2023" },
-        { title: "Payment Method", value: "Stripe" },
-        { title: "Email", value: "test@yahoo.com" },
-        { title: "Expected Delivery", value: "1/20/2023" },
-        { title: "Delivery Option", value: "USPS Priority" }
-      ];
+
+  // order details
+  const [orderNumber, setOrderNumber] = useState("#0001357")
+  const [orderTotal, setOrderTotal] = useState("$420")
+  const [orderDate, setOrderDate] = useState("1/18/2023")
+  const [paymentMethod, setPaymentMethod] = useState("Stripe")
+  const [email, setEmail] = useState("test@yahoo.com")
+  const [expectedDelivery, setExpectedDelivery] = useState("1/20/2023")
+  const [deliveryOption, setDeliveryOption] = useState("USPS Priority")
+
+
+  const orderDetails = [
+      { title: "Order Total", value: orderTotal },
+      { title: "Order Date", value: orderDate },
+      { title: "Payment Method", value: paymentMethod },
+      { title: "Email", value: email },
+      { title: "Expected Delivery", value: expectedDelivery },
+      { title: "Delivery Option", value: deliveryOption }
+    ];
 
     useEffect(() => {
       const fetchOrder = async () => {
@@ -26,6 +40,13 @@ export default function OrderSuccess() {
 
         if(response.ok) {
           console.log(json)
+          setOrderNumber(json.orderNumber)
+          setOrderTotal(`$${(json.total/100).toFixed(2)}`)
+          const date = moment(json.createdAt).format('MM/DD/YYYY');
+          setOrderDate(date)
+          // setPaymentMethod(json.payment)
+          setEmail(json.email)
+          setDeliveryOption(json.shipping.delivery)
         }
       }
       if(user) {
@@ -37,7 +58,7 @@ export default function OrderSuccess() {
     <>
     <div className="order-success-container">
     <div>Thank you for your order!</div>
-    <div>Order Details - #0001357</div>
+    <div>{`Order Details - ${orderNumber}`}</div>
     <div className="order-details">
       {orderDetails.map((detail) => (
         <div>
