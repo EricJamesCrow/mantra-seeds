@@ -8,6 +8,7 @@ const cartRoutes = require('./routes/cart')
 const orderRoutes = require('./routes/order')
 const shippingRoutes = require('./routes/shipping')
 const stripeRoutes = require('./routes/stripe')
+const paypalRoutes = require('./routes/paypal')
 
 // express app
 const app = express()
@@ -28,6 +29,7 @@ app.use('/api/carts', cartRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/shipping', shippingRoutes)
 app.use('/api/stripe', stripeRoutes)
+app.use('/api/paypal', paypalRoutes)
 
 // stripe public key
 app.get("/config", (req, res) => {

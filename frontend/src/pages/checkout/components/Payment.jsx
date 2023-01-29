@@ -9,6 +9,9 @@ import PoweredByStripe from '../../../images/payment_logos/PoweredByStripe.wine.
 // stripe component
 import StripeContainer from './stripe/StripeContainer'
 
+// paypal component
+import PayPal from './paypal/PayPal'
+
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function Payment( { setSelectedLink, cart, shipping, products, dispatchProducts, user } ) {   
@@ -102,6 +105,9 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
       <img src={PoweredByStripe} className='powered-by-stripe'/> 
   <StripeContainer cart={cart} shipping={shipping} user={user}/>
   </div>
+  }
+  { selectedPaymentMethod === "paypal" && 
+  <PayPal/>
   }
   </div>
     </>
