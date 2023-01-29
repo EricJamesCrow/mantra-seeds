@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
+// images
+import Stripe from '../../../images/payment_logos/Stripe.wine.svg';
+import Paypal from '../../../images/payment_logos/PayPal-Logo.wine.svg';
+import Bitcoin from '../../../images/payment_logos/Bitcoin-Logo.wine.svg';
+import PoweredByStripe from '../../../images/payment_logos/PoweredByStripe.wine.svg';
+
 // stripe component
 import StripeContainer from './stripe/StripeContainer'
 
@@ -7,6 +13,7 @@ const PRODUCTS_API_URL = '/api/products/'
 
 export default function Payment( { setSelectedLink, cart, shipping, products, dispatchProducts, user } ) {   
     const [ productsInCart, setProductsInCart ] = useState(null)
+    const [ selectedPaymentMethod, setSelectedPaymentMethod] = useState("stripe")
 
     const shippingInfo = [
         {
@@ -73,7 +80,30 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
       </>
     ))}
   </div>
-    <StripeContainer cart={cart} shipping={shipping} user={user}/>
+  <div className="shipping-methods shipping-methods-remove-padding">
+    <div>PAYMENT METHOD</div>
+    <div className="payment-methods">
+    <div className={selectedPaymentMethod == 'stripe' ? "stripe-selected" : null} onClick={() => setSelectedPaymentMethod("stripe")}>
+      <img src={Stripe} alt='stripe'/>
+      </div>
+      <div className={selectedPaymentMethod == 'paypal' ? "paypal-selected" : null} onClick={() => setSelectedPaymentMethod("paypal")}>
+      <img src={Paypal} alt='paypal'/>
+        </div>
+      <div className={selectedPaymentMethod == 'bitcoin' ? "bitcoin-selected" : null} onClick={() => setSelectedPaymentMethod("bitcoin")}>
+      <img src={Bitcoin} alt='bitcoin'/>
+        </div>
+    </div>
+  </div>
+  <div 
+ className={selectedPaymentMethod == 'stripe' ? "selected-payment-method-container stripe-selected": selectedPaymentMethod == 'paypal' ? "selected-payment-method-container paypal-selected" : selectedPaymentMethod == 'bitcoin' ? "selected-payment-method-container bitcoin-selected" : "selected-payment-method-container"}
+  >
+  { selectedPaymentMethod === "stripe" && 
+  <div className="grid-container">
+      <img src={PoweredByStripe} className='powered-by-stripe'/> 
+  <StripeContainer cart={cart} shipping={shipping} user={user}/>
+  </div>
+  }
+  </div>
     </>
   )
 }
