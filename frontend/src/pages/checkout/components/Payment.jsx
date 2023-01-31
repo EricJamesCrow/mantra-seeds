@@ -107,7 +107,7 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
   </div>
   }
   { selectedPaymentMethod === "paypal" && 
-  <PayPal/>
+  <PayPal cart={cart} shipping={shipping} user={user}/>
   }
   </div>
     </>

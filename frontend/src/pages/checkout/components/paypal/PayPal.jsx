@@ -1,47 +1,72 @@
 import React, { useEffect, useState } from 'react'
 
-import { PayPalButton } from 'react-paypal-button-v2'
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
-export default function PayPal() {
-    const [sdkReady, setSdkReady] = useState(false)
+export default function PayPal( {cart, shipping, user}) {
     const [sandbox, setSandbox] = useState(null)
-
-    const client = {
-        sandbox:    'AaZYptpCecbCor3xhuoxwndN4yi0ohmRqWRhfB5qIAnsioQEwhDd64kasyEqsbSMt0rcuGY1zQiVj1w4',
-        production: 'YOUR-PRODUCTION-APP-ID',
-    }
+    const [total, setTotal] = useState(null)
 
     useEffect(() => {
         const addPayPal = async () => {
             const response = await fetch('/api/paypal/config');
             const clientId = await response.text();
             setSandbox(clientId)
-            const script = document.createElement('script');
-            script.type = 'text/javascript'
-            script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
-            script.async = true
-            script.onload = () => {
-                setSdkReady(true)
-            }
-            document.body.appendChild(script)
         }
-        if(!window.paypal) {
-            console.log('!window.paypal triggered')
+        const calculateOrderAmount = async () => {
+            try {
+            fetch("/api/paypal/calculate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  id: cart.user,
+                  shippingPrice: shipping.shippingPrice,
+                }),
+              }).then((res) => res.json())
+              .then((data) => {
+                setTotal(data.total)});
+            } catch(e) {
+                console.log(e)
+            }
+        }
+        if(sandbox === null) {
+            calculateOrderAmount()
             addPayPal()
-        } else {
-            console.log('The else statement was triggered')
-            setSdkReady(true)
         }
     }, [])
 
   return (
     <>
-    {sdkReady && 
+    {/* {sdkReady && 
     <>
     <PayPalButton 
     amount={2209} 
     />
     </>
+    } */}
+    {sandbox !== null && total !== null &&
+    <PayPalScriptProvider options={{
+        "client-id": sandbox
+    }}>
+       <PayPalButtons
+            createOrder={(data, actions) => {
+            return actions.order.create({
+                purchase_units: [
+                    {
+                        amount: {
+                            value: total,
+                        },
+                        custom_id: cart._id
+                    },
+                ],
+            });
+        }}
+        onApprove={(data, actions) => {
+            return actions.order.capture().then((details) => {
+                console.log(details)
+            });
+        }}
+       /> 
+    </PayPalScriptProvider>
     }
     </>
   )

@@ -15,6 +15,7 @@ const app = express()
 
 // middleware
 app.use('/api/stripe/webhook', express.raw({type: 'application/json'}))
+app.use('/api/paypal/webhook', express.raw({type: 'application/json'}))
 app.use(express.json())
 
 app.use((req, res, next) => {
