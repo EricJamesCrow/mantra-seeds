@@ -1,4 +1,4 @@
 .env
 private.pem
 public.pem
-mantra-seeds-aws-ec2.pem
+mantra-seeds-key-pair.pem
