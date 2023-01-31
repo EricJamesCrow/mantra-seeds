@@ -36,6 +36,7 @@ const calculateOrderAmount = async (req, res) => {
 const webhook = async (req, res) => {
     const event = req.body;
     const data = JSON.parse(event.toString());
+    console.log(data.event_type)
     if(data.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
         const transactionId = data.resource.parent_payment;
         const amount = data.resource.amount.value;
@@ -45,7 +46,7 @@ const webhook = async (req, res) => {
   return res.status(200).send({ success: "Webhook event processed" });
 };
 
-const verify = async (req, res) => {
+const verify = async (req, res, next) => {
     const transmissionId = req.headers['paypal-transmission-id'];
     const transmissionTime = req.headers['paypal-transmission-time'];
     const signature = req.headers['paypal-transmission-sig'];
