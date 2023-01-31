@@ -73,6 +73,7 @@ const verify = async (req, res) => {
     if (result) {
         // The signature is verified
         console.log('Signature verification succeeded');
+        next();
     } else {
         // The signature is not verified
         console.error('Signature verification failed');
