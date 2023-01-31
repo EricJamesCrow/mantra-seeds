@@ -33,23 +33,33 @@ const calculateOrderAmount = async (req, res) => {
 };
 
 
-router.post("/webhook", async (req, res) => {
+const webhook = async (req, res) => {
     const event = req.body;
+    const data = JSON.parse(event.toString());
+    if(data.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
+        const transactionId = data.resource.parent_payment;
+        const amount = data.resource.amount.value;
+        console.log(`Payment capture completed for ${transactionId} for $${amount}.`)
+    }
 
+  return res.status(200).send({ success: "Webhook event processed" });
+};
+
+const verify = async (req, res) => {
     const transmissionId = req.headers['paypal-transmission-id'];
     const transmissionTime = req.headers['paypal-transmission-time'];
     const signature = req.headers['paypal-transmission-sig'];
     const certUrl = req.headers['paypal-cert-url'];
-    const bodyCrc32 = CRC32.buf(event)
+    const bodyCrc32 = CRC32.buf(req.body)
     const unsigned_crc = bodyCrc32 >>> 0;
 
     // verify domain is actually paypal.com, or else someone
     // could spoof in their own cert
-    // const urlObj = new URL(url);
-    // if (!urlObj.hostname.endsWith('.paypal.com')) {
-    //     throw new Error(
-    //     `URL ${certUrl} is not in the domain paypal.com, refusing to fetch cert for security reasons`);
-    // }
+    const urlObj = new URL(certUrl);
+    if (!urlObj.hostname.endsWith('.paypal.com')) {
+        throw new Error(
+        `URL ${certUrl} is not in the domain paypal.com, refusing to fetch cert for security reasons`);
+    }
 
     const validationString = `${transmissionId}|${transmissionTime}|${WEBHOOK_ID}|${unsigned_crc}`
 
@@ -68,16 +78,7 @@ router.post("/webhook", async (req, res) => {
         console.error('Signature verification failed');
         return res.status(400).send({ error: "Signature verification failed" });
     }
-
-    const data = JSON.parse(event.toString());
-    if(data.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
-        const transactionId = data.resource.parent_payment;
-        const amount = data.resource.amount.value;
-        console.log(`Payment capture completed for ${transactionId} for $${amount}.`)
-    }
-
-  return res.status(200).send({ success: "Webhook event processed" });
-});
+}
 
 const config = (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID)
@@ -85,5 +86,6 @@ const config = (req, res) => {
 
 router.get('/config', config)
 router.post('/calculate', calculateOrderAmount)
+router.post('/webhook', verify, webhook)
 
 module.exports = router
