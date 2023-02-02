@@ -1,5 +1,8 @@
 require('dotenv').config()
 
+// const https = require('https');
+// const fs = require('fs');
+
 const express = require('express')
 const mongoose = require('mongoose')
 const productsRoutes = require('./routes/products')
@@ -50,3 +53,20 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((error) => {
         console.log(error)
     })
+
+// const options = {
+//     key: fs.readFileSync('/etc/pki/tls/certs/localhost.crt'),
+//     cert: fs.readFileSync('/etc/pki/tls/certs/localhost.crt')
+//     };
+    
+//     // connect to db
+//     mongoose.connect(process.env.MONGO_URI)
+//     .then(() => {
+//         // Create the HTTPS server
+//         https.createServer(options, app).listen(process.env.PORT, '0.0.0.0', () => {
+//         console.log('Connected to db & listening on port', process.env.PORT);
+//         });
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     })
