@@ -19,20 +19,20 @@ export default function Cart() {
   const { cartItems, dispatchCart } = useCartContext()
   const [ subtotal, setSubtotal ] = useState(null)
 
-    useEffect(() => {
-      const fetchCart = async () => {
-        const response = await fetch('/api/carts/'+user.cart)
-        const json = await response.json()
+    // useEffect(() => {
+    //   const fetchCart = async () => {
+    //     const response = await fetch('/api/carts/'+user.cart)
+    //     const json = await response.json()
 
-        if (response.ok) {
-          setSubtotal((json.subtotal/100).toFixed(2))
-          dispatchCart({type: 'SET_CART', payload: json})
-        }
-      }
-      if(user) {
-        fetchCart()
-      }
-    }, [user])
+    //     if (response.ok) {
+    //       setSubtotal((json.subtotal/100).toFixed(2))
+    //       dispatchCart({type: 'SET_CART', payload: json})
+    //     }
+    //   }
+    //   if(user) {
+    //     fetchCart()
+    //   }
+    // }, [user])
 
     useEffect(() => {
       // Listen for changes in the cart items and re-render the page

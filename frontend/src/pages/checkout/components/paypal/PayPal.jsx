@@ -63,6 +63,18 @@ export default function PayPal( {cart, shipping, user}) {
         onApprove={(data, actions) => {
             return actions.order.capture().then((details) => {
                 console.log(details)
+                fetch('/api/paypal/create_order', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: cart._id, shippingPrice: shipping.shippingPrice})
+                  }).then(() => {
+                    window.location.assign('/cart/checkout/order-success');
+                  })
+                  .catch(error => {
+                    console.error('Error creating order:', error);
+                  });
             });
         }}
        /> 

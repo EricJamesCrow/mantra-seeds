@@ -44,7 +44,7 @@ export default function OrderSuccess() {
           setOrderTotal(`$${(json.total/100).toFixed(2)}`)
           const date = moment(json.createdAt).format('MM/DD/YYYY');
           setOrderDate(date)
-          // setPaymentMethod(json.payment)
+          setPaymentMethod(json.payment)
           setEmail(json.email)
           setDeliveryOption(json.shipping.delivery)
         }
