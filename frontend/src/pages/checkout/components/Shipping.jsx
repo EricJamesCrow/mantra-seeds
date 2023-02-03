@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
+// redux
+import { updateShipping } from '../../../redux/slices/shippingSlice';
+
 const PRODUCTS_API_URL = '/api/products/'
 
-export default function Shipping( { setSelectedLink, cart, shipping, dispatchShipping, products, dispatchProducts }) {
+export default function Shipping( { setSelectedLink, cart, shipping, dispatch, products, dispatchProducts }) {
     const [selectedShipping, setSelectedShipping] = useState(null);
     const [ productsInCart, setProductsInCart ] = useState(null)
     const [ shippingMethods, setShippingMethods ] = useState([])
@@ -14,10 +17,10 @@ export default function Shipping( { setSelectedLink, cart, shipping, dispatchShi
     }
 
     const handleSubmit = () => {
-        dispatchShipping({type: 'UPDATE_SHIPPING', payload: {
-          shippingName: `${selectedShipping.provider} ${selectedShipping.service_level}`,
-          shippingPrice: selectedShipping.amount
-        }})
+      dispatch(updateShipping({
+        shippingName: `${selectedShipping.provider} ${selectedShipping.service_level}`,
+        shippingPrice: selectedShipping.amount
+      }));
         setSelectedLink("PAYMENT")
     }
 

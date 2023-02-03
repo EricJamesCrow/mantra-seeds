@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
+import { setShipping } from '../../../redux/slices/shippingSlice';
+
 // material ui
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
-
-// hooks
-import { useShippingContext } from '../../../hooks/useShippingContext';
 
 const CssTextField = styled(TextField)({
   backgroundColor: '#FFFFFF',
@@ -31,7 +30,7 @@ const CssTextField = styled(TextField)({
 });
 
 
-export default function Info( { setSelectedLink, shipping, dispatchShipping }) {
+export default function Info( { setSelectedLink, shipping, dispatch }) {
 
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("");
@@ -60,7 +59,7 @@ export default function Info( { setSelectedLink, shipping, dispatchShipping }) {
     const submitForm = (event) => {
       event.preventDefault();
       const formData = { email, firstName, lastName, company, address, apt, city, state, zip, phone };
-      dispatchShipping({ type: 'SET_SHIPPING', payload: formData });
+      dispatch(setShipping(formData));
       setSelectedLink("SHIPPING")
     }
 

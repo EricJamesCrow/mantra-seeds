@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
 
 // styles
 import "./Checkout.css"
@@ -18,7 +19,8 @@ import { useCartContext } from '../../hooks/useCartContext'
 export default function Checkout() {
   const { user } = useAuthContext() // JWT token in local storage
   const { cartItems, dispatchCart } = useCartContext()
-  const { shipping, dispatchShipping } = useShippingContext()
+  const dispatch = useDispatch();
+  const { shipping } = useSelector(state => state.shipping);
   const { products, dispatchProducts } = useProductsContext()
   const [selectedLink, setSelectedLink] = useState("INFO");
   const checkoutLinks = ["CART", "INFO", "SHIPPING", "PAYMENT"]
@@ -61,10 +63,10 @@ export default function Checkout() {
     </div>
     </div>
     {selectedLink === 'INFO' &&
-    <Info setSelectedLink={setSelectedLink} shipping={shipping} dispatchShipping={dispatchShipping}/>}
+    <Info setSelectedLink={setSelectedLink} shipping={shipping} dispatch={dispatch}/>}
     {selectedLink === 'SHIPPING' &&
     <>
-    <Shipping setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts} dispatchShipping={dispatchShipping}/>
+    <Shipping setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts} dispatch={dispatch}/>
     </>
     }
     {selectedLink === "PAYMENT" &&
