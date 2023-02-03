@@ -11,7 +11,6 @@ import Shipping from "./components/Shipping"
 import Payment from "./components/Payment"
 
 // hooks
-import { useShippingContext } from '../../hooks/useShippingContext';
 import { useProductsContext } from '../../hooks/useProductsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useCartContext } from '../../hooks/useCartContext'
