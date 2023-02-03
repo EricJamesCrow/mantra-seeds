@@ -17,6 +17,7 @@ const PRODUCTS_API_URL = '/api/products/'
 export default function Payment( { setSelectedLink, cart, shipping, products, dispatchProducts, user } ) {   
     const [ productsInCart, setProductsInCart ] = useState(null)
     const [ selectedPaymentMethod, setSelectedPaymentMethod] = useState("stripe")
+    const [ encrypted, setEncrypted ] = useState(false)
 
     const shippingInfo = [
         {
@@ -53,6 +54,39 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
         }
     
         fetchProducts()
+      }, [])
+
+      useEffect(() => {
+        const encryptAdrress = async () => {
+          fetch("/api/payment/encrypt", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              user: cart.user,
+              address: { 
+                firstName: shipping.firstName,
+                lastName: shipping.lastName,
+                street: shipping.address,
+                city: shipping.city,
+                state: shipping.state,
+                zip: shipping.zip
+              },
+              items: cart,
+              shipping: {
+                delivery: shipping.shippingName,
+                price: shipping.shippingPrice,
+                // expected: shipping.shippingPrice // fix this, need expected delivery date
+              },
+              email: shipping.email
+            }),
+          }).then((res) => res.json())
+          .then((data) => {
+            setEncrypted(data)})
+          .catch((e) => {
+            console.log(e)
+          })
+        }
+        encryptAdrress()
       }, [])
 
       useEffect(() => {
@@ -100,13 +134,13 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
   <div 
  className={selectedPaymentMethod == 'stripe' ? "selected-payment-method-container stripe-selected": selectedPaymentMethod == 'paypal' ? "selected-payment-method-container paypal-selected" : selectedPaymentMethod == 'bitcoin' ? "selected-payment-method-container bitcoin-selected" : "selected-payment-method-container"}
   >
-  { selectedPaymentMethod === "stripe" && 
+  { selectedPaymentMethod === "stripe" && encrypted &&
   <div className="grid-container">
       <img src={PoweredByStripe} className='powered-by-stripe'/> 
   <StripeContainer cart={cart} shipping={shipping} user={user}/>
   </div>
   }
-  { selectedPaymentMethod === "paypal" && 
+  { selectedPaymentMethod === "paypal" && encrypted &&
   <PayPal cart={cart} shipping={shipping} user={user}/>
   }
   </div>

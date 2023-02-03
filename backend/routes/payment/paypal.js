@@ -7,9 +7,9 @@ const forge = require('node-forge');
 const axios = require('axios');
 
 // models
-const Cart = require('../models/cartModel')
-const Order = require('../models/orderModel')
-const User = require('../models/userModel')
+const Cart = require('../../models/cartModel')
+const Order = require('../../models/orderModel')
+const User = require('../../models/userModel')
 
 const WEBHOOK_ID = process.env.PAYPAL_WEBHOOK_ID;
 

@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react'
 
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
+const PAYPAL_API_URL = '/api/payment/paypal/'
+
 export default function PayPal( {cart, shipping, user}) {
     const [sandbox, setSandbox] = useState(null)
     const [total, setTotal] = useState(null)
 
     useEffect(() => {
         const addPayPal = async () => {
-            const response = await fetch('/api/paypal/config');
+            const response = await fetch(PAYPAL_API_URL+'config');
             const clientId = await response.text();
             setSandbox(clientId)
         }
         const calculateOrderAmount = async () => {
             try {
-            fetch("/api/paypal/calculate", {
+            fetch(PAYPAL_API_URL+"calculate", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -63,7 +65,7 @@ export default function PayPal( {cart, shipping, user}) {
         onApprove={(data, actions) => {
             return actions.order.capture().then((details) => {
                 console.log(details)
-                fetch('/api/paypal/create_order', {
+                fetch(PAYPAL_API_URL+'create_order', {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json'

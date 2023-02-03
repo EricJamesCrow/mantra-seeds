@@ -4,9 +4,9 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET);
 const endpointSecret = process.env.STRIPE_WEBHOOK_ENDPOINT
 
 // models
-const Cart = require('../models/cartModel')
-const Order = require('../models/orderModel')
-const User = require('../models/userModel')
+const Cart = require('../../models/cartModel')
+const Order = require('../../models/orderModel')
+const User = require('../../models/userModel')
 
 const calculateOrderAmount = async (id, shippingPrice) => {
     const finalShippingPrice = parseFloat(shippingPrice) * 100
@@ -19,10 +19,8 @@ const calculateOrderAmount = async (id, shippingPrice) => {
 
 const createPaymentIntent = async (req, res) => {
   try {
-    const { address, items, shipping, email, payment } = req.body;
+    const { items, shipping, payment } = req.body;
     const id = items._id
-    await Cart.encryptAddress(address)
-    await Cart.findOneAndUpdate({ id }, { $set: { address: address, email: email, shipping: shipping } }, { new: true });
 
     const customer = await stripe.customers.create({
       metadata: {

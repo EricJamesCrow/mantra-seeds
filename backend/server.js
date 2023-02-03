@@ -10,15 +10,16 @@ const userRoutes = require('./routes/user')
 const cartRoutes = require('./routes/cart')
 const orderRoutes = require('./routes/order')
 const shippingRoutes = require('./routes/shipping')
-const stripeRoutes = require('./routes/stripe')
-const paypalRoutes = require('./routes/paypal')
+const paymentRoutes = require('./routes/payment/payment')
+const stripeRoutes = require('./routes/payment/stripe')
+const paypalRoutes = require('./routes/payment/paypal')
 
 // express app
 const app = express()
 
 // middleware
-app.use('/api/stripe/webhook', express.raw({type: 'application/json'}))
-app.use('/api/paypal/webhook', express.raw({type: 'application/json'}))
+app.use('/api/payment/stripe/webhook', express.raw({type: 'application/json'}))
+app.use('/api/payment/paypal/webhook', express.raw({type: 'application/json'}))
 app.use(express.json())
 
 app.use((req, res, next) => {
@@ -32,8 +33,9 @@ app.use('/api/user', userRoutes)
 app.use('/api/carts', cartRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/shipping', shippingRoutes)
-app.use('/api/stripe', stripeRoutes)
-app.use('/api/paypal', paypalRoutes)
+app.use('/api/payment', paymentRoutes)
+app.use('/api/payment/stripe', stripeRoutes)
+app.use('/api/payment/paypal', paypalRoutes)
 
 // stripe public key
 app.get("/config", (req, res) => {
