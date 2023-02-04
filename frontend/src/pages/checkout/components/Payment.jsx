@@ -3,14 +3,13 @@ import React, { useEffect, useState } from 'react'
 // images
 import Stripe from '../../../images/payment_logos/Stripe.wine.svg';
 import Paypal from '../../../images/payment_logos/PayPal-Logo.wine.svg';
-import Bitcoin from '../../../images/payment_logos/Bitcoin-Logo.wine.svg';
+import BitcoinSvg from '../../../images/payment_logos/Bitcoin-Logo.wine.svg';
 import PoweredByStripe from '../../../images/payment_logos/PoweredByStripe.wine.svg';
 
-// stripe component
+// components
 import StripeContainer from './stripe/StripeContainer'
-
-// paypal component
 import PayPal from './paypal/PayPal'
+import Bitcoin from './bitcoin/Bitcoin'
 
 export default function Payment( { setSelectedLink, cart, shipping, products, user } ) {   
     const [ productsInCart, setProductsInCart ] = useState(null)
@@ -111,7 +110,7 @@ export default function Payment( { setSelectedLink, cart, shipping, products, us
       <img src={Paypal} alt='paypal'/>
         </div>
       <div className={selectedPaymentMethod == 'bitcoin' ? "bitcoin-selected" : null} onClick={() => setSelectedPaymentMethod("bitcoin")}>
-      <img src={Bitcoin} alt='bitcoin'/>
+      <img src={BitcoinSvg} alt='bitcoin'/>
         </div>
     </div>
   </div>
@@ -126,6 +125,9 @@ export default function Payment( { setSelectedLink, cart, shipping, products, us
   }
   { selectedPaymentMethod === "paypal" && encrypted &&
   <PayPal cart={cart} shipping={shipping} user={user}/>
+  }
+  { selectedPaymentMethod === "bitcoin" && encrypted &&
+  <Bitcoin cart={cart} shipping={shipping} user={user}/>
   }
   </div>
     </>
