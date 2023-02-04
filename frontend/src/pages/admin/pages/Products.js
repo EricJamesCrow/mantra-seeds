@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useProductsContext } from "../../../hooks/useProductsContext";
 
 // styles
 import "./Products.css"
@@ -8,11 +7,8 @@ import "./Products.css"
 import Product from "../components/Product"
 import AddProductModel from '../components/AddProductModel';
 
-const PRODUCTS_API_URL = '/api/products/'
 
-export default function Products() {
-  const {products, dispatchProducts} = useProductsContext()
-
+export default function Products( { products }) {
   const [showAddProduct, setShowAddProduct] = useState(() => {
     // retrieve showAddProduct value from localStorage on initial render
     return localStorage.getItem('showAddProduct') === 'true';
@@ -22,19 +18,6 @@ export default function Products() {
     // update localStorage with the current value of showAddProduct
     localStorage.setItem('showAddProduct', showAddProduct);
   }, [showAddProduct]); // only update localStorage when showAddProduct changes
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch(PRODUCTS_API_URL)
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
-      }
-    }
-
-    fetchProducts()
-  }, [])
 
   const handleClick = () => {
     setShowAddProduct(!showAddProduct) 

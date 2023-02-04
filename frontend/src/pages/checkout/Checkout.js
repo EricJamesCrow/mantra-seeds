@@ -24,20 +24,6 @@ export default function Checkout() {
   const checkoutLinks = ["CART", "INFO", "SHIPPING", "PAYMENT"]
   const navigate = useNavigate();
 
-    // useEffect(() => {
-    //   const fetchCart = async () => {
-    //     const response = await fetch('/api/carts/'+user.cart)
-    //     const json = await response.json()
-
-    //     if (response.ok) {
-    //       dispatchCart({type: 'SET_CART', payload: json})
-    //     }
-    //   }
-    //   if(user) {
-    //     fetchCart()
-    //   }
-    // }, [user])
-
     useEffect(() => {
         if(selectedLink === 'CART') {
             navigate('/cart')

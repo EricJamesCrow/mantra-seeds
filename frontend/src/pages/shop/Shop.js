@@ -6,31 +6,16 @@ import Product from "../../components/Product"
 
 // react
 import React from "react"
-
-// react
 import { useEffect } from 'react';
-import { useProductsContext } from "../../hooks/useProductsContext";
 
-const PRODUCTS_API_URL = '/api/products/'
+//redux
+import { useSelector } from 'react-redux'
 
 export default function Store( { filter } ) {
-  const {products, dispatchProducts} = useProductsContext()
+  const products = useSelector(state => state.products.products);
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch(PRODUCTS_API_URL)
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
-      }
-    }
-
-    fetchProducts()
   }, [])
       
   return (

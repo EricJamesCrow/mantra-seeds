@@ -8,23 +8,7 @@ import './Overview.css'
 import Order from "../components/Order"
 import Product from "../components/Product"
 
-const PRODUCTS_API_URL = '/api/products/'
-
-export default function Overview() {
-  const {products, dispatchProducts} = useProductsContext()
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch(PRODUCTS_API_URL)
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
-      }
-    }
-
-    fetchProducts()
-  }, [])
+export default function Overview( { products } ) {
 
   return (
     <>

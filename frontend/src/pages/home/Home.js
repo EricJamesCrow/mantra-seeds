@@ -2,8 +2,9 @@
 import { Link } from 'react-router-dom'
 import React, { useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
-import { useProductsContext } from "../../hooks/useProductsContext";
 
+//redux
+import { useSelector } from 'react-redux'
 
 // styles
 import "./Home.css"
@@ -11,23 +12,8 @@ import "./Home.css"
 // components
 import BootstrapCarousel from "../../components/BootstrapCarousel"
 
-const PRODUCTS_API_URL = '/api/products/'
-
 export default function Home() {
-  const {products, dispatchProducts} = useProductsContext()
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch(PRODUCTS_API_URL)
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
-      }
-    }
-
-    fetchProducts()
-  }, [])
+  const products = useSelector(state => state.products.products);
 
   useEffect(() => {
     window.scrollTo(0, 0)

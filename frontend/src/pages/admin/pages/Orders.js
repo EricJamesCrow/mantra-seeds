@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useProductsContext } from "../../../hooks/useProductsContext";
+import React from 'react'
 
 // styles
 import "./Orders.css"
@@ -7,24 +6,7 @@ import "./Orders.css"
 // components 
 import Order from "../components/Order"
 
-const PRODUCTS_API_URL = '/api/products/'
-
-export default function Orders() {
-  const {products, dispatchProducts} = useProductsContext()
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch(PRODUCTS_API_URL)
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
-      }
-    }
-
-    fetchProducts()
-  }, [])
-
+export default function Orders( { products }) {
   return (
     <>
         {

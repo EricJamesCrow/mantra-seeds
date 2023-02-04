@@ -12,6 +12,9 @@ import Orders from "./pages/Orders"
 import Products from "./pages/Products"
 import Analytics from "./pages/Analytics"
 
+//redux
+import { useSelector } from 'react-redux'
+
 
 function toTitleCase(str) {
   return str.replace(
@@ -24,6 +27,8 @@ function toTitleCase(str) {
 
 export default function Admin() {
   const { user } = useAuthContext()
+  const products = useSelector(state => state.products.products);
+
   const [selectedButton, setSelectedButton] = useState('Overview');
   const navigate = useNavigate();
 
@@ -96,9 +101,9 @@ export default function Admin() {
           </button>
         ))}
       <>
-        {selectedButton === 'Overview' && <Overview/>}
-        {selectedButton === 'Orders' && <Orders/>}
-        {selectedButton === 'Products' && <Products/>}
+        {selectedButton === 'Overview' && <Overview products={products}/>}
+        {selectedButton === 'Orders' && <Orders products={products}/>}
+        {selectedButton === 'Products' && <Products products={products}/>}
         {selectedButton === 'Analytics' && <Analytics/>}
       </>
       </div>

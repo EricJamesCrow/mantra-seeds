@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from 'react';
 // redux
 import { useDispatch } from 'react-redux';
 import { setCart } from './redux/slices/cartSlice';
+import { setProducts } from './redux/slices/productSlice';
 
 // hooks
 import { useAuthContext } from './hooks/useAuthContext';
@@ -28,6 +29,8 @@ import Cart from "./pages/cart/Cart"
 import Checkout from "./pages/checkout/Checkout"
 import OrderSuccess from './pages/checkout/OrderSuccess'
 
+const PRODUCTS_API_URL = '/api/products/'
+
 function App() {
   const { user } = useAuthContext()
   const dispatch = useDispatch();
@@ -48,6 +51,16 @@ function App() {
     if(user) {
       fetchCart()
     }
+    const fetchProducts = async () => {
+      const response = await fetch(PRODUCTS_API_URL)
+      const json = await response.json()
+
+      if (response.ok) {
+        dispatch(setProducts(json))
+      }
+    }
+
+    fetchProducts()
   }, [user])
 
   const updateFilter = term => {
