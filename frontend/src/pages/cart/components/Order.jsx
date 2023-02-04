@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-
 // styles
 import './Order.css'
 
@@ -10,10 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
+// redux
+import { useDispatch } from 'react-redux';
+import { deleteItem } from '../../../redux/slices/cartSlice'
+
 const CARTS_API_URL = '/api/carts/'
 const PRODUCTS_API_URL = '/api/products/'
 
-export default function Order( { item, dispatchCart, user } ) {
+export default function Order( { item, user } ) {
+  const dispatch = useDispatch();
   const [product, setProduct] = useState('')
   const [hover, setHover] = useState(false);
   const price = (item.price/100).toFixed(2)
@@ -40,7 +44,7 @@ export default function Order( { item, dispatchCart, user } ) {
   });
     const json = await response.json(); // need to refactor backend so the response is the cart object
     if(response.ok) {
-      dispatchCart({type: 'DELETE_ITEM', payload: json});
+      dispatch(deleteItem(json));
     }
   }
 

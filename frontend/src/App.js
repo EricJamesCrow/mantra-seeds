@@ -1,6 +1,12 @@
 // react
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import React, { useState, useRef, useEffect } from 'react';
+
+// redux
+import { useDispatch } from 'react-redux';
+import { setCart } from './redux/slices/cartSlice';
+
+// hooks
 import { useAuthContext } from './hooks/useAuthContext';
 
 // styles
@@ -23,9 +29,26 @@ import Checkout from "./pages/checkout/Checkout"
 import OrderSuccess from './pages/checkout/OrderSuccess'
 
 function App() {
-  const [filter, setFilter] = useState([])
   const { user } = useAuthContext()
+  const dispatch = useDispatch();
+
+  const [filter, setFilter] = useState([])
   const ChildRef = useRef([]);
+
+  useEffect(() => {
+    // TODO: store cart in local storage
+    const fetchCart = async () => {
+      const response = await fetch('/api/carts/'+user.cart)
+      const json = await response.json()
+
+      if (response.ok) {
+        dispatch(setCart(json))
+      }
+    }
+    if(user) {
+      fetchCart()
+    }
+  }, [user])
 
   const updateFilter = term => {
     var index = filter.indexOf(term);
@@ -45,7 +68,7 @@ function App() {
     ChildRef.navbar.bottomNavBarFunction()
   }
 
-  const DoSomethingWrapper = ({ children }) => {
+  const ShowLoginWrapper = ({ children }) => {
     useEffect(() => {
       showLogin();
     }, []);
@@ -80,7 +103,7 @@ function App() {
         <Route path="/contact" element={<Contact/>} />
         <Route path="/cart" element={<ScrollToTop><Cart/></ScrollToTop>} />
         <Route path="/profile" 
-        element={JSON.parse(localStorage.getItem('user')) ? <ScrollToTop><Profile/></ScrollToTop> : <DoSomethingWrapper><Navigate to="/"/></DoSomethingWrapper>} 
+        element={JSON.parse(localStorage.getItem('user')) ? <ScrollToTop><Profile/></ScrollToTop> : <ShowLoginWrapper><Navigate to="/"/></ShowLoginWrapper>} 
         />
         {/* <Route path="/profile"element={<ScrollToTop><Profile/></ScrollToTop>}/> */}
       </Routes>

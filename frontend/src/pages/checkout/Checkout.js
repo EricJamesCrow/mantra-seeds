@@ -13,11 +13,10 @@ import Payment from "./components/Payment"
 // hooks
 import { useProductsContext } from '../../hooks/useProductsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { useCartContext } from '../../hooks/useCartContext'
 
 export default function Checkout() {
   const { user } = useAuthContext() // JWT token in local storage
-  const { cartItems, dispatchCart } = useCartContext()
+  const cartItems = useSelector(state => state.cart.cartItems);
   const dispatch = useDispatch();
   const { shipping } = useSelector(state => state.shipping);
   const { products, dispatchProducts } = useProductsContext()

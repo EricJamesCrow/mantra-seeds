@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import store from './redux/store'
 import { ProductsContextProvider } from './context/ProductContext';
 import { AuthContextProvider } from './context/AuthContext';
-import { CartContextProvider } from './context/CartContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,9 +14,7 @@ root.render(
     <Provider store={store}>
     <AuthContextProvider>
     <ProductsContextProvider>
-    <CartContextProvider>
     <App />
-    </CartContextProvider>
     </ProductsContextProvider>
     </AuthContextProvider>
     </Provider>

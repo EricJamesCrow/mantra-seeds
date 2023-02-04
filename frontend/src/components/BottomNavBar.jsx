@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+
+// images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons';
-import { useCartContext } from '../hooks/useCartContext';
+
+// styles
 import "./BottomNavBar.css"
+
+// redux
+import { useSelector } from 'react-redux';
 
 export default function BottomNavBar({ hideLogin }) {
     const location = useLocation();
-    const { cartItems } = useCartContext();
+    const cartItems = useSelector(state => state.cart.cartItems);
 
   return (
     <nav className="bottom-nav">
@@ -45,7 +51,7 @@ export default function BottomNavBar({ hideLogin }) {
                     cursor: "pointer"
                 }}
             />
-            { cartItems && cartItems.cartItems.length > 0 && 
+            { cartItems && cartItems.length > 0 && 
             <div style={{
                 position: 'absolute',
                 top: '5px',
@@ -59,7 +65,7 @@ export default function BottomNavBar({ hideLogin }) {
                 height: '20px',
                 textAlign: 'center',
                 lineHeight: '15px',
-            }}>{cartItems.cartItems.length}</div>
+            }}>{cartItems.length}</div>
             }
         </div>
         </NavLink>

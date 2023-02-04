@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
-import { useCartContext } from './useCartContext';
+// redux
+import { useDispatch } from 'react-redux'
+import { updateCart } from '../redux/slices/cartSlice';
 
 const useAddToCart = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const { cartItems, dispatchCart } = useCartContext()
+    const dispatch = useDispatch();
 
     const addToCart = async (id, product, quantity, price) => {
         setLoading(true);
@@ -20,7 +22,7 @@ const useAddToCart = () => {
                 })
             });
             const json = await response.json();
-            dispatchCart({type: 'UPDATE_CART', payload: json.cart})
+            dispatch(updateCart(json.cart))
             setLoading(false);
         } catch (err) {
             setError(err);
