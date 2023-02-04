@@ -1,10 +1,9 @@
 import { useAuthContext } from "../../hooks/useAuthContext"
-import { useProductsContext } from "../../hooks/useProductsContext"
 import { Link, useNavigate } from 'react-router-dom'
 import { useLogout } from '../../hooks/useLogout'
 
 // react
-import React, { useEffect } from "react"
+import React from "react"
 
 // components
 import Product from "../../components/Product"
@@ -16,27 +15,14 @@ import "./Profile.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faShoppingCart, faUser, faList } from '@fortawesome/free-solid-svg-icons'
 
-const PRODUCTS_API_URL = '/api/products/'
+// redux
+import { useSelector } from "react-redux"
 
 
 export default function Profile() {
   const { user } = useAuthContext()
   let navigate = useNavigate()
-  const {products, dispatchProducts} = useProductsContext()
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch(PRODUCTS_API_URL)
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatchProducts({type: 'SET_PRODUCTS', payload: json})
-      }
-    }
-
-    fetchProducts()
-    console.log(user)
-  }, [])
+  const products = useSelector(state => state.products.products); 
 
   const { logout } = useLogout()
 

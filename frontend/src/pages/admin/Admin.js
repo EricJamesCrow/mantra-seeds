@@ -27,7 +27,7 @@ function toTitleCase(str) {
 
 export default function Admin() {
   const { user } = useAuthContext()
-  const products = useSelector(state => state.products.products);
+  const products = useSelector(state => state.products.products);  
 
   const [selectedButton, setSelectedButton] = useState('Overview');
   const navigate = useNavigate();

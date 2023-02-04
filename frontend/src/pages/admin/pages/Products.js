@@ -7,8 +7,13 @@ import "./Products.css"
 import Product from "../components/Product"
 import AddProductModel from '../components/AddProductModel';
 
+//redux
+import { useDispatch } from 'react-redux'
+
 
 export default function Products( { products }) {
+  const dispatch = useDispatch();
+
   const [showAddProduct, setShowAddProduct] = useState(() => {
     // retrieve showAddProduct value from localStorage on initial render
     return localStorage.getItem('showAddProduct') === 'true';
@@ -44,7 +49,7 @@ export default function Products( { products }) {
       }
       { showAddProduct && (
         <div style={{ position: 'fixed', top: 50, left: 0, right: 0, bottom: 0, zIndex: 1 }}>
-          <AddProductModel setShowAddProduct={setShowAddProduct}/>
+          <AddProductModel setShowAddProduct={setShowAddProduct} dispatch={dispatch}/>
         </div>
       )}
     </>

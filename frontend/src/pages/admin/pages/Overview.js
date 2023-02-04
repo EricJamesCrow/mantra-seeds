@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useProductsContext } from "../../../hooks/useProductsContext";
 
 // styles
 import './Overview.css'

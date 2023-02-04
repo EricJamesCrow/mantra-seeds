@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
-import { useProductsContext } from "../../../hooks/useProductsContext";
 import { useAuthContext } from '../../../hooks/useAuthContext';
 
 // styles
@@ -12,9 +11,15 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 import Crown from "../../../images/chakras/crown-chakra.svg"
 
+//redux
+import { useDispatch } from 'react-redux'
+import { deleteProduct, updateProduct } from '../../../redux/slices/productSlice';
+
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function EditProductModel() {
+    const dispatch = useDispatch()
+
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
@@ -24,7 +29,6 @@ export default function EditProductModel() {
 
     const { id } = useParams()
     const [product, setProduct] = useState('')
-    const { dispatchProducts } = useProductsContext()
     
     const [productAttributes, setProductAttributes] = useState({
       "Price": product.price,
@@ -47,7 +51,7 @@ export default function EditProductModel() {
         const json = await response.json()
 
         if (response.ok) {
-            dispatchProducts({type: 'DELETE_PRODUCT', payload: json})
+            dispatch(deleteProduct(json))
             navigate(-1); // Won't navigate to previous page if refresh is hit first.
         }
     }
@@ -65,7 +69,7 @@ export default function EditProductModel() {
       const json = await response.json()
     
       if (response.ok) {
-        dispatchProducts({ type: 'UPDATE_PRODUCT', payload: json })
+        dispatch(updateProduct(json))
         navigate(-1) // Won't navigate to previous page if refresh is hit first.
       }
     }

@@ -12,9 +12,7 @@ import StripeContainer from './stripe/StripeContainer'
 // paypal component
 import PayPal from './paypal/PayPal'
 
-const PRODUCTS_API_URL = '/api/products/'
-
-export default function Payment( { setSelectedLink, cart, shipping, products, dispatchProducts, user } ) {   
+export default function Payment( { setSelectedLink, cart, shipping, products, user } ) {   
     const [ productsInCart, setProductsInCart ] = useState(null)
     const [ selectedPaymentMethod, setSelectedPaymentMethod] = useState("stripe")
     const [ encrypted, setEncrypted ] = useState(false)
@@ -42,20 +40,6 @@ export default function Payment( { setSelectedLink, cart, shipping, products, di
         }
       ];
     
-
-      useEffect(() => {
-        const fetchProducts = async () => {
-          const response = await fetch(PRODUCTS_API_URL)
-          const json = await response.json()
-    
-          if (response.ok) {
-            dispatchProducts({type: 'SET_PRODUCTS', payload: json})
-          }
-        }
-    
-        fetchProducts()
-      }, [])
-
       useEffect(() => {
         const encryptAdrress = async () => {
           fetch("/api/payment/encrypt", {

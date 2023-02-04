@@ -11,15 +11,16 @@ import Shipping from "./components/Shipping"
 import Payment from "./components/Payment"
 
 // hooks
-import { useProductsContext } from '../../hooks/useProductsContext';
+// import { useProductsContext } from '../../hooks/useProductsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
 export default function Checkout() {
   const { user } = useAuthContext() // JWT token in local storage
-  const cartItems = useSelector(state => state.cart.cartItems);
+  const cart = useSelector(state => state.cart);
+  const products = useSelector(state => state.products.products);
   const dispatch = useDispatch();
   const { shipping } = useSelector(state => state.shipping);
-  const { products, dispatchProducts } = useProductsContext()
+  // const { products, dispatchProducts } = useProductsContext()
   const [selectedLink, setSelectedLink] = useState("INFO");
   const checkoutLinks = ["CART", "INFO", "SHIPPING", "PAYMENT"]
   const navigate = useNavigate();
@@ -50,11 +51,11 @@ export default function Checkout() {
     <Info setSelectedLink={setSelectedLink} shipping={shipping} dispatch={dispatch}/>}
     {selectedLink === 'SHIPPING' &&
     <>
-    <Shipping setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts} dispatch={dispatch}/>
+    <Shipping setSelectedLink={setSelectedLink} cart={cart} shipping={shipping} products={products} dispatch={dispatch}/>
     </>
     }
     {selectedLink === "PAYMENT" &&
-        <Payment setSelectedLink={setSelectedLink} cart={cartItems} shipping={shipping} products={products} dispatchProducts={dispatchProducts} user={user}/>
+        <Payment setSelectedLink={setSelectedLink} cart={cart} shipping={shipping} products={products} user={user}/>
     }
     </div>
     </>

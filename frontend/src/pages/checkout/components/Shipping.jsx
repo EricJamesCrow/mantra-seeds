@@ -3,9 +3,8 @@ import React, { useEffect, useState } from 'react'
 // redux
 import { updateShipping } from '../../../redux/slices/shippingSlice';
 
-const PRODUCTS_API_URL = '/api/products/'
 
-export default function Shipping( { setSelectedLink, cart, shipping, dispatch, products, dispatchProducts }) {
+export default function Shipping( { setSelectedLink, cart, shipping, dispatch, products }) {
     const [selectedShipping, setSelectedShipping] = useState(null);
     const [ productsInCart, setProductsInCart ] = useState(null)
     const [ shippingMethods, setShippingMethods ] = useState([])
@@ -42,19 +41,7 @@ export default function Shipping( { setSelectedLink, cart, shipping, dispatch, p
         }
       ];
 
-      useEffect(() => {
-        const fetchProducts = async () => {
-          const response = await fetch(PRODUCTS_API_URL)
-          const json = await response.json()
-    
-          if (response.ok) {
-            dispatchProducts({type: 'SET_PRODUCTS', payload: json})
-          }
-        }
-    
-        fetchProducts()
-      }, [])
-
+      // Set products in Order Summary
       useEffect(() => {
         const total = ((cart.subtotal)/100).toFixed(2)
         if(products) {
@@ -66,7 +53,6 @@ export default function Shipping( { setSelectedLink, cart, shipping, dispatch, p
           setProductsInCart(productsInCart);
         }
       }, [products])
-
 
       // Shipping API
       const calculateShipping = async (shipping) => {

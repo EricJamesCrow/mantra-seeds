@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { useProductsContext } from "../../../hooks/useProductsContext";
 import { useAuthContext } from '../../../hooks/useAuthContext';
+
+// redux
+import { createProduct } from '../../../redux/slices/productSlice';
 
 // material ui
 import TextField from '@mui/material/TextField';
@@ -37,7 +39,7 @@ const CssTextField = styled(TextField)({
     },
   });
 
-export default function AddProductModel({ setShowAddProduct }) {
+export default function AddProductModel({ setShowAddProduct, dispatch }) {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
@@ -46,8 +48,6 @@ export default function AddProductModel({ setShowAddProduct }) {
     const [thc, setThc] = useState('')
 
     const [error, setError] = useState(null)
-
-    const { dispatchProducts } = useProductsContext()
 
     const { user } = useAuthContext() // JWT token in local storage
     const token = user.token;
@@ -78,7 +78,7 @@ export default function AddProductModel({ setShowAddProduct }) {
         setThc("");
         setError(null);
         console.log("new product added");
-        dispatchProducts({ type: "CREATE_PRODUCT", payload: json });
+        dispatch(createProduct(json));
     
         // show the success message
         const successMessage = document.querySelector(".success-message");
