@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useSelector } from 'react-redux';
 
 // redux
 import { createProduct } from '../../../redux/slices/productSlice';
@@ -49,7 +49,7 @@ export default function AddProductModel({ setShowAddProduct, dispatch }) {
 
     const [error, setError] = useState(null)
 
-    const { user } = useAuthContext() // JWT token in local storage
+    const user = useSelector(state => state.auth.user);
     const token = user.token;
 
     const handleSubmit = async (e) => {

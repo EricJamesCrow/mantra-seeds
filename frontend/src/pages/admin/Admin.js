@@ -1,4 +1,3 @@
-import { useAuthContext } from '../../hooks/useAuthContext';
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../../hooks/useLogin'
@@ -26,7 +25,7 @@ function toTitleCase(str) {
 }
 
 export default function Admin() {
-  const { user } = useAuthContext()
+  const user = useSelector(state => state.auth.user);
   const products = useSelector(state => state.products.products);  
 
   const [selectedButton, setSelectedButton] = useState('Overview');

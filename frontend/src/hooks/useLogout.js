@@ -1,14 +1,18 @@
-import { useAuthContext } from "./useAuthContext"
+import { useDispatch } from "react-redux"
+
+import { logoutAuth } from "../redux/slices/authSlice"
+import { clearCart } from "../redux/slices/cartSlice"
 
 export const useLogout = () => {
-    const { dispatch } = useAuthContext()
+    const dispatch = useDispatch()
 
     const logout = () => {
         // remove user from storage
         localStorage.removeItem('user')
 
         // dispatch logout action
-        dispatch({type: 'LOGOUT'})
+        dispatch(logoutAuth())
+        dispatch(clearCart())
     }
 
     return { logout }

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { NavLink, Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
-import { useAuthContext } from '../hooks/useAuthContext';
+import { useSelector } from 'react-redux';
 
 // styles
 import "./Navbar.css"
@@ -27,7 +27,7 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
     const [showLogin, setShowLogin] = useState(false)
     const [showSignup, setShowSignup] = useState(false)
 
-    const { user } = useAuthContext()
+    const user = useSelector(state => state.auth.user);
 
     useImperativeHandle(ref, () =>({
         callChildFunction() {

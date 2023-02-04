@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
-import { useAuthContext } from '../../../hooks/useAuthContext';
+import { useSelector } from 'react-redux'
 
 // styles
 import "./EditProductModel.css"
@@ -38,7 +38,7 @@ export default function EditProductModel() {
 
     const navigate = useNavigate();
 
-    const { user } = useAuthContext() // JWT token in local storage
+    const user = useSelector(state => state.auth.user);
     const token = user.token;
 
     const handleDelete = async () => {

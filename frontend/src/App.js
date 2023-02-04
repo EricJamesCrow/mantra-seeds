@@ -3,12 +3,10 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import React, { useState, useRef, useEffect } from 'react';
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCart } from './redux/slices/cartSlice';
 import { setProducts } from './redux/slices/productSlice';
-
-// hooks
-import { useAuthContext } from './hooks/useAuthContext';
+import { loginAuth } from './redux/slices/authSlice';
 
 // styles
 import './App.css';
@@ -32,14 +30,40 @@ import OrderSuccess from './pages/checkout/OrderSuccess'
 const PRODUCTS_API_URL = '/api/products/'
 
 function App() {
-  const { user } = useAuthContext()
+  const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
 
   const [filter, setFilter] = useState([])
   const ChildRef = useRef([]);
 
   useEffect(() => {
-    // TODO: store cart in local storage
+    // TODO: store cart in local storage        
+    const user = JSON.parse(localStorage.getItem('user'))
+    const fetchUser = async (user) => {
+      const token = user.token
+      const id = user.id
+      const headers = {
+          'Authorization': token
+      }
+      const response = await fetch('/api/user/'+id, { headers });
+      const json = await response.json();
+
+      if(response.ok) {
+          // merge the json data with the user object
+          const updatedUser = {...user, ...json}
+          // update the state with the merged data
+          dispatch(loginAuth(updatedUser))
+      }
+  }
+
+    if (user) {
+        try {
+        fetchUser(user)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
     const fetchCart = async () => {
       const response = await fetch('/api/carts/'+user.cart)
       const json = await response.json()
@@ -59,9 +83,9 @@ function App() {
         dispatch(setProducts(json))
       }
     }
-
+    fetchUser()
     fetchProducts()
-  }, [user])
+  }, [])
 
   const updateFilter = term => {
     var index = filter.indexOf(term);

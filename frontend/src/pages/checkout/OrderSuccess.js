@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react'
 // library for intuitive date formatting
 import moment from 'moment'
 
-// hooks
-import { useAuthContext } from '../../hooks/useAuthContext';
+import { useSelector } from 'react-redux'
 
 import './OrderSuccess.css'
 
 export default function OrderSuccess() {
-  const { user } = useAuthContext()
+  const user = useSelector(state => state.auth.user);
 
   // order details
   const [orderNumber, setOrderNumber] = useState("#0001357")

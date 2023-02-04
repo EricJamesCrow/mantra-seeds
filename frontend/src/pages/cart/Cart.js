@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuthContext } from '../../hooks/useAuthContext';
-
-// redux
 import { useSelector } from 'react-redux';
 
 // styles
@@ -17,7 +14,7 @@ import Order from './components/Order'
 
 
 export default function Cart() {
-  const { user } = useAuthContext() // JWT token in local storage
+  const user = useSelector(state => state.auth.user);
   const cart = useSelector(state => state.cart);
   const [ subtotal, setSubtotal ] = useState(null)
 

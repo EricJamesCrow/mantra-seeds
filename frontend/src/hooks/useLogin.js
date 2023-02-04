@@ -1,10 +1,14 @@
 import { useState } from 'react'
-import { useAuthContext} from './useAuthContext'
+
+import { useDispatch } from 'react-redux'
+
+import { loginAuth } from '../redux/slices/authSlice'
+import { setCart } from '../redux/slices/cartSlice'
 
 export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
-    const { dispatch } = useAuthContext()
+    const dispatch = useDispatch()
 
     const login = async (email, password) => {
         setIsLoading(true)
@@ -26,7 +30,17 @@ export const useLogin = () => {
             localStorage.setItem('user', JSON.stringify(json))
 
             // update the auth context
-            dispatch({type: 'LOGIN', payload: json})
+            dispatch(loginAuth(json))
+            const user = json
+            const fetchCart = async () => {
+                const response = await fetch('/api/carts/'+user.cart)
+                const json = await response.json()
+          
+                if (response.ok) {
+                  dispatch(setCart(json))
+                }
+              }
+            fetchCart()
 
             setIsLoading(false)
         }

@@ -1,10 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-export const fetchCart = createAsyncThunk('cart/fetchCart', async (cartId) => {
-    const response = await fetch(`/api/carts/${cartId}`);
-    const json = await response.json();
-    return json;
-  });
+import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -27,26 +21,14 @@ const cartSlice = createSlice({
   
         state.cartItems = state.cartItems.filter(item => item._id !== action.payload._id);
         state.subtotal = newSubtotal;
+      },
+      clearCart: (state) => {
+        state.cartItems = null;
+        state.subtotal = 0;
       }
-    },
-    extraReducers: {
-    [fetchCart.pending]: (state, action) => {
-        state.loading = true;
-        state.error = null;
-        },
-        [fetchCart.fulfilled]: (state, action) => {
-        state.cartItems = action.payload.cartItems;
-        state.subtotal = action.payload.subtotal;
-        state.loading = false;
-        state.error = null;
-        },
-        [fetchCart.rejected]: (state, action) => {
-        state.loading = false;
-        state.error = action.error;
-        }
     }
   });
   
-  export const { setCart, updateCart, deleteItem } = cartSlice.actions;
+  export const { setCart, updateCart, deleteItem, clearCart } = cartSlice.actions;
 
   export default cartSlice.reducer;

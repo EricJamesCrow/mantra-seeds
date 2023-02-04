@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useSignup } from '../hooks/useSignup'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuthContext } from '../hooks/useAuthContext';
+import { useSelector } from 'react-redux';
 
 
 // material ui
@@ -41,7 +41,7 @@ export default function LoginModel( { showSignupFields, setShowSignup } ) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {signup, error, isLoading} = useSignup()
-    const { user } = useAuthContext()
+    const user = useSelector(state => state.auth.user);
     let navigate = useNavigate();
 
     const handleSubmit = async (e) => {

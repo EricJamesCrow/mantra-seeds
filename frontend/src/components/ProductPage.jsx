@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 // hooks
-import { useAuthContext } from '../hooks/useAuthContext';
 import useAddToCart from '../hooks/useAddToCart';
 
 // styles
@@ -18,7 +18,7 @@ const PRODUCTS_API_URL = '/api/products/'
 export default function ProductPage() {
     const { id } = useParams()
     const [product, setProduct] = useState('')
-    const { user } = useAuthContext() // JWT token in local storage
+    const user = useSelector(state => state.auth.user);
     const { addToCart } = useAddToCart();
     const price = (product.price/100).toFixed(2)
 

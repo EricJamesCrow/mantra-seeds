@@ -1,4 +1,3 @@
-import { useAuthContext } from "../../hooks/useAuthContext"
 import { Link, useNavigate } from 'react-router-dom'
 import { useLogout } from '../../hooks/useLogout'
 
@@ -20,7 +19,7 @@ import { useSelector } from "react-redux"
 
 
 export default function Profile() {
-  const { user } = useAuthContext()
+  const user = useSelector(state => state.auth.user);
   let navigate = useNavigate()
   const products = useSelector(state => state.products.products); 
 

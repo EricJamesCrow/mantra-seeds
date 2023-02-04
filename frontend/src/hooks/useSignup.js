@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import { useAuthContext} from './useAuthContext'
+import { useDispatch } from 'react-redux'
+
+import { loginAuth } from '../redux/slices/authSlice'
 
 export const useSignup = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
-    const { dispatch } = useAuthContext()
+    const dispatch = useDispatch()
 
     const signup = async (email, password) => {
         setIsLoading(true)
@@ -27,7 +29,7 @@ export const useSignup = () => {
             localStorage.setItem('user', JSON.stringify(json))
 
             // update the auth context
-            dispatch({type: 'LOGIN', payload: json})
+            dispatch(loginAuth(json))
 
             setIsLoading(false)
         }
