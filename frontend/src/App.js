@@ -13,8 +13,8 @@ import './App.css';
 
 // components
 import Navbar from './components/Navbar';
+import SideNav from './components/SideNav';
 import BottomNavBar from './components/BottomNavBar'
-import Profile from './pages/profile/Profile'
 import EditProductModel from "./pages/admin/components/EditProductModel"
 import ProductPage from "./components/ProductPage"
 
@@ -22,10 +22,11 @@ import ProductPage from "./components/ProductPage"
 import Home from "./pages/home/Home"
 import Admin from "./pages/admin/Admin"
 import Shop from "./pages/shop/Shop"
-import Contact from "./pages/contact/Contact"
 import Cart from "./pages/cart/Cart"
 import Checkout from "./pages/checkout/Checkout"
 import OrderSuccess from './pages/checkout/OrderSuccess'
+import Profile from './pages/profile/Profile'
+import Contact from "./pages/contact/Contact"
 
 const PRODUCTS_API_URL = '/api/products/'
 
@@ -124,6 +125,8 @@ function App() {
   return (
     <>
     <BrowserRouter>
+    <SideNav/>
+    <div className="main-content">
       <Navbar
       key={"navbar"}
       updateFilter={updateFilter}
@@ -150,6 +153,7 @@ function App() {
     <BottomNavBar
     hideLogin={hideLogin}
     />
+    </div>
     </BrowserRouter>
     </>
   );

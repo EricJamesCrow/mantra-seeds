@@ -16,6 +16,12 @@ export default function BottomNavBar({ hideLogin }) {
     const location = useLocation();
     const cartItems = useSelector(state => state.cart.cartItems);
 
+    const handleClick = () => {
+        hideLogin();
+        document.querySelector('.main-content').classList.toggle('push');
+        document.querySelector('.side-nav').classList.toggle('open')
+    }
+
   return (
     <nav className="bottom-nav">
         <NavLink to="/" onClick={hideLogin}>
@@ -69,7 +75,7 @@ export default function BottomNavBar({ hideLogin }) {
             }
         </div>
         </NavLink>
-        <NavLink to="/menu" onClick={hideLogin}>
+        <NavLink onClick={handleClick}>
             <FontAwesomeIcon
                 icon={faBars}
                 style={{

@@ -1,6 +1,6 @@
 // react
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
@@ -9,8 +9,6 @@ import "./Navbar.css"
 
 // images
 import Cannabis from "../images/cannabis-leaf.svg"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 // components
 import Sidebar from "./Sidebar"
@@ -18,7 +16,6 @@ import LoginModel from "./LoginModel"
 import SignupModel from "./SignupModel"
 
 const Navbar = forwardRef(( { updateFilter }, ref ) => {
-    const [isActive, setActive] = useState(false)
     const [showModal, setShowModal] = useState(false)
     
     const [isShopping, setIsShopping] = useState(false)
@@ -62,7 +59,8 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
     }
 
     const displayMobileMenu = () => {
-        setActive(!isActive)
+        document.querySelector('.side-nav').classList.toggle('open')
+        document.querySelector('.main-content').classList.toggle('push');
     }
 
     useEffect(() => {
@@ -74,6 +72,7 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
     })
 
   return (
+    <>
     <nav className='sticky-nav'>
     <div className="navbar-container">
         <div className="logo-container">
@@ -85,34 +84,7 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
             <span className="bar"></span>
             <span className="bar"></span>
         </button>
-        <div className={"navbar-links"} 
-        style={isActive ? {display: "flex"} : null}>
-            <ul>
-            <li>
-                <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-                <NavLink to="/shop">Shop</NavLink>
-            </li>
-            <li>
-                <NavLink to="/contact">Contact</NavLink>
-            </li>
-            <li><FontAwesomeIcon 
-            icon={faUser} 
-            style={{
-                color: "#FFF",
-                fontSize: "1.6rem",
-                padding: "15px 20px",
-                cursor: "pointer"}}/></li>
-            <li><FontAwesomeIcon 
-            icon={faCartShopping} 
-            style={{
-                color: "#FFF",
-                fontSize: "1.6rem",
-                padding: "15px 20px",
-                cursor: "pointer"}}/></li>
-            </ul>
-        </div>
+
     </div>
     {!user && showLogin && <LoginModel
     showSignupFields={showSignupFields}
@@ -123,7 +95,7 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
     showSignupFields={showSignupFields}
     setShowSignup={setShowSignup}
     />}
-    {isShopping && !isActive && !showLogin &&
+    {isShopping && !showLogin &&
         <div className="store-banner">
         <div className="store-header">Store</div>
         <button className="filter-products-mobile">
@@ -139,6 +111,7 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
     </div>
     }
     </nav>
+    </>
   )
 })
 
