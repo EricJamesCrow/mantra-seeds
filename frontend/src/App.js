@@ -13,6 +13,7 @@ import './App.css';
 
 // components
 import Navbar from './components/Navbar';
+import SearchModel from './components/SearchModel';
 import SideNav from './components/SideNav';
 import BottomNavBar from './components/BottomNavBar'
 import EditProductModel from "./pages/admin/components/EditProductModel"
@@ -126,6 +127,7 @@ function App() {
     <>
     <BrowserRouter>
     <SideNav/>
+    {/* <SearchModel /> */}
     <div className="main-content">
       <Navbar
       key={"navbar"}

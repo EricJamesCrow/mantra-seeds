@@ -1,0 +1,27 @@
+.search-model {
+    position: fixed;
+    width: 100%;
+    height: 94%;
+    /* background-color: #325886; */
+    background-color: white;
+    z-index: 999999;
+    transition: 0.5s transform ease;
+    transform: translateY(-100%);
+  }
+
+  .search-model.open {
+    display: inline;
+    transform: translateY(8%);
+  }
+
+  .search-input-desktop {
+    font-size: 48px !important;
+    border-bottom: 3px solid #E5E5E5 !important;
+  }
+
+  .search-model form {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+  

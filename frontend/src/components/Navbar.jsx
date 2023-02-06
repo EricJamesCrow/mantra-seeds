@@ -14,11 +14,13 @@ import { faUser, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-ic
 
 // components
 import Sidebar from "./Sidebar"
+import SearchModel from "./SearchModel"
 import LoginModel from "./LoginModel"
 import SignupModel from "./SignupModel"
 
 const Navbar = forwardRef(( { updateFilter }, ref ) => {
     const [showModal, setShowModal] = useState(false)
+    const [searchModelOpen, setSearchModelOpen] = useState(false);
     
     const [isShopping, setIsShopping] = useState(false)
     const location = useLocation();
@@ -65,6 +67,23 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
         document.querySelector('.main-content').classList.toggle('push');
     }
 
+    const showSearch = () => {
+        setSearchModelOpen(true)
+    }
+
+    useEffect(() => {
+        if (searchModelOpen) {
+          setTimeout(() => {
+            // timeout allows css transition to still display for SearchModel
+            document.querySelector(".search-model").classList.toggle("open");
+          }, 0);
+        }
+      }, [searchModelOpen]);
+
+    const hideSearch = () => {
+        setSearchModelOpen(false)
+    };
+
     useEffect(() => {
         if(showLogin || showSignup) {
             document.body.style.overflow = "hidden";
@@ -75,11 +94,12 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
 
   return (
     <>
+    {searchModelOpen && <SearchModel hideSearch={hideSearch}/>}
     <nav className='sticky-nav'>
     <div className="navbar-container">
         <div className="logo-container">
         <img src={Cannabis} className="cannabis"/>
-        <Link to="/" className="title">MantraSeeds</Link>
+        <Link to="/" className="title" onClick={hideSearch}>MantraSeeds</Link>
         </div>
         <button href="#" className={"toggle-button"} onClick={displayMobileMenu}>
             <span className="bar"></span>
@@ -89,18 +109,18 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
         <div className={"navbar-links"}>
             <ul>
             <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/" onClick={hideSearch}>Home</NavLink>
             </li>
             {user && user.role === 1 &&
             <li>
-            <NavLink to="/admin">Admin</NavLink>
+            <NavLink to="/admin" onClick={hideSearch}>Admin</NavLink>
             </li>
             }
             <li>
-                <NavLink to="/shop">Shop</NavLink>
+                <NavLink to="/shop" onClick={hideSearch}>Shop</NavLink>
             </li>
             <li>
-                <NavLink to="/contact">Contact</NavLink>
+                <NavLink to="/contact" onClick={hideSearch}>Contact</NavLink>
             </li>
             <li>
             <FontAwesomeIcon 
@@ -109,10 +129,12 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
                 color: "#FFF",
                 fontSize: "1.6rem",
                 padding: "15px 20px",
-                cursor: "pointer"}}/>
+                cursor: "pointer"}}
+            onClick={showSearch}
+            />
             </li>
             <li>
-                <NavLink to="/profile">
+                <NavLink to="/profile" onClick={hideSearch}> 
                 <FontAwesomeIcon 
             icon={faUser} 
             style={{
@@ -123,7 +145,7 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
                 </NavLink>
                 </li>
             <li>
-                <NavLink to="/cart">
+                <NavLink to="/cart" onClick={hideSearch}>
                 <FontAwesomeIcon 
             icon={faCartShopping} 
             style={{

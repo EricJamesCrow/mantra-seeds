@@ -35,7 +35,7 @@ export default function ProductPage() {
 
   return (
     <>
-    <div style={{ marginTop: '50px', zIndex: 1 }}>
+    <div style={{ paddingTop: '50px', zIndex: 1 }}>
     <div className="view-product">
     <div>{product.name}</div>
     <div className="view-product-quantity">IN STOCK</div>

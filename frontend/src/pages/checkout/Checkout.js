@@ -33,7 +33,7 @@ export default function Checkout() {
 
   return (
     <>
-    <div style={{ marginTop: '50px', zIndex: 1, backgroundColor: selectedLink === 'INFO' ? 'transparent' : '#D9D9D9' }}>
+    <div style={{ paddingTop: '50px', zIndex: 1, backgroundColor: selectedLink === 'INFO' ? 'transparent' : '#D9D9D9' }}>
     <div className="checkout-header-container">
     <div>CHECKOUT</div>
     <div className="checkout-header-links">
