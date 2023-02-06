@@ -41,7 +41,7 @@ nav {
     list-style: none;
 }
 
-.navbar-links li a {
+.navbar-links li:not(:nth-last-child(-n+2)) a {
     text-decoration: none;
     color: white;
     padding: 1rem;
@@ -56,7 +56,6 @@ nav {
 .navbar-links li:hover {
     background-color: #82A7D6;
 }
-
 
 .cannabis {
     width: 45px;

@@ -1,6 +1,6 @@
 // react
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
@@ -9,6 +9,8 @@ import "./Navbar.css"
 
 // images
 import Cannabis from "../images/cannabis-leaf.svg"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 // components
 import Sidebar from "./Sidebar"
@@ -84,7 +86,55 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
             <span className="bar"></span>
             <span className="bar"></span>
         </button>
-
+        <div className={"navbar-links"}>
+            <ul>
+            <li>
+                <NavLink to="/">Home</NavLink>
+            </li>
+            {user && user.role === 1 &&
+            <li>
+            <NavLink to="/admin">Admin</NavLink>
+            </li>
+            }
+            <li>
+                <NavLink to="/shop">Shop</NavLink>
+            </li>
+            <li>
+                <NavLink to="/contact">Contact</NavLink>
+            </li>
+            <li>
+            <FontAwesomeIcon 
+            icon={faSearch} 
+            style={{
+                color: "#FFF",
+                fontSize: "1.6rem",
+                padding: "15px 20px",
+                cursor: "pointer"}}/>
+            </li>
+            <li>
+                <NavLink to="/profile">
+                <FontAwesomeIcon 
+            icon={faUser} 
+            style={{
+                color: "#FFF",
+                fontSize: "1.6rem",
+                padding: "15px 20px",
+                cursor: "pointer"}}/>
+                </NavLink>
+                </li>
+            <li>
+                <NavLink to="/cart">
+                <FontAwesomeIcon 
+            icon={faCartShopping} 
+            style={{
+                color: "#FFF",
+                fontSize: "1.6rem",
+                padding: "15px 20px",
+                cursor: "pointer"}}/>
+                </NavLink>
+                </li>
+            </ul>
+        </div>
     </div>
     {!user && showLogin && <LoginModel
     showSignupFields={showSignupFields}
