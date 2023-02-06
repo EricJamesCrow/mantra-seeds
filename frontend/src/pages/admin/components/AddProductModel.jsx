@@ -183,7 +183,7 @@ export default function AddProductModel({ setShowAddProduct, dispatch }) {
     />
   </Grid>
 </Grid>
-<div className="signup-instead"> 
+<div className="add-product-model-submit"> 
         <button>SUBMIT</button>
     </div> 
     </form>

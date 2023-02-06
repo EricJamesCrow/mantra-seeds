@@ -80,7 +80,7 @@
     cursor: pointer;
 }
 
-.signup-instead {
+.add-product-model-submit {
     display: flex; 
     flex-flow: column;
     align-items: center;
@@ -88,7 +88,7 @@
     height: 180px;
 }
 
-.signup-instead div {
+.add-product-model-submit div {
     padding-top: 20px;
     font-family: 'Futura';
     font-style: normal;
@@ -96,7 +96,7 @@
     font-size: 16px;
 }
 
-.signup-instead button {
+.add-product-model-submit button {
     width: 50%;
     height: 45px;
     background: #F1F1F1;
@@ -110,7 +110,7 @@
     transition: background-color 250ms;
 }
 
-.signup-instead button:hover {
+.add-product-model-submit button:hover {
     cursor: pointer;
     background: #e0e0e0;
 }

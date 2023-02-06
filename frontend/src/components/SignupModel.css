@@ -56,37 +56,3 @@
     background: #00D0C8;
     cursor: pointer;
 }
-
-.signup-instead {
-    display: flex; 
-    flex-flow: column;
-    align-items: center;
-    background: #F1F1F1;
-    height: 250px;
-}
-
-.signup-instead div {
-    padding-top: 20px;
-    font-family: 'Futura';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-}
-
-.signup-instead button {
-    width: 50%;
-    height: 45px;
-    background: #F1F1F1;
-    border: 1px solid #9F9F9F;
-    font-family: 'Futura';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    margin-top: 30px;
-    transition: background-color 250ms;
-}
-
-.signup-instead button:hover {
-    cursor: pointer;
-    background: #e0e0e0;
-}
