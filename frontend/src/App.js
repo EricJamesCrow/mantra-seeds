@@ -13,15 +13,18 @@ import './App.css';
 
 // components
 import Navbar from './components/Navbar';
-import SearchModel from './components/SearchModel';
 import SideNav from './components/SideNav';
+import AdminNav from './pages/new_admin/components/AdminNav';
 import BottomNavBar from './components/BottomNavBar'
 import EditProductModel from "./pages/admin/components/EditProductModel"
 import ProductPage from "./components/ProductPage"
 
 // pages
 import Home from "./pages/home/Home"
-import Admin from "./pages/admin/Admin"
+import AdminDashboard from "./pages/new_admin/pages/AdminDashboard"
+import AdminOrders from "./pages/new_admin/pages/AdminOrders"
+import AdminCustomers from './pages/new_admin/pages/AdminCustomers'
+import AdminProducts from './pages/new_admin/pages/AdminProducts'
 import Shop from "./pages/shop/Shop"
 import Cart from "./pages/cart/Cart"
 import Checkout from "./pages/checkout/Checkout"
@@ -127,7 +130,7 @@ function App() {
     <>
     <BrowserRouter>
     <SideNav/>
-    {/* <SearchModel /> */}
+    <AdminNav/>
     <div className="main-content">
       <Navbar
       key={"navbar"}
@@ -136,7 +139,10 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<Admin/>} />
+        <Route path="/admin/dashboard" element={<AdminDashboard/>} />
+        <Route path="/admin/orders" element={<AdminOrders/>} />
+        <Route path="/admin/customers" element={<AdminCustomers/>} />
+        <Route path="/admin/products" element={<AdminProducts/>} />
         {user && user.role === 1 ?  <Route path="/admin/products/:id" element={<EditProductModel/>} /> : null}
         <Route path="/shop/products/:id" element={<ScrollToTop><ProductPage/></ScrollToTop>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
@@ -147,7 +153,6 @@ function App() {
         <Route path="/profile" 
         element={JSON.parse(localStorage.getItem('user')) ? <ScrollToTop><Profile/></ScrollToTop> : <ShowLoginWrapper><Navigate to="/"/></ShowLoginWrapper>} 
         />
-        {/* <Route path="/profile"element={<ScrollToTop><Profile/></ScrollToTop>}/> */}
       </Routes>
       <div className="copyright">
       <div>© Mantra Seeds 2022</div>

@@ -35,7 +35,7 @@ export default function SideNav() {
     <ul className='side-nav-links'>
         {user && user.role === 1 &&
     <li>
-    <NavLink to="/admin" onClick={toggleOpen}>Admin Dashboard</NavLink>
+    <NavLink to="/admin/dashboard" onClick={toggleOpen}>Admin Dashboard</NavLink>
     </li>
         }
         <li>

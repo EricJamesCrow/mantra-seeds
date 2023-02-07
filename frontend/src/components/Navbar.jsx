@@ -101,12 +101,12 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
         <img src={Cannabis} className="cannabis"/>
         <Link to="/" className="title" onClick={hideSearch}>MantraSeeds</Link>
         </div>
-        <button href="#" className={"toggle-button"} onClick={displayMobileMenu}>
+        <button href="#" className="toggle-button" onClick={displayMobileMenu}>
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
         </button>
-        <div className={"navbar-links"}>
+        <div className="navbar-links">
             <ul>
             <li>
                 <NavLink to="/" onClick={hideSearch}>Home</NavLink>
