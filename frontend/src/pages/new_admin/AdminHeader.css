@@ -1,3 +1,7 @@
+.admin-container {
+    background: #F7F9FB;
+}
+
 .admin-container > div:first-child {
     padding-top: 4rem;
     display: grid;
