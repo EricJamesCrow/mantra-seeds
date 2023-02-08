@@ -1,0 +1,6 @@
+.admin-dashboard-cards-container {
+    background: #F7F9FB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,5 +1,54 @@
 .content-card-container {
-    background: #FFFFFF;
+    background-color: #FFFFFF;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.content-card-container:hover {
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+
+.left-card-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+.left-card-content div {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    margin: 0.75rem 0.75rem;
+}
+
+.left-card-content div:first-child {
+    color: #8A8787;
+}
+
+.left-card-content div:nth-child(2) {
+    color: #1A1A1A;
+    font-weight: 700;
+    margin: 3rem 0 3rem 0.75rem;
+}
+
+.left-card-content div:last-child {
+    margin-bottom: 1rem;
+}
+
+.right-card-content {
+    margin: 0.5rem 0.5rem;
+}
+
+.positive {
+    color: #74D6A1
+}
+
+.negative {
+    color: #F15885;
 }
