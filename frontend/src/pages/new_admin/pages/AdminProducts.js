@@ -1,13 +1,14 @@
 import React from 'react'
 
 // components
-import AdminHeader from '../AdminHeader'
+import AdminHeader from '../components/AdminHeader'
+import FilterSort from '../components/FilterSort'
 
 export default function AdminProducts() {
   return (
     <>
     <AdminHeader/>
-    <div>AdminProducts</div>
+    <FilterSort/>
     </>
   )
 }

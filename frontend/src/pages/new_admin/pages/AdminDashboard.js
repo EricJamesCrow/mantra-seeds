@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 // styles
 import './AdminDashboard.css'
 
@@ -7,7 +8,7 @@ import './AdminDashboard.css'
 import { faUsers, faShoppingCart, faBoxOpen } from '@fortawesome/free-solid-svg-icons'
 
 // components
-import AdminHeader from '../AdminHeader'
+import AdminHeader from '../components/AdminHeader'
 import ContentCard from '../components/ContentCard'
 
 export default function AdminDashboard() {

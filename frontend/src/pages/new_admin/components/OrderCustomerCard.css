@@ -1,0 +1,137 @@
+.order-customer-card-container {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+    margin-bottom: 0.2rem;
+}
+
+.order-customer-card-see-details-container {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    color: #BCBDBC;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem 0.25rem 1rem;
+}
+
+.order-customer-card-see-details-container > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+}
+
+.order-customer-card-see-details-container > div:nth-child(2) > div:first-child {
+    margin-right: 0.5rem;
+}
+
+.order-customer-card-container > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-customer-card-container > div:nth-child(2) > span {
+    display: inline-block;
+    border: 1px solid #BCBDBC;
+    width: 95%; 
+    margin-bottom: 0.5rem;
+}
+
+.order-customer-card-id-btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.75rem;
+    padding-bottom: 0.5rem;
+}
+
+.order-customer-card-id-btn-container > div:first-child {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    color: #000000
+}
+
+.order-customer-card-id-btn-container > button {
+    border: none;
+    width: 105px;
+    height: 20px;
+    border-radius: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.order-customer-card-btn.active {
+    background: rgba(154, 205, 50, 0.25);
+    color: #9ACD32;
+}
+
+.order-customer-card-btn.paid {
+    background: rgba(154, 205, 50, 0.25);
+    color: #9ACD32;
+}
+
+.order-customer-card-btn.pending {
+    background: rgba(247, 203, 115, 0.25);
+    color: #F7CB73;
+}
+
+.order-customer-card-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.order-customer-card-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 5px;
+    width: 95%;
+    height: 25px;
+    padding: 0 0.3rem;
+}
+
+.order-customer-card-details.gray { 
+    background: #F8F8F8;
+}
+
+.order-customer-card-details > div:first-child {
+    color: #ADAFB1;
+}
+
+.order-customer-card-details > div:last-child {
+    display: flex;
+    align-items: center;
+}
+
+.circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 0.25rem;
+}
+
+.circle.pending {
+    background: #F7CB73;
+}
+
+.circle.false {
+    background: #CB0E03;
+}
+
+.circle.true{
+    background: #9ACD32;
+}
+
+.circle.paid {
+    background: #9ACD32;
+}
