@@ -7,7 +7,7 @@ import './FilterSort.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faSort } from '@fortawesome/free-solid-svg-icons'
 
-export default function FilterSort() {
+export default function FilterSort( { results }) {
     const buttonData = [
         { id: 1, title: 'Filter', icon: faFilter },
         { id: 2, title: 'Sort', icon: faSort }
@@ -31,7 +31,7 @@ export default function FilterSort() {
     ))}
     </div>
     <div className="admin-page-results-container">
-      <div>1 - 4 of 4 Results</div>
+      <div>{`1 - ${results} of ${results} Results`}</div>
       <div>Results per Page: </div>
     </div>
     </div>

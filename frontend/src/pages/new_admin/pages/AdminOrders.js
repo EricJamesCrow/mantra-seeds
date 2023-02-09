@@ -10,18 +10,19 @@ import OrderCustomerCard from '../components/OrderCustomerCard'
 
 export default function AdminOrders() {
   const orders = [
-    { id: "order", orderNumber: 'MS23021708', dateCreated: "15 Jul 2020, 16:00", email: 'EricCrow@pm.me', paymentStatus: 'pending', total: 20211, shippingStatus: 'false' },
-    { id: "order", orderNumber: 'MS23021708', dateCreated: "15 Jul 2020, 16:00", email: 'EricCrow@pm.me', paymentStatus: 'paid', total: 20211, shippingStatus: 'true' },
-    { id: "order", orderNumber: 'MS23021708', dateCreated: "15 Jul 2020, 16:00", email: 'EricCrow@pm.me', paymentStatus: 'paid', total: 20211, shippingStatus: 'true' },
-    { id: "order", orderNumber: 'MS23021708', dateCreated: "15 Jul 2020, 16:00", email: 'EricCrow@pm.me', paymentStatus: 'pending', total: 20211, shippingStatus: 'false' },
-    { id: "order", orderNumber: 'MS23021708', dateCreated: "15 Jul 2020, 16:00", email: 'EricCrow@pm.me', paymentStatus: 'paid', total: 20211, shippingStatus: 'true' },
-    { id: "order", orderNumber: 'MS23021708', dateCreated: "15 Jul 2020, 16:00", email: 'EricCrow@pm.me', paymentStatus: 'pending', total: 20211, shippingStatus: 'false' },
-    { id: "order", orderNumber: 'MS23021708', dateCreated: "15 Jul 2020, 16:00", email: 'EricCrow@pm.me', paymentStatus: 'pending', total: 20211, shippingStatus: 'false' },
+    { id: "order", cardId: '#MS23021708', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'pending', var3: 20211, var4: 'false', var5: 'Pending' },
+    { id: "order", cardId: '#MS23021708', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'paid', var3: 20211, var4: 'true', var5: 'Paid' },
+    { id: "order", cardId: '#MS23021708', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'paid', var3: 20211, var4: 'true', var5: 'Paid' },
+    { id: "order", cardId: '#MS23021708', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'pending', var3: 20211, var4: 'false', var5: 'Pending' },
+    { id: "order", cardId: '#MS23021708', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'paid', var3: 20211, var4: 'true', var5: 'Paid' },
+    { id: "order", cardId: '#MS23021708', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'pending', var3: 20211, var4: 'false', var5: 'Pending' },
+    { id: "order", cardId: '#MS23021708', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'pending', var3: 20211, var4: 'false', var5: 'Pending' },
   ]
+  
   return (
     <>
     <AdminHeader/>
-    <FilterSort/>
+    <FilterSort results={orders.length}/>
     <div className="display-admin-orders">
     {orders.map(item => (
       <OrderCustomerCard 

@@ -70,6 +70,11 @@
     color: #9ACD32;
 }
 
+.order-customer-card-btn.inactive {
+    background: rgba(203, 14, 3, 0.25);
+    color: #CB0E03;
+}
+
 .order-customer-card-btn.paid {
     background: rgba(154, 205, 50, 0.25);
     color: #9ACD32;
