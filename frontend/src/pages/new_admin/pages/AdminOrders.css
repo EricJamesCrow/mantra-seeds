@@ -1,3 +1,15 @@
 .display-admin-orders {
     background: #F7F9FB;
 }
+
+@media (min-width: 620px) {
+    .display-admin-orders {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    
+      .display-admin-orders > div {
+        width: calc(50% - 10px);
+        margin: 5px;
+      }
+}
