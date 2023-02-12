@@ -1,10 +1,11 @@
-
 .admin-filter-sort-component-container {
     background: #F7F9FB;
     padding-bottom: 1rem;
 }
 
 .search-and-buttons-container {
+    width: 85%;
+    margin: 0 auto;
 }
 
 .filter-sort-search-container {
@@ -15,9 +16,8 @@
     border-radius: 5px;
     border-radius: 5px;
     padding: 0.5rem;
-    margin: 0 auto;
     margin-bottom: 1rem;
-    width: 85%;
+    width: 100%;
   }
   
   .filter-sort-search-input {
@@ -31,6 +31,7 @@
     font-size: 20px;
     color: #ACB0AF;
     outline: none;
+    overflow-x: hidden;
   }
   
   .filter-sort-search-container FontAwesomeIcon {
@@ -40,7 +41,7 @@
 .admin-filter-sort-btn-container {
     display: flex;
     justify-content: space-between;
-    padding: 0 2rem;
+    margin-bottom: 1rem;
 }
 
 .admin-filter-sort-btn {
@@ -86,6 +87,6 @@
     font-weight: 700;
     font-size: 14px;
     color: #BCBDBC;
-    padding: 0.25rem 0.5rem;
-    margin-top: 1rem;
+    padding: 0.25
+
 }
