@@ -6,6 +6,7 @@ import './AdminOrders.css'
 // components
 import AdminHeader from '../components/AdminHeader'
 import FilterSort from '../components/FilterSort'
+import SideBar from '../components/SideBar'
 import OrderCustomerCard from '../components/OrderCustomerCard'
 
 export default function AdminOrders() {
@@ -21,6 +22,9 @@ export default function AdminOrders() {
   
   return (
     <>
+    <div className='admin-side-bar-main-content-container'>
+    <SideBar/>
+    <div className="admin-main-content">
     <AdminHeader/>
     <FilterSort results={orders.length}/>
     <div className="display-admin-orders">
@@ -31,6 +35,8 @@ export default function AdminOrders() {
       />
     ))
     }
+    </div>
+    </div>
     </div>
     </>
   )

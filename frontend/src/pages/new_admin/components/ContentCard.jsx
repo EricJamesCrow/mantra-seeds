@@ -37,7 +37,7 @@ export default function ContentCard( { title, value, percentage, icon }) {
         <FontAwesomeIcon
           icon={icon} 
           style={{
-            color: "#33A0FF",
+            color: "#FFFFFF",
             fontSize: "2rem",
             float: "right"
           }}

@@ -3,6 +3,7 @@ import React from 'react'
 // components
 import AdminHeader from '../components/AdminHeader'
 import FilterSort from '../components/FilterSort'
+import SideBar from '../components/SideBar'
 import ProductCard from '../components/ProductCard'
 
 export default function AdminProducts() {
@@ -15,6 +16,9 @@ export default function AdminProducts() {
   ]
   return (
     <>
+    <div className='admin-side-bar-main-content-container'>
+    <SideBar/>
+    <div className="admin-main-content">
     <AdminHeader/>
     <FilterSort results={products.length}/>
     <div className="display-admin-orders">
@@ -25,6 +29,8 @@ export default function AdminProducts() {
       />
     ))
     }
+    </div>
+    </div>
     </div>
     </>
   )

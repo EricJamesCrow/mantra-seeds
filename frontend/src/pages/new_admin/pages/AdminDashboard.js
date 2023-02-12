@@ -9,6 +9,7 @@ import { faUsers, faShoppingCart, faBoxOpen } from '@fortawesome/free-solid-svg-
 
 // components
 import AdminHeader from '../components/AdminHeader'
+import SideBar from '../components/SideBar'
 import ContentCard from '../components/ContentCard'
 
 export default function AdminDashboard() {
@@ -20,6 +21,9 @@ export default function AdminDashboard() {
 
   return (
     <>
+    <div className='admin-side-bar-main-content-container'>
+    <SideBar/>
+    <div className="admin-main-content">
     <AdminHeader/>
     <div className="admin-dashboard-cards-container">
     {cardData.map(item => (
@@ -32,6 +36,8 @@ export default function AdminDashboard() {
       />
     ))
     }
+    </div>
+    </div>
     </div>
     </>
   )

@@ -1,0 +1,44 @@
+.admin-side-bar {
+    display: none;
+}
+
+.admin-main-content {
+    width: 100%;
+  }
+
+.admin-side-bar > a:first-child {
+    margin-top: 5rem;
+}
+
+.admin-side-bar > a {
+    margin-bottom: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.admin-side-bar > a:hover {
+    transform: scale(1.15)
+}
+
+.admin-side-bar-seperator {
+    height: 1px;
+    background-color: #ffffff;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 980px) {
+    .admin-side-bar-main-content-container {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+    }
+    
+    .admin-side-bar {
+      width: 70px;
+      background-color: #36454F;
+      display: flex;
+      flex-direction: column;
+    }
+  }

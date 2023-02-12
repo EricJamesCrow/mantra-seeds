@@ -2,7 +2,7 @@
     background: #F7F9FB;
 }
 
-@media (min-width: 620px) {
+@media (min-width: 620px) and (max-width: 980px){
     .display-admin-orders {
         display: flex;
         flex-wrap: wrap;
