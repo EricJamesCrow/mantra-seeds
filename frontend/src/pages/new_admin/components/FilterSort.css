@@ -30,9 +30,13 @@
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
-    color: #ACB0AF;
+    color: #1A1A1A;
     outline: none;
     overflow-x: hidden;
+  }
+
+  .filter-sort-search-input::placeholder {
+    color: #ACB0AF;
   }
   
   .filter-sort-search-container FontAwesomeIcon {

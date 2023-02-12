@@ -36,7 +36,7 @@ export default function FilterSort( { results }) {
           fontSize: "1.3rem"
         }}
       />
-    <input type="search" id="searchInput" placeholder={`Search ${searchText}`} class="filter-sort-search-input"/>
+    <input type="text" id="searchInput" placeholder={`Search ${searchText}`} class="filter-sort-search-input"/>
     </div>
     </form>
     <div className="admin-filter-sort-btn-container">
