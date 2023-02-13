@@ -6,14 +6,23 @@ import FilterSort from '../components/FilterSort'
 import SideBar from '../components/SideBar'
 import OrderCustomerCard from '../components/OrderCustomerCard'
 
+//redux
+import { useSelector } from 'react-redux'
+
 export default function AdminCustomers() {
-  const customers = [
-    { id: "customer", cardId: '63ca0d44e163669ecb545709', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'active', var3: 6, var4: '$1029.99', var5: '63ddd4cf21d92eac0603e82f' },
-    { id: "customer", cardId: '63ca0d44e163669ecb545709', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'inactive', var3: 6, var4: '$1029.99', var5: '63ddd4cf21d92eac0603e82f' },
-    { id: "customer", cardId: '63ca0d44e163669ecb545709', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'inactive', var3: 6, var4: '$1029.99', var5: '63ddd4cf21d92eac0603e82f' },
-    { id: "customer", cardId: '63ca0d44e163669ecb545709', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'active', var3: 6, var4: '$1029.99', var5: '63ddd4cf21d92eac0603e82f' },
-    { id: "customer", cardId: '63ca0d44e163669ecb545709', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'active', var3: 6, var4: '$1029.99', var5: '63ddd4cf21d92eac0603e82f' },
-  ]
+  const customers = useSelector(state => state.customers.customers);
+  if (!customers) return null; // only render once redux is loaded
+
+  const customersData = customers.map(customer => ({
+    id: "customer",
+    cardId: customer._id,
+    dateCreated: customer.createdAt,
+    var1: customer.email,
+    var2: "active",
+    var3: "6",
+    var4: "$386.99",
+    var5: customer.order
+  }));
 
   return (
     <>
@@ -21,9 +30,9 @@ export default function AdminCustomers() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader/>
-    <FilterSort results={customers.length}/>
+    <FilterSort results={customersData.length}/>
     <div className="display-admin-orders">
-    {customers.map(item => (
+    {customersData.map(item => (
       <OrderCustomerCard 
       key={item.id}
       item={item}

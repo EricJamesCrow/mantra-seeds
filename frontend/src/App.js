@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCart } from './redux/slices/cartSlice';
 import { setProducts } from './redux/slices/productSlice';
 import { loginAuth } from './redux/slices/authSlice';
+import { setOrders } from './redux/slices/ordersSlice';
+import { setCustomers } from './redux/slices/customersSlice';
 
 // styles
 import './App.css';
@@ -33,6 +35,8 @@ import Profile from './pages/profile/Profile'
 import Contact from "./pages/contact/Contact"
 
 const PRODUCTS_API_URL = '/api/products/'
+const ORDERS_API_URL = '/api/orders'
+const CUSTOMERS_API_URL = '/api/user'
 
 function App() {
   const user = useSelector(state => state.auth.user);
@@ -41,26 +45,74 @@ function App() {
   const [filter, setFilter] = useState([])
   const ChildRef = useRef([]);
 
-  useEffect(() => {
-    // TODO: store cart in local storage        
-    const user = JSON.parse(localStorage.getItem('user'))
-    const fetchUser = async (user) => {
+  const fetchUser = async (user) => {
+  try {
+    const token = user.token
+    const id = user.id
+    const headers = {
+        'Authorization': token
+    }
+    const response = await fetch('/api/user/'+id, { headers });
+    const json = await response.json();
+
+    if(response.ok) {
+        // merge the json data with the user object
+        const updatedUser = {...user, ...json}
+        // update the state with the merged data
+        dispatch(loginAuth(updatedUser))
+    }
+
+  } catch (e) {
+    // fix this error. user is sometimes undefined
+    console.log(e)
+  }
+    }
+
+  const fetchCart = async (user) => {
+    const response = await fetch('/api/carts/'+user.cart)
+    const json = await response.json()
+
+    if (response.ok) {
+      dispatch(setCart(json))
+    }
+  }
+
+  const fetchProducts = async () => {
+    const response = await fetch(PRODUCTS_API_URL)
+    const json = await response.json()
+
+    if (response.ok) {
+      dispatch(setProducts(json))
+    }
+  }
+
+  const fetchOrders = async (user) => {
       const token = user.token
-      const id = user.id
       const headers = {
           'Authorization': token
       }
-      const response = await fetch('/api/user/'+id, { headers });
+      const response = await fetch(ORDERS_API_URL, { headers });
       const json = await response.json();
-
       if(response.ok) {
-          // merge the json data with the user object
-          const updatedUser = {...user, ...json}
-          // update the state with the merged data
-          dispatch(loginAuth(updatedUser))
+        dispatch(setOrders(json))
       }
   }
 
+  const fetchCustomers = async (user) => {
+    const token = user.token
+    const headers = {
+        'Authorization': token
+    }
+    const response = await fetch(CUSTOMERS_API_URL, { headers });
+    const json = await response.json();
+    if(response.ok) {
+      dispatch(setCustomers(json))
+    }
+  }
+
+  useEffect(() => {
+    // TODO: store cart in local storage        
+    const user = JSON.parse(localStorage.getItem('user'))
     if (user) {
         try {
         fetchUser(user)
@@ -68,25 +120,12 @@ function App() {
             console.log(err)
         }
     }
-
-    const fetchCart = async () => {
-      const response = await fetch('/api/carts/'+user.cart)
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatch(setCart(json))
-      }
-    }
     if(user) {
-      fetchCart()
+      fetchCart(user)
     }
-    const fetchProducts = async () => {
-      const response = await fetch(PRODUCTS_API_URL)
-      const json = await response.json()
-
-      if (response.ok) {
-        dispatch(setProducts(json))
-      }
+    if(user.role === 1) {
+      fetchOrders(user)
+      fetchCustomers(user)
     }
     fetchUser()
     fetchProducts()

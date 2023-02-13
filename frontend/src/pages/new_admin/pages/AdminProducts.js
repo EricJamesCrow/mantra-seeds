@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux'
 
 export default function AdminProducts() {
   const products = useSelector(state => state.products.products);
+  if (!products) return null; // only render once redux is loaded
+
   const productsData = products.map(product => ({
     id: "product",
     cardId: product._id,
