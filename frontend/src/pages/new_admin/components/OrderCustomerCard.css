@@ -140,3 +140,14 @@
 .circle.paid {
     background: #9ACD32;
 }
+
+.admin-desktop-sort.order-customer-card-desktop {
+    background: #FFFFFF;
+    border-bottom: 1px solid #BCBDBC;
+    padding: 0.75rem 0;
+    cursor: pointer;
+}
+
+.admin-desktop-sort.order-customer-card-desktop > div {
+    color: black;
+}

@@ -9,19 +9,56 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faSort, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 export default function FilterSort( { results }) {
+    let customers = false;
+    let orders = false;
+    let products = false;
+
     const location = useLocation();
     const buttonData = [
         { id: 1, title: 'Filter', icon: faFilter },
         { id: 2, title: 'Sort', icon: faSort }
       ]
 
+    const customersHeaders = [
+        { id: 1, name: 'REF.'},
+        { id: 2, name: 'CREATED'},
+        { id: 3, name: 'EMAIL'},
+        { id: 4, name: 'RECENT ORDER'},
+        { id: 5, name: 'TOTAL ORDERS'},
+        { id: 6, name: 'TOTAL SPENT'},
+        { id: 7, name: 'STATUS'},
+      ]
+    
+    const ordersHeaders = [
+      { id: 1, name: 'REF.'},
+      { id: 2, name: 'CREATED'},
+      { id: 3, name: 'CUSTOMER'},
+      { id: 4, name: 'PAYMENT STATUS'},
+      { id: 5, name: 'ORDER TOTAL'},
+      { id: 6, name: 'DELIVERY STATUS'},
+      { id: 7, name: 'STATUS'},
+    ]
+
+    const productsHeaders = [
+      { id: 1, name: 'REF.'},
+      { id: 2, name: 'CREATED'},
+      { id: 3, name: 'NAME'},
+      { id: 4, name: 'PRICE'},
+      { id: 5, name: 'QUANTITY'},
+      { id: 6, name: 'PRODUCT IMAGE'},
+      { id: 7, name: 'STATUS'},
+    ]
+
     let searchText = '';
     if (location.pathname === '/admin/orders') {
       searchText = 'Orders';
+      orders = true
       } else if (location.pathname === '/admin/customers') {
         searchText = 'Customers';
+        customers = true
       } else if (location.pathname === '/admin/products') {
         searchText = 'Products';
+        products = true
       }
     
   return (
@@ -58,6 +95,47 @@ export default function FilterSort( { results }) {
     <div className="admin-page-results-container">
       <div>{`1 - ${results} of ${results} Results`}</div>
       <div>Results per Page: </div>
+    </div>
+    <div className="admin-desktop-sort">
+    {customers && customersHeaders.map(item => ( 
+      <div>
+      <div>{item.name}</div>
+      <FontAwesomeIcon 
+      icon={faSort} 
+      style={{
+          color: "#36454F",
+          fontSize: "1.3rem",
+          cursor: "pointer"
+        }}
+      />
+      </div>))
+      }
+      {orders && ordersHeaders.map(item => ( 
+      <div>
+      <div>{item.name}</div>
+      <FontAwesomeIcon 
+      icon={faSort} 
+      style={{
+          color: "#36454F",
+          fontSize: "1.3rem",
+          cursor: "pointer"
+        }}
+      />
+      </div>))
+      }
+      {products && productsHeaders.map(item => ( 
+      <div>
+      <div>{item.name}</div>
+      <FontAwesomeIcon 
+      icon={faSort} 
+      style={{
+          color: "#36454F",
+          fontSize: "1.3rem",
+          cursor: "pointer"
+        }}
+      />
+      </div>))
+      }
     </div>
     </div>
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 // styles
 import './OrderCustomerCard.css'
@@ -8,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 export default function OrderCustomerCard( { item } ) {
+    const desktop = useMediaQuery('(min-width:980px)');
+
     const cardId = item.cardId
     const var1 = item.var1
     const var2 = item.var2
@@ -35,7 +38,8 @@ export default function OrderCustomerCard( { item } ) {
       ]
 
   return (
-    <div className="order-customer-card-container">
+    <>
+    {!desktop && <div className="order-customer-card-container">
       <div className="order-customer-card-see-details-container">
         <div>{item.dateCreated}</div>
         <div>
@@ -70,6 +74,25 @@ export default function OrderCustomerCard( { item } ) {
         ))
         }
       </div>
-    </div>
+    </div>}
+    {desktop &&
+        <div className="admin-desktop-sort order-customer-card-desktop">
+        <div>{cardId}</div>
+        <div>{item.dateCreated}</div>
+        {cardDetails.map(item => (
+          <div>
+            {item.status &&
+            <div className={`circle ${item.status}`}></div>
+            }
+          <div>{item.value}</div>
+          </div>
+        ))
+        }
+        <div className="order-customer-card-id-btn-container">
+        <button className={`order-customer-card-btn ${var2}`}>{toTitleCase(var2)}</button>
+        </div>
+        </div>
+    }
+    </>
   )
 }

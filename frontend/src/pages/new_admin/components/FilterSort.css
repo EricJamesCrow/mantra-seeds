@@ -95,6 +95,31 @@
     padding: 0.25rem 1rem;
 }
 
+.admin-desktop-sort {
+    display: none;
+}
+
+.admin-desktop-sort > div {
+    display: flex;
+    color: #36454F;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0.5rem 2rem 0 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-desktop-sort > div > div {
+    padding-right: 0.5rem;
+}
+
+.admin-desktop-sort > div > svg {
+    text-align: center;
+}
+
+
 @media (min-width: 620px) {
     .search-and-buttons-container {
         display: flex;
@@ -114,5 +139,11 @@
 }
 
 @media (min-width: 980px) {
-
+    .admin-desktop-sort {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+    .admin-filter-sort-component-container {
+        padding-bottom: 0.5rem;
+    }
 }

@@ -12,3 +12,14 @@
     margin-left: 10px;
     margin-bottom: 10px;
 }
+
+.product-card-image-details-container-desktop {
+    height: 95px;
+    background: #F1F1F1;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
