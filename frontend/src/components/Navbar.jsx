@@ -113,7 +113,7 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
             </li>
             {user && user.role === 1 &&
             <li>
-            <NavLink to="/admin" onClick={hideSearch}>Admin</NavLink>
+            <NavLink to="/admin/dashboard" onClick={hideSearch}>Admin</NavLink>
             </li>
             }
             <li>

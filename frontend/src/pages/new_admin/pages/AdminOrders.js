@@ -9,7 +9,19 @@ import FilterSort from '../components/FilterSort'
 import SideBar from '../components/SideBar'
 import OrderCustomerCard from '../components/OrderCustomerCard'
 
+
 export default function AdminOrders() {
+  // const orders = useSelector(state => state.orders.orders);
+  // const ordersData = orders.map(order => ({
+  //   id: "order",
+  //   cardId: order._id,
+  //   dateCreated: order.createdAt,
+  //   var1: order.email,
+  //   var2: "pending",
+  //   var3: order.total,
+  //   var4: "false",
+  //   var5: "Pending"
+  // }));
   const orders = [
     { id: "order", cardId: '#MS23021708', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'pending', var3: 20211, var4: 'false', var5: 'Pending' },
     { id: "order", cardId: '#MS23021708', dateCreated: "15 Jul 2020, 16:00", var1: 'EricCrow@pm.me', var2: 'paid', var3: 20211, var4: 'true', var5: 'Paid' },
