@@ -1,4 +1,5 @@
 import React from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { useLocation } from 'react-router-dom';
 
 // styles
@@ -6,9 +7,11 @@ import './FilterSort.css'
 
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilter, faSort, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faFilter, faSort, faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 export default function FilterSort( { results }) {
+    const desktop = useMediaQuery('(min-width:980px)');
+
     let customers = false;
     let orders = false;
     let products = false;
@@ -18,6 +21,21 @@ export default function FilterSort( { results }) {
         { id: 1, title: 'Filter', icon: faFilter },
         { id: 2, title: 'Sort', icon: faSort }
       ]
+    const desktopOrdersData = [
+      { id: 1, title: 'Payment Status'},
+      { id: 2, title: 'Delivery Status'},
+      { id: 3, title: 'Status'},
+      { id: 4, title: 'More Filters'},
+    ]
+    const desktopCustomersData = [
+      { id: 1, title: 'Status'},
+      { id: 2, title: 'More Filters'}
+    ]
+    const desktopProductsData = [
+      { id: 1, title: 'Status'},
+      { id: 2, title: 'More Filters'}
+    ]
+
 
     const customersHeaders = [
         { id: 1, name: 'REF.'},
@@ -77,7 +95,7 @@ export default function FilterSort( { results }) {
     </div>
     </form>
     <div className="admin-filter-sort-btn-container">
-    {buttonData.map(item => (
+    {!desktop && buttonData.map(item => (
           <button className="admin-filter-sort-btn">
           <FontAwesomeIcon 
                   key={item.id}
@@ -90,6 +108,51 @@ export default function FilterSort( { results }) {
           <div>{item.title}</div>
           </button>
     ))}
+    {desktop && orders && desktopOrdersData.map(item => (
+      <button className="admin-filter-sort-btn desktop">
+      <div>{item.title}</div>
+      <FontAwesomeIcon 
+              key={item.id}
+              icon={faChevronDown} 
+              style={{
+                  color: "#000000",
+                  fontSize: "1.3rem",
+                  cursor: "pointer",
+                  paddingLeft: "1rem"}}
+              />
+      </button>
+    ))
+    }
+    {desktop && customers && desktopCustomersData.map(item => (
+      <button className="admin-filter-sort-btn desktop">
+      <div>{item.title}</div>
+      <FontAwesomeIcon 
+              key={item.id}
+              icon={faChevronDown} 
+              style={{
+                  color: "#000000",
+                  fontSize: "1.3rem",
+                  cursor: "pointer",
+                  paddingLeft: "1rem"}}
+              />
+      </button>
+    ))
+    }
+    {desktop && products && desktopProductsData.map(item => (
+      <button className="admin-filter-sort-btn desktop">
+      <div>{item.title}</div>
+      <FontAwesomeIcon 
+              key={item.id}
+              icon={faChevronDown} 
+              style={{
+                  color: "#000000",
+                  fontSize: "1.3rem",
+                  cursor: "pointer",
+                  paddingLeft: "1rem"}}
+              />
+      </button>
+    ))
+    }
     </div>
     </div>
     <div className="admin-page-results-container">

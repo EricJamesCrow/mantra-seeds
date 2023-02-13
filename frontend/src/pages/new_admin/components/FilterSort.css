@@ -119,6 +119,14 @@
     text-align: center;
 }
 
+.admin-filter-sort-btn.desktop > div{
+    font-size: 16px;
+}
+
+.admin-filter-sort-btn.desktop {
+    max-width: 300px;
+}
+
 
 @media (min-width: 620px) {
     .search-and-buttons-container {
@@ -145,5 +153,8 @@
     }
     .admin-filter-sort-component-container {
         padding-bottom: 0.5rem;
+    }
+    .admin-filter-sort-btn-container {
+        justify-content: flex-start;
     }
 }
