@@ -186,7 +186,7 @@ function App() {
         <Route path="/admin/customers" element={<AdminCustomers/>} />
         <Route path="/admin/customers/:id" element={<AdminCustomersDetailsPage/>} />
         <Route path="/admin/products" element={<AdminProducts/>} />
-        {user && user.role === 1 ?  <Route path="/admin/products/:id" element={<AdminProductsDetailsPage/>} /> : null}
+        <Route path="/admin/products/:id" element={<AdminProductsDetailsPage/>} />
         <Route path="/shop/products/:id" element={<ScrollToTop><ProductPage/></ScrollToTop>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/cart/checkout" element={<ScrollToTop><Checkout/></ScrollToTop>} />

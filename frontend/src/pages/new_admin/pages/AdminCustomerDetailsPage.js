@@ -1,5 +1,6 @@
 import React from 'react'
-import { useNavigate} from 'react-router-dom'
+import { useParams, useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // styles
 import './AdminOrdersDetailsPage.css'
@@ -10,11 +11,18 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import defaultProfilePic from '../../../images/abstract-user-flat.svg'
 
 export default function AdminCustomersDetailsPage() {
+  const { id } = useParams()
   const navigate = useNavigate();
+  const { customers } = useSelector(state => state.customers)
+  const customer = customers.find(c => c._id === id)
+  
+  const email = customer.email
+  const order = customer.order
+
 
   const cardDetails = [
-    { id: 1, title: "Email", value: "EricCrow@pm.me", class: 'gray', },
-    { id: 2, title: "Recent Order", value: "63ddd4cf21d92eac0603e82f"},
+    { id: 1, title: "Email", value: email, class: 'gray', },
+    { id: 2, title: "Recent Order", value: order},
     { id: 3, title: "Number of Orders", value: "6", class: 'gray'},
     { id: 4, title: "Total Spent", value: "$1029.99"}
   ]
@@ -31,7 +39,7 @@ export default function AdminCustomersDetailsPage() {
         />
       </button>
       <div className="order-customer-card-id-btn-container">
-      <div>Customer: EricCrow@pm.me</div>
+      <div>Customer: {email}</div>
       <button className={`order-customer-card-btn active`}>{"Active"}</button>
       </div>
       <div className="order-customer-card-details-container">

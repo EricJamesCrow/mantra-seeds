@@ -1,5 +1,6 @@
 import React from 'react'
-import { useNavigate} from 'react-router-dom'
+import { useParams, useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // styles
 import './AdminOrdersDetailsPage.css'
@@ -10,16 +11,29 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
 export default function AdminOrdersDetailsPage() {
+  const { id } = useParams()
   const navigate = useNavigate();
+  const { products } = useSelector(state => state.products)
+  const { orders } = useSelector(state => state.orders)
+  const order = orders.find(o => o._id === id)
+
+  const address = order.address
+  console.log(address)
+  const orderNumber = order.orderNumber
+  const customer = order.email
+  const shippingMethod = order.shipping.delivery
+  const shippingPrice = `$${order.shipping.price}`
+  const orderTotal = `$${(order.total / 100).toFixed(2)}`
+  const items = order.items
 
   const cardDetails = [
-    { id: 1, title: "Customer", value: "EricCrow@pm.me", class: 'gray', },
+    { id: 1, title: "Customer", value: customer, class: 'gray', },
     { id: 2, title: "Payment Method", value: "Stripe"},
     { id: 3, title: "Payment Status", value: "Pending", class: 'gray', status: "pending"},
     { id: 4, title: "Delivery Status", value: "Not Shipped", status: "false"},
-    { id: 5, title: "Shipping Method", value: "USPS Priority Express", class: 'gray'},
-    { id: 6, title: "Shipping Price", value: "$51.50"},
-    { id: 7, title: "Order Total", value: "$202.11", class: 'gray'}
+    { id: 5, title: "Shipping Method", value: shippingMethod, class: 'gray'},
+    { id: 6, title: "Shipping Price", value: shippingPrice},
+    { id: 7, title: "Order Total", value: orderTotal, class: 'gray'}
   ]
 
   return (
@@ -34,7 +48,7 @@ export default function AdminOrdersDetailsPage() {
         />
       </button>
       <div className="order-customer-card-id-btn-container">
-      <div>Order: #MS23021708</div>
+      <div>Order: #{orderNumber}</div>
       <button className={`order-customer-card-btn active`}>{"Active"}</button>
       </div>
       <div className="order-customer-card-details-container">
@@ -54,12 +68,13 @@ export default function AdminOrdersDetailsPage() {
           <div>Order</div>
         </div>
         <div className='admin-order-details-page-order-images-container'>
-        {cardDetails.slice(0, 2).map(item => (<div className="admin-order-details-page-order-details">
+        {items.map(item => (<div className="admin-order-details-page-order-details">
         <div>
         <img src={Cannabis}/>
         </div>
-        <div>Sativa Seeds</div>
-        <div>Quantity: 3</div>
+        <div>{products.find(p => p._id === item.product).name}</div>
+        <div>${(item.price / 100).toFixed(2)}</div>
+        <div>Quantity: {item.quantity}</div>
         </div>))}
         </div>
         <div className={`order-customer-card-details-order-details-address gray`}>

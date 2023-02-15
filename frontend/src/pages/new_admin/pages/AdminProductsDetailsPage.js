@@ -1,5 +1,6 @@
 import React from 'react'
-import { useNavigate} from 'react-router-dom'
+import { useParams, useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 // styles
 import './AdminOrdersDetailsPage.css'
@@ -10,12 +11,25 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
 export default function AdminCustomersDetailsPage() {
+  const { id } = useParams()
   const navigate = useNavigate();
+  const { products } = useSelector(state => state.products)
+  const product = products.find(p => p._id === id)
+
+  const name = product.name
+  const price = `$${(product.price / 100).toFixed(2)}`
+  const chakra = product.chakra
+  const strain = product.strain
+  const thc = product.thc
+  const description = product.description
 
   const cardDetails = [
-    { id: 1, title: "Name", value: "Watermelon Seeds", class: 'gray', },
-    { id: 2, title: "Price", value: "$45.99"},
+    { id: 1, title: "Name", value: name, class: 'gray', },
+    { id: 2, title: "Price", value: price},
     { id: 3, title: "Quantity", value: "5", class: 'gray'},
+    { id: 4, title: "Chakra", value: chakra},
+    { id: 5, title: "Strain", value: strain, class: 'gray'},
+    { id: 6, title: "THC", value: thc},
   ]
 
   return (
@@ -30,7 +44,7 @@ export default function AdminCustomersDetailsPage() {
         />
       </button>
       <div className="order-customer-card-id-btn-container">
-      <div>Watermelon Seeds</div>
+      <div>{name}</div>
       <button className={`order-customer-card-btn active`}>{"Active"}</button>
       </div>
       <div className="order-customer-card-details-container">
@@ -51,7 +65,7 @@ export default function AdminCustomersDetailsPage() {
         }
         <div className={`order-customer-card-details-order-details-address gray product`}>
           <div>Description</div>
-          <div>Pro cu veri mediocrem, cum ea suas omnis justo. Quo nulla soleat cetero eu, nam debet invidunt cu.</div>
+          <div>{description}</div>
         </div>
         <div className="order-details-button-container">
           <button className="order-details-button pending">Edit Product Details</button>
