@@ -18,7 +18,6 @@ import Navbar from './components/Navbar';
 import SideNav from './components/SideNav';
 import AdminNav from './pages/new_admin/components/AdminNav';
 import BottomNavBar from './components/BottomNavBar'
-import EditProductModel from "./pages/admin/components/EditProductModel"
 import ProductPage from "./components/ProductPage"
 
 // pages
@@ -29,6 +28,7 @@ import AdminOrdersDetailsPage from './pages/new_admin/pages/AdminOrdersDetailsPa
 import AdminCustomers from './pages/new_admin/pages/AdminCustomers'
 import AdminCustomersDetailsPage from './pages/new_admin/pages/AdminCustomerDetailsPage'
 import AdminProducts from './pages/new_admin/pages/AdminProducts'
+import AdminProductsDetailsPage from './pages/new_admin/pages/AdminProductsDetailsPage'
 import Shop from "./pages/shop/Shop"
 import Cart from "./pages/cart/Cart"
 import Checkout from "./pages/checkout/Checkout"
@@ -186,7 +186,7 @@ function App() {
         <Route path="/admin/customers" element={<AdminCustomers/>} />
         <Route path="/admin/customers/:id" element={<AdminCustomersDetailsPage/>} />
         <Route path="/admin/products" element={<AdminProducts/>} />
-        {user && user.role === 1 ?  <Route path="/admin/products/:id" element={<EditProductModel/>} /> : null}
+        {user && user.role === 1 ?  <Route path="/admin/products/:id" element={<AdminProductsDetailsPage/>} /> : null}
         <Route path="/shop/products/:id" element={<ScrollToTop><ProductPage/></ScrollToTop>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/cart/checkout" element={<ScrollToTop><Checkout/></ScrollToTop>} />
