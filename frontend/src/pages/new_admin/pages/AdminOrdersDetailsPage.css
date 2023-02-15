@@ -87,6 +87,10 @@
     margin-top: 1rem;
 }
 
+.order-customer-card-details-order-details-address.customer {
+    margin-top: 0;
+}
+
 .order-customer-card-details-order-details-address.gray {
     background: #F8F8F8;
 }
@@ -151,5 +155,9 @@
 
 .order-details-button.canceled:hover {
     background: rgba(203, 14, 3, 0.5); 
+}
+
+.customer-details-profile-pic {
+    width: 185px;
 }
 

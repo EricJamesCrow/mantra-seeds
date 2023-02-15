@@ -125,7 +125,7 @@ function App() {
     if(user) {
       fetchCart(user)
     }
-    if(user.role === 1) {
+    if(user && user.role === 1) {
       fetchOrders(user)
       fetchCustomers(user)
     }
