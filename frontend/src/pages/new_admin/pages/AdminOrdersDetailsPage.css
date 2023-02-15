@@ -1,5 +1,28 @@
 .admin-orders-details-page-container {
-    padding-top: 4rem;
+    padding: 5rem 0;
+    min-height: 100vh;
+}
+
+.admin-orders-details-page-container > .order-customer-card-id-btn-container {
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
+}
+
+.admin-orders-details-page-container > .order-customer-card-id-btn-container > .order-customer-card-btn {
+    height: 25px;
+    width: 125px;
+    font-size: 16px;
+}
+
+.admin-orders-details-page-container > .order-customer-card-id-btn-container > div:first-child {
+    font-size: 20px;
+}
+
+.admin-orders-details-page-container > .order-customer-card-details-container > .order-customer-card-details {
+    font-size: 16px;
+    width: 92.5%;
+    height: 35px;
+    padding: 0 0.3rem;
 }
 
 .details-page-btn {
@@ -9,9 +32,124 @@
     width: 35px;
     height: 35px;
     transition: all 0.1s ease;
+    margin-left: 0.75rem;
 }
 
 .details-page-btn:hover {
     cursor: pointer;
     background: #E6E6E6;
 }
+
+.admin-order-details-page-order-details {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-order-details-page-order-details > div:first-child {
+    background: #F1F1F1;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 125px;
+}
+
+.admin-order-details-page-order-details > div:nth-child(2) {
+    font-weight: 700;
+}
+
+.admin-order-details-page-order-details > div:last-child {
+    font-weight: 300;
+}
+
+
+.admin-order-details-page-order-images-container {
+    padding-top: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 4rem;
+}
+
+.order-customer-card-details-order-details-address {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    width: 92.5%;
+    min-height: 115px;
+    margin-top: 1rem;
+}
+
+.order-customer-card-details-order-details-address.gray {
+    background: #F8F8F8;
+}
+
+.order-customer-card-details-order-details-address > div:first-child {
+    margin: 0.5rem 0.3rem;
+    color: #ADAFB1;
+}
+
+.order-customer-card-details-order-details-address > div:last-child {
+    width: 60%;
+    padding-top: 0.5rem;
+    margin: 0 auto;
+}
+
+.order-details-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 3rem;
+    width: 75%;
+  }
+
+.order-details-button {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    height: 48px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.order-details-button:hover {
+    cursor: pointer;
+}
+
+.order-details-button.shipped {
+    color: #FFAA00;
+    background: rgba(247, 203, 115, 0.25);
+}
+
+.order-details-button.shipped:hover {
+    background: rgba(247, 203, 115, 0.5);
+}
+
+.order-details-button.delivered {
+    color: #7EBC00;
+    background: rgba(154, 205, 50, 0.25);
+}
+
+.order-details-button.delivered:hover {
+    background: rgba(154, 205, 50, 0.5);
+}
+
+.order-details-button.canceled {
+    color: #CB0E03;
+    background: rgba(203, 14, 3, 0.25);
+}
+
+.order-details-button.canceled:hover {
+    background: rgba(203, 14, 3, 0.5); 
+}
+
