@@ -8,7 +8,7 @@
         flex-wrap: wrap;
       }
     
-      .display-admin-orders > div {
+      .display-admin-orders > a {
         width: calc(50% - 10px);
         margin: 5px;
       }

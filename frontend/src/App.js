@@ -25,7 +25,9 @@ import ProductPage from "./components/ProductPage"
 import Home from "./pages/home/Home"
 import AdminDashboard from "./pages/new_admin/pages/AdminDashboard"
 import AdminOrders from "./pages/new_admin/pages/AdminOrders"
+import AdminOrdersDetailsPage from './pages/new_admin/pages/AdminOrdersDetailsPage';
 import AdminCustomers from './pages/new_admin/pages/AdminCustomers'
+import AdminCustomersDetailsPage from './pages/new_admin/pages/AdminCustomerDetailsPage'
 import AdminProducts from './pages/new_admin/pages/AdminProducts'
 import Shop from "./pages/shop/Shop"
 import Cart from "./pages/cart/Cart"
@@ -180,7 +182,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/admin/orders" element={<AdminOrders/>} />
+        <Route path="/admin/orders/:id" element={<AdminOrdersDetailsPage/>} />
         <Route path="/admin/customers" element={<AdminCustomers/>} />
+        <Route path="/admin/customers/:id" element={<AdminCustomersDetailsPage/>} />
         <Route path="/admin/products" element={<AdminProducts/>} />
         {user && user.role === 1 ?  <Route path="/admin/products/:id" element={<EditProductModel/>} /> : null}
         <Route path="/shop/products/:id" element={<ScrollToTop><ProductPage/></ScrollToTop>} />

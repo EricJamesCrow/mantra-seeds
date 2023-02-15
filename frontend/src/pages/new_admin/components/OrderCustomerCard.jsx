@@ -1,5 +1,6 @@
 import React from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { NavLink } from 'react-router-dom'
 
 // styles
 import './OrderCustomerCard.css'
@@ -38,7 +39,7 @@ export default function OrderCustomerCard( { item } ) {
       ]
 
   return (
-    <>
+    <NavLink to={`/admin/${item.id}s/${cardId}`}>
     {!desktop && <div className="order-customer-card-container">
       <div className="order-customer-card-see-details-container">
         <div>{item.dateCreated}</div>
@@ -93,6 +94,6 @@ export default function OrderCustomerCard( { item } ) {
         </div>
         </div>
     }
-    </>
+    </NavLink>
   )
 }

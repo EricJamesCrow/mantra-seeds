@@ -1,0 +1,17 @@
+.admin-orders-details-page-container {
+    padding-top: 4rem;
+}
+
+.details-page-btn {
+    background: #F2F2F4;
+    border-radius: 5px;
+    border: none;
+    width: 35px;
+    height: 35px;
+    transition: all 0.1s ease;
+}
+
+.details-page-btn:hover {
+    cursor: pointer;
+    background: #E6E6E6;
+}
