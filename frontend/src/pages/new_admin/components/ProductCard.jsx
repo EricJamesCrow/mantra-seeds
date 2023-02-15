@@ -27,9 +27,9 @@ export default function ProductCard( {item} ) {
       }
 
     const cardDetails = [
-        { id: 1, title: 'Name', value: name},
-        { id: 2, title: 'Price', value: price, class: 'gray', status: status},
-        { id: 3, title: 'Quantity', value: quantity},
+        { id: 1, title: 'Name', value: name, class: 'gray',},
+        { id: 2, title: 'Price', value: price, status: status},
+        { id: 3, title: 'Quantity', value: quantity,  class: 'gray'},
       ]
 
   return (

@@ -31,10 +31,10 @@ export default function OrderCustomerCard( { item } ) {
     const title4 = item.id === 'order' ? 'Delivery Status' : item.id === 'customer' ? 'Total Spent' : null
 
     const cardDetails = [
-        { id: 1, title: title1, value: var1},
-        { id: 2, title: title2, value: var5, class: 'gray', status: item.id === 'order' ? var2 : null},
-        { id: 3, title: title3, value: var3},
-        { id: 4, title: title4, value: var4Value, class: 'gray', status: item.id === 'order' ? var4 : null}
+        { id: 1, title: title1, value: var1, class: 'gray', },
+        { id: 2, title: title2, value: var5, status: item.id === 'order' ? var2 : null},
+        { id: 3, title: title3, value: var3, class: 'gray'},
+        { id: 4, title: title4, value: var4Value, status: item.id === 'order' ? var4 : null}
       ]
 
   return (
