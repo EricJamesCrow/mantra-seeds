@@ -17,8 +17,8 @@ export default function AdminOrdersDetailsPage() {
   const { orders } = useSelector(state => state.orders)
   const order = orders.find(o => o._id === id)
 
-  const address = order.address
-  console.log(address)
+  const { firstName, lastName, state, city, street, zip } = order.address
+  const formattedAddress = `<div><span style="display: inline-block">${firstName} ${lastName}</span><br>${street}<br>${city}, ${state} ${zip}<br>United States</div>`
   const orderNumber = order.orderNumber
   const customer = order.email
   const shippingMethod = order.shipping.delivery
@@ -79,8 +79,7 @@ export default function AdminOrdersDetailsPage() {
         </div>
         <div className={`order-customer-card-details-order-details-address gray`}>
           <div>Shipping Address</div>
-          <div>1024 Address, Santa Cruz CA
-95065-9623, United States</div>
+          <div dangerouslySetInnerHTML={{ __html: formattedAddress }}></div>
         </div>
         <div className="order-details-button-container">
           <button className="order-details-button shipped">Mark Order as Shipped</button>

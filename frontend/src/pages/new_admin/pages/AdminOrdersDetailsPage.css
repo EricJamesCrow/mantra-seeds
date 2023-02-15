@@ -71,7 +71,8 @@
     padding-top: 0.5rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 4rem;
+    grid-column-gap: 4rem;
+    grid-row-gap: 1rem;
 }
 
 .order-customer-card-details-order-details-address {
@@ -86,6 +87,7 @@
     min-height: 115px;
     margin-top: 1rem;
     border-radius: 5px;
+    padding-bottom: 1rem;
 }
 
 .order-customer-card-details-order-details-address.customer {
