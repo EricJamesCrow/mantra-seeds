@@ -9,7 +9,7 @@ import { faBars, faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons
 // styles
 import './AdminHeader.css'
 
-export default function AdminHeader() {
+export default function AdminHeader( { setShowAddProduct }) {
     const desktop = useMediaQuery('(min-width:980px)');
     const location = useLocation();
     
@@ -28,6 +28,10 @@ export default function AdminHeader() {
       } else if (location.pathname === '/admin/products') {
         headerText = 'Products';
       }
+
+    const handleCreateProduct = () => {
+      setShowAddProduct(true);
+    }
 
   return (
     <>
@@ -55,7 +59,7 @@ export default function AdminHeader() {
                   />
           </button>
           {headerText === 'Products' &&
-          <button className="admin-filter-sort-btn desktop admin-header">
+          <button className="admin-filter-sort-btn desktop admin-header" onClick={handleCreateProduct}>
           <FontAwesomeIcon 
             icon={faPlus}
             style={{

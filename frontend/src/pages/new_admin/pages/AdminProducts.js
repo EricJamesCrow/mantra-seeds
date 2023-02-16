@@ -5,11 +5,13 @@ import AdminHeader from '../components/AdminHeader'
 import FilterSort from '../components/FilterSort'
 import SideBar from '../components/SideBar'
 import ProductCard from '../components/ProductCard'
+import AddProduct from '../components/AddProduct'
 
 //redux
 import { useSelector } from 'react-redux'
 
 export default function AdminProducts() {
+  const [showAddProduct, setShowAddProduct] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const products = useSelector(state => state.products.products);
   if (!products) return null; // only render once redux is loaded
@@ -32,7 +34,7 @@ export default function AdminProducts() {
     <div className='admin-side-bar-main-content-container'>
     <SideBar/>
     <div className="admin-main-content">
-    <AdminHeader/>
+    <AdminHeader setShowAddProduct={setShowAddProduct}/>
     <FilterSort results={productsData.length} setSearchTerm={setSearchTerm}/>
     <div className="display-admin-orders">
     {productsData.map(item => (
@@ -45,6 +47,10 @@ export default function AdminProducts() {
     </div>
     </div>
     </div>
+    {showAddProduct &&
+    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 }}>
+    <AddProduct setShowAddProduct={setShowAddProduct}/>
+    </div>}
     </>
   )
 }
