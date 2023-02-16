@@ -34,14 +34,44 @@
     margin-bottom: 1rem;
 }
 
+.admin-filter-sort-btn.admin-header {
+    background: #F7F9FB;
+    border: 1px solid #BCBDBC;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #1A1A1A;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+}
+
+.admin-filter-sort-btn.admin-header > div:nth-child(2) {
+    font-size: 14px !important;
+}
+
 @media (min-width: 420px) {
     .admin-container {
         padding-top: 1rem;
     }
 }
 
+@media (min-width: 620px) and (max-width: 980px) {
+    .admin-filter-sort-btn-container.admin-header {
+        margin-left: 0;
+        justify-content: center;
+    }
+}
+
 @media (min-width: 980px) {
     .admin-container > div:first-child > svg:first-child {
         display: none;
+    }
+    .admin-filter-sort-btn-container.admin-header {
+        justify-content: flex-end;
+        width: 95%;
     }
 }
