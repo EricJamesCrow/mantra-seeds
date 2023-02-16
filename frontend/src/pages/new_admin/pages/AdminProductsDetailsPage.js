@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteProduct } from '../../../redux/slices/productSlice';
 
 // styles
 import './AdminOrdersDetailsPage.css'
@@ -10,11 +11,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
+const PRODUCTS_API_URL = '/api/products/'
+
 export default function AdminCustomersDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const { products } = useSelector(state => state.products)
   const product = products.find(p => p._id === id)
+  const user = useSelector(state => state.auth.user);
+  const token = user.token;
+  const [isActive, setIsActive] = useState(false);
 
   const name = product.name
   const price = `$${(product.price / 100).toFixed(2)}`
@@ -31,6 +38,31 @@ export default function AdminCustomersDetailsPage() {
     { id: 5, title: "Strain", value: strain, class: 'gray'},
     { id: 6, title: "THC", value: thc},
   ]
+
+  const handleDelete =  async (event) => {
+    if (isActive && event.target === document.activeElement) {
+      const response = await fetch(PRODUCTS_API_URL + product._id, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `${token}` // set the authorization header
+        }
+    })
+    const json = await response.json()
+
+    if (response.ok) {
+        dispatch(deleteProduct(json))
+        navigate(-1); // Won't navigate to previous page if refresh is hit first.
+    }
+    }
+  }
+
+  function handleMouseDown() {
+    setIsActive(true);
+  }
+
+  function handleMouseUp() {
+    setIsActive(false);
+  }
 
   return (
     <div className="admin-orders-details-page-container">
@@ -69,7 +101,12 @@ export default function AdminCustomersDetailsPage() {
         </div>
         <div className="order-details-button-container">
           <button className="order-details-button pending">Edit Product Details</button>
-          <button className="order-details-button canceled">Delete Product</button>
+          <button 
+          className="order-details-button canceled"
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onTransitionEnd={handleDelete}
+          >Delete Product</button>
         </div>
       </div>
     </div>

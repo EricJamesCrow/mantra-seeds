@@ -159,11 +159,14 @@
 
 .order-details-button.canceled {
     color: #CB0E03;
-    background: rgba(203, 14, 3, 0.25);
+    background: linear-gradient(to right, rgba(203, 14, 3, 0.5) 50%, rgba(203, 14, 3, 0.25) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
 }
 
-.order-details-button.canceled:hover {
-    background: rgba(203, 14, 3, 0.5); 
+.order-details-button.canceled:active {
+    transition: all 1s ease-out;
+    background-position: left bottom;
 }
 
 .customer-details-profile-pic {
