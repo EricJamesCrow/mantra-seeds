@@ -71,6 +71,7 @@ export default function AdminHeader() {
         <span></span>
         </div>
     </div>
+    {desktop && <div className="admin-header-desktop-span"><span></span></div>}
     </>
   )
 }
