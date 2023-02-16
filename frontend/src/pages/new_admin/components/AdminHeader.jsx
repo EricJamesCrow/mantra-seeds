@@ -43,7 +43,7 @@ export default function AdminHeader() {
             />
             <div>{headerText}</div>
             </div>
-            <div className="admin-filter-sort-btn-container admin-header">
+            {headerText !== "Dashboard" && <div className={headerText === 'Products' ? `admin-filter-sort-btn-container admin-header` : `admin-filter-sort-btn-container admin-header not-products`}>
             <button className="admin-filter-sort-btn desktop admin-header">
             <div style={{ paddingRight: "8px" }}>EXPORT</div>
           <FontAwesomeIcon 
@@ -66,7 +66,7 @@ export default function AdminHeader() {
             <div>CREATE PRODUCT</div>
           </button>
           }
-          </div>
+          </div>}
             <div>
         <span></span>
         </div>

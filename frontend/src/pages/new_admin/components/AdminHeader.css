@@ -53,6 +53,10 @@
     font-size: 14px !important;
 }
 
+.admin-filter-sort-btn-container.not-products {
+    justify-content: flex-end !important;
+}
+
 @media (min-width: 420px) {
     .admin-container {
         padding-top: 1rem;
@@ -86,6 +90,7 @@
     .admin-header-desktop-span {
         display: flex;
         justify-content: center;
+        background: #F7F9FB;
     }
 
     .admin-header-desktop-span > span {
