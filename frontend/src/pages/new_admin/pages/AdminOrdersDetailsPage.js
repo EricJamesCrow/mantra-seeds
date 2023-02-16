@@ -49,7 +49,7 @@ export default function AdminOrdersDetailsPage() {
       </button>
       <div className="order-customer-card-id-btn-container">
       <div>Order: #{orderNumber}</div>
-      <button className={`order-customer-card-btn active`}>{"Active"}</button>
+      <button className={`order-customer-card-btn pending`}>{"Pending"}</button>
       </div>
       <div className="order-customer-card-details-container">
         {cardDetails.map(item => (

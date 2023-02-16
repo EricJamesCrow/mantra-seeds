@@ -77,7 +77,7 @@ export default function AdminCustomersDetailsPage() {
       </button>
       <div className="order-customer-card-id-btn-container">
       <div>{name}</div>
-      <button className={`order-customer-card-btn active`}>{"Active"}</button>
+      <button className={`order-customer-card-btn active`}>{"In Stock"}</button>
       </div>
       <div className="order-customer-card-details-container">
       <div className="product-card-image-details-container-desktop products">
