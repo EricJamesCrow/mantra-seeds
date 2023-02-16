@@ -9,7 +9,7 @@ import './FilterSort.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faSort, faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-export default function FilterSort( { results }) {
+export default function FilterSort( { results, setSearchTerm }) {
     const desktop = useMediaQuery('(min-width:980px)');
 
     let customers = false;
@@ -91,7 +91,12 @@ export default function FilterSort( { results }) {
           fontSize: "1.3rem"
         }}
       />
-    <input type="text" id="searchInput" placeholder={`Search ${searchText}`} class="filter-sort-search-input"/>
+    <input type="text" 
+    id="searchInput" 
+    placeholder={`Search ${searchText}`} 
+    class="filter-sort-search-input"
+    onChange={(e) => setSearchTerm(e.target.value)}
+    />
     </div>
     </form>
     <div className="admin-filter-sort-btn-container">

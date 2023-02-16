@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // components
 import AdminHeader from '../components/AdminHeader'
@@ -10,10 +10,13 @@ import OrderCustomerCard from '../components/OrderCustomerCard'
 import { useSelector } from 'react-redux'
 
 export default function AdminCustomers() {
+  const [searchTerm, setSearchTerm] = useState('');
   const customers = useSelector(state => state.customers.customers);
   if (!customers) return null; // only render once redux is loaded
 
-  const customersData = customers.map(customer => ({
+  const customersData = customers
+  .filter(customer => customer.email.toLowerCase().includes(searchTerm.toLowerCase()))
+  .map(customer => ({
     id: "customer",
     cardId: customer._id,
     dateCreated: customer.createdAt,
@@ -30,7 +33,7 @@ export default function AdminCustomers() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader/>
-    <FilterSort results={customersData.length}/>
+    <FilterSort results={customersData.length} setSearchTerm={setSearchTerm}/>
     <div className="display-admin-orders">
     {customersData.map(item => (
       <OrderCustomerCard 

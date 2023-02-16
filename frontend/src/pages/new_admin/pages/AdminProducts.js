@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // components
 import AdminHeader from '../components/AdminHeader'
@@ -10,10 +10,13 @@ import ProductCard from '../components/ProductCard'
 import { useSelector } from 'react-redux'
 
 export default function AdminProducts() {
+  const [searchTerm, setSearchTerm] = useState('');
   const products = useSelector(state => state.products.products);
   if (!products) return null; // only render once redux is loaded
 
-  const productsData = products.map(product => ({
+  const productsData = products
+  .filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  .map(product => ({
     id: "product",
     cardId: product._id,
     dateCreated: product.createdAt,
@@ -30,7 +33,7 @@ export default function AdminProducts() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader/>
-    <FilterSort results={productsData.length}/>
+    <FilterSort results={productsData.length} setSearchTerm={setSearchTerm}/>
     <div className="display-admin-orders">
     {productsData.map(item => (
       <ProductCard 

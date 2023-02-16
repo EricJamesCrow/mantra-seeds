@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 //redux
 import { useSelector } from 'react-redux'
@@ -14,12 +14,18 @@ import OrderCustomerCard from '../components/OrderCustomerCard'
 
 
 export default function AdminOrders() {
+  const [searchTerm, setSearchTerm] = useState('');
   const orders = useSelector(state => state.orders.orders);
   if (!orders) return null; // only render once redux is loaded
 
-  const ordersData = orders.map(order => ({
+  const ordersData = orders
+  .filter(order => 
+    order.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    order.email.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  .map(order => ({
     id: "order",
-    cardId: order._id,
+    cardId: `#${order.orderNumber}`,
     dateCreated: order.createdAt,
     var1: order.email,
     var2: "pending",
@@ -34,7 +40,7 @@ export default function AdminOrders() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader/>
-    <FilterSort results={ordersData.length}/>
+    <FilterSort results={ordersData.length} setSearchTerm={setSearchTerm}/>
     <div className="display-admin-orders">
     {ordersData.map(item => (
       <OrderCustomerCard 
