@@ -161,7 +161,7 @@ export default function FilterSort( { results, setSearchTerm }) {
     </div>
     </div>
     <div className="admin-page-results-container">
-      <div>{`1 - ${results} of ${results} Results`}</div>
+      <div>{results === 0 ? `0 - ${results} of ${results} Results` : `1 - ${results} of ${results} Results`}</div>
       <div>Results per Page: </div>
     </div>
     <div className="admin-desktop-sort">

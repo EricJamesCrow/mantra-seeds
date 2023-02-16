@@ -58,7 +58,7 @@ export default function OrderCustomerCard( { item } ) {
       <span></span>
       </div>
       <div className="order-customer-card-id-btn-container">
-        <div>{cardId}</div>
+        <div>{item.id === 'order' ? `#${item.orderNumber}` : item.cardId}</div>
         <button className={`order-customer-card-btn ${var2}`}>{toTitleCase(var2)}</button>
       </div>
       <div className="order-customer-card-details-container">

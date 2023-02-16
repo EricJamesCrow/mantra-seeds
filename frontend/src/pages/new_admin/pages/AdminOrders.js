@@ -25,7 +25,8 @@ export default function AdminOrders() {
     )
   .map(order => ({
     id: "order",
-    cardId: `#${order.orderNumber}`,
+    cardId: order._id,
+    orderNumber: order.orderNumber,
     dateCreated: order.createdAt,
     var1: order.email,
     var2: "pending",
