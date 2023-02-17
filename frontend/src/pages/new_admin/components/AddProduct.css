@@ -39,34 +39,42 @@
     font-weight: 500;
     font-size: 16px;
     color: #1A1A1A;
+    min-height: 100vh;
 }
 
 .add-product-form .form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1rem;
+    width: 85%;
+    margin: 0 auto;
+    padding-bottom: 1rem;
   }
-  
-  .add-product-form .form-group label {
-    text-align: left;
-    margin-bottom: 0.5rem;
-  }
-  
+
   .add-product-form .form-group input {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    border: 1px solid #ccc;
+    margin-top: 0.5rem;
   }
-  
-  .add-product-form .form-group-two-cols {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+
+  .add-product-form .form-group:last-child {
+    height: 300px;
   }
-  
+
   .add-product-form .form-group-two-cols label {
     margin-right: 1rem;
   }
+
+  .form-group-two-cols {
+    display: flex;
+    justify-content: center;
+  }
   
+  .form-group-two-cols > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-group-two-cols > div > label {
+    width: 75%;
+  }
+  
+  .form-group-two-cols > div > input {
+    width: 100%;
+  }

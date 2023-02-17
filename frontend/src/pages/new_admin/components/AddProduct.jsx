@@ -7,6 +7,12 @@ import './AddProduct.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 
+// chakra ui
+import { Input, InputGroup, InputLeftElement, InputRightElement } from "@chakra-ui/react";
+import { Textarea } from '@chakra-ui/react'
+import { CheckIcon } from "@chakra-ui/icons";
+
+
 export default function AddProduct( { setShowAddProduct }) {
     const handleClose = () => {
         setShowAddProduct(false);
@@ -33,17 +39,30 @@ export default function AddProduct( { setShowAddProduct }) {
 <form className="add-product-form">
   <div className="form-group">
     <label>Product Name</label>
-    <input/>
+    <Input variant='outline' className="add-product-input"/>
   </div>
   <div className="form-group">
     <label>Description</label>
-    <input/>
+    <Textarea style={{ marginTop: "0.5rem"}} />
   </div>
-  <div className="form-group form-group-two-cols">
+  <div className="form-group-two-cols">
+    <div>
     <label>Price</label>
-    <input/>
+    <InputGroup style={{ width: "85%", marginTop: "0.5rem"}}>
+    <InputLeftElement
+      pointerEvents='none'
+      color='gray.300'
+      fontSize='1.2em'
+      children='$'
+    />
+    <Input placeholder='Enter amount' />
+    <InputRightElement children={<CheckIcon color='green.500' />} />
+  </InputGroup>
+  </div>
+  <div>
     <label>Chakra</label>
-    <input/>
+    <Input variant='outline' style={{ width: "85%", marginTop: "0.5rem"}}/>
+    </div>
   </div>
 </form>
 
