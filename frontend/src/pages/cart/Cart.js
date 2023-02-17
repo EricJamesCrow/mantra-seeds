@@ -27,7 +27,7 @@ export default function Cart() {
 
   return (
     <>
-    <div style={{ paddingTop: '50px', zIndex: 1 }}>
+    <div style={{ zIndex: 1 }}>
     <div className="add-product">
     <div>SHOPPING CART</div>
     <FontAwesomeIcon

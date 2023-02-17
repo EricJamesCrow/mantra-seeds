@@ -27,7 +27,8 @@ const getProduct = async (req, res) => {
 
 // create new product
 const createProduct = async (req, res) => {
-    const {name, description, price, chakra, strain, thc} = req.body
+    // const {name, description, price, chakra, strain, thc} = req.body
+    const {name, description, price, chakra} = req.body
 
     let emptyFields = []
 
@@ -40,19 +41,20 @@ const createProduct = async (req, res) => {
     if(!chakra) {
         emptyFields.push('chakra')
     }
-    if(!strain) {
-        emptyFields.push('strain')
-    }
-    if(!thc) {
-        emptyFields.push('thc')
-    }
+    // if(!strain) {
+    //     emptyFields.push('strain')
+    // }
+    // if(!thc) {
+    //     emptyFields.push('thc')
+    // }
     if(emptyFields.length > 0) {
         return res.status(400).json({ error: 'Please fill in all the fields', emptyFields})
     }
 
     // add doc to db
     try {
-      const product = await Product.create({name, description, price, chakra, strain, thc})
+    //   const product = await Product.create({name, description, price, chakra, strain, thc})
+    const product = await Product.create({name, description, price, chakra})
       res.status(200).json(product)
     } catch (error) {
       res.status(400).json({error: error.message})

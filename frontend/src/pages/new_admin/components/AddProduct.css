@@ -9,7 +9,7 @@
 }
 
 .add-product-container {
-    padding-top: 4rem;
+    margin-top: 4rem;
     background: #FFFFFF;
     width: 100%;
 }
@@ -75,5 +75,6 @@
     width: 75%;
   }
   
-  .form-group-two-cols > div > select {
-  }
+.order-details-button-container.create-product {
+  margin: 10rem auto;
+}

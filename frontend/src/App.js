@@ -178,6 +178,7 @@ function App() {
       updateFilter={updateFilter}
       ref={theRef => ChildRef["navbar"] = theRef}
       />
+      <div className="routes">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin/dashboard" element={<AdminDashboard/>} />
@@ -187,16 +188,17 @@ function App() {
         <Route path="/admin/customers/:id" element={<AdminCustomersDetailsPage/>} />
         <Route path="/admin/products" element={<AdminProducts/>} />
         <Route path="/admin/products/:id" element={<AdminProductsDetailsPage/>} />
-        <Route path="/shop/products/:id" element={<ScrollToTop><ProductPage/></ScrollToTop>} />
+        <Route path="/shop/products/:id" element={<ProductPage/>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
-        <Route path="/cart/checkout" element={<ScrollToTop><Checkout/></ScrollToTop>} />
-        <Route path="/cart/checkout/order-success" element={<ScrollToTop><OrderSuccess/></ScrollToTop>} />
+        <Route path="/cart/checkout" element={<Checkout/>} />
+        <Route path="/cart/checkout/order-success" element={<OrderSuccess/>} />
         <Route path="/contact" element={<Contact/>} />
-        <Route path="/cart" element={<ScrollToTop><Cart/></ScrollToTop>} />
+        <Route path="/cart" element={<Cart/>} />
         <Route path="/profile" 
-        element={JSON.parse(localStorage.getItem('user')) ? <ScrollToTop><Profile/></ScrollToTop> : <ShowLoginWrapper><Navigate to="/"/></ShowLoginWrapper>} 
+        element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <ShowLoginWrapper><Navigate to="/"/></ShowLoginWrapper>} 
         />
       </Routes>
+      </div>
       <div className="copyright">
       <div>© Mantra Seeds 2022</div>
     </div>

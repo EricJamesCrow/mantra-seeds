@@ -44,7 +44,7 @@ nav {
 .navbar-links li:not(:nth-last-child(-n+2)) a {
     text-decoration: none;
     color: white;
-    padding: 1rem;
+    padding: .75rem 1rem;
     display: block;
     font-family: 'Futura';
     font-style: normal;
@@ -58,8 +58,8 @@ nav {
 }
 
 .cannabis {
-    width: 45px;
-    height: 45px;
+    width: 36px;
+    height: 36px;
     left: 10px;
     top: 20px;
 }
@@ -68,7 +68,7 @@ nav {
     font-family: 'Overseer';
     font-style: normal;
     font-weight: 400;
-    font-size: 38px;
+    font-size: 30.4px;
     margin: .5rem;
     text-align: center;
     color: #FFFFFF;
@@ -178,19 +178,5 @@ nav {
 
     .navbar-links li a {
         padding: .5rem 1rem;
-    }
-}
-
-@media (max-width: 420px) {
-    .title {
-        font-size: calc(38px * .8)
-    }  
-    .cannabis {
-        width: calc(45px * .8);
-        height: calc(45px * .8);
-    }
-    .toggle-button {
-        width: calc(30px * .8);
-        height: calc(21px * .8);
     }
 }

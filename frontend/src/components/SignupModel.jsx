@@ -5,10 +5,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 
-// material ui
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
-import Checkbox from '@mui/material/Checkbox';
+// chakra ui
+import { Checkbox } from '@chakra-ui/react'
+import { Input } from "@chakra-ui/react";
 
 // styles
 import "./SignupModel.css"
@@ -16,26 +15,6 @@ import "./SignupModel.css"
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
-
-const CssTextField = styled(TextField)({
-    '& label.Mui-focused': {
-      color: '#00D0C8',
-    },
-    '& .MuiInput-underline:after': {
-    //   borderBottomColor: 'green',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        // borderColor: 'red',
-      },
-      '&:hover fieldset': {
-        // borderColor: 'yellow',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#00D0C8',
-      },
-    },
-  });
 
 export default function LoginModel( { showSignupFields, setShowSignup } ) {
     const [email, setEmail] = useState('')
@@ -73,7 +52,7 @@ export default function LoginModel( { showSignupFields, setShowSignup } ) {
     </div>
     <form className="login-fields" onSubmit={handleSubmit}>
     <div style={{width: "90%"}}>
-    <CssTextField id="outlined-email-input" 
+    <Input id="outlined-email-input" 
                label="Email" 
                variant="outlined"
                type="email"
@@ -82,7 +61,7 @@ export default function LoginModel( { showSignupFields, setShowSignup } ) {
                 value={email} />
     </div>
     <div style = {{width: "90%", paddingTop: "20px"}}>
-    <CssTextField id="outlined-password-input" 
+    <Input id="outlined-password-input" 
                label="Password" 
                variant="outlined" 
                 type="password"
@@ -92,9 +71,7 @@ export default function LoginModel( { showSignupFields, setShowSignup } ) {
     />
     </div>
     <div style={{ display: "flex", alignItems: "center", color: "#454545", marginRight: "auto"}}>
-    <Checkbox 
-    disableElevation
-    disableRipple/>
+    <Checkbox />
     <Link>I agree to the terms and conditions.</Link>
     </div>
     <button disabled={isLoading}>CREATE ACCOUNT</button>

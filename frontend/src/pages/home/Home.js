@@ -51,11 +51,11 @@ export default function Home() {
           item={product}
           />
         ))} */}
-        {products &&
+        {/* {products &&
         <BootstrapCarousel
         items={products.slice(0, 8)}
         />
-        }
+        } */}
         </div>
     </div>
     <div className="special-deals">
@@ -66,11 +66,11 @@ export default function Home() {
           item={product}
           />
         ))} */}
-        {products &&
+        {/* {products &&
         <BootstrapCarousel
         items={products.slice(0, 3)}
         />
-        }
+        } */}
       </div>
     </div>
     <div className="about">

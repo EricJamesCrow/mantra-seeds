@@ -21,11 +21,11 @@ const productSchema = new Schema({
     },
     strain: {
         type: String,
-        required: true
+        required: false
     },
     thc: {
         type: String,
-        required: true
+        required: false
     }
 }, { timestamps: true})
 

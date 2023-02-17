@@ -1,5 +1,5 @@
 // react
-import React, { useState } from 'react';
+import React from 'react';
 import Carousel from 'react-material-ui-carousel'
 import { useMediaQuery } from 'react-responsive'
 
