@@ -11,6 +11,7 @@ import { faX } from '@fortawesome/free-solid-svg-icons'
 import { Input, InputGroup, InputLeftElement, InputRightElement } from "@chakra-ui/react";
 import { Textarea } from '@chakra-ui/react'
 import { CheckIcon } from "@chakra-ui/icons";
+import { Select } from '@chakra-ui/react'
 
 
 export default function AddProduct( { setShowAddProduct }) {
@@ -59,9 +60,17 @@ export default function AddProduct( { setShowAddProduct }) {
     <InputRightElement children={<CheckIcon color='green.500' />} />
   </InputGroup>
   </div>
-  <div>
-    <label>Chakra</label>
-    <Input variant='outline' style={{ width: "85%", marginTop: "0.5rem"}}/>
+  <div style={{ marginRight: "1rem"}}>
+    <label style={{ paddingBottom: "0.5rem"}}>Chakra</label>
+    <Select placeholder="Select" style={{ marginRight: "2rem"}}>
+        <option value='root'>Root</option>
+        <option value='sacral'>Sacral</option>
+        <option value='solar'>Solar</option>
+        <option value='heart'>Heart</option>
+        <option value='throat'>Throat</option>
+        <option value='third-eye'>Third Eye</option>
+        <option value='crown'>Crown</option>
+    </Select>
     </div>
   </div>
 </form>

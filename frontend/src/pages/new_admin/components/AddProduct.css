@@ -75,6 +75,5 @@
     width: 75%;
   }
   
-  .form-group-two-cols > div > input {
-    width: 100%;
+  .form-group-two-cols > div > select {
   }
