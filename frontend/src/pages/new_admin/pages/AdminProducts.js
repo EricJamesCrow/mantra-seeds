@@ -48,7 +48,7 @@ export default function AdminProducts() {
     </div>
     </div>
     {showAddProduct &&
-    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1 }}>
+    <div style={{ position: 'fixed', top: '61px', left: 0, right: 0, zIndex: 1 }}>
     <AddProduct setShowAddProduct={setShowAddProduct}/>
     </div>}
     </>

@@ -11,6 +11,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
+// components
+import EditProduct from '../components/EditProduct'
+
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function AdminCustomersDetailsPage() {
@@ -22,6 +25,7 @@ export default function AdminCustomersDetailsPage() {
   const user = useSelector(state => state.auth.user);
   const token = user.token;
   const [isActive, setIsActive] = useState(false);
+  const [showEditProduct, setShowEditProduct] = useState(false);
 
   const name = product.name
   const price = `$${(product.price / 100).toFixed(2)}`
@@ -56,6 +60,10 @@ export default function AdminCustomersDetailsPage() {
     }
   }
 
+  const handleUpdate = () => {
+    setShowEditProduct(true)
+  }
+
   function handleMouseDown() {
     setIsActive(true);
   }
@@ -65,6 +73,7 @@ export default function AdminCustomersDetailsPage() {
   }
 
   return (
+    <>
     <div className="admin-orders-details-page-container">
       <button className="details-page-btn" onClick={() => navigate(-1)}>
       <FontAwesomeIcon 
@@ -100,7 +109,7 @@ export default function AdminCustomersDetailsPage() {
           <div>{description}</div>
         </div>
         <div className="order-details-button-container">
-          <button className="order-details-button pending">Edit Product Details</button>
+          <button className="order-details-button pending" onClick={handleUpdate}>Edit Product Details</button>
           <button 
           className="order-details-button canceled"
           onMouseDown={handleMouseDown}
@@ -110,5 +119,10 @@ export default function AdminCustomersDetailsPage() {
         </div>
       </div>
     </div>
+    {showEditProduct &&
+      <div style={{ position: 'fixed', top: '61px', left: 0, right: 0, zIndex: 1 }}>
+      <EditProduct setShowEditProduct={setShowEditProduct} product={product}/>
+      </div>}
+    </>
   )
 }
