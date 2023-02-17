@@ -57,7 +57,7 @@ export default function AddProduct( { setShowAddProduct }) {
       children='$'
     />
     <Input placeholder='Enter amount' />
-    <InputRightElement children={<CheckIcon color='green.500' />} />
+    {/* <InputRightElement children={<CheckIcon color='green.500' />} /> */}
   </InputGroup>
   </div>
   <div style={{ marginRight: "1rem"}}>
@@ -74,7 +74,6 @@ export default function AddProduct( { setShowAddProduct }) {
     </div>
   </div>
 </form>
-
 </div>
   )
 }
