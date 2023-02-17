@@ -15,6 +15,8 @@ export default function AdminOrdersDetailsPage() {
   const navigate = useNavigate();
   const { products } = useSelector(state => state.products)
   const { orders } = useSelector(state => state.orders)
+
+  if(!orders) return null // This is needed to prevent the page from crashing when the orders are not loaded yet.
   const order = orders.find(o => o._id === id)
 
   const { firstName, lastName, state, city, street, zip } = order.address

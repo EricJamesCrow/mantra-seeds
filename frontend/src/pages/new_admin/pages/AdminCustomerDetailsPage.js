@@ -14,6 +14,7 @@ export default function AdminCustomersDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate();
   const { customers } = useSelector(state => state.customers)
+  if (!customers) return null; // TODO: add loading spinner
   const customer = customers.find(c => c._id === id)
   
   const email = customer.email

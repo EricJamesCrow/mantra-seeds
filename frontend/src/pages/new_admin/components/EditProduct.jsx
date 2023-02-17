@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate} from 'react-router-dom'
 import { updateProduct } from '../../../redux/slices/productSlice';
 
 // styles
@@ -20,12 +19,11 @@ const PRODUCTS_API_URL = '/api/products/'
 export default function AddProduct( { setShowEditProduct, product }) {
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch()
-    const navigate = useNavigate();
     const token = user.token;
 
     const [name, setName] = useState(product.name)
     const [description, setDescription] = useState(product.description)
-    const [price, setPrice] = useState(product.price)
+    const [price, setPrice] = useState((product.price/100).toFixed(2))
     const [chakra, setChakra] = useState(product.chakra)
 
     const [error, setError] = useState(null)
@@ -43,13 +41,13 @@ export default function AddProduct( { setShowEditProduct, product }) {
           headers: { 
             "Authorization": token,
             "Content-Type": "application/json" },
-          body: JSON.stringify({ name, description, price, chakra})
+          body: JSON.stringify({ name, description, price: parseInt(price*100), chakra})
         })
         const json = await response.json()
       
         if (response.ok) {
-          dispatch(updateProduct(json))
-          navigate(-1) // Won't navigate to previous page if refresh is hit first.
+          dispatch(updateProduct(json));
+          setShowEditProduct(false);
         }
     }
       }
@@ -86,7 +84,6 @@ export default function AddProduct( { setShowEditProduct, product }) {
     <Input 
     variant='outline' 
     className="add-product-input"
-    placeholder={product.name}
     onChange={(e) => setName(e.target.value)}
     placeholder={name}
     />
@@ -95,7 +92,6 @@ export default function AddProduct( { setShowEditProduct, product }) {
     <label>Description</label>
     <Textarea 
     style={{ marginTop: "0.5rem"}}
-    placeholder={product.description}
     onChange={(e) => setDescription(e.target.value)}
     placeholder={description}
      />
@@ -110,7 +106,7 @@ export default function AddProduct( { setShowEditProduct, product }) {
       fontSize='1.2em'
       children='$'
     />
-    <Input placeholder='Enter amount'
+    <Input
       onChange={(e) => setPrice(e.target.value)}
       placeholder={price} />
     {/* <InputRightElement children={<CheckIcon color='green.500' />} /> */}

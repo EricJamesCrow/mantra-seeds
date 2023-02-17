@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteProduct } from '../../../redux/slices/productSlice';
@@ -20,13 +20,16 @@ export default function AdminCustomersDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  const { products } = useSelector(state => state.products)
-  const product = products.find(p => p._id === id)
-  const user = useSelector(state => state.auth.user);
-  const token = user.token;
   const [isActive, setIsActive] = useState(false);
   const [showEditProduct, setShowEditProduct] = useState(false);
+  const { products } = useSelector(state => state.products)
+  const user = useSelector(state => state.auth.user);
+  if (!products) return null; // only render once redux is loaded
 
+  const product = products.find(p => p._id === id)
+  const token = user.token
+
+  if(!product) return null
   const name = product.name
   const price = `$${(product.price / 100).toFixed(2)}`
   const chakra = product.chakra

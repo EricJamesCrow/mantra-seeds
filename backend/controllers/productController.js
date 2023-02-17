@@ -89,12 +89,12 @@ const updateProduct = async (req, res) => {
 
     const product = await Product.findOneAndUpdate({_id: id}, {
         ...req.body
-    })
+    }, {new: true})
 
     if (!product) {
         return res.status(400).json({error: 'No such product'})
     }
-
+    console.log(product)
     res.status(200).json(product)
 }
 

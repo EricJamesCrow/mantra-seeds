@@ -10,9 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 
 // chakra ui
-import { Input, InputGroup, InputLeftElement, InputRightElement } from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { Textarea } from '@chakra-ui/react'
-import { CheckIcon } from "@chakra-ui/icons";
 import { Select } from '@chakra-ui/react'
 
 const PRODUCTS_API_URL = '/api/products/'
@@ -37,8 +36,6 @@ export default function AddProduct( { setShowAddProduct }) {
     const handleSubmit = async (e) => {
       e.preventDefault();
       if (isActive && e.target === document.activeElement) {
-
-      console.log(name, description, price, chakra)
     
       const product = { name, description, price: parseInt(price*100), chakra };
     
