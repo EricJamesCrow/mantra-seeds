@@ -15,8 +15,8 @@ import { useSelector } from 'react-redux'
 export default function AdminProducts() {
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1); // pagination
+  const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
   const products = useSelector(state => state.products.products);
   if (!products) return null; // only render once redux is loaded
 
@@ -24,8 +24,8 @@ export default function AdminProducts() {
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfLastItem = currentPage * itemsPerPage; // pagination
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage; // pagination
   const productsData = filteredProducts
     .slice(indexOfFirstItem, indexOfLastItem)
     .map(product => ({
@@ -45,7 +45,7 @@ export default function AdminProducts() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader setShowAddProduct={setShowAddProduct}/>
-    <FilterSort results={filteredProducts.length} setSearchTerm={setSearchTerm} setItemsPerPage={setItemsPerPage}/>
+    <FilterSort results={filteredProducts.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage}/>
     <div className="display-admin-orders">
     {productsData.map(item => (
       <ProductCard 

@@ -12,7 +12,7 @@ import { faFilter, faSort, faSearch, faChevronDown } from '@fortawesome/free-sol
 // chakra ui
 import { Select } from '@chakra-ui/react'
 
-export default function FilterSort( { results, setSearchTerm, setItemsPerPage }) {
+export default function FilterSort( { results, setSearchTerm, currentPage, itemsPerPage, setItemsPerPage }) {
     const desktop = useMediaQuery('(min-width:980px)');
 
     let customers = false;
@@ -81,6 +81,10 @@ export default function FilterSort( { results, setSearchTerm, setItemsPerPage })
         searchText = 'Products';
         products = true
       }
+
+    const handleSelect = (e) => {
+      setItemsPerPage(e.target.value)
+    }
     
   return (
     <div className="admin-filter-sort-component-container">
@@ -164,10 +168,11 @@ export default function FilterSort( { results, setSearchTerm, setItemsPerPage })
     </div>
     </div>
     <div className="admin-page-results-container">
-  <div>{results === 0 ? `0 - ${results} of ${results} Results` : `1 - ${results} of ${results} Results`}</div>
+  <div>{results === 0 ? `0 - ${results} of ${results} Results` :
+      `${(currentPage - 1) * itemsPerPage + 1} - ${Math.min(currentPage * itemsPerPage, results)} of ${results} Results`}</div>
   <div>
     <div>Results per Page:</div>
-    <Select size='xs'>
+    <Select size='xs' onChange={handleSelect}>
       <option value='10'>10</option>
       <option value='20'>20</option>
       <option value='30'>30</option>
