@@ -6,7 +6,6 @@ import FilterSort from '../components/FilterSort'
 import SideBar from '../components/SideBar'
 import ProductCard from '../components/ProductCard'
 import AddProduct from '../components/AddProduct'
-
 import Pagination from '../../../components/Pagination'
 
 //redux

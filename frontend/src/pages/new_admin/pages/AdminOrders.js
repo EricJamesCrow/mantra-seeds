@@ -11,18 +11,25 @@ import AdminHeader from '../components/AdminHeader'
 import FilterSort from '../components/FilterSort'
 import SideBar from '../components/SideBar'
 import OrderCustomerCard from '../components/OrderCustomerCard'
+import Pagination from '../../../components/Pagination'
 
 
 export default function AdminOrders() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1); // pagination
+  const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
   const orders = useSelector(state => state.orders.orders);
   if (!orders) return null; // only render once redux is loaded
 
-  const ordersData = orders
-  .filter(order => 
+  const filteredOrders = orders.filter(order => 
     order.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
     order.email.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    );
+
+  const indexOfLastItem = currentPage * itemsPerPage; // pagination
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage; // pagination
+  const ordersData = filteredOrders
+  .slice(indexOfFirstItem, indexOfLastItem)
   .map(order => ({
     id: "order",
     cardId: order._id,
@@ -41,7 +48,7 @@ export default function AdminOrders() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader/>
-    <FilterSort results={ordersData.length} setSearchTerm={setSearchTerm}/>
+    <FilterSort results={filteredOrders.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage}/>
     <div className="display-admin-orders">
     {ordersData.map(item => (
       <OrderCustomerCard 
@@ -51,6 +58,12 @@ export default function AdminOrders() {
     ))
     }
     </div>
+    <Pagination
+            itemsPerPage={itemsPerPage}
+            totalItems={filteredOrders.length}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
     </div>
     </div>
     </>
