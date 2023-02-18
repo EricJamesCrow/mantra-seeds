@@ -3,6 +3,10 @@
     padding-bottom: 40rem;
 }
 
+.admin-side-bar-main-content-container {
+  background: #F7F9FB
+}
+
 .admin-main-content {
     width: 100%;
   }
