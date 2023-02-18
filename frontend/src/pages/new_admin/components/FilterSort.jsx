@@ -9,7 +9,10 @@ import './FilterSort.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faSort, faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-export default function FilterSort( { results, setSearchTerm }) {
+// chakra ui
+import { Select } from '@chakra-ui/react'
+
+export default function FilterSort( { results, setSearchTerm, setItemsPerPage }) {
     const desktop = useMediaQuery('(min-width:980px)');
 
     let customers = false;
@@ -161,9 +164,18 @@ export default function FilterSort( { results, setSearchTerm }) {
     </div>
     </div>
     <div className="admin-page-results-container">
-      <div>{results === 0 ? `0 - ${results} of ${results} Results` : `1 - ${results} of ${results} Results`}</div>
-      <div>Results per Page: </div>
-    </div>
+  <div>{results === 0 ? `0 - ${results} of ${results} Results` : `1 - ${results} of ${results} Results`}</div>
+  <div>
+    <div>Results per Page:</div>
+    <Select size='xs'>
+      <option value='10'>10</option>
+      <option value='20'>20</option>
+      <option value='30'>30</option>
+      <option value='40'>40</option>
+    </Select>
+  </div>
+</div>
+
     <div className="admin-desktop-sort">
     {customers && customersHeaders.map(item => ( 
       <div>

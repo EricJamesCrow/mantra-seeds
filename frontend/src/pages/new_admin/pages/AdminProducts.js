@@ -45,7 +45,7 @@ export default function AdminProducts() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader setShowAddProduct={setShowAddProduct}/>
-    <FilterSort results={filteredProducts.length} setSearchTerm={setSearchTerm}/>
+    <FilterSort results={filteredProducts.length} setSearchTerm={setSearchTerm} setItemsPerPage={setItemsPerPage}/>
     <div className="display-admin-orders">
     {productsData.map(item => (
       <ProductCard 
