@@ -64,6 +64,13 @@ function App() {
         dispatch(loginAuth(updatedUser))
     }
 
+    if(!response.ok) {
+        // remove the user from local storage
+        localStorage.removeItem('user')
+        // update the state with the merged data
+        dispatch(loginAuth(null))
+    }
+
   } catch (e) {
     // fix this error. user is sometimes undefined
     console.log(e)
@@ -119,7 +126,7 @@ function App() {
         try {
         fetchUser(user)
         } catch(err) {
-            console.log(err)
+          console.log(err)
         }
     }
     if(user) {
