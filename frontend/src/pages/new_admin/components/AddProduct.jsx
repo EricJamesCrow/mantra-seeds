@@ -13,10 +13,12 @@ import { faX } from '@fortawesome/free-solid-svg-icons'
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { Textarea } from '@chakra-ui/react'
 import { Select } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function AddProduct( { setShowAddProduct }) {
+    const toast = useToast()
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch()
     const token = user.token;
@@ -26,16 +28,12 @@ export default function AddProduct( { setShowAddProduct }) {
     const [price, setPrice] = useState('')
     const [chakra, setChakra] = useState('')
 
-    const [error, setError] = useState(null)
-    const [isActive, setIsActive] = useState(false);
-
     const handleClose = () => {
         setShowAddProduct(false);
     }
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      if (isActive && e.target === document.activeElement) {
     
       const product = { name, description, price: parseInt(price*100), chakra };
     
@@ -49,28 +47,32 @@ export default function AddProduct( { setShowAddProduct }) {
       const json = await response.json();
     
       if (!response.ok) {
-        setError(json.error);
+        toast({
+          title: 'Error',
+          description: `${json.error}`,
+          status: 'error',
+          duration: 4000,
+          isClosable: true,
+        })
       }
       if (response.ok) {
+        console.log("new product added");
+        dispatch(createProduct(json));
+        toast({
+          title: 'Product Created.',
+          description: `${name} has been added to the database.`,
+          status: 'success',
+          duration: 10000,
+          isClosable: true,
+        })
         setName("");
         setDescription("");
         setPrice("");
         setChakra("");
-        setError(null);
-        console.log("new product added");
-        dispatch(createProduct(json));
       }
-    }
+    
 
     };
-
-    function handleMouseDown() {
-      setIsActive(true);
-    }
-  
-    function handleMouseUp() {
-      setIsActive(false);
-    }
 
   return (
     <div className="add-product-container">
@@ -90,7 +92,7 @@ export default function AddProduct( { setShowAddProduct }) {
     <span></span>
     </div>
 </div>
-<form className="add-product-form" onSubmit={(e) => e.preventDefault}>
+<form className="add-product-form" onSubmit={handleSubmit}>
   <div className="form-group">
     <label>Product Name</label>
     <Input 
@@ -140,11 +142,7 @@ export default function AddProduct( { setShowAddProduct }) {
   </div>
   <div className="order-details-button-container create-product">
   <button 
-  type="button"
-  className="order-details-button create-product"
-  onMouseDown={handleMouseDown}
-  onMouseUp={handleMouseUp}
-  onTransitionEnd={handleSubmit}>Create Product</button>
+  className="order-details-button delivered">Create Product</button>
 </div>
 </form>
 </div>

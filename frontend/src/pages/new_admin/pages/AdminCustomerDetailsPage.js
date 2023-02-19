@@ -10,7 +10,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import defaultProfilePic from '../../../images/abstract-user-flat.svg'
 
+// chakra ui
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
+  Button,
+  useDisclosure
+} from '@chakra-ui/react'
+
 export default function AdminCustomersDetailsPage() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef()
   const { id } = useParams()
   const navigate = useNavigate();
   const { customers } = useSelector(state => state.customers)
@@ -64,9 +78,35 @@ export default function AdminCustomersDetailsPage() {
         </div>
         <div className="order-details-button-container">
           <button className="order-details-button delivered">Make Customer Admin</button>
-          <button className="order-details-button canceled">Ban Customer</button>
+          <button className="order-details-button delete" onClick={onOpen}>Ban Customer</button>
         </div>
       </div>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Ban Customer
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure you want to ban this customer? You can't undo this action afterwards.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Button>
+              <Button colorScheme='red' onClick={onClose} ml={3}>
+                Ban
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </div>
   )
 }

@@ -181,6 +181,15 @@
     background-position: left bottom;
 }
 
+.order-details-button.delete {
+    color: #CB0E03;
+    background: rgba(203, 14, 3, 0.25);
+}
+
+.order-details-button.delete:hover {
+    background: rgba(203, 14, 3, 0.5)
+}
+
 .customer-details-profile-pic {
     width: 185px;
 }
