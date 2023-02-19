@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // components
 import AdminHeader from '../components/AdminHeader'
@@ -13,6 +13,20 @@ import { useSelector } from 'react-redux'
 
 export default function AdminProducts() {
   const [showAddProduct, setShowAddProduct] = useState(false);
+
+  useEffect(() => {
+    // Disable scrollbar when AddProduct is visible
+    if (showAddProduct) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    // Cleanup the effect
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [showAddProduct]);
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1); // pagination
   const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
@@ -63,7 +77,7 @@ export default function AdminProducts() {
     </div>
     </div>
     {showAddProduct &&
-    <div style={{ position: 'fixed', top: '61px', left: 0, right: 0, zIndex: 1 }}>
+    <div style={{ position: 'fixed', top: '61px', left: 0, right: 0, zIndex: 1, height: 'calc(100vh - 61px)', overflow: 'auto' }}>
     <AddProduct setShowAddProduct={setShowAddProduct}/>
     </div>}
     </>

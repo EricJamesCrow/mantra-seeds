@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteProduct } from '../../../redux/slices/productSlice';
@@ -35,6 +35,20 @@ export default function AdminCustomersDetailsPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [showEditProduct, setShowEditProduct] = useState(false);
+
+  useEffect(() => {
+    // Disable scrollbar when AddProduct is visible
+    if (showEditProduct) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    // Cleanup the effect
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [showEditProduct]);
+
   const { products } = useSelector(state => state.products)
   const user = useSelector(state => state.auth.user);
   if (!products) return null; // only render once redux is loaded
@@ -125,7 +139,7 @@ export default function AdminCustomersDetailsPage() {
       </div>
     </div>
     {showEditProduct &&
-      <div style={{ position: 'fixed', top: '61px', left: 0, right: 0, zIndex: 1 }}>
+      <div style={{ position: 'fixed', top: '61px', left: 0, right: 0, zIndex: 1, height: 'calc(100vh - 61px)', overflow: 'auto' }}>
       <EditProduct setShowEditProduct={setShowEditProduct} product={product}/>
       </div>}
       <AlertDialog
