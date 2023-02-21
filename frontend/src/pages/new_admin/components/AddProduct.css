@@ -11,6 +11,7 @@
 .add-product-container {
     background: #FFFFFF;
     width: 100%;
+    padding-bottom: 0.1rem;
 }
 
 .admin-container-add-product > div:first-child {
@@ -62,6 +63,7 @@
   .form-group-two-cols {
     display: flex;
     justify-content: center;
+    padding-bottom: 2rem;
   }
   
   .form-group-two-cols > div {
@@ -76,4 +78,34 @@
   
 .order-details-button-container.create-product {
   margin: 10rem auto;
+}
+
+.add-product-img-container {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.add-product-img-container > img {
+  border: 2px solid #eaebf8;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.add-product-img-container > img:hover {
+  border-color: #7aafec;
+}
+
+.add-product-img-container > svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.5rem;
+  transition: color 0.1s ease;
+}
+
+.add-product-img-container > svg:hover {
+  cursor: pointer;
+  color: #E53E3E;
 }

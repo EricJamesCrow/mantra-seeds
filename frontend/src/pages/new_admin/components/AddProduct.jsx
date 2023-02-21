@@ -14,10 +14,17 @@ import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { Textarea } from '@chakra-ui/react'
 import { Select } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
+import { DeleteIcon } from '@chakra-ui/icons'
+
+// upload images
+import StyledDropzone from '../../../components/Dropzone';
 
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function AddProduct( { setShowAddProduct }) {
+    const [selectedImages, setSelectedImages] = useState([]);
+
+
     const toast = useToast()
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch()
@@ -35,7 +42,7 @@ export default function AddProduct( { setShowAddProduct }) {
     const handleSubmit = async (e) => {
       e.preventDefault();
     
-      const product = { name, description, price: parseInt(price*100), chakra };
+      const product = { name, images: selectedImages, description, price: parseInt(price*100), chakra };
     
       const response = await fetch(PRODUCTS_API_URL, {
         method: "POST",
@@ -140,6 +147,20 @@ export default function AddProduct( { setShowAddProduct }) {
     </Select>
     </div>
   </div>
+  {selectedImages.map((url, index) => (
+    <div className="add-product-img-container">
+  <img key={index} src={url} alt="Selected" className="add-product-img" />
+  <DeleteIcon onClick={() => {
+      setSelectedImages(prevSelectedImages => {
+        const newSelectedImages = [...prevSelectedImages];
+        newSelectedImages.splice(index, 1);
+        return newSelectedImages;
+      });
+    }}
+  />
+</div>
+))}
+  <StyledDropzone setSelectedImages={setSelectedImages}/>
   <div className="order-details-button-container create-product">
   <button 
   className="order-details-button delivered">Create Product</button>
