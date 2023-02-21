@@ -1,3 +1,5 @@
+const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
 const Product = require('../models/productModel')
 const mongoose = require('mongoose')
 
@@ -25,41 +27,56 @@ const getProduct = async (req, res) => {
     res.status(200).json(product)
 }
 
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  });
+
 // create new product
 const createProduct = async (req, res) => {
-    // const {name, description, price, chakra, strain, thc} = req.body
-    const {name, description, price, chakra} = req.body
-
-    let emptyFields = []
-
-    if(!name) {
-        emptyFields.push('name')
+    const { name, images, description, price, chakra } = req.body;
+  
+    let emptyFields = [];
+  
+    if (!name) {
+      emptyFields.push('name');
     }
-    if(!price) {
-        emptyFields.push('price')
+    if (!images) {
+      emptyFields.push('images');
     }
-    if(!chakra) {
-        emptyFields.push('chakra')
+    if (!price) {
+      emptyFields.push('price');
     }
-    // if(!strain) {
-    //     emptyFields.push('strain')
-    // }
-    // if(!thc) {
-    //     emptyFields.push('thc')
-    // }
-    if(emptyFields.length > 0) {
-        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields})
+    if (!chakra) {
+      emptyFields.push('chakra');
     }
-
-    // add doc to db
+    if (emptyFields.length > 0) {
+      return res.status(400).json({ error: 'Please fill in all the fields', emptyFields });
+    }
+  
+    // Upload images to S3 bucket
+    const uploadedImages = [];
+    for (let i = 0; i < images.length; i++) {
+      const imageBlob = images[i];
+      console.log(imageBlob)
+      // convert this blob into something that S3 can accept
+      const fileName = `${uuidv4()}.jpg`;
+      const imageUrl = await s3.upload({
+        Bucket: process.env.AWS_S3_BUCKET_NAME,
+        Key: fileName,
+        Body: Buffer.from(imageBlob, 'base64'),
+      })
+      uploadedImages.push(imageUrl);
+    }
+  
+    // Add product to database
     try {
-    //   const product = await Product.create({name, description, price, chakra, strain, thc})
-    const product = await Product.create({name, description, price, chakra})
-      res.status(200).json(product)
+      const product = await Product.create({ name, images: uploadedImages, description, price, chakra });
+      res.status(200).json(product);
     } catch (error) {
-      res.status(400).json({error: error.message})
+      res.status(400).json({ error: error.message });
     }
-}
+  };
 
 // delete a product
 const deleteProduct = async (req, res) => {
