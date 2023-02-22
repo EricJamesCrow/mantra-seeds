@@ -66,9 +66,6 @@ const createProduct = async (req, res) => {
       return res.status(400).json({ error: 'Please fill in all the fields', emptyFields });
     }
   
-    // Upload images to S3 bucket
-    const uploadedImages = [];
-    // convert this blob into something that S3 can accept
     const fileName = `${uuidv4()}.jpg`;
     const imageUrl = await s3.upload({
       Bucket: process.env.AWS_S3_BUCKET_NAME,
