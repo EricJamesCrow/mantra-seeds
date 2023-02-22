@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { createProduct } from '../../../redux/slices/productSlice';
 
@@ -24,7 +24,6 @@ const PRODUCTS_API_URL = '/api/products/'
 export default function AddProduct( { setShowAddProduct }) {
     const [selectedImages, setSelectedImages] = useState([]);
 
-
     const toast = useToast()
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch()
@@ -35,6 +34,10 @@ export default function AddProduct( { setShowAddProduct }) {
     const [price, setPrice] = useState('')
     const [chakra, setChakra] = useState('')
 
+    useEffect(() => {
+      console.log(selectedImages)
+    }, [selectedImages])
+
     const handleClose = () => {
         setShowAddProduct(false);
     }
@@ -42,15 +45,22 @@ export default function AddProduct( { setShowAddProduct }) {
     const handleSubmit = async (e) => {
       e.preventDefault();
     
-      const product = { name, images: selectedImages, description, price: parseInt(price*100), chakra };
-    
+      const productData = new FormData();
+      productData.append('name', name);
+      productData.append('description', description);
+      productData.append('price', price);
+      productData.append('chakra', chakra);
+      productData.append('image', selectedImages[0])
+      
+      
       const response = await fetch(PRODUCTS_API_URL, {
-        method: "POST",
+        method: 'POST',
         headers: { 
-          "Authorization": token,
-          "Content-Type": "application/json" },
-        body: JSON.stringify(product),
+          'Authorization': token,
+        },
+        body: productData,
       });
+      
       const json = await response.json();
     
       if (!response.ok) {
@@ -77,8 +87,6 @@ export default function AddProduct( { setShowAddProduct }) {
         setPrice("");
         setChakra("");
       }
-    
-
     };
 
   return (
@@ -160,7 +168,7 @@ export default function AddProduct( { setShowAddProduct }) {
   />
 </div>
 ))}
-  <StyledDropzone setSelectedImages={setSelectedImages}/>
+  <StyledDropzone selectedImages={selectedImages} setSelectedImages={setSelectedImages}/>
   <div className="order-details-button-container create-product">
   <button 
   className="order-details-button delivered">Create Product</button>

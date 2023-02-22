@@ -1,4 +1,4 @@
-import React, {useMemo, useCallback} from 'react';
+import React, {useMemo, useCallback, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 
 import './Dropzone.css'
@@ -31,21 +31,24 @@ const rejectStyle = {
   borderColor: '#ff1744'
 };
 
-export default function StyledDropzone( { setSelectedImages }) {
+const validFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+
+export default function StyledDropzone({ selectedImages, setSelectedImages }) {
+  const [error, setError] = useState('');
+
   const onDrop = useCallback(acceptedFiles => {
     if (acceptedFiles.length > 0) {
-      const urls = acceptedFiles.map(file => URL.createObjectURL(file));
-      setSelectedImages(prevState => [...prevState, ...urls]);
+      const files = acceptedFiles.map(file => 
+        {if (!validFileTypes.find(type => type === file.type)) {
+          setError('File must be in jpeg, jpg, or png format.');
+          return;
+        } else {
+          return file;
+        }});
+      const newImages = [...selectedImages, ...files].slice(0, 5);
+      setSelectedImages(newImages);
     }
-  }, []);
-
-  // const onDrop = useCallback(acceptedFiles => {
-  //   if (acceptedFiles.length > 0) {
-  //     const urls = acceptedFiles.map(file => URL.createObjectURL(file));
-  //     const newImages = [...selectedImages, ...urls].slice(0, 5);
-  //     setSelectedImages(newImages);
-  //   }
-  // }, [selectedImages]);
+  }, [selectedImages]);
   
   const {
     getRootProps,

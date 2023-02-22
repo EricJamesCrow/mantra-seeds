@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const Product = require('../models/productModel')
 const mongoose = require('mongoose')
 
+
 // get all products
 const getProducts = async (req, res) => {
     const products = await Product.find({}).sort({createdAt: -1})
@@ -34,15 +35,26 @@ const s3 = new AWS.S3({
 
 // create new product
 const createProduct = async (req, res) => {
-    const { name, images, description, price, chakra } = req.body;
+    const { name, file, description, price, chakra} = req.body;
+    // Check for any errors with the file upload
+    if (req.fileValidationError) {
+      console.log(req.fileValidationError)
+      return res.status(400).json({ message: req.fileValidationError });
+    } else if (!req.file) {
+      console.log('No files were uploaded.')
+      return res.status(400).json({ message: 'No files were uploaded.' });
+    }
+
+    const image = req.file
+    console.log(image)
   
     let emptyFields = [];
   
     if (!name) {
       emptyFields.push('name');
     }
-    if (!images) {
-      emptyFields.push('images');
+    if (!image) {
+      emptyFields.push('image');
     }
     if (!price) {
       emptyFields.push('price');
@@ -56,22 +68,19 @@ const createProduct = async (req, res) => {
   
     // Upload images to S3 bucket
     const uploadedImages = [];
-    for (let i = 0; i < images.length; i++) {
-      const imageBlob = images[i];
-      console.log(imageBlob)
-      // convert this blob into something that S3 can accept
-      const fileName = `${uuidv4()}.jpg`;
-      const imageUrl = await s3.upload({
-        Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: fileName,
-        Body: Buffer.from(imageBlob, 'base64'),
-      })
-      uploadedImages.push(imageUrl);
-    }
+    // convert this blob into something that S3 can accept
+    const fileName = `${uuidv4()}.jpg`;
+    const imageUrl = await s3.upload({
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Key: fileName,
+      Body: image.buffer,
+      ContentType: image.mimetype
+    }).promise();
+    const imageLocation = imageUrl.Location;
   
     // Add product to database
     try {
-      const product = await Product.create({ name, images: uploadedImages, description, price, chakra });
+      const product = await Product.create({ name, image: imageLocation, description, price, chakra });
       res.status(200).json(product);
     } catch (error) {
       res.status(400).json({ error: error.message });
