@@ -11,11 +11,16 @@ import Pagination from '../../../components/Pagination'
 //redux
 import { useSelector } from 'react-redux'
 
+// styles
+import './AdminProducts.css'
+
 export default function AdminProducts() {
   const [showAddProduct, setShowAddProduct] = useState(false);
 
   useEffect(() => {
     // Disable scrollbar when AddProduct is visible
+    const overlay = document.querySelector('.admin-products-overlay');
+    overlay.classList.toggle('show', showAddProduct);
     if (showAddProduct) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -77,7 +82,7 @@ export default function AdminProducts() {
     </div>
     </div>
     {showAddProduct &&
-    <div style={{ position: 'fixed', top: '61px', left: 0, right: 0, zIndex: 1, height: 'calc(100vh - 61px)', overflow: 'auto' }}>
+    <div className="admin-products-add-product-container">
     <AddProduct setShowAddProduct={setShowAddProduct}/>
     </div>}
     </>

@@ -1,0 +1,40 @@
+.admin-products-add-product-container {
+    position: fixed; 
+    top: 61px;
+    left: 0; 
+    right: 0; 
+    z-index: 1;
+    height: calc(100vh - 61px); 
+    overflow: auto;
+}
+
+.admin-products-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.admin-products-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (min-width: 980px) {
+    .admin-products-add-product-container {
+        position: fixed;
+        top: 54%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        height: calc(100vh - 100px); 
+        overflow: auto;
+        border-radius: 5px;
+    }
+}

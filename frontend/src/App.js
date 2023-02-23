@@ -179,6 +179,7 @@ function App() {
     <BrowserRouter>
     <SideNav/>
     <AdminNav/>
+    <div className="admin-products-overlay"/>
     <div className="main-content">
       <Navbar
       key={"navbar"}
