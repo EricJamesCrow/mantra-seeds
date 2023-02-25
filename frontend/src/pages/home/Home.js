@@ -3,17 +3,10 @@ import { Link } from 'react-router-dom'
 import React, { useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 
-//redux
-import { useSelector } from 'react-redux'
-
 // styles
 import "./Home.css"
 
-// components
-import BootstrapCarousel from "../../components/BootstrapCarousel"
-
 export default function Home() {
-  const products = useSelector(state => state.products.products);
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -46,31 +39,11 @@ export default function Home() {
     <div className="recent-products">
       <div className="recent-products-label">Recent Products</div>
       <div className={!isMobile ? "recent-product" : "recent-product-mobile"}>
-        {/* {products.slice(0, 8).map(product => (
-          <Product
-          item={product}
-          />
-        ))} */}
-        {/* {products &&
-        <BootstrapCarousel
-        items={products.slice(0, 8)}
-        />
-        } */}
         </div>
     </div>
     <div className="special-deals">
       <div className="special-deals-label">Special Deals</div>
       <div className={!isMobile ? "special-deals-products" : null}>
-        {/* {products.slice(0, 3).map(product => (
-          <Product
-          item={product}
-          />
-        ))} */}
-        {/* {products &&
-        <BootstrapCarousel
-        items={products.slice(0, 3)}
-        />
-        } */}
       </div>
     </div>
     <div className="about">

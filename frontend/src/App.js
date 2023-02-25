@@ -21,7 +21,8 @@ import BottomNavBar from './components/BottomNavBar'
 import ProductPage from "./components/ProductPage"
 
 // pages
-import Home from "./pages/home/Home"
+// import Home from "./pages/home/Home"
+import Home from "./pages/new_home/Home"
 import AdminDashboard from "./pages/new_admin/pages/AdminDashboard"
 import AdminOrders from "./pages/new_admin/pages/AdminOrders"
 import AdminOrdersDetailsPage from './pages/new_admin/pages/AdminOrdersDetailsPage';

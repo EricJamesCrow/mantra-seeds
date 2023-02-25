@@ -38,3 +38,9 @@
         border-radius: 5px;
     }
 }
+
+@media (max-width: 980px) {
+    .admin-products-overlay {
+        display: none;
+}
+}

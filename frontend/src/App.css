@@ -9,3 +9,9 @@ button {
 .routes { 
   padding-top: 61px;
 }
+
+.copyright {
+  padding-top: 2rem;
+  text-align: center;
+  background: #E9E4CA;
+}

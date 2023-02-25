@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.landing-page-container {
+    background-image: url('../../images/home/background_image.svg');
+    background-repeat: no-repeat;
+    background-size: calc(1728px*1.05) calc(1117px*1.05);
+    background-position: center -360px;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+.landing-page-text {
+    position: relative;
+    z-index: 1; /* to ensure the text is on top of the background image */
+    transform: translate3d(0, 0, 0); /* to enable hardware acceleration for smoother scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:43px;
+}
+
+.landing-page-text > div:first-child {
+    font-family: 'Alex Brush';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.landing-page-text > div:nth-child(2) {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.birds-container {
+    display: flex;
+}
+
+.birds-container > img:first-child {
+    position: absolute;
+    right: 80%;
+    top: 36.61%;
+    bottom: 59.72%;
+}
+
+.birds-container > img:last-child {
+    position: absolute;
+    left: 71.79%;
+    right: 9.03%;
+    top: 29.86%;
+    bottom: 66.36%;
+}
+
+.meditating {
+    padding-top: 12rem;
+    margin: 0 auto;
+    width: 320px;
+    filter: drop-shadow(3px 6px 5px rgba(0, 0, 0, 0.5));
+}
+
+.home-page-shop-products {
+    background-color: #E9E4CA;
+    height: 50vh;
+}
+
+.home-page-shop-products > div:first-child {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    color: #ffffff;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+

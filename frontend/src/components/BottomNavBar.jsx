@@ -28,7 +28,7 @@ export default function BottomNavBar({ hideLogin }) {
             <FontAwesomeIcon
                 icon={faHouse}
                 style={{
-                    color: location.pathname === "/" ? "#AECAED" : "#FFF",
+                    color: location.pathname === "/" ? "#d4d4cf" : "#FFF",
                     fontSize: "1.6rem",
                     padding: "15px 20px",
                     cursor: "pointer"
@@ -39,7 +39,7 @@ export default function BottomNavBar({ hideLogin }) {
             <FontAwesomeIcon
                 icon={faUser}
                 style={{
-                    color: location.pathname === "/profile" ? "#AECAED" : "#FFF",
+                    color: location.pathname === "/profile" ? "#d4d4cf" : "#FFF",
                     fontSize: "1.6rem",
                     padding: "15px 20px",
                     cursor: "pointer"
@@ -51,7 +51,7 @@ export default function BottomNavBar({ hideLogin }) {
             <FontAwesomeIcon
                 icon={faCartShopping}
                 style={{
-                    color: location.pathname === "/cart" ? "#AECAED" : "#FFF",
+                    color: location.pathname === "/cart" ? "#d4d4cf" : "#FFF",
                     fontSize: "1.6rem",
                     padding: "15px 20px",
                     cursor: "pointer"
@@ -79,7 +79,7 @@ export default function BottomNavBar({ hideLogin }) {
             <FontAwesomeIcon
                 icon={faBars}
                 style={{
-                    color: location.pathname === "/menu" ? "#AECAED" : "#FFF",
+                    color: location.pathname === "/menu" ? "#d4d4cf" : "#FFF",
                     fontSize: "1.6rem",
                     padding: "15px 20px",
                     cursor: "pointer"

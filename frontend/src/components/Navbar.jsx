@@ -98,8 +98,8 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
     <nav className='sticky-nav'>
     <div className="navbar-container">
         <div className="logo-container">
-        <img src={Cannabis} className="cannabis"/>
-        <Link to="/" className="title" onClick={hideSearch}>MantraSeeds</Link>
+        {/* <img src={Cannabis} className="cannabis"/> */}
+        <Link to="/" className="title" onClick={hideSearch}>MANTRA SEEDS</Link>
         </div>
         <button href="#" className="toggle-button" onClick={displayMobileMenu}>
             <span className="bar"></span>

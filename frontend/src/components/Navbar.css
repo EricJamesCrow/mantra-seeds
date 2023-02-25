@@ -22,7 +22,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #325886;
+    background: #7F9364;
 }
 
 .logo-container {
@@ -46,15 +46,16 @@ nav {
     color: white;
     padding: .75rem 1rem;
     display: block;
-    font-family: 'Futura';
-    font-style: normal;
+    font-family: 'Roboto';
     font-weight: 400;
-    font-size: 24px;
+    font-size: 20px;
+    height: 60px;
+    line-height: 35px;
     -webkit-tap-highlight-color: transparent;
 }
 
 .navbar-links li:hover {
-    background-color: #82A7D6;
+    background-color: #A9B993;
 }
 
 .cannabis {
@@ -65,10 +66,12 @@ nav {
 }
 
 .title {
-    font-family: 'Overseer';
+    /* font-family: 'Be Vietnam Pro'; */
     font-style: normal;
-    font-weight: 400;
-    font-size: 30.4px;
+    font-weight: 200;
+    font-size: 20px;
+    height: 45.59px;
+    line-height: 45.59px;
     margin: .5rem;
     text-align: center;
     color: #FFFFFF;
@@ -77,7 +80,7 @@ nav {
 }
 
 .logo-container:hover {
-    background-color: #82A7D6;
+    background-color: #A9B993;
 }
 
 .toggle-button {
