@@ -58,16 +58,39 @@
 
 .home-page-shop-products {
     background-color: #E9E4CA;
+    margin-top: 5rem;
     height: 50vh;
 }
 
-.home-page-shop-products > div:first-child {
+.home-page-shop-products > div {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
     font-size: 60px;
     color: #ffffff;
-    margin-top: 1rem;
-    margin-left: 1rem;
+}
+
+.home-page-shop-products > div:first-child {
+    margin: 2.5rem;
+    padding-top: 1rem;
+}
+
+.home-page-shop-content-container {
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 980px) {
+    .landing-page-text > div:first-child {
+        font-size: 36px;
+    }
+
+    .landing-page-text > div:nth-child(2) {
+        font-size: 80px;
+    }
+    .meditating {
+        padding-top: 8rem;
+        width: 320px;
+    }
 }
 

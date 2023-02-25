@@ -209,7 +209,7 @@ function App() {
       </Routes>
       </div>
       <div className="copyright">
-      <div>© Mantra Seeds 2022</div>
+      <div></div>
     </div>
     <BottomNavBar
     hideLogin={hideLogin}

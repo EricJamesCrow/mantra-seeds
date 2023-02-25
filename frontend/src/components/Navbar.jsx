@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import "./Navbar.css"
 
 // images
-import Cannabis from "../images/cannabis-leaf.svg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons'
 

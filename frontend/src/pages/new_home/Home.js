@@ -24,6 +24,9 @@ export default function Home() {
         <img src={Meditating} alt="meditating" className="meditating" />
         <div className="home-page-shop-products">
             <div>Shop</div>
+            <div className="home-page-shop-content-container">
+            <div>Insert Content Here</div>
+            </div>
         </div>
     </div>
   )
