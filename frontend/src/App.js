@@ -1,5 +1,5 @@
 // react
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
 import React, { useState, useRef, useEffect } from 'react';
 
 // redux
@@ -42,11 +42,18 @@ const ORDERS_API_URL = '/api/orders'
 const CUSTOMERS_API_URL = '/api/user'
 
 function App() {
+  const location = useLocation()
+  // const [location, setLocation] = useState(window.location.pathname);
   const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
 
   const [filter, setFilter] = useState([])
   const ChildRef = useRef([]);
+
+  // useEffect(() => {
+  //   setLocation(window.location.pathname)
+  //   console.log(window.location.pathname)
+  // }, [window.location.pathname])
 
   const fetchUser = async (user) => {
   try {
@@ -177,7 +184,6 @@ function App() {
 
   return (
     <>
-    <BrowserRouter>
     <SideNav/>
     <AdminNav/>
     <div className="admin-products-overlay"/>
@@ -187,9 +193,9 @@ function App() {
       updateFilter={updateFilter}
       ref={theRef => ChildRef["navbar"] = theRef}
       />
-      <div className="routes">
+      <div className={location.pathname === "/" ? "home" : "routes"}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/admin/orders" element={<AdminOrders/>} />
         <Route path="/admin/orders/:id" element={<AdminOrdersDetailsPage/>} />
@@ -215,7 +221,6 @@ function App() {
     hideLogin={hideLogin}
     />
     </div>
-    </BrowserRouter>
     </>
   );
 }

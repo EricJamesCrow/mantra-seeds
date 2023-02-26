@@ -22,7 +22,30 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #00000000;
+    transition: all 0.3s ease;
+}
+
+.navbar-container.background {
     background: #7F9364;
+}
+
+.navbar-container .logo-container a {
+    color: #000000;
+    transition: color 0.3s ease;
+}
+
+.navbar-container button span {
+    background-color: #000000;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-container.background .logo-container a {
+    color: #FFFFFF;
+}
+
+.navbar-container.background button span {
+    background-color: #FFFFFF;
 }
 
 .logo-container {
@@ -43,7 +66,6 @@ nav {
 
 .navbar-links li:not(:nth-last-child(-n+2)) a {
     text-decoration: none;
-    color: white;
     padding: .75rem 1rem;
     display: block;
     font-family: 'Roboto';
@@ -54,7 +76,27 @@ nav {
     -webkit-tap-highlight-color: transparent;
 }
 
-.navbar-links li:hover {
+.navbar-container .navbar-links li {
+    transition: transform 0.3s ease;
+}
+
+.navbar-container .navbar-links li:hover {
+    transform: scale(1.08);
+}
+
+.navbar-container.background .navbar-links li {
+    transition:  none;
+}
+
+.navbar-container.background .navbar-links li:hover {
+    transform: none;
+}
+
+.navbar-container.background .navbar-links li a, .navbar-container.background .navbar-links li svg {
+    color: white;
+}
+
+.navbar-container.background .navbar-links li:hover {
     background-color: #A9B993;
 }
 
@@ -66,7 +108,6 @@ nav {
 }
 
 .title {
-    /* font-family: 'Be Vietnam Pro'; */
     font-style: normal;
     font-weight: 200;
     font-size: 20px;
@@ -79,8 +120,17 @@ nav {
     text-decoration: none
 }
 
-.logo-container:hover {
+.navbar-container .logo-container {
+    transition: transform 0.3s ease;
+}
+
+.navbar-container .logo-container:hover {
+    transform: scale(1.08);
+}
+
+.navbar-container.background .logo-container:hover {
     background-color: #A9B993;
+    transform: none;
 }
 
 .toggle-button {
@@ -103,7 +153,6 @@ nav {
 .toggle-button .bar {
     height: 3px;
     width: 100%;
-    background-color: white;
     border-radius: 10px;
 }
 

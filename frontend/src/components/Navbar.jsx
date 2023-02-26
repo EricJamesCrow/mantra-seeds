@@ -1,7 +1,6 @@
 // react
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import { NavLink, Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 // styles
@@ -12,17 +11,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 // components
-import Sidebar from "./Sidebar"
 import SearchModel from "./SearchModel"
 import LoginModel from "./LoginModel"
 import SignupModel from "./SignupModel"
 
-const Navbar = forwardRef(( { updateFilter }, ref ) => {
-    const [showModal, setShowModal] = useState(false)
+const Navbar = forwardRef(( {}, ref ) => {
+    const location = useLocation()
+
     const [searchModelOpen, setSearchModelOpen] = useState(false);
-    
-    const [isShopping, setIsShopping] = useState(false)
-    const location = useLocation();
+    const [isScrolled, setIsScrolled] = useState(false);
 
     const [showLogin, setShowLogin] = useState(false)
     const [showSignup, setShowSignup] = useState(false)
@@ -39,26 +36,9 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
         }
       }))
 
-    const shopping = () => {
-        if(location.pathname === "/shop") {
-            setIsShopping(true)
-        } else {
-            setIsShopping(false)
-        }
-    }
-
     const showSignupFields = () => {
         setShowLogin(!showLogin)
         setShowSignup(!showSignup)
-    }
-
-
-    useEffect(() => {
-        shopping()
-    })
-
-    const runShowModal = () => {
-        setShowModal(!showModal)
     }
 
     const displayMobileMenu = () => {
@@ -91,11 +71,20 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
         }
     })
 
+    useEffect(() => {
+        function handleScroll() {
+          setIsScrolled(window.pageYOffset > 0);
+        }
+    
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
   return (
     <>
     {searchModelOpen && <SearchModel hideSearch={hideSearch}/>}
     <nav className='sticky-nav'>
-    <div className="navbar-container">
+    <div className={location.pathname === "/" && isScrolled ? 'navbar-container background' : location.pathname === "/" && !isScrolled ? 'navbar-container' : 'navbar-container background'}>
         <div className="logo-container">
         {/* <img src={Cannabis} className="cannabis"/> */}
         <Link to="/" className="title" onClick={hideSearch}>MANTRA SEEDS</Link>
@@ -125,7 +114,6 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
             <FontAwesomeIcon 
             icon={faSearch} 
             style={{
-                color: "#FFF",
                 fontSize: "1.6rem",
                 padding: "15px 20px",
                 cursor: "pointer"}}
@@ -137,7 +125,6 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
                 <FontAwesomeIcon 
             icon={faUser} 
             style={{
-                color: "#FFF",
                 fontSize: "1.6rem",
                 padding: "15px 20px",
                 cursor: "pointer"}}/>
@@ -148,7 +135,6 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
                 <FontAwesomeIcon 
             icon={faCartShopping} 
             style={{
-                color: "#FFF",
                 fontSize: "1.6rem",
                 padding: "15px 20px",
                 cursor: "pointer"}}/>
@@ -166,21 +152,6 @@ const Navbar = forwardRef(( { updateFilter }, ref ) => {
     showSignupFields={showSignupFields}
     setShowSignup={setShowSignup}
     />}
-    {isShopping && !showLogin &&
-        <div className="store-banner">
-        <div className="store-header">Store</div>
-        <button className="filter-products-mobile">
-          <div onClick={runShowModal}>Filter Products</div>
-        </button>
-    </div>
-    }
-    {showModal && isShopping &&
-    <div className="filter-products__modal">
-    <Sidebar
-    updateFilter={updateFilter}
-    />
-    </div>
-    }
     </nav>
     </>
   )

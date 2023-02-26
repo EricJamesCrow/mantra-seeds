@@ -10,6 +10,10 @@ button {
   padding-top: 61px;
 }
 
+.routes.home {
+  padding-top: 0;
+}
+
 .copyright {
   padding-top: 3.65rem;
   text-align: center;
