@@ -14,8 +14,10 @@ button {
   padding-top: 0;
 }
 
-.copyright {
-  padding-top: 3.65rem;
-  text-align: center;
-  background: #E9E4CA;
+@media (max-width: 980px) {
+  .copyright {
+    padding-top: 3.65rem;
+    text-align: center;
+    background: #E9E4CA;
+  }
 }
