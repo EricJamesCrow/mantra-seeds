@@ -21,8 +21,8 @@ import BottomNavBar from './components/BottomNavBar'
 import ProductPage from "./components/ProductPage"
 
 // pages
-// import Home from "./pages/home/Home"
 import Home from "./pages/new_home/Home"
+import HomeV2 from "./pages/new_home/HomeV2"
 import AdminDashboard from "./pages/new_admin/pages/AdminDashboard"
 import AdminOrders from "./pages/new_admin/pages/AdminOrders"
 import AdminOrdersDetailsPage from './pages/new_admin/pages/AdminOrdersDetailsPage';
@@ -195,7 +195,7 @@ function App() {
       />
       <div className={location.pathname === "/" ? "home" : "routes"}>
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<HomeV2 />}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/admin/orders" element={<AdminOrders/>} />
         <Route path="/admin/orders/:id" element={<AdminOrdersDetailsPage/>} />

@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.landing-page-container {
+    background-image: url('../../images/home/background_image.svg');
+    background-repeat: no-repeat;
+    background-size: calc(1728px*1.05) calc(1117px*1.05);
+    background-position: center -360px;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+.landing-page-text {
+    position: relative;
+    z-index: 1; /* to ensure the text is on top of the background image */
+    transform: translate3d(0, 0, 0); /* to enable hardware acceleration for smoother scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.landing-page-text > div:first-child {
+    font-family: 'Alex Brush';
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.landing-page-text > div:nth-child(2) {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+@keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+.chakras-container > img {
+    width: 17%;
+    animation: fade-in 1s ease-in-out;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+.chakras-container > .upper-left {
+    position: absolute;
+    top: 10%;
+    left: 3%;
+    animation-delay: 0.25s;
+}
+
+.chakras-container > .lower-left {
+    position: absolute;
+    bottom: 8%;
+    left: 3%;
+    animation-delay: 0.75s;
+}
+
+.chakras-container > .upper-right {
+    position: absolute;
+    top: 10%;
+    right: 3%;
+    animation-delay: 1.25s;
+}
+
+.chakras-container > .lower-right {
+    position: absolute;
+    bottom: 8%;
+    right: 3%;
+    animation-delay: 2s;
+}
+
+@keyframes glow {
+    0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 5px white);
+        stroke: white;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        stroke-width: 20;
+      }
+      100% {
+        opacity: 1;
+        filter: none;
+        stroke-width: 10;
+      }
+}
+
+/* .chakra {
+    transition: all 1s ease-in-out;
+} */
+
+.chakra.visible {
+    animation: glow 2s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.meditating {
+    padding-top: 12rem;
+    margin: 0 auto;
+    width: 320px;
+    filter: drop-shadow(3px 6px 5px rgba(0, 0, 0, 0.5));
+}
+
+.home-page-shop-products {
+    background-color: #E9E4CA;
+    height: 50vh;
+}
+
+.home-page-shop-products > div {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    color: #ffffff;
+}
+
+.home-page-shop-products > div:first-child {
+    margin: 2.5rem;
+    padding-top: 1rem;
+}
+
+.home-page-shop-content-container {
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 980px) {
+    .landing-page-text > div:first-child {
+        font-size: 36px;
+    }
+
+    .landing-page-text > div:nth-child(2) {
+        font-size: 80px;
+    }
+    .meditating {
+        padding-top: 8rem;
+        width: 320px;
+    }
+    .landing-page-text > img {
+        width: 320px;
+    }
+}
