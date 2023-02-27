@@ -18,10 +18,10 @@ import Navbar from './components/Navbar';
 import SideNav from './components/SideNav';
 import AdminNav from './pages/new_admin/components/AdminNav';
 import BottomNavBar from './components/BottomNavBar'
-import ProductPage from "./components/ProductPage"
+// import ProductPage from "./components/ProductPage"
+import NewProductPage from './components/NewProductPage';
 
 // pages
-import Home from "./pages/new_home/Home"
 import HomeV2 from "./pages/new_home/HomeV2"
 import AdminDashboard from "./pages/new_admin/pages/AdminDashboard"
 import AdminOrders from "./pages/new_admin/pages/AdminOrders"
@@ -203,7 +203,7 @@ function App() {
         <Route path="/admin/customers/:id" element={<AdminCustomersDetailsPage/>} />
         <Route path="/admin/products" element={<AdminProducts/>} />
         <Route path="/admin/products/:id" element={<AdminProductsDetailsPage/>} />
-        <Route path="/shop/products/:id" element={<ProductPage/>} />
+        <Route path="/shop/products/:id" element={<NewProductPage/>} />
         <Route path="/shop" element={<Shop filter={filter}/>} />
         <Route path="/cart/checkout" element={<Checkout/>} />
         <Route path="/cart/checkout/order-success" element={<OrderSuccess/>} />

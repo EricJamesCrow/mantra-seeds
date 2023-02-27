@@ -1,0 +1,125 @@
+.product-details-container {
+    width: 310px;
+    height: 345px;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.product-details-container > .product-image {
+    width: 310px;
+    height: 345px;
+}
+
+.rating {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.rating > .num-of-reviews {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 0.5rem;
+}
+
+.product-details-container > .product-details {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.product-details-container > .product-details > div:first-child {
+    margin-top: 0.75rem;
+}
+
+.product-details-container > .product-details > div:nth-child(2) {
+    margin-top: 0.25rem;
+    color: #2D3748
+}
+
+.product-details-container > .product-details > div:nth-child(3) {
+    margin-top: 0.75rem;
+    font-size: 16px;
+}
+
+.product-details-page-functionality {
+    display: flex;
+    justify-content: space-between;
+}
+
+.adjust-quantity-container > div:first-child {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 1rem;
+}
+
+.adjust-quantity-container > .adjust-quantity {
+    margin-top: 0.5rem;
+    width: 142px;
+    height: 31px;
+    background: #FFFFFF;
+    border: 1px solid #EDF1F6;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adjust-quantity-container> .adjust-quantity > div {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    color: #1A202C;
+}
+
+.adjust-quantity-container > .adjust-quantity > .adjust-quantity-btn {
+    background: #F2F2F4;
+    border-radius: 5px;
+    width: 23px;
+    height: 23px;
+    display: flex;
+    justify-content: center;
+    margin: 0 0.5rem;
+}
+
+.adjust-quantity-btn > div {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    color: #1A202C;
+}
+
+.add-to-favorites {
+    background: #FFFFFF;
+    border: 1px solid #EDF1F6;
+    border-radius: 2px;
+    width: 142px;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end
+}
+
+.add-to-favorites div {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: #1A2A40;
+    margin-left: 0.5rem;
+}
+
+.add-to-cart-btn {
+    width: 322px;
+    height: 48px;
+    background: #319795;
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 2rem;
+}
