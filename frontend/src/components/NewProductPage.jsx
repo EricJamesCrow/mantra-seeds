@@ -45,6 +45,7 @@ export default function NewProductPage() {
     </button>
     <div className="product-details-container">
         <img src={product.image} alt="product-image" className="product-image"/>
+        <div className="product-details-information-container">
         <div className="rating">
         {[...Array(5)].map((_, index) => (
             <FontAwesomeIcon
@@ -88,6 +89,55 @@ export default function NewProductPage() {
             </div>
         </div>
         <button className="add-to-cart-btn" onClick={() => addToCart(user.id, product._id, 1, product.price)}>Add to Cart</button>
+        </div>
+        <div className="reviews-container">
+            <div>Reviews</div>
+            <div className="average-rating-container">
+                <div className="average-rating">4.3</div>
+                <div className="average-stars-and-num-of-reviews">
+                    <div>
+                        {[...Array(5)].map((_, index) => (
+                            <FontAwesomeIcon
+                            key={index}
+                            icon={faStar}
+                            style={{
+                                color: index < 4 ? "#319795" : "#E2E8F0",
+                                fontSize: "1rem",
+                            }}
+                            />
+                        ))}
+                    </div>
+                    <div>Based on 12 reviews</div>
+                </div>
+            </div>
+            <div className="reviews-btns-container">
+                <button>See all reviews</button>
+                <button>Write a review</button>
+            </div>
+            <div className="review-container">
+                <div className="rating-and-title">
+                <div>
+                        {[...Array(5)].map((_, index) => (
+                            <FontAwesomeIcon
+                            key={index}
+                            icon={faStar}
+                            style={{
+                                color: index < 4 ? "#319795" : "#E2E8F0",
+                                fontSize: "1rem",
+                            }}
+                            />
+                        ))}
+                    </div>
+                    <div>Love these seeds!</div>
+                </div>
+                <div className="review">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </div>
+                <div className="review-author">
+                by Christopher, July 15th 2020
+                </div>
+            </div>
+        </div>
     </div>
   </div>
   )
