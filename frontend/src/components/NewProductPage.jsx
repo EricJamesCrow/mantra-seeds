@@ -52,7 +52,7 @@ export default function NewProductPage() {
             key={index}
             icon={faStar}
             style={{
-                color: index < 4 ? "#319795" : "#E2E8F0",
+                color: index < 4 ? "#669c54" : "#E2E8F0",
                 fontSize: "1rem",
             }}
             />
@@ -101,7 +101,7 @@ export default function NewProductPage() {
                             key={index}
                             icon={faStar}
                             style={{
-                                color: index < 4 ? "#319795" : "#E2E8F0",
+                                color: index < 4 ? "#669c54" : "#E2E8F0",
                                 fontSize: "1rem",
                             }}
                             />
@@ -122,7 +122,7 @@ export default function NewProductPage() {
                             key={index}
                             icon={faStar}
                             style={{
-                                color: index < 4 ? "#319795" : "#E2E8F0",
+                                color: index < 4 ? "#669c54" : "#E2E8F0",
                                 fontSize: "1rem",
                             }}
                             />
