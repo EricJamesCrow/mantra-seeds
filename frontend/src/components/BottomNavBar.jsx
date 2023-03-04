@@ -29,8 +29,8 @@ export default function BottomNavBar({ hideLogin }) {
                 icon={faHouse}
                 style={{
                     color: location.pathname === "/" ? "#d4d4cf" : "#FFF",
-                    fontSize: "1.6rem",
-                    padding: "15px 20px",
+                    fontSize: "1.3rem",
+                    padding: "10px 20px",
                     cursor: "pointer"
                 }}
             />
@@ -40,8 +40,8 @@ export default function BottomNavBar({ hideLogin }) {
                 icon={faUser}
                 style={{
                     color: location.pathname === "/profile" ? "#d4d4cf" : "#FFF",
-                    fontSize: "1.6rem",
-                    padding: "15px 20px",
+                    fontSize: "1.3rem",
+                    padding: "10px 20px",
                     cursor: "pointer"
                 }}
             />
@@ -52,8 +52,8 @@ export default function BottomNavBar({ hideLogin }) {
                 icon={faCartShopping}
                 style={{
                     color: location.pathname === "/cart" ? "#d4d4cf" : "#FFF",
-                    fontSize: "1.6rem",
-                    padding: "15px 20px",
+                    fontSize: "1.3rem",
+                    padding: "10px 20px",
                     cursor: "pointer"
                 }}
             />
@@ -80,8 +80,8 @@ export default function BottomNavBar({ hideLogin }) {
                 icon={faBars}
                 style={{
                     color: location.pathname === "/menu" ? "#d4d4cf" : "#FFF",
-                    fontSize: "1.6rem",
-                    padding: "15px 20px",
+                    fontSize: "1.3rem",
+                    padding: "10px 20px",
                     cursor: "pointer"
                 }}
             />
