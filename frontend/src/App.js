@@ -18,7 +18,6 @@ import Navbar from './components/Navbar';
 import SideNav from './components/SideNav';
 import AdminNav from './pages/new_admin/components/AdminNav';
 import BottomNavBar from './components/BottomNavBar'
-// import ProductPage from "./components/ProductPage"
 import NewProductPage from './components/NewProductPage';
 
 // pages
@@ -34,7 +33,7 @@ import Shop from "./pages/shop/Shop"
 import Cart from "./pages/cart/Cart"
 import Checkout from "./pages/checkout/Checkout"
 import OrderSuccess from './pages/checkout/OrderSuccess'
-import Profile from './pages/profile/Profile'
+import Profile from './pages/new_profile/Profile'
 import Contact from "./pages/contact/Contact"
 
 const PRODUCTS_API_URL = '/api/products/'
