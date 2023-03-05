@@ -29,7 +29,7 @@ import AdminCustomers from './pages/new_admin/pages/AdminCustomers'
 import AdminCustomersDetailsPage from './pages/new_admin/pages/AdminCustomerDetailsPage'
 import AdminProducts from './pages/new_admin/pages/AdminProducts'
 import AdminProductsDetailsPage from './pages/new_admin/pages/AdminProductsDetailsPage'
-import Shop from "./pages/shop/Shop"
+import Shop from "./pages/new_shop/Shop"
 import Cart from "./pages/cart/Cart"
 import Checkout from "./pages/checkout/Checkout"
 import OrderSuccess from './pages/checkout/OrderSuccess'
@@ -203,7 +203,7 @@ function App() {
         <Route path="/admin/products" element={<AdminProducts/>} />
         <Route path="/admin/products/:id" element={<AdminProductsDetailsPage/>} />
         <Route path="/shop/products/:id" element={<NewProductPage/>} />
-        <Route path="/shop" element={<Shop filter={filter}/>} />
+        <Route path="/shop" element={<Shop/>} />
         <Route path="/cart/checkout" element={<Checkout/>} />
         <Route path="/cart/checkout/order-success" element={<OrderSuccess/>} />
         <Route path="/contact" element={<Contact/>} />

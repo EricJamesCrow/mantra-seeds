@@ -1,0 +1,21 @@
+.shop-container {
+    min-height: 84vh;
+}
+
+.shop-container > div:first-child {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 32px;
+    margin-top: 0.75rem;
+    margin-left: 0.75rem;
+}
+
+.shop-container .filter-sort-search-container {
+    width: 70%;
+    margin: 1rem auto;
+}
+
+.shop-container .admin-page-results-container {
+    color: #456649;
+    border-color: #456649;
+}
