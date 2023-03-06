@@ -51,7 +51,6 @@ export default function Shop() {
       }
 
     const handleChakraClick = (chakraName) => {
-      console.log(chakraName)
       if(chakraName === "Show All") {
         return setSearchTerm('')
       }
