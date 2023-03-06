@@ -11,6 +11,16 @@ import './Shop.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
+// filters
+import ShowAll from '../../images/chakras/show-all.svg'
+import Root from '../../images/chakras/root-chakra.svg'
+import Sacral from '../../images/chakras/sacral-chakra.svg'
+import Solar from '../../images/chakras/solar-chakra.svg'
+import Heart from '../../images/chakras/heart-chakra.svg'
+import Throat from '../../images/chakras/throat-chakra.svg'
+import ThirdEye from '../../images/chakras/third-eye-chakra.svg'
+import Crown from '../../images/chakras/crown-chakra.svg'
+
 //redux
 import { useSelector } from 'react-redux'
 
@@ -25,7 +35,8 @@ export default function Shop() {
     if (!products) return null; // only render once redux is loaded
   
     const filteredProducts = products.filter(product =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.chakra.toLowerCase().includes(searchTerm.toLowerCase())
     );
   
     const indexOfLastItem = currentPage * itemsPerPage; // pagination
@@ -38,6 +49,15 @@ export default function Shop() {
     const handleSelect = (e) => {
         setItemsPerPage(e.target.value)
       }
+
+    const handleChakraClick = (chakraName) => {
+      console.log(chakraName)
+      if(chakraName === "Show All") {
+        return setSearchTerm('')
+      }
+      setSearchTerm(chakraName.toLowerCase());
+      setCurrentPage(1);
+    };
   
 
   return (
@@ -60,6 +80,14 @@ export default function Shop() {
     />
     </div>
     </form>
+    <div className="shop-chakra-filters">
+  {[    { name: "Show All", image: ShowAll },    { name: "Root", image: Root },    { name: "Sacral", image: Sacral },    { name: "Solar", image: Solar },    { name: "Heart", image: Heart },    { name: "Throat", image: Throat },    { name: "Third Eye", image: ThirdEye },    { name: "Crown", image: Crown },  ].map((filter, index) => (
+    <div key={index} className='chakra-filter' onClick={() => handleChakraClick(filter.name)}>
+      <img src={filter.image} alt={filter.name} />
+      <span>{filter.name}</span>
+    </div>
+  ))}
+</div>
     <div className="admin-page-results-container">
   <div>{results === 0 ? `0 - ${results} of ${results} Results` :
       `${(currentPage - 1) * itemsPerPage + 1} - ${Math.min(currentPage * itemsPerPage, results)} of ${results} Results`}</div>
