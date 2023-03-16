@@ -30,7 +30,6 @@ import AdminCustomersDetailsPage from './pages/new_admin/pages/AdminCustomerDeta
 import AdminProducts from './pages/new_admin/pages/AdminProducts'
 import AdminProductsDetailsPage from './pages/new_admin/pages/AdminProductsDetailsPage'
 import Shop from "./pages/new_shop/Shop"
-// import Cart from "./pages/cart/Cart"
 import Cart from "./pages/new_cart/Cart"
 import Checkout from "./pages/checkout/Checkout"
 import OrderSuccess from './pages/checkout/OrderSuccess'
