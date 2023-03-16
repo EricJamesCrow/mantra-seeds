@@ -31,6 +31,8 @@ import AdminProducts from './pages/new_admin/pages/AdminProducts'
 import AdminProductsDetailsPage from './pages/new_admin/pages/AdminProductsDetailsPage'
 import Shop from "./pages/new_shop/Shop"
 import Cart from "./pages/new_cart/Cart"
+import Login from "./pages/login/Login"
+import Signup from "./pages/signup/Signup"
 import Checkout from "./pages/checkout/Checkout"
 import OrderSuccess from './pages/checkout/OrderSuccess'
 import Profile from './pages/new_profile/Profile'
@@ -194,7 +196,7 @@ function App() {
       />
       <div className={location.pathname === "/" ? "home" : "routes"}>
       <Routes>
-        <Route path="/" element={<HomeV2 />}/>
+        <Route path="/" element={<HomeV2/>}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/admin/orders" element={<AdminOrders/>} />
         <Route path="/admin/orders/:id" element={<AdminOrdersDetailsPage/>} />
@@ -208,8 +210,10 @@ function App() {
         <Route path="/cart/checkout/order-success" element={<OrderSuccess/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/cart" element={<Cart/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup/>} />
         <Route path="/profile" 
-        element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <ShowLoginWrapper><Navigate to="/"/></ShowLoginWrapper>} 
+        element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <Navigate to="/login"/>} 
         />
       </Routes>
       </div>
