@@ -1,0 +1,108 @@
+.cart-order-container {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.06);
+    border-radius: 5px;
+    height: 186px;
+    width: 95%;
+}
+
+.cart-order-details-container {
+    display: flex;
+    align-items: center;
+}
+
+.cart-order-container > div:first-child {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: 0.75rem;
+}
+
+.cart-order-container > div:first-child img {
+    width: 140px;
+    height: 150px;
+}
+
+.cart-order-details {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 100%;
+}
+
+.details-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 150px;
+    margin-right: 0.5rem;
+}
+
+.details-wrapper > div:first-child {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    color: #1A202C;
+}
+
+.details-wrapper > div:first-child > div:last-child {
+    color: #2D3748;
+}
+
+.details-wrapper > div:last-child {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.details-wrapper > div:last-child > svg:hover {
+    cursor: pointer;
+    color:#E53E3E;
+}
+
+.order-adjust-quantity-container > div:first-child {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.order-adjust-quantity-container > .order-adjust-quantity {
+    width: 125px;
+    height: 30px;
+    background: #FFFFFF;
+    border: 1px solid #EDF1F6;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-adjust-quantity-container> .order-adjust-quantity > div {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 14px;
+    color: #1A202C;
+}
+
+.order-adjust-quantity-container > .order-adjust-quantity > .order-adjust-quantity-btn {
+    background: #F2F2F4;
+    border-radius: 5px;
+    width: 23px;
+    height: 23px;
+    display: flex;
+    justify-content: center;
+    margin: 0 0.5rem;
+}
+
+.order-adjust-quantity-btn > div {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    color: #1A202C;
+}
