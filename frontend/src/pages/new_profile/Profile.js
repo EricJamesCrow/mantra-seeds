@@ -19,15 +19,19 @@ export default function Profile() {
     let navigate = useNavigate()
     const { logout } = useLogout()
     
-    const handleClick = () => {
+    const handleLogout = () => {
         navigate('/')
         logout()
-      }
+    }
+
+    const handleClick = (link) => {
+        navigate(link)
+    }
 
     const userProfileBtns = [
-        {id: 1, icon: faHistory, text: 'Order History', link: '/order-history'},
-        {id: 2, icon: faUnlockKeyhole, text: 'Change Password', link: '/change-password'},
-        {id: 3, icon: faSignOutAlt, text:"Logout", link: '/logout'}
+        {id: 1, icon: faHistory, text: 'Order History', onClick: () => handleClick('/profile/order-history')},
+        {id: 2, icon: faUnlockKeyhole, text: 'Change Password', onClick: () => handleClick('/profile/change-password')},
+        {id: 3, icon: faSignOutAlt, text:"Logout", onClick: handleLogout}
     ]
 
   return (
@@ -35,17 +39,17 @@ export default function Profile() {
         <div>Profile</div>
         <div className="user-profile-container">
             <div className="avatar-and-info">
-            <Avatar name='Eric Crow' w='16' h='16'/>
-            <div className='name-and-email-container'>
-            <div>Eric Crow</div>
-            <div>{user.email}</div>
-            </div>
+                <Avatar name='Eric Crow' w='16' h='16'/>
+                <div className='name-and-email-container'>
+                    <div>Eric Crow</div>
+                    <div>{user.email}</div>
+                </div>
             </div>
             <EditIcon w='7' h='7' color='#fff'/>
         </div>
         <div className="user-profile-btns-container">
             {userProfileBtns.map(btn => (
-            <div className="user-profile-btn" onClick={handleClick}>
+            <div className="user-profile-btn" onClick={btn.onClick}>
                 <div>
                     <div>
                         <FontAwesomeIcon
