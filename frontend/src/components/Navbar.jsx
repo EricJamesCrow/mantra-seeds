@@ -1,5 +1,5 @@
 // react
-import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
@@ -12,34 +12,14 @@ import { faUser, faCartShopping, faSearch } from '@fortawesome/free-solid-svg-ic
 
 // components
 import SearchModel from "./SearchModel"
-import LoginModel from "./LoginModel"
-import SignupModel from "./SignupModel"
 
-const Navbar = forwardRef(( {}, ref ) => {
+export default function Navbar() {
     const location = useLocation()
 
     const [searchModelOpen, setSearchModelOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
-    const [showLogin, setShowLogin] = useState(false)
-    const [showSignup, setShowSignup] = useState(false)
-
     const user = useSelector(state => state.auth.user);
-
-    useImperativeHandle(ref, () =>({
-        callChildFunction() {
-            setShowLogin(true)
-        },
-        bottomNavBarFunction() { 
-            setShowLogin(false)
-            setShowSignup(false)     
-        }
-      }))
-
-    const showSignupFields = () => {
-        setShowLogin(!showLogin)
-        setShowSignup(!showSignup)
-    }
 
     const displayMobileMenu = () => {
         document.querySelector('.side-nav').classList.toggle('open')
@@ -64,18 +44,9 @@ const Navbar = forwardRef(( {}, ref ) => {
     };
 
     useEffect(() => {
-        if(showLogin || showSignup) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "scroll";
-        }
-    })
-
-    useEffect(() => {
         function handleScroll() {
           setIsScrolled(window.pageYOffset > 0);
         }
-    
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
       }, []);
@@ -86,7 +57,6 @@ const Navbar = forwardRef(( {}, ref ) => {
     <nav className='sticky-nav'>
     <div className={location.pathname === "/" && isScrolled ? 'navbar-container background' : location.pathname === "/" && !isScrolled ? 'navbar-container' : 'navbar-container background'}>
         <div className="logo-container">
-        {/* <img src={Cannabis} className="cannabis"/> */}
         <Link to="/" className="title" onClick={hideSearch}>MANTRA SEEDS</Link>
         </div>
         <button href="#" className="toggle-button" onClick={displayMobileMenu}>
@@ -143,19 +113,9 @@ const Navbar = forwardRef(( {}, ref ) => {
             </ul>
         </div>
     </div>
-    {!user && showLogin && <LoginModel
-    showSignupFields={showSignupFields}
-    setShowLogin={setShowLogin}
-    />}
-    {!user && showSignup && 
-    <SignupModel
-    showSignupFields={showSignupFields}
-    setShowSignup={setShowSignup}
-    />}
     </nav>
     </>
   )
-})
+}
 
-export default Navbar
 

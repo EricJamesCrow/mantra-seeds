@@ -12,19 +12,18 @@ import "./BottomNavBar.css"
 // redux
 import { useSelector } from 'react-redux';
 
-export default function BottomNavBar({ hideLogin }) {
+export default function BottomNavBar() {
     const location = useLocation();
     const cartItems = useSelector(state => state.cart.cartItems);
 
     const handleClick = () => {
-        hideLogin();
         document.querySelector('.main-content').classList.toggle('push');
         document.querySelector('.side-nav').classList.toggle('open')
     }
 
   return (
     <nav className="bottom-nav">
-        <NavLink to="/" onClick={hideLogin}>
+        <NavLink to="/">
             <FontAwesomeIcon
                 icon={faHouse}
                 style={{
@@ -46,7 +45,7 @@ export default function BottomNavBar({ hideLogin }) {
                 }}
             />
         </NavLink>
-        <NavLink to="/cart" onClick={hideLogin}>
+        <NavLink to="/cart">
         <div style={{ position: 'relative'}}>
             <FontAwesomeIcon
                 icon={faCartShopping}
@@ -79,7 +78,7 @@ export default function BottomNavBar({ hideLogin }) {
             <FontAwesomeIcon
                 icon={faBars}
                 style={{
-                    color: location.pathname === "/menu" ? "#d4d4cf" : "#FFF",
+                    color: "#FFF",
                     fontSize: "1.3rem",
                     padding: "10px 20px",
                     cursor: "pointer"

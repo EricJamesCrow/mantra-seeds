@@ -43,7 +43,7 @@ export default function Signup() {
       <div className="login-fields-container">
         <h1>Sign Up</h1>
         <div className="input-fields">
-          <div>Email</div>
+          <div>Email<span className="required-asterisk">*</span></div>
           <Input
           type="email"
           onChange={(e) => setEmail(e.target.value)}
@@ -51,7 +51,7 @@ export default function Signup() {
           />
         </div>
         <div className="input-fields">
-          <div>Password</div>
+          <div>Password<span className="required-asterisk">*</span></div>
           <Input
           type="password"
           onChange={(e) => setPassword(e.target.value)}
@@ -62,7 +62,7 @@ export default function Signup() {
       <div className="input-field-submit-container">
         <button disabled={isLoading}>Create Account</button>
         {error && <div className="error">{error}</div>}
-        <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
+        <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
       </div>
       </form>
       <div className="alternative-link-container">

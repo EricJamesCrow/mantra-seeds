@@ -1,6 +1,6 @@
 // react
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,6 +33,7 @@ import Shop from "./pages/new_shop/Shop"
 import Cart from "./pages/new_cart/Cart"
 import Login from "./pages/login/Login"
 import Signup from "./pages/signup/Signup"
+import ResetPassword from "./pages/reset-password/ResetPassword"
 import Checkout from "./pages/checkout/Checkout"
 import OrderSuccess from './pages/checkout/OrderSuccess'
 import Profile from './pages/new_profile/Profile'
@@ -44,17 +45,8 @@ const CUSTOMERS_API_URL = '/api/user'
 
 function App() {
   const location = useLocation()
-  // const [location, setLocation] = useState(window.location.pathname);
   const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
-
-  const [filter, setFilter] = useState([])
-  const ChildRef = useRef([]);
-
-  // useEffect(() => {
-  //   setLocation(window.location.pathname)
-  //   console.log(window.location.pathname)
-  // }, [window.location.pathname])
 
   const fetchUser = async (user) => {
   try {
@@ -149,31 +141,6 @@ function App() {
     fetchProducts()
   }, [])
 
-  const updateFilter = term => {
-    var index = filter.indexOf(term);
-    if(index !== -1) {
-      var filterFiltered = filter.filter(v => v !== term)
-      setFilter(filterFiltered)
-    } else {
-      setFilter(prevArray => [...prevArray, term])
-    }
-  }
-
-  const showLogin = () => {
-    ChildRef.navbar.callChildFunction()
-  }
-
-  const hideLogin = () => {
-    ChildRef.navbar.bottomNavBarFunction()
-  }
-
-  const ShowLoginWrapper = ({ children }) => {
-    useEffect(() => {
-      showLogin();
-    }, []);
-    return children;
-  };
-
   const ScrollToTop = ({ children }) => {
     useEffect(() => {
       window.scrollTo(0, 0);
@@ -190,9 +157,7 @@ function App() {
     <div className="admin-products-overlay"/>
     <div className="main-content">
       <Navbar
-      key={"navbar"}
-      updateFilter={updateFilter}
-      ref={theRef => ChildRef["navbar"] = theRef}
+      key="navbar"
       />
       <div className={location.pathname === "/" ? "home" : "routes"}>
       <Routes>
@@ -212,6 +177,7 @@ function App() {
         <Route path="/cart" element={<Cart/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
+        <Route path="/reset-password" element={<ResetPassword/>} />
         <Route path="/profile" 
         element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <Navigate to="/login"/>} 
         />
@@ -221,7 +187,6 @@ function App() {
       <div></div>
     </div>
     <BottomNavBar
-    hideLogin={hideLogin}
     />
     </div>
     </>

@@ -62,7 +62,7 @@ export default function Login() {
       <div className="input-field-submit-container">
         <button disabled={isLoading}>Sign In</button>
         {error && <div className="error">{error}</div>}
-        <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
+        <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
       </div>
       </form>
       <div className="alternative-link-container">
