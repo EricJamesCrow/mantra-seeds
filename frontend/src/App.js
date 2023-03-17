@@ -34,6 +34,7 @@ import Cart from "./pages/new_cart/Cart"
 import Login from "./pages/login/Login"
 import Signup from "./pages/signup/Signup"
 import ResetPassword from "./pages/reset-password/ResetPassword"
+import ChangePassword from './pages/new_profile/pages/ChangePassword';
 import Checkout from "./pages/checkout/Checkout"
 import OrderSuccess from './pages/checkout/OrderSuccess'
 import Profile from './pages/new_profile/Profile'
@@ -181,6 +182,7 @@ function App() {
         <Route path="/profile" 
         element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <Navigate to="/login"/>} 
         />
+        <Route path="/profile/change-password" element={JSON.parse(localStorage.getItem('user')) ? <ChangePassword/> : <Navigate to="/login"/>} />
       </Routes>
       </div>
       <div className="copyright">
