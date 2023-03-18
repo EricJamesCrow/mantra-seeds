@@ -51,7 +51,7 @@
     margin-top: 0;
 }
 
-.checkout-component-form > .alternative-link-container > .alternative-link:hover {
+.checkout-component-form > .alternative-link-container > .alternative-link:hover, .alternative-link-container.shipping:hover {
    cursor: pointer;
 }
 
@@ -88,4 +88,79 @@
 
 .alternative-link-container.shipping {
     margin-bottom: 1rem;
+}
+
+/* payment component css */
+.review-order-container {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.06);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 0.5rem;
+}
+
+.review-order-container > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+}
+
+.review-order-container > div:first-child > div:last-child {
+    font-size: 14px;
+    color: #0BADA2;
+    cursor: pointer;
+}
+
+.review-order-container > div:first-child > div:last-child:hover {
+    color: #45D5CA;
+}
+
+.review-order-container > div:last-child {
+    text-align: center;
+    margin: 1rem auto;
+    width: 80%;
+}
+
+.order-summary-container {
+    margin-bottom: 1rem;
+}
+
+.order-summary-container > h2 {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.order-summary-container div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+.order-summary-container div > div:first-child {
+    color: #98999A
+}
+
+.order-summary-container > div:last-child > div:first-child, .order-summary-container > div:last-child > div:last-child {
+    font-weight: 500;
+    font-size: 18px;
+    color: black;
+}
+
+.payment-option-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.06);
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.payment-option-container img {
+    width: 96px;
+    height: 96px;
 }

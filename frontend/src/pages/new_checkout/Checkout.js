@@ -32,7 +32,8 @@ export default function Checkout() {
             </div>
         </div>
         {/* <Address/> */}
-        <Shipping/>
+        {/* <Shipping/> */}
+        <Payment/>
     </div>
   )
 }
