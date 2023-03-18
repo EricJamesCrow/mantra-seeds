@@ -1,0 +1,55 @@
+.checkout-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #F9F9F9;
+}
+
+.checkout-step-container {
+    display: flex;
+    gap: 0.25rem;
+    font-weight: 600;
+    font-size: 14px;
+    align-items: center;
+}
+
+.checkout-circle {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+    background: #000000;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* component css */
+.checkout-component-container {
+    padding: 1rem;
+}
+
+.checkout-component-container h1 {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 1rem;
+}
+
+.checkout-component-form > .input-fields {
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+    width: 90%;
+}
+
+.address-component-header-2 {
+    margin-top: 1rem;
+}
+
+.checkout-component-form > .alternative-link-container > .alternative-link {
+    margin-top: 0;
+}
+
+.checkout-component-form > .alternative-link-container > .alternative-link:hover {
+   cursor: pointer;
+}

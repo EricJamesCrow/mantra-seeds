@@ -35,7 +35,8 @@ import Login from "./pages/login/Login"
 import Signup from "./pages/signup/Signup"
 import ResetPassword from "./pages/reset-password/ResetPassword"
 import ChangePassword from './pages/new_profile/pages/ChangePassword';
-import Checkout from "./pages/checkout/Checkout"
+// import Checkout from "./pages/checkout/Checkout"
+import Checkout from './pages/new_checkout/Checkout';
 import OrderSuccess from './pages/checkout/OrderSuccess'
 import Profile from './pages/new_profile/Profile'
 import Contact from "./pages/contact/Contact"
