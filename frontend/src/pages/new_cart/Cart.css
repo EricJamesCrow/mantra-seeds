@@ -1,3 +1,7 @@
+.cart-container {
+    min-height: 86vh;
+}
+
 .cart-container h1 {
     font-family: 'Roboto';
     font-size: 2rem;
