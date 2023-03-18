@@ -31,7 +31,8 @@ export default function Checkout() {
                 <div>Payment</div>
             </div>
         </div>
-        <Address/>
+        {/* <Address/> */}
+        <Shipping/>
     </div>
   )
 }
