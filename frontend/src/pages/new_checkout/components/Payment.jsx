@@ -1,18 +1,61 @@
 import React, { useEffect, useState } from 'react'
 
 // chakra ui
-import { Radio } from '@chakra-ui/react'
+import { Radio, RadioGroup } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 
 // images
-import Stripe from "../../../images/payment_logos/Stripe.wine.svg"
-import PayPal from "../../../images/payment_logos/PayPal-Logo.wine.svg"
-import Bitcoin from "../../../images/payment_logos/Bitcoin-Logo.wine.svg"
+import StripeSvg from "../../../images/payment_logos/Stripe.wine.svg"
+import PayPalSvg from "../../../images/payment_logos/PayPal-Logo.wine.svg"
+import BitcoinSvg from "../../../images/payment_logos/Bitcoin-Logo.wine.svg"
 
-export default function Payment( { shipping, dispatch, cart } ) {
-    const total = ((cart.subtotal+shipping.shippingPrice*100)/100).toFixed(2)
-    const subtotal = (cart.subtotal/100).toFixed(2)
-    const delivery = shipping.shippingPrice
+// components
+import StripeContainer from './stripe/StripeContainer'
+import PayPal from './paypal/PayPal'
+
+export default function Payment( { setCurrentStep, shipping, dispatch, cart, user } ) {
+    const [ encrypted, setEncrypted ] = useState(false);
+    const [ value, setValue ] = useState(0);
+    const total = ((cart.subtotal+shipping.shippingPrice*100)/100).toFixed(2);
+    const subtotal = (cart.subtotal/100).toFixed(2);
+    const delivery = shipping.shippingPrice;
+
+    const handleEdit = () => {
+      setCurrentStep(1)
+    };
+
+    useEffect(() => {
+      const encryptAdrress = async () => {
+        fetch("/api/payment/encrypt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user: cart.user,
+            address: { 
+              firstName: shipping.firstName,
+              lastName: shipping.lastName,
+              street: shipping.address,
+              city: shipping.city,
+              state: shipping.state,
+              zip: shipping.zip
+            },
+            items: cart,
+            shipping: {
+              delivery: shipping.shippingName,
+              price: shipping.shippingPrice,
+              // expected: shipping.shippingPrice // fix this, need expected delivery date
+            },
+            email: shipping.email
+          }),
+        }).then((res) => res.json())
+        .then((data) => {
+          setEncrypted(data)})
+        .catch((e) => {
+          console.log(e)
+        })
+      }
+      encryptAdrress()
+    }, [])
   
   return (
     <div className="checkout-component-container">
@@ -21,14 +64,14 @@ export default function Payment( { shipping, dispatch, cart } ) {
         <div className="review-order-container">
           <div>
             <div>Contact</div>
-            <div>Edit</div>
+            <div onClick={handleEdit}>Edit</div>
           </div>
           <div>{shipping.email}</div>
         </div>
         <div className="review-order-container">
           <div>
             <div>Shipping Address</div>
-            <div>Edit</div>
+            <div onClick={handleEdit}>Edit</div>
           </div>
           <div>{`${shipping.address}, ${shipping.city} ${shipping.state} ${shipping.zip}, United States`}</div>
         </div>
@@ -50,18 +93,35 @@ export default function Payment( { shipping, dispatch, cart } ) {
       </div>
       <h1>Choose a payment method</h1>
       <div className="review-order-containers">
-        <div className="payment-option-container">
-          <Radio/>
-          <img src={Stripe}/>
+      <RadioGroup onChange={setValue} value={value}>
+        <div className={value === "stripe" ? "payment-option-container stripe" : "payment-option-container"}>
+          <div>
+            <Radio
+            value='stripe'
+            />
+            <img src={StripeSvg}/>
+          </div>
+          {encrypted && value === "stripe" && <StripeContainer cart={cart} shipping={shipping} user={user}/>}
         </div>
         <div className="payment-option-container">
-          <Radio/>
-          <img src={PayPal}/>
+          <div>
+            <Radio
+            value='paypal'
+            />
+            <img src={PayPalSvg}/>
+          </div>
+          {encrypted && value === "paypal" && <PayPal cart={cart} shipping={shipping} user={user}/>}
         </div>
         <div className="payment-option-container">
-          <Radio/>
-          <img src={Bitcoin}/>
+          <div>
+            <Radio
+            value='bitcoin'
+            />
+            <img src={BitcoinSvg}/>
+          </div>
+          {encrypted && value === "bitcoin" && <PayPal cart={cart} shipping={shipping} user={user}/>}
         </div>
+      </RadioGroup>
       </div>
       <div className="alternative-link-container shipping">
         <div className="alternative-link">

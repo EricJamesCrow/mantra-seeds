@@ -43,7 +43,7 @@ export default function Checkout() {
         </div>
         {currentStep === 1 && <Address setCurrentStep={setCurrentStep} shipping={shipping} dispatch={dispatch}/>}
         {currentStep === 2 && <Shipping setCurrentStep={setCurrentStep} shipping={shipping} dispatch={dispatch}/>}
-        {currentStep === 3 && <Payment shipping={shipping} dispatch={dispatch} cart={cart}/>}
+        {currentStep === 3 && <Payment setCurrentStep={setCurrentStep} shipping={shipping} dispatch={dispatch} cart={cart} user={user}/>}
     </div>
   )
 }
