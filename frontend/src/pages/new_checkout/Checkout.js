@@ -16,7 +16,6 @@ export default function Checkout() {
     const [currentStep, setCurrentStep] = useState(1);
     const user = useSelector(state => state.auth.user);
     const cart = useSelector(state => state.cart);
-    const products = useSelector(state => state.products.products);
     const dispatch = useDispatch();
     const { shipping } = useSelector(state => state.shipping);
 
@@ -44,7 +43,7 @@ export default function Checkout() {
         </div>
         {currentStep === 1 && <Address setCurrentStep={setCurrentStep} shipping={shipping} dispatch={dispatch}/>}
         {currentStep === 2 && <Shipping setCurrentStep={setCurrentStep} shipping={shipping} dispatch={dispatch}/>}
-        {currentStep === 3 && <Payment />}
+        {currentStep === 3 && <Payment shipping={shipping} dispatch={dispatch} cart={cart}/>}
     </div>
   )
 }

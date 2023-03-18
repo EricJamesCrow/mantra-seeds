@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 // chakra ui
 import { Radio } from '@chakra-ui/react'
@@ -9,7 +9,11 @@ import Stripe from "../../../images/payment_logos/Stripe.wine.svg"
 import PayPal from "../../../images/payment_logos/PayPal-Logo.wine.svg"
 import Bitcoin from "../../../images/payment_logos/Bitcoin-Logo.wine.svg"
 
-export default function Payment() {
+export default function Payment( { shipping, dispatch, cart } ) {
+    const total = ((cart.subtotal+shipping.shippingPrice*100)/100).toFixed(2)
+    const subtotal = (cart.subtotal/100).toFixed(2)
+    const delivery = shipping.shippingPrice
+  
   return (
     <div className="checkout-component-container">
       <h1>Review Order</h1>
@@ -19,29 +23,28 @@ export default function Payment() {
             <div>Contact</div>
             <div>Edit</div>
           </div>
-          <div>EricCrow@pm.me</div>
+          <div>{shipping.email}</div>
         </div>
         <div className="review-order-container">
           <div>
             <div>Shipping Address</div>
             <div>Edit</div>
           </div>
-          <div>1024 Address, Santa Cruz CA
-95065-9623, United States</div>
+          <div>{`${shipping.address}, ${shipping.city} ${shipping.state} ${shipping.zip}, United States`}</div>
         </div>
         <div className="order-summary-container">
           <h2>Order Summary</h2>
           <div>
             <div>Subtotal</div>
-            <div>$23.98</div>
+            <div>${subtotal}</div>
           </div>
           <div>
             <div>Delivery</div>
-            <div>$7.99</div>
+            <div>${delivery}</div>
           </div>
           <div>
             <div>Total</div>
-            <div>$31.97</div>
+            <div>${total}</div>
           </div>
         </div>
       </div>
