@@ -82,7 +82,7 @@ export default function Shipping( { setCurrentStep, shipping, dispatch } ) {
         </div>
       </div>
       <div className="alternative-link-container shipping">
-            <div className="alternative-link" onClick={handleSubmit}>
+            <div className="alternative-link" onClick={() => selectedShipping ? handleSubmit() : null}>
               <div>Confirm and continue</div>
               <ChevronRightIcon w={6} h={6}/>
             </div>
