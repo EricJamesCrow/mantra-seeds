@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 // chakra ui
 import { CheckCircleIcon } from '@chakra-ui/icons'
@@ -13,6 +14,11 @@ import './Checkout.css'
 
 export default function Checkout() {
     const [currentStep, setCurrentStep] = useState(1);
+    const user = useSelector(state => state.auth.user);
+    const cart = useSelector(state => state.cart);
+    const products = useSelector(state => state.products.products);
+    const dispatch = useDispatch();
+    const { shipping } = useSelector(state => state.shipping);
 
   return (
     <div className="checkout-container">
@@ -36,8 +42,8 @@ export default function Checkout() {
                 <div>Payment</div>
             </div>
         </div>
-        {currentStep === 1 && <Address setCurrentStep={setCurrentStep}/>}
-        {currentStep === 2 && <Shipping setCurrentStep={setCurrentStep}/>}
+        {currentStep === 1 && <Address setCurrentStep={setCurrentStep} shipping={shipping} dispatch={dispatch}/>}
+        {currentStep === 2 && <Shipping setCurrentStep={setCurrentStep} shipping={shipping} dispatch={dispatch}/>}
         {currentStep === 3 && <Payment />}
     </div>
   )
