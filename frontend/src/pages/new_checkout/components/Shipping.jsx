@@ -44,14 +44,13 @@ export default function Shipping( { setCurrentStep, shipping, dispatch } ) {
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         method.estimated_days = "Estimated delivery " + delivery.toLocaleDateString("en-US", options);
     });
-      setShippingMethods(shippingOptions)
-      console.log(shippingOptions)
+      setShippingMethods(shippingOptions);
     }
   };
 
   useEffect(() => {
     calculateShipping(shipping);
-  }, []);
+  }, [shipping]);
 
   return (
     <div>

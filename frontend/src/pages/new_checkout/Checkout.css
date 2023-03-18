@@ -13,6 +13,10 @@
     align-items: center;
 }
 
+.checkout-step-container:hover {
+    cursor: pointer;
+}
+
 .checkout-circle {
     width: 20px;
     height: 20px;
