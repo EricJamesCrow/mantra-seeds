@@ -4,7 +4,12 @@ import React from 'react'
 import { Input } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 
-export default function Address() {
+export default function Address( {setCurrentStep }) {
+
+  const handleClick = () => {
+    setCurrentStep(2);
+  };
+
   return (
     <div className="checkout-component-container">
       <h1>Enter your shipping address</h1>
@@ -51,7 +56,7 @@ export default function Address() {
               <Input/> 
         </div>
         <div className="alternative-link-container">
-            <div className="alternative-link">
+            <div className="alternative-link" onClick={handleClick}>
               <div>Confirm and continue</div>
               <ChevronRightIcon w={6} h={6}/>
             </div>

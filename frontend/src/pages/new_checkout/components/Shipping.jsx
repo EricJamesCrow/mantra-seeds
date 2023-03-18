@@ -4,7 +4,12 @@ import React from 'react'
 import { Radio } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 
-export default function Shipping() {
+export default function Shipping( { setCurrentStep } ) {
+
+  const handleClick = () => {
+    setCurrentStep(3);
+  };
+
   return (
     <div>
       <div className="checkout-component-container">
@@ -21,7 +26,7 @@ export default function Shipping() {
         </div>
       </div>
       <div className="alternative-link-container shipping">
-            <div className="alternative-link">
+            <div className="alternative-link" onClick={handleClick}>
               <div>Confirm and continue</div>
               <ChevronRightIcon w={6} h={6}/>
             </div>
