@@ -197,7 +197,7 @@
 }
 
 @media (min-width: 980px) {
-    .checkout-component-container {
+    .checkout-component-container.payment {
         display: flex;
         justify-content: space-between;
         gap: 2rem;

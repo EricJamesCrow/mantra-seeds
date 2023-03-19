@@ -61,7 +61,7 @@ export default function Payment( { setCurrentStep, shipping, dispatch, cart, use
     }, [])
   
   return (
-    <div className="checkout-component-container">
+    <div className="checkout-component-container payment">
       <div className="review-order-wrapper">
       <h1>Review Order</h1>
       <div className="review-order-containers">
