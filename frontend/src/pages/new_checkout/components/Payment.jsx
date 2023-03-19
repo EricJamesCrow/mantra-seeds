@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import { useMediaQuery } from 'react-responsive'
+
 // chakra ui
 import { Radio, RadioGroup } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
@@ -14,6 +16,7 @@ import StripeContainer from './stripe/StripeContainer'
 import PayPal from './paypal/PayPal'
 
 export default function Payment( { setCurrentStep, shipping, dispatch, cart, user } ) {
+    const isDesktop = useMediaQuery({ minWidth: 980 });
     const [ encrypted, setEncrypted ] = useState(false);
     const [ value, setValue ] = useState(0);
     const total = ((cart.subtotal+shipping.shippingPrice*100)/100).toFixed(2);
@@ -59,6 +62,7 @@ export default function Payment( { setCurrentStep, shipping, dispatch, cart, use
   
   return (
     <div className="checkout-component-container">
+      <div className="review-order-wrapper">
       <h1>Review Order</h1>
       <div className="review-order-containers">
         <div className="review-order-container">
@@ -91,6 +95,14 @@ export default function Payment( { setCurrentStep, shipping, dispatch, cart, use
           </div>
         </div>
       </div>
+      {isDesktop && <div className="alternative-link-container shipping">
+        <div className="alternative-link">
+          <div>Submit Order</div>
+          <ChevronRightIcon w={6} h={6}/>
+        </div>
+      </div>}
+      </div>
+      <div className="payment-method-wrapper">
       <h1>Choose a payment method</h1>
       <div className="review-order-containers">
       <RadioGroup onChange={setValue} value={value}>
@@ -123,11 +135,12 @@ export default function Payment( { setCurrentStep, shipping, dispatch, cart, use
         </div>
       </RadioGroup>
       </div>
-      <div className="alternative-link-container shipping">
+      {!isDesktop && <div className="alternative-link-container shipping">
         <div className="alternative-link">
           <div>Submit Order</div>
           <ChevronRightIcon w={6} h={6}/>
         </div>
+      </div>}
       </div>
     </div>
   )
