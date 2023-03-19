@@ -1,6 +1,13 @@
+.profile-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .profile-container {
     margin: 1rem;
     min-height: 80vh;
+    width: 100%;
+    max-width: 600px;
 }
 
 .profile-container > div:first-child { 
@@ -97,3 +104,29 @@
 .user-profile-btn > svg {
     margin-right: 0.5rem;
 }
+
+/* @media (min-width: 980px) {
+    .user-profile-and-btns-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  
+    .user-profile-container {
+      width: 40%;
+    }
+  
+    .user-profile-btns-container {
+      width: 40%;
+    }
+  
+    .user-profile-btn {
+      flex-direction: row;
+      padding: 1rem;
+    }
+
+    .profile-container > div:first-child {
+        font-size: 36px;
+    }
+  } */

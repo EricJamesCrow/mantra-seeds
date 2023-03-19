@@ -35,33 +35,37 @@ export default function Profile() {
     ]
 
   return (
-    <div className="profile-container">
-        <div>Profile</div>
-        <div className="user-profile-container">
-            <div className="avatar-and-info">
-                <Avatar name='Eric Crow' w='16' h='16'/>
-                <div className='name-and-email-container'>
-                    <div>Eric Crow</div>
-                    <div>{user.email}</div>
-                </div>
-            </div>
-            <EditIcon w='7' h='7' color='#fff'/>
-        </div>
-        <div className="user-profile-btns-container">
-            {userProfileBtns.map(btn => (
-            <div className="user-profile-btn" onClick={btn.onClick}>
-                <div>
-                    <div>
-                        <FontAwesomeIcon
-                            icon={btn.icon}
-                            color='#669C54'
-                            />
+    <div className="profile-wrapper">
+        <div className="profile-container">
+            <div>Profile</div>
+            <div className="user-profile-and-btns-wrapper">
+                <div className="user-profile-container">
+                    <div className="avatar-and-info">
+                        <Avatar name='Eric Crow' w='16' h='16'/>
+                        <div className='name-and-email-container'>
+                            <div>Eric Crow</div>
+                            <div>{user.email}</div>
+                        </div>
                     </div>
-                    <div>{btn.text}</div>
+                    <EditIcon w='7' h='7' color='#fff'/>
                 </div>
-                <ChevronRightIcon w='7' h='7' color='#ABABAB'/>
+                <div className="user-profile-btns-container">
+                    {userProfileBtns.map(btn => (
+                    <div className="user-profile-btn" onClick={btn.onClick}>
+                        <div>
+                            <div>
+                                <FontAwesomeIcon
+                                    icon={btn.icon}
+                                    color='#669C54'
+                                    />
+                            </div>
+                            <div>{btn.text}</div>
+                        </div>
+                        <ChevronRightIcon w='7' h='7' color='#ABABAB'/>
+                    </div>
+                    ))}
+                </div>
             </div>
-            ))}
         </div>
     </div>
   )
