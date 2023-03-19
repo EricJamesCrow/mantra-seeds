@@ -90,6 +90,16 @@
         justify-content: center;
         margin-left: 5%;
         gap: 1rem;
+        overflow-x: visible;
+        white-space: normal;
+    }
+
+    .chakra-filter {
+        transition: all 0.2s ease-in-out;
+    }
+
+    .chakra-filter:hover {
+        transform: scale(1.1);
     }
 
     .chakra-filter img {
