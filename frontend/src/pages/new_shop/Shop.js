@@ -62,31 +62,33 @@ export default function Shop() {
   return (
     <div className="shop-container">
         <div>Shop Products</div>
+        <div className="search-and-filters-container">
         <form>
-    <div className="filter-sort-search-container">
-    <FontAwesomeIcon 
-      icon={faSearch} 
-      style={{
-          color: "#36454F",
-          fontSize: "1.3rem"
-        }}
-      />
-    <input type="text" 
-    id="searchInput" 
-    placeholder={`Search Products`} 
-    class="filter-sort-search-input"
-    onChange={(e) => setSearchTerm(e.target.value)}
-    />
-    </div>
-    </form>
-    <div className="shop-chakra-filters">
-  {[    { name: "Show All", image: ShowAll },    { name: "Root", image: Root },    { name: "Sacral", image: Sacral },    { name: "Solar", image: Solar },    { name: "Heart", image: Heart },    { name: "Throat", image: Throat },    { name: "Third Eye", image: ThirdEye },    { name: "Crown", image: Crown },  ].map((filter, index) => (
-    <div key={index} className='chakra-filter' onClick={() => handleChakraClick(filter.name)}>
-      <img src={filter.image} alt={filter.name} />
-      <span>{filter.name}</span>
-    </div>
-  ))}
-</div>
+          <div className="filter-sort-search-container">
+            <FontAwesomeIcon 
+              icon={faSearch} 
+              style={{
+                  color: "#36454F",
+                  fontSize: "1.3rem"
+                }}
+              />
+            <input type="text" 
+            id="searchInput" 
+            placeholder={`Search Products`} 
+            class="filter-sort-search-input"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </form>
+            <div className="shop-chakra-filters">
+              {[    { name: "Show All", image: ShowAll },    { name: "Root", image: Root },    { name: "Sacral", image: Sacral },    { name: "Solar", image: Solar },    { name: "Heart", image: Heart },    { name: "Throat", image: Throat },    { name: "Third Eye", image: ThirdEye },    { name: "Crown", image: Crown },  ].map((filter, index) => (
+                <div key={index} className='chakra-filter' onClick={() => handleChakraClick(filter.name)}>
+                  <img src={filter.image} alt={filter.name} />
+                  <span>{filter.name}</span>
+                </div>
+              ))}
+            </div>
+        </div>
     <div className="admin-page-results-container">
   <div>{results === 0 ? `0 - ${results} of ${results} Results` :
       `${(currentPage - 1) * itemsPerPage + 1} - ${Math.min(currentPage * itemsPerPage, results)} of ${results} Results`}</div>
@@ -100,14 +102,15 @@ export default function Shop() {
     </Select>
   </div>
 </div>
+<div className="shop-display-products-container">
 {productsData.map(product => (
     <NewProduct
     key={product._id}
     product={product}
     />
 ))
-
 }
+</div>
 <Pagination
             itemsPerPage={itemsPerPage}
             totalItems={filteredProducts.length}
