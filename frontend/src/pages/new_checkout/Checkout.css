@@ -59,8 +59,8 @@
     margin-top: 0;
 }
 
-.checkout-component-form > .alternative-link-container > .alternative-link:hover, .alternative-link-container.shipping:hover {
-   cursor: pointer;
+.alternative-link:hover {
+    cursor: pointer;
 }
 
 /* shipping component css */

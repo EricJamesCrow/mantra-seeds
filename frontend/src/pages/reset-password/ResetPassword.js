@@ -23,22 +23,24 @@ export default function ResetPassword() {
             cursor: "pointer"}}
         />
     </button>
-    <form>
-    <div className="login-fields-container">
-      <h1>Reset Password</h1>
-      <div className="input-fields">
-        <div>Email<span className="required-asterisk">*</span></div>
-        <Input
-        type="email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-        />
+    <div className="change-password-wrapper">
+      <form>
+      <div className="login-fields-container">
+        <h1>Reset Password</h1>
+        <div className="input-fields">
+          <div>Email<span className="required-asterisk">*</span></div>
+          <Input
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          />
+        </div>
       </div>
+      <div className="input-field-submit-container">
+        <button>Send Verification Code</button>
+      </div>
+      </form>
     </div>
-    <div className="input-field-submit-container">
-      <button>Send Verification Code</button>
-    </div>
-    </form>
   </div>
   )
 }

@@ -39,7 +39,7 @@ export default function Login() {
               cursor: "pointer"}}
           />
       </button>
-        <div className="login-wrapper">
+        <div className="change-password-wrapper">
         <form onSubmit={handleSubmit}>
         <div className="login-fields-container">
           <h1>Sign In</h1>
