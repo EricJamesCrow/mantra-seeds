@@ -46,7 +46,8 @@ export default function Address( {setCurrentStep, shipping, dispatch }) {
   };
 
   return (
-    <div className="checkout-component-container">
+    <div className="address-wrapper">
+    <div className="checkout-component-container address">
       <h1>Enter your shipping address</h1>
       <form className="checkout-component-form" onSubmit={handleSubmit}>
         <div className="input-fields">
@@ -101,6 +102,7 @@ export default function Address( {setCurrentStep, shipping, dispatch }) {
             </button>
         </div>
       </form>
+    </div>
     </div>
   )
 }

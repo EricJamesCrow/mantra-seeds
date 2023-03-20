@@ -196,6 +196,16 @@
     width: 100%;
 }
 
+.address-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-component-container.address {
+    width: 100%;
+    max-width: 600px;
+}
+
 @media (min-width: 980px) {
     .checkout-component-container.payment {
         display: flex;
