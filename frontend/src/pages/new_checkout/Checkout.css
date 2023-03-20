@@ -196,17 +196,12 @@
     width: 100%;
 }
 
-.address-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
-.checkout-component-container.address {
-    width: 100%;
-    max-width: 600px;
-}
-
 @media (min-width: 980px) {
+    .checkout-header {
+        display: flex;
+        justify-content: center;
+        gap: 25%;
+    }
     .checkout-component-container.payment {
         display: flex;
         justify-content: space-between;
@@ -222,6 +217,33 @@
         max-width: 600px;
     }
     .alternative-link-container.shipping {
-        margin-top: -3rem;
+        width: 25%;
+    }
+    
+    .shipping-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .checkout-component-container.shipping {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .checkout-component-container.address {
+        display: flex;
+        justify-content: center;
+        margin: 1rem 0;
+        gap: 3rem;
+        width: 100%;
+    }
+
+    .shipping-address-wrapper {
+        width: 40%;
+    }
+
+    .contact-wrapper {
+        width: 40%;
     }
 }

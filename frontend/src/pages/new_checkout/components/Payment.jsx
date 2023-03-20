@@ -95,7 +95,7 @@ export default function Payment( { setCurrentStep, shipping, dispatch, cart, use
           </div>
         </div>
       </div>
-      {isDesktop && <div className="alternative-link-container shipping">
+      {isDesktop && <div className="alternative-link-container">
         <div className="alternative-link">
           <div>Submit Order</div>
           <ChevronRightIcon w={6} h={6}/>

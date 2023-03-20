@@ -53,8 +53,8 @@ export default function Shipping( { setCurrentStep, shipping, dispatch } ) {
   }, [shipping]);
 
   return (
-    <div>
-      <div className="checkout-component-container">
+    <div className="shipping-wrapper">
+      <div className="checkout-component-container shipping">
         <h1>Select a shipping method</h1>
         <div className="shipping-methods-container">
         {shippingMethods.length === 0 ? (

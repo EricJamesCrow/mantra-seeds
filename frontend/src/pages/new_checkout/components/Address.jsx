@@ -47,62 +47,66 @@ export default function Address( {setCurrentStep, shipping, dispatch }) {
 
   return (
     <div className="address-wrapper">
-    <div className="checkout-component-container address">
-      <h1>Enter your shipping address</h1>
-      <form className="checkout-component-form" onSubmit={handleSubmit}>
-        <div className="input-fields">
-            <div>First Name<span className="required-asterisk">*</span></div>
-            <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} required/> 
-        </div>
-        <div className="input-fields">
-            <div>Last Name<span className="required-asterisk">*</span></div>
-            <Input value={lastName} onChange={(e) => setLastName(e.target.value)} required/> 
-        </div>
-        <div className="input-fields">
-            <div>Company</div>
-            <Input value={company} onChange={(e) => setCompany(e.target.value)}/> 
-        </div>
-        <div className="input-fields">
-            <div>Address<span className="required-asterisk">*</span></div>
-            <Input value={address} onChange={(e) => setAddress(e.target.value)} required/> 
-        </div>
-        <div className="input-fields">
-            <div>Apartment, suite, etc. (optional)</div>
-            <Input value={apt} onChange={(e) => setApt(e.target.value)}/> 
-        </div>
-        <div className="input-fields">
-            <div>City<span className="required-asterisk">*</span></div>
-            <Input value={city} onChange={(e) => setCity(e.target.value)} required/> 
-        </div>
-        <div className="input-fields">
-            <div>State<span className="required-asterisk">*</span></div>
-            <Input value={state} onChange={(e) => setState(e.target.value)} required/> 
-        </div>
-        <div className="input-fields">
-            <div>Zip<span className="required-asterisk">*</span></div>
-            <Input value={zip} onChange={(e) => setZip(e.target.value)} required/> 
-        </div>
-        <div className="input-fields">
-            <div>Phone</div>
-            <Input value={phone} onChange={(e) => setPhone(e.target.value)}/> 
-        </div>
-        <h1 className="address-component-header-2">Enter your contact information</h1>
-        <div className="input-fields">
-              <div>Email<span className="required-asterisk">*</span></div>
-              <Input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              required={true}
-              /> 
-        </div>
-        <div className="alternative-link-container">
-            <button type="submit" className="alternative-link">
-              <div>Confirm and continue</div>
-              <ChevronRightIcon w={6} h={6}/>
-            </button>
-        </div>
-      </form>
+    <form className="checkout-component-form" onSubmit={handleSubmit}> 
+    <div className="checkout-component-container address"> 
+      <div className="shipping-address-wrapper">
+        <h1>Enter your shipping address</h1>
+          <div className="input-fields">
+              <div>First Name<span className="required-asterisk">*</span></div>
+              <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} required/> 
+          </div>
+          <div className="input-fields">
+              <div>Last Name<span className="required-asterisk">*</span></div>
+              <Input value={lastName} onChange={(e) => setLastName(e.target.value)} required/> 
+          </div>
+          <div className="input-fields">
+              <div>Company</div>
+              <Input value={company} onChange={(e) => setCompany(e.target.value)}/> 
+          </div>
+          <div className="input-fields">
+              <div>Address<span className="required-asterisk">*</span></div>
+              <Input value={address} onChange={(e) => setAddress(e.target.value)} required/> 
+          </div>
+          <div className="input-fields">
+              <div>Apartment, suite, etc. (optional)</div>
+              <Input value={apt} onChange={(e) => setApt(e.target.value)}/> 
+          </div>
+          <div className="input-fields">
+              <div>City<span className="required-asterisk">*</span></div>
+              <Input value={city} onChange={(e) => setCity(e.target.value)} required/> 
+          </div>
+          <div className="input-fields">
+              <div>State<span className="required-asterisk">*</span></div>
+              <Input value={state} onChange={(e) => setState(e.target.value)} required/> 
+          </div>
+          <div className="input-fields">
+              <div>Zip<span className="required-asterisk">*</span></div>
+              <Input value={zip} onChange={(e) => setZip(e.target.value)} required/> 
+          </div>
+          <div className="input-fields">
+              <div>Phone</div>
+              <Input value={phone} onChange={(e) => setPhone(e.target.value)}/> 
+          </div>     
+      </div>
+      <div className="contact-wrapper">
+            <h1 className="address-component-header-2">Enter your contact information</h1>
+            <div className="input-fields">
+                  <div>Email<span className="required-asterisk">*</span></div>
+                  <Input
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  required={true}
+                  /> 
+            </div>
+            <div className="alternative-link-container">
+                <button type="submit" className="alternative-link">
+                  <div>Confirm and continue</div>
+                  <ChevronRightIcon w={6} h={6}/>
+                </button>
+            </div>
+          </div>
     </div>
+    </form>
     </div>
   )
 }
