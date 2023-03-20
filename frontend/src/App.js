@@ -21,6 +21,7 @@ import BottomNavBar from './components/BottomNavBar'
 import NewProductPage from './components/NewProductPage';
 
 // pages
+import Home from "./pages/new_home/Home"
 import HomeV2 from "./pages/new_home/HomeV2"
 import AdminDashboard from "./pages/new_admin/pages/AdminDashboard"
 import AdminOrders from "./pages/new_admin/pages/AdminOrders"
@@ -163,7 +164,7 @@ function App() {
       />
       <div className={location.pathname === "/" ? "home" : "routes"}>
       <Routes>
-        <Route path="/" element={<HomeV2/>}/>
+        <Route path="/" element={<Home/>}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/admin/orders" element={<AdminOrders/>} />
         <Route path="/admin/orders/:id" element={<AdminOrdersDetailsPage/>} />

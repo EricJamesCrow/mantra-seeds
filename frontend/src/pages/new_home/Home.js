@@ -17,10 +17,10 @@ export default function Home() {
             <div>MANTRA SEEDS</div>
             <img src={Underline} alt="underline" />
         </div>
-        <div className="birds-container">
+        {/* <div className="birds-container">
         <img src={TwoBirds} alt="two birds" className="two-birds" />
         <img src={ThreeBirds} alt="three birds" className="three-birds" />
-        </div>
+        </div> */}
         <img src={Meditating} alt="meditating" className="meditating" />
         <div className="home-page-shop-products">
             <div>Shop</div>
