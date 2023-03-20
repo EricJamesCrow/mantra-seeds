@@ -29,7 +29,7 @@ export default function Signup() {
 }
 
   return (
-    <div className="login-container admin-orders-details-page-container">
+    <div className="login-container">
       <button className="details-page-btn" onClick={() => navigate(-1)}>
         <FontAwesomeIcon 
           icon={faChevronLeft} 
@@ -39,39 +39,41 @@ export default function Signup() {
               cursor: "pointer"}}
           />
       </button>
-      <form onSubmit={handleSubmit}>
-      <div className="login-fields-container">
-        <h1>Sign Up</h1>
-        <div className="input-fields">
-          <div>Email<span className="required-asterisk">*</span></div>
-          <Input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          />
+      <div className="login-wrapper">
+        <form onSubmit={handleSubmit}>
+        <div className="login-fields-container">
+          <h1>Sign Up</h1>
+          <div className="input-fields">
+            <div>Email<span className="required-asterisk">*</span></div>
+            <Input
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            />
+          </div>
+          <div className="input-fields">
+            <div>Password<span className="required-asterisk">*</span></div>
+            <Input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            />
+          </div>
         </div>
-        <div className="input-fields">
-          <div>Password<span className="required-asterisk">*</span></div>
-          <Input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          />
+        <div className="input-field-submit-container">
+          <button disabled={isLoading}>Create Account</button>
+          {error && <div className="error">{error}</div>}
+          <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
         </div>
-      </div>
-      <div className="input-field-submit-container">
-        <button disabled={isLoading}>Create Account</button>
-        {error && <div className="error">{error}</div>}
-        <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
-      </div>
-      </form>
-      <div className="alternative-link-container">
-            <h1>Have an account?</h1>
-            <Link to="/login" className="alternative-link">
-              <div>Sign In</div>
-              <ChevronRightIcon w={6} h={6}/>
-            </Link>
-      </div>
+        </form>
+        <div className="alternative-link-container">
+              <h1>Have an account?</h1>
+              <Link to="/login" className="alternative-link">
+                <div>Sign In</div>
+                <ChevronRightIcon w={6} h={6}/>
+              </Link>
+        </div>
+        </div>
     </div>
   )
 }
