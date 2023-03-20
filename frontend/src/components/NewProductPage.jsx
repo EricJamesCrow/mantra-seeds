@@ -20,6 +20,7 @@ export default function NewProductPage() {
   const { addToCart } = useAddToCart();
   const navigate = useNavigate();
   const price = (product.price/100).toFixed(2)
+  const [quantity, setQuantity] = useState(1)
 
   useEffect(() => {
     const url = PRODUCTS_API_URL+id;
@@ -31,6 +32,16 @@ export default function NewProductPage() {
             setProduct(data)
         })
 }, [id])
+
+    const handleQuantityIncrease = () => {
+        setQuantity(quantity + 1)
+    }
+
+    const handleQuantityDecrease = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1)
+        }
+    }
 
   return (
     <div className="admin-orders-details-page-container">
@@ -68,11 +79,11 @@ export default function NewProductPage() {
             <div className="adjust-quantity-container">
             <div>Quantity</div>
             <div className="adjust-quantity">
-                <button className="adjust-quantity-btn">
+                <button className="adjust-quantity-btn" onClick={handleQuantityDecrease}>
                     <div>-</div>
                 </button>
-                <div>1</div>
-                <button className="adjust-quantity-btn">
+                <div>{quantity}</div>
+                <button className="adjust-quantity-btn" onClick={handleQuantityIncrease}>
                     <div>+</div>
                 </button>
             </div>
@@ -88,7 +99,7 @@ export default function NewProductPage() {
                 <div>Add to Favorites</div>
             </div>
         </div>
-        <button className="add-to-cart-btn" onClick={() => addToCart(user.id, product._id, 1, product.price)}>Add to Cart</button>
+        <button className="add-to-cart-btn" onClick={() => addToCart(user.id, product._id, quantity, product.price)}>Add to Cart</button>
         </div>
         <div className="reviews-container">
             <div>Reviews</div>

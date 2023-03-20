@@ -22,7 +22,7 @@ import NewProductPage from './components/NewProductPage';
 
 // pages
 import Home from "./pages/new_home/Home"
-import HomeV2 from "./pages/new_home/HomeV2"
+// import HomeV2 from "./pages/new_home/HomeV2"
 import AdminDashboard from "./pages/new_admin/pages/AdminDashboard"
 import AdminOrders from "./pages/new_admin/pages/AdminOrders"
 import AdminOrdersDetailsPage from './pages/new_admin/pages/AdminOrdersDetailsPage';
