@@ -53,32 +53,34 @@ export default function AdminCustomersDetailsPage() {
             cursor: "pointer"}}
         />
       </button>
-      <div className="order-customer-card-id-btn-container">
-      <div>Customer: {email}</div>
-      <button className={`order-customer-card-btn active`}>{"Active"}</button>
-      </div>
-      <div className="order-customer-card-details-container">
-        <img src={defaultProfilePic} className="customer-details-profile-pic"/>
-        {cardDetails.map(item => (
-        <div key={item.id} className={`order-customer-card-details ${item.class}`}>
-          <div>{item.title}</div>
-          <div>
-            {item.status &&
-            <div className={`circle ${item.status}`}></div>
-            }
-          <div>{item.value}</div>
+      <div className="admin-order-details-wrapper">
+        <div className="order-customer-card-id-btn-container">
+        <div>Customer: {email}</div>
+        <button className={`order-customer-card-btn active`}>{"Active"}</button>
+        </div>
+        <div className="order-customer-card-details-container">
+          <img src={defaultProfilePic} className="customer-details-profile-pic"/>
+          {cardDetails.map(item => (
+          <div key={item.id} className={`order-customer-card-details ${item.class}`}>
+            <div>{item.title}</div>
+            <div>
+              {item.status &&
+              <div className={`circle ${item.status}`}></div>
+              }
+            <div>{item.value}</div>
+            </div>
           </div>
-        </div>
-        ))
-        }
-        <div className={`order-customer-card-details-order-details-address gray customer`}>
-          <div>Shipping Address</div>
-          <div>1024 Address, Santa Cruz CA
-95065-9623, United States</div>
-        </div>
-        <div className="order-details-button-container">
-          <button className="order-details-button delivered">Make Customer Admin</button>
-          <button className="order-details-button delete" onClick={onOpen}>Ban Customer</button>
+          ))
+          }
+          <div className={`order-customer-card-details-order-details-address gray customer`}>
+            <div>Shipping Address</div>
+            <div>1024 Address, Santa Cruz CA
+  95065-9623, United States</div>
+          </div>
+          <div className="order-details-button-container">
+            <button className="order-details-button delivered">Make Customer Admin</button>
+            <button className="order-details-button delete" onClick={onOpen}>Ban Customer</button>
+          </div>
         </div>
       </div>
       <AlertDialog

@@ -1,5 +1,7 @@
 import React from 'react'
 
+// redux
+import { useSelector } from 'react-redux'
 
 // styles
 import './AdminDashboard.css'
@@ -13,10 +15,14 @@ import SideBar from '../components/SideBar'
 import ContentCard from '../components/ContentCard'
 
 export default function AdminDashboard() {
+  const { products } = useSelector(state => state.products)
+  const { orders } = useSelector(state => state.orders)
+  const customers = useSelector(state => state.customers.customers);
+
   const cardData = [
-    { id: 1, title: 'Customers', value: 44, percentage: '-12.5%', icon: faUsers },
-    { id: 2, title: 'Orders', value: 120, percentage: '15%', icon: faShoppingCart },
-    { id: 3, title: 'Products', value: 500, percentage: '2%', icon: faBoxOpen },
+    { id: 1, title: 'Customers', value: customers.length, percentage: '-12.5%', icon: faUsers },
+    { id: 2, title: 'Orders', value: orders.length, percentage: '15%', icon: faShoppingCart },
+    { id: 3, title: 'Products', value: products.length, percentage: '2%', icon: faBoxOpen },
   ];
 
   return (

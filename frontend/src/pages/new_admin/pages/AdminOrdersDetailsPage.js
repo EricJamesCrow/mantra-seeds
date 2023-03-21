@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useMediaQuery } from 'react-responsive';
 
 // styles
 import './AdminOrdersDetailsPage.css'
@@ -11,6 +12,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
 export default function AdminOrdersDetailsPage() {
+  const isDesktop = useMediaQuery({ minWidth: 980 });
   const { id } = useParams()
   const navigate = useNavigate();
   const { products } = useSelector(state => state.products)
@@ -39,7 +41,8 @@ export default function AdminOrdersDetailsPage() {
   ]
 
   return (
-    <div className="admin-orders-details-page-container">
+    !isDesktop ? (
+      <div className="admin-orders-details-page-container">
       <button className="details-page-btn" onClick={() => navigate(-1)}>
       <FontAwesomeIcon 
         icon={faChevronLeft} 
@@ -49,46 +52,105 @@ export default function AdminOrdersDetailsPage() {
             cursor: "pointer"}}
         />
       </button>
-      <div className="order-customer-card-id-btn-container">
-      <div>Order: #{orderNumber}</div>
-      <button className={`order-customer-card-btn pending`}>{"Pending"}</button>
-      </div>
-      <div className="order-customer-card-details-container">
-        {cardDetails.map(item => (
-        <div key={item.id} className={`order-customer-card-details ${item.class}`}>
-          <div>{item.title}</div>
-          <div>
-            {item.status &&
-            <div className={`circle ${item.status}`}></div>
-            }
-          <div>{item.value}</div>
+      <div className="admin-order-details-wrapper">
+          <div className="order-customer-card-id-btn-container">
+          <div>Order: #{orderNumber}</div>
+          <button className={`order-customer-card-btn pending`}>{"Pending"}</button>
           </div>
-        </div>
-        ))
-        }
-        <div className={`order-customer-card-details`}>
-          <div>Order</div>
-        </div>
-        <div className='admin-order-details-page-order-images-container'>
-        {items.map(item => (<div className="admin-order-details-page-order-details">
-        <div>
-        <img src={Cannabis}/>
-        </div>
-        <div>{products.find(p => p._id === item.product).name}</div>
-        <div>${(item.price / 100).toFixed(2)}</div>
-        <div>Quantity: {item.quantity}</div>
-        </div>))}
-        </div>
-        <div className={`order-customer-card-details-order-details-address gray`}>
-          <div>Shipping Address</div>
-          <div dangerouslySetInnerHTML={{ __html: formattedAddress }}></div>
-        </div>
-        <div className="order-details-button-container">
-          <button className="order-details-button shipped">Mark Order as Shipped</button>
-          <button className="order-details-button delivered">Mark Order as Delivered</button>
-          <button className="order-details-button canceled">Mark Order as Canceled</button>
-        </div>
+          <div className="order-customer-card-details-container">
+            {cardDetails.map(item => (
+            <div key={item.id} className={`order-customer-card-details ${item.class}`}>
+              <div>{item.title}</div>
+              <div>
+                {item.status &&
+                <div className={`circle ${item.status}`}></div>
+                }
+              <div>{item.value}</div>
+              </div>
+            </div>
+            ))
+            }
+            <div className={`order-customer-card-details`}>
+              <div>Order</div>
+            </div>
+            <div className='admin-order-details-page-order-images-container'>
+            {items.map(item => (<div className="admin-order-details-page-order-details">
+            <div>
+            <img src={Cannabis}/>
+            </div>
+            <div>{products.find(p => p._id === item.product).name}</div>
+            <div>${(item.price / 100).toFixed(2)}</div>
+            <div>Quantity: {item.quantity}</div>
+            </div>))}
+            </div>
+          <div className={`order-customer-card-details-order-details-address gray`}>
+            <div>Shipping Address</div>
+            <div dangerouslySetInnerHTML={{ __html: formattedAddress }}></div>
+          </div>
+          <div className="order-details-button-container">
+            <button className="order-details-button shipped">Mark Order as Shipped</button>
+            <button className="order-details-button delivered">Mark Order as Delivered</button>
+            <button className="order-details-button canceled">Mark Order as Canceled</button>
+          </div>
+          </div>
       </div>
-    </div>
+    </div>) : (
+              <div className="admin-orders-details-page-container">
+              <button className="details-page-btn" onClick={() => navigate(-1)}>
+              <FontAwesomeIcon 
+                icon={faChevronLeft} 
+                style={{
+                    color: "#BCBDBC",
+                    fontSize: "1.15rem",
+                    cursor: "pointer"}}
+                />
+              </button>
+              <div className="admin-order-details-wrapper-order">
+                  <div className="first-wrapper-admin-orders">
+                    <div className="order-customer-card-id-btn-container">
+                    <div>Order: #{orderNumber}</div>
+                    <button className={`order-customer-card-btn pending`}>{"Pending"}</button>
+                    </div>
+                    <div className="order-customer-card-details-container">
+                      {cardDetails.map(item => (
+                      <div key={item.id} className={`order-customer-card-details ${item.class}`}>
+                        <div>{item.title}</div>
+                        <div>
+                          {item.status &&
+                          <div className={`circle ${item.status}`}></div>
+                          }
+                        <div>{item.value}</div>
+                        </div>
+                      </div>
+                      ))
+                      }
+                      <div className={`order-customer-card-details`}>
+                        <div>Order</div>
+                      </div>
+                      <div className='admin-order-details-page-order-images-container'>
+                      {items.map(item => (<div className="admin-order-details-page-order-details">
+                      <div>
+                      <img src={Cannabis}/>
+                      </div>
+                      <div>{products.find(p => p._id === item.product).name}</div>
+                      <div>${(item.price / 100).toFixed(2)}</div>
+                      <div>Quantity: {item.quantity}</div>
+                      </div>))}
+                      </div>
+                  </div>
+                </div>
+                <div className="second-wrapper-admin-orders">
+                  <div className={`order-customer-card-details-order-details-address gray`}>
+                    <div>Shipping Address</div>
+                    <div dangerouslySetInnerHTML={{ __html: formattedAddress }}></div>
+                  </div>
+                  <div className="order-details-button-container">
+                    <button className="order-details-button shipped">Mark Order as Shipped</button>
+                    <button className="order-details-button delivered">Mark Order as Delivered</button>
+                    <button className="order-details-button canceled">Mark Order as Canceled</button>
+                  </div>
+                </div>  
+              </div>
+          </div>)
   )
 }

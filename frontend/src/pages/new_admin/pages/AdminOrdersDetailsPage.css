@@ -1,24 +1,57 @@
+.admin-order-details-wrapper-order {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.second-wrapper-admin-orders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-order-details-wrapper-order > div:first-child {
+    width: 45%;
+}
+
+.admin-order-details-wrapper-order > div:last-child {
+    width: 45%;
+}
+
 .admin-orders-details-page-container {
     padding: 1rem 0;
     min-height: 100vh;
 }
 
-.admin-orders-details-page-container > .order-customer-card-id-btn-container {
+.admin-order-details-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.admin-orders-details-page-container > .order-customer-card-id-btn-container,  
+.admin-orders-details-page-container > .admin-order-details-wrapper > .order-customer-card-id-btn-container,
+.admin-orders-details-page-container > .admin-order-details-wrapper-order .order-customer-card-id-btn-container {
     padding-top: 1rem;
     padding-bottom: 1.5rem;
 }
 
-.admin-orders-details-page-container > .order-customer-card-id-btn-container > .order-customer-card-btn {
+.admin-orders-details-page-container > .order-customer-card-id-btn-container > .order-customer-card-btn,
+.admin-orders-details-page-container > .admin-order-details-wrapper > .order-customer-card-id-btn-container > .order-customer-card-btn,
+.admin-orders-details-page-container > .admin-order-details-wrapper-order .order-customer-card-id-btn-container > .order-customer-card-btn {
     height: 25px;
     width: 125px;
     font-size: 16px;
 }
 
-.admin-orders-details-page-container > .order-customer-card-id-btn-container > div:first-child {
+.admin-orders-details-page-container > .order-customer-card-id-btn-container > div:first-child,
+.admin-orders-details-page-container > .admin-order-details-wrapper > .order-customer-card-id-btn-container > div:first-child,
+.admin-orders-details-page-container > .admin-order-details-wrapper-order .order-customer-card-id-btn-container > div:first-child {
     font-size: 20px;
 }
 
-.admin-orders-details-page-container > .order-customer-card-details-container > .order-customer-card-details {
+.admin-orders-details-page-container > .order-customer-card-details-container > .order-customer-card-details,
+.admin-orders-details-page-container > .admin-order-details-wrapper > .order-customer-card-details-container > .order-customer-card-details,
+.admin-orders-details-page-container > .admin-order-details-wrapper-order .order-customer-card-details-container > .order-customer-card-details {
     font-size: 16px;
     width: 92.5%;
     height: 35px;
@@ -118,6 +151,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     margin-top: 3rem;
     width: 75%;
   }
@@ -132,6 +166,8 @@
     font-weight: 700;
     font-size: 16px;
     transition: all 0.2s ease;
+    width: 100%;
+    max-width: 380px;
 }
 
 .order-details-button:hover {
