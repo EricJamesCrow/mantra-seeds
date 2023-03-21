@@ -2,15 +2,15 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // redux
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // chakra ui
 import { useToast } from '@chakra-ui/react'
 
 export default function Notifications() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const addToCart = useSelector(state => state.notifications.addToCart);
+    const addToCartTriggered = useSelector(state => state.notifications.addToCartTriggered);
+    const removedItemTriggered = useSelector(state => state.notifications.removedItemTriggered);
     const toast = useToast();
 
     useEffect(() => {
@@ -25,12 +25,25 @@ export default function Notifications() {
                   }}>Click here to view cart.</div>
             ),
             status: "success",
-            duration: 3000,
+            duration: 1500,
             isClosable: true
           });
         };
-        if(addToCart) showToast();
-      }, [addToCart]);
+        if(addToCartTriggered) showToast();
+      }, [addToCartTriggered]);
+
+    useEffect(() => {
+        const showToast = () => {
+            toast({
+              title: "Item removed from cart",
+              description: "Item has been removed from your cart.",
+              status: 'error',
+              duration: 1500,
+              isClosable: true
+            });
+          };
+          if(removedItemTriggered) showToast();
+    }, [removedItemTriggered])
       
   return null
 }

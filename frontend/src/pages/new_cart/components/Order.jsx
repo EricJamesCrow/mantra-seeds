@@ -10,6 +10,7 @@ import { debounce } from 'lodash';
 // redux
 import { useDispatch } from 'react-redux';
 import { deleteItem, updateCart } from '../../../redux/slices/cartSlice'
+import { setRemovedItem } from '../../../redux/slices/notificationsSlice';
 
 // styles
 import './Order.css'
@@ -73,6 +74,10 @@ export default function Order( {item, user }) {
       const json = await response.json(); // need to refactor backend so the response is the cart object
       if(response.ok) {
         dispatch(deleteItem(json));
+        dispatch(setRemovedItem(true));
+        setTimeout(() => {
+            dispatch(setRemovedItem(false));
+          }, 100);
       }
     };
 
