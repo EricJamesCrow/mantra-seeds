@@ -3,6 +3,43 @@ const User = require('../models/userModel')
 const Product = require('../models/productModel')
 const mongoose = require('mongoose')
 
+const updateItemQuantity = async (req, res) => {
+    const { user, product, quantity } = req.body;
+  
+    if (!user || !product || !quantity) {
+      return res.status(400).json({ error: "Missing required parameters" });
+    }
+  
+    if (isNaN(quantity) || typeof quantity !== 'number' || quantity < 1) {
+      return res.status(400).json({ error: "Invalid quantity" });
+    }
+  
+    try {
+      const cart = await Cart.findOne({ user });
+  
+      if (!cart) {
+        return res.status(404).json({ error: "Cart not found" });
+      } else {
+        const cartItem = cart.cartItems.find(c => c.product.equals(product));
+  
+        if (!cartItem) {
+          return res.status(404).json({ error: "Item not found in cart" });
+        } else {
+          cart.subtotal -= cartItem.price * cartItem.quantity; // Subtract the old price
+          cartItem.quantity = quantity; // Update the quantity for the item
+          cart.subtotal += cartItem.price * cartItem.quantity; // Add the new price
+  
+          cart.markModified('cartItems');
+          await cart.save();
+          return res.status(200).json(cart);
+        }
+      }
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  };
+  
+
 const addItemToCart = async (req, res) => {
     const { user } = req.body;
     const { product, quantity, price } = req.body.cartItems[0];
@@ -118,6 +155,7 @@ const getAllCarts = async (req, res) => {
 };
 
 module.exports = {
+    updateItemQuantity,
     addItemToCart,
     removeItemFromCart,
     getUserCart,

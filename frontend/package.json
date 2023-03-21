@@ -27,6 +27,7 @@
     "css-select": "^5.1.0",
     "font-awesome": "^4.7.0",
     "framer-motion": "^9.0.4",
+    "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "nth-check": "^2.1.1",
     "react": "^18.2.0",

@@ -2,9 +2,13 @@ const express = require('express')
 const { addItemToCart,
     removeItemFromCart,
     getUserCart,
-    getAllCarts } = require('../controllers/cartController')
+    getAllCarts,
+    updateItemQuantity } = require('../controllers/cartController')
 const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
+
+// update quantity
+router.put('/:id', updateItemQuantity); 
 
 // add a new cart
 router.post('/', addItemToCart)

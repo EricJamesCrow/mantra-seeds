@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
 // chakra ui
 import { DeleteIcon } from '@chakra-ui/icons'
 
+// lodash
+import { debounce } from 'lodash';
+
 // redux
 import { useDispatch } from 'react-redux';
-import { deleteItem } from '../../../redux/slices/cartSlice'
+import { deleteItem, updateCart } from '../../../redux/slices/cartSlice'
 
 // styles
 import './Order.css'
@@ -18,6 +21,7 @@ export default function Order( {item, user }) {
     const dispatch = useDispatch();
     const [product, setProduct] = useState('')
     const price = (item.price/100).toFixed(2)
+    const [quantity, setQuantity] = useState(item.quantity);
   
     useEffect(() => {
       const url = PRODUCTS_API_URL+item.product;
@@ -29,6 +33,33 @@ export default function Order( {item, user }) {
               setProduct(data)
           })
   }, [])
+
+    const updateQuantity = useCallback(
+        debounce(async (newQuantity) => {
+            const response = await fetch(CARTS_API_URL + item._id, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                user: user.id,
+                product: product._id,
+                quantity: newQuantity,
+            }),
+            });
+            const json = await response.json();
+            if (!response.ok) {
+            // Show an error message if the update fails
+            console.error('Failed to update cart item quantity');
+            }
+            if(response.ok) {
+                dispatch(updateCart(json));
+            }
+    }, 500), [product]);
+
+    const handleQuantityChange = (delta) => {
+        const newQuantity = Math.max(1, quantity + delta);
+        setQuantity(newQuantity);
+        updateQuantity(newQuantity);
+      };
   
     const handleDelete = async () => { 
       const response = await fetch(CARTS_API_URL+item._id, {
@@ -43,7 +74,7 @@ export default function Order( {item, user }) {
       if(response.ok) {
         dispatch(deleteItem(json));
       }
-    }
+    };
 
   return (
     <div className="cart-order-container">
@@ -63,11 +94,11 @@ export default function Order( {item, user }) {
                         <DeleteIcon onClick={handleDelete}/>
                         <div className="order-adjust-quantity-container">
                             <div className="order-adjust-quantity">
-                                <button className="order-adjust-quantity-btn">
+                                <button className="order-adjust-quantity-btn" onClick={() => handleQuantityChange(-1)}>
                                     <div>-</div>
                                 </button>
-                                <div>{item.quantity}</div>
-                                <button className="order-adjust-quantity-btn">
+                                <div>{quantity}</div>
+                                <button className="order-adjust-quantity-btn" onClick={() => handleQuantityChange(1)}>
                                     <div>+</div>
                                 </button>
                             </div>
