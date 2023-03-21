@@ -18,9 +18,10 @@ export default function NewProduct( { product } ) {
     const { addToCart } = useAddToCart();
 
   return (
-    <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>
         <div className="product-card-container">
+        <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>
         <img src={product.image} className="product-card-image"/>
+        </Link>
         <div className="product-card-info-container">
             <div className="rating">
                 {[...Array(5)].map((_, index) => (
@@ -35,7 +36,7 @@ export default function NewProduct( { product } ) {
                 ))}
                 <div className="num-of-reviews">12 reviews</div>
             </div>
-            <div>{product.name}</div>
+            <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>{product.name}</Link>
             <div>{`$${price}`}</div>
             <button className="add-to-cart-btn" onClick={(event) => {
         event.preventDefault(); // prevent the link from navigating
@@ -43,6 +44,5 @@ export default function NewProduct( { product } ) {
       }}>Add to Cart</button>
         </div>
         </div>
-    </Link>
   )
 }

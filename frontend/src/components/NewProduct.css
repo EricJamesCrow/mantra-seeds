@@ -7,7 +7,7 @@
     padding-bottom: 1.2rem;
 }
 
-.product-card-container > img {
+.product-card-container > a > img {
     width: 60%;
     margin: 0 auto;
     padding-top: 2rem;
@@ -18,7 +18,7 @@
     margin: 0 auto;
 }
 
-.product-card-info-container div {
+.product-card-info-container div,  .product-card-info-container a{
     font-family: 'Roboto';
     font-weight: 500;
     font-size: 16px;
