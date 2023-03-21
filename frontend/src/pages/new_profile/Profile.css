@@ -71,11 +71,13 @@
     justify-content: space-between;
     align-items: center;
     background: #fff;
+    transition: all 0.3s ease;
     border-radius: 5px;
 }
 
 .user-profile-btn:hover {
     cursor: pointer;
+    background: #f0f0f0;
 }
 
 .user-profile-btn > div:first-child {
