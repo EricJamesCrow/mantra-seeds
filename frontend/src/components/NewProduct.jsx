@@ -15,7 +15,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 export default function NewProduct( { product } ) {
     const price = (product.price/100).toFixed(2);
     const user = useSelector(state => state.auth.user);
-    const { addToCart } = useAddToCart();
+    const { addToCart, loading } = useAddToCart();
 
   return (
         <div className="product-card-container">
@@ -38,7 +38,7 @@ export default function NewProduct( { product } ) {
             </div>
             <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>{product.name}</Link>
             <div>{`$${price}`}</div>
-            <button className="add-to-cart-btn" onClick={(event) => {
+            <button disabled={loading} className="add-to-cart-btn" onClick={(event) => {
         event.preventDefault(); // prevent the link from navigating
         addToCart(user.id, product._id, 1, product.price);
       }}>Add to Cart</button>

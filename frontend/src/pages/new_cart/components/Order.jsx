@@ -77,7 +77,7 @@ export default function Order( {item, user }) {
         dispatch(setRemovedItem(true));
         setTimeout(() => {
             dispatch(setRemovedItem(false));
-          }, 100);
+          }, 0);
       }
     };
 
