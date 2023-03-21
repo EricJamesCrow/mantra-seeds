@@ -14,6 +14,7 @@ import { setCustomers } from './redux/slices/customersSlice';
 import './App.css';
 
 // components
+import Notifications from './components/Notifications';
 import Navbar from './components/Navbar';
 import SideNav from './components/SideNav';
 import AdminNav from './pages/new_admin/components/AdminNav';
@@ -162,6 +163,7 @@ function App() {
       <Navbar
       key="navbar"
       />
+      <Notifications/>
       <div className={location.pathname === "/" ? "home" : "routes"}>
       <Routes>
         <Route path="/" element={<Home/>}/>

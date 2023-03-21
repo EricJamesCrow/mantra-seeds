@@ -3,6 +3,7 @@ import { useState } from 'react';
 // redux
 import { useDispatch } from 'react-redux'
 import { updateCart } from '../redux/slices/cartSlice';
+import { setAddToCart } from '../redux/slices/notificationsSlice';
 
 const useAddToCart = () => {
     const [loading, setLoading] = useState(false);
@@ -23,6 +24,10 @@ const useAddToCart = () => {
             });
             const json = await response.json();
             dispatch(updateCart(json.cart))
+            dispatch(setAddToCart(true))
+            setTimeout(() => {
+                dispatch(setAddToCart(false));
+              }, 100);
             setLoading(false);
         } catch (err) {
             setError(err);
