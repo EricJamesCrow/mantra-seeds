@@ -5,6 +5,7 @@ const notificationsSlice = createSlice({
     initialState: {
         addToCartTriggered: false,
         removedItemTriggered: false,
+        removedItem: null
     },
     reducers: {
         setAddToCart: (state, action) => {
@@ -12,10 +13,13 @@ const notificationsSlice = createSlice({
         },
         setRemovedItem: (state, action) => {
             state.removedItemTriggered = action.payload;
-        }
+        },
+        setRemovedItemName: (state, action) => {
+            state.removedItem = action.payload;
+        },
     }
 });
 
-export const { setAddToCart, setRemovedItem } = notificationsSlice.actions;
+export const { setAddToCart, setRemovedItem, setRemovedItemName } = notificationsSlice.actions;
 
 export default notificationsSlice.reducer;

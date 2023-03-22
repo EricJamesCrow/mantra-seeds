@@ -22,6 +22,7 @@ export default function Notifications() {
     const cartItems = cart.cartItems;
     const addToCartTriggered = useSelector(state => state.notifications.addToCartTriggered);
     const removedItemTriggered = useSelector(state => state.notifications.removedItemTriggered);
+    const removedItem = useSelector(state => state.notifications.removedItem);
     const toast = useToast();
 
     const prevCartItems = usePrevious(cartItems);
@@ -58,7 +59,7 @@ export default function Notifications() {
     useEffect(() => {
         const showToast = () => {
             toast({
-              title: "Item removed from cart",
+              title: `${removedItem} removed from cart`,
               description: "Item has been removed from your cart.",
               status: 'error',
               duration: 1500,

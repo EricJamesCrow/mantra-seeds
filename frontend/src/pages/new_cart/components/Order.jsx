@@ -10,7 +10,7 @@ import { debounce } from 'lodash';
 // redux
 import { useDispatch } from 'react-redux';
 import { deleteItem, updateCart } from '../../../redux/slices/cartSlice'
-import { setRemovedItem } from '../../../redux/slices/notificationsSlice';
+import { setRemovedItem, setRemovedItemName } from '../../../redux/slices/notificationsSlice';
 
 // styles
 import './Order.css'
@@ -75,6 +75,7 @@ export default function Order( {item, user }) {
       if(response.ok) {
         dispatch(deleteItem(json));
         dispatch(setRemovedItem(true));
+        dispatch(setRemovedItemName(product.name))
         setTimeout(() => {
             dispatch(setRemovedItem(false));
           }, 0);
