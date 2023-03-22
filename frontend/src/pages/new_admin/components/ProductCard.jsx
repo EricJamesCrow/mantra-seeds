@@ -57,8 +57,8 @@ export default function ProductCard( {item} ) {
       <button className={`order-customer-card-btn ${status}`}>{statusValue}</button>
     </div>
     <div className="product-card-image-details-container">
-      <div>
-      <img src={Cannabis}/>
+      <div className="product-card-image-details-container-desktop">
+      <img src={item.image}/>
       </div>
     <div className="order-customer-card-details-container">
       {cardDetails.map(item => (
@@ -90,7 +90,7 @@ export default function ProductCard( {item} ) {
         ))
         }
       <div className="product-card-image-details-container-desktop">
-      <img src={Cannabis}/>
+      <img src={item.image}/>
       </div>
         <div className="order-customer-card-id-btn-container">
         <button className={`order-customer-card-btn ${item.var2}`}>{toTitleCase(item.var2)}</button>

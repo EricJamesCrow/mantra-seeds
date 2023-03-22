@@ -112,7 +112,7 @@ export default function AdminCustomersDetailsPage() {
         </div>
         <div className="order-customer-card-details-container">
         <div className="product-card-image-details-container-desktop products">
-        <img src={Cannabis}/>
+        <img src={product.image}/>
         </div>
           {cardDetails.map(item => (
           <div key={item.id} className={`order-customer-card-details ${item.class}`}>

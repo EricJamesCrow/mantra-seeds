@@ -55,6 +55,7 @@ export default function AdminProducts() {
       var3: product.price,
       var4: '5',
       var5: 'In Stock',
+      image: product.image,
     }));
 
   return (
