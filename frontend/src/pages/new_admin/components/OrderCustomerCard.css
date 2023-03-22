@@ -146,7 +146,12 @@
     background: #FFFFFF;
     border-bottom: 1px solid #BCBDBC;
     padding: 0.75rem 0;
+    transition: all 0.1s ease;
+}
+
+.admin-desktop-sort.order-customer-card-desktop:hover {
     cursor: pointer;
+    background: #F8F8F8;
 }
 
 .admin-desktop-sort.order-customer-card-desktop > div {
