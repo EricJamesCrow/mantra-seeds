@@ -76,7 +76,7 @@ export default function AdminOrdersDetailsPage() {
             <div className='admin-order-details-page-order-images-container'>
             {items.map(item => (<div className="admin-order-details-page-order-details">
             <div>
-            <img src={Cannabis}/>
+            <img src={products.find(p => p._id === item.product).image}/>
             </div>
             <div>{products.find(p => p._id === item.product).name}</div>
             <div>${(item.price / 100).toFixed(2)}</div>
@@ -130,7 +130,7 @@ export default function AdminOrdersDetailsPage() {
                       <div className='admin-order-details-page-order-images-container'>
                       {items.map(item => (<div className="admin-order-details-page-order-details">
                       <div>
-                      <img src={Cannabis}/>
+                      <img src={products.find(p => p._id === item.product).image}/>
                       </div>
                       <div>{products.find(p => p._id === item.product).name}</div>
                       <div>${(item.price / 100).toFixed(2)}</div>
