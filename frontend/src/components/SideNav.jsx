@@ -50,7 +50,7 @@ export default function SideNav() {
   id="searchInput" 
   placeholder="Search"
   value={search} 
-  class="search-input"/>
+  className="search-input"/>
     </form>
     <ul className='side-nav-links'>
         {user && user.role === 1 &&

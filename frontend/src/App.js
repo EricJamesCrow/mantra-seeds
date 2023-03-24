@@ -37,11 +37,11 @@ import Login from "./pages/login/Login"
 import Signup from "./pages/signup/Signup"
 import ResetPassword from "./pages/reset-password/ResetPassword"
 import ChangePassword from './pages/new_profile/pages/ChangePassword';
-// import Checkout from "./pages/checkout/Checkout"
 import Checkout from './pages/new_checkout/Checkout';
 import OrderSuccess from './pages/checkout/OrderSuccess'
 import Profile from './pages/new_profile/Profile'
 import OrderHistory from './pages/new_profile/pages/OrderHistory'
+import OrderPage from './pages/new_profile/pages/OrderPage'
 import Search from "./pages/search/Search"
 import Contact from "./pages/contact/Contact"
 
@@ -91,6 +91,9 @@ function App() {
     if (response.ok) {
       dispatch(setCart(json))
     }
+    if (!response.ok) {
+      dispatch(setCart({cartItems: null, subtotal: 0}))
+    }
   }
 
   const fetchProducts = async () => {
@@ -99,6 +102,9 @@ function App() {
 
     if (response.ok) {
       dispatch(setProducts(json))
+    }
+    if (!response.ok) {
+      dispatch(setProducts(null))
     }
   }
 
@@ -190,6 +196,7 @@ function App() {
         element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <Navigate to="/login"/>} 
         />
         <Route path="/profile/order-history" element={JSON.parse(localStorage.getItem('user')) ? <OrderHistory/> : <Navigate to="/login"/>} />
+        <Route path="/profile/order-history/:id" element={JSON.parse(localStorage.getItem('user')) ? <OrderPage/> : <Navigate to="/login"/>} />
         <Route path="/profile/change-password" element={JSON.parse(localStorage.getItem('user')) ? <ChangePassword/> : <Navigate to="/login"/>} />
       </Routes>
       </div>

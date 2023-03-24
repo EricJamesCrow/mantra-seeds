@@ -9,7 +9,6 @@ import './AdminOrdersDetailsPage.css'
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
 export default function AdminOrdersDetailsPage() {
   const isDesktop = useMediaQuery({ minWidth: 980 });

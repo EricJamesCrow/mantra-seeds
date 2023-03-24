@@ -1,0 +1,10 @@
+.order-customer-card-container.customer {
+    max-width: 500px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.order-customer-card-container.customer:hover {
+    cursor: pointer;
+}
