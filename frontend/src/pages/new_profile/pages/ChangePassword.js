@@ -15,7 +15,7 @@ export default function ChangePassword() {
     const navigate = useNavigate();
   return (
       <div className="login-container admin-orders-details-page-container">
-      <button className="details-page-btn" onClick={() => navigate(-1)}>
+      <button className="details-page-btn" onClick={() => navigate("/profile")}>
         <FontAwesomeIcon 
           icon={faChevronLeft} 
           style={{

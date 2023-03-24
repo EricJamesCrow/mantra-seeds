@@ -41,6 +41,7 @@ import ChangePassword from './pages/new_profile/pages/ChangePassword';
 import Checkout from './pages/new_checkout/Checkout';
 import OrderSuccess from './pages/checkout/OrderSuccess'
 import Profile from './pages/new_profile/Profile'
+import OrderHistory from './pages/new_profile/pages/OrderHistory'
 import Search from "./pages/search/Search"
 import Contact from "./pages/contact/Contact"
 
@@ -188,6 +189,7 @@ function App() {
         <Route path="/profile" 
         element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <Navigate to="/login"/>} 
         />
+        <Route path="/profile/order-history" element={JSON.parse(localStorage.getItem('user')) ? <OrderHistory/> : <Navigate to="/login"/>} />
         <Route path="/profile/change-password" element={JSON.parse(localStorage.getItem('user')) ? <ChangePassword/> : <Navigate to="/login"/>} />
       </Routes>
       </div>
