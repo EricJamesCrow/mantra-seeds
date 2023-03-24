@@ -1,0 +1,36 @@
+.search-page-container {
+    min-height: 90vh;
+    position: relative;
+    padding-bottom: 4rem;
+}
+
+.search-page-container > h1 {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 32px;
+    margin-top: 0.75rem;
+    margin-left: 0.75rem;
+}
+
+.search-page-container > h2 {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.pagination-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+@media (min-width: 980px) {
+    .search-page-container > h1 {
+        font-size: 48px;
+    }
+    .search-page-container > h2 {
+        font-size: 24px;
+    }
+  }

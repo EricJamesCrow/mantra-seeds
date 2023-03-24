@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 // images
@@ -11,6 +11,18 @@ import './SideNav.css'
 
 export default function SideNav() {
     const user = useSelector(state => state.auth.user);
+    const navigate = useNavigate();
+    const [search, setSearch] = useState("");
+  
+    const handleSearch = (e) => {
+      e.preventDefault();
+      if (search) {
+        navigate(`/search/${search}`);
+        setSearch("");
+        toggleOpen();
+      }
+    }
+  
 
     const toggleOpen = () => {
         document.querySelector('.main-content').classList.toggle('push');
@@ -29,8 +41,16 @@ export default function SideNav() {
     marginTop: "1rem",
     marginRight: "1.5rem",
     cursor: "pointer"}}/>
-    <form>
-  <input type="text" id="searchInput" placeholder="Search" class="search-input"/>
+    <form onSubmit={handleSearch}>
+  <input 
+  onChange={(e) => {
+    setSearch(e.target.value)
+    }}
+  type="text" 
+  id="searchInput" 
+  placeholder="Search"
+  value={search} 
+  class="search-input"/>
     </form>
     <ul className='side-nav-links'>
         {user && user.role === 1 &&

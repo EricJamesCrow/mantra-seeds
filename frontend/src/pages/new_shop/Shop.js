@@ -111,12 +111,14 @@ export default function Shop() {
 ))
 }
 </div>
+<div className="pagination-container">
 <Pagination
             itemsPerPage={itemsPerPage}
             totalItems={filteredProducts.length}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
+          </div>
     </div>
   )
 }

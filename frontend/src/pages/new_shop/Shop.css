@@ -1,5 +1,7 @@
 .shop-container {
     min-height: 84vh;
+    position: relative;
+    padding-bottom: 4rem;
 }
 
 .shop-container > div:first-child {

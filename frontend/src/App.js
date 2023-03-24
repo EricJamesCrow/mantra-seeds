@@ -41,6 +41,7 @@ import ChangePassword from './pages/new_profile/pages/ChangePassword';
 import Checkout from './pages/new_checkout/Checkout';
 import OrderSuccess from './pages/checkout/OrderSuccess'
 import Profile from './pages/new_profile/Profile'
+import Search from "./pages/search/Search"
 import Contact from "./pages/contact/Contact"
 
 const PRODUCTS_API_URL = '/api/products/'
@@ -178,6 +179,7 @@ function App() {
         <Route path="/shop" element={<Shop/>} />
         <Route path="/cart/checkout" element={<Checkout/>} />
         <Route path="/cart/checkout/order-success" element={<OrderSuccess/>} />
+        <Route path="/search/:id" element={<Search/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/cart" element={<Cart/>} />
         <Route path="/login" element={<Login/>} />
