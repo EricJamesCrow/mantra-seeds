@@ -30,7 +30,6 @@ export default function OrderHistory() {
     const fetchOrders = async () => {
       const id = user.id
       const token = user.token;
-      console.log(user)
       const headers = {
           'Authorization': token,
       };
