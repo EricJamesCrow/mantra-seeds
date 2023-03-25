@@ -17,7 +17,7 @@ const calculateOrderAmount = async (req, res) => {
     try {
         const { id, shippingPrice } = req.body
         const finalShippingPrice = parseFloat(shippingPrice) * 100
-        const cart = await Cart.findOne({ id });
+        const cart = await Cart.findById(id);
         if(!cart) {
             throw Error(`Cart ${id} not found`)
         }
@@ -38,7 +38,7 @@ const createOrder = async (req, res, next) => {
     try {
     const { id, shippingPrice } = req.body
     const finalShippingPrice = parseFloat(shippingPrice) * 100
-    const cart = await Cart.findOne({ id });
+    const cart = await Cart.findById(id);
     const user = cart.user;
     const address = cart.address;
     const items = cart.cartItems;
@@ -48,7 +48,7 @@ const createOrder = async (req, res, next) => {
     const total = cart.subtotal + finalShippingPrice
     // make this so create order adds the cart. this will be a unique id the webhook can find later
     const order = await Order.createOrder(user, address, items, email, shipping, payment, total);
-    await User.findOneAndUpdate({ user }, { $set: { order: order._id } }, { new: true });
+    await User.findByIdAndUpdate(user , { $set: { order: order._id } }, { new: true });
     // create update inventory function
     await Cart.deleteCart(id);
     next();

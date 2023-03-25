@@ -33,7 +33,7 @@ export default function Payment( { setCurrentStep, shipping, dispatch, cart, use
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            user: cart.user,
+            id: user.cart,
             address: { 
               firstName: shipping.firstName,
               lastName: shipping.lastName,
@@ -42,7 +42,6 @@ export default function Payment( { setCurrentStep, shipping, dispatch, cart, use
               state: shipping.state,
               zip: shipping.zip
             },
-            items: cart,
             shipping: {
               delivery: shipping.shippingName,
               price: shipping.shippingPrice,

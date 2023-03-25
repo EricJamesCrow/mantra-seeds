@@ -75,7 +75,7 @@ export default function Shop() {
             <input type="text" 
             id="searchInput" 
             placeholder={`Search Products`} 
-            class="filter-sort-search-input"
+            className="filter-sort-search-input"
             onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
@@ -112,7 +112,7 @@ export default function Shop() {
 }
 </div>
 <div className="pagination-container">
-<Pagination
+          <Pagination
             itemsPerPage={itemsPerPage}
             totalItems={filteredProducts.length}
             currentPage={currentPage}

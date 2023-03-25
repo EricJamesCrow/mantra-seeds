@@ -3,7 +3,7 @@ import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
 import React, { useEffect } from 'react';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setCart } from './redux/slices/cartSlice';
 import { setProducts } from './redux/slices/productSlice';
 import { loginAuth } from './redux/slices/authSlice';
@@ -51,16 +51,15 @@ const CUSTOMERS_API_URL = '/api/user'
 
 function App() {
   const location = useLocation()
-  const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
 
   const fetchUser = async (user) => {
   try {
-    const token = user.token
-    const id = user.id
+    const token = user.token;
+    const id = user.id;
     const headers = {
         'Authorization': token
-    }
+    };
     const response = await fetch('/api/user/'+id, { headers });
     const json = await response.json();
 
@@ -142,15 +141,15 @@ function App() {
           console.log(err)
         }
     }
-    if(user) {
-      fetchCart(user)
-    }
     if(user && user.role === 1) {
       fetchOrders(user)
       fetchCustomers(user)
     }
     fetchUser()
     fetchProducts()
+    if(user) {
+      fetchCart(user)
+    }
   }, [])
 
   const ScrollToTop = ({ children }) => {

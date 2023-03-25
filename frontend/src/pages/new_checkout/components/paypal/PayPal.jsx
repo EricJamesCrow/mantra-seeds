@@ -20,7 +20,7 @@ export default function PayPal( {cart, shipping, user}) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                  id: cart.user,
+                  id: user.cart,
                   shippingPrice: shipping.shippingPrice,
                 }),
               }).then((res) => res.json())
@@ -38,13 +38,6 @@ export default function PayPal( {cart, shipping, user}) {
 
   return (
     <>
-    {/* {sdkReady && 
-    <>
-    <PayPalButton 
-    amount={2209} 
-    />
-    </>
-    } */}
     {sandbox !== null && total !== null &&
     <PayPalScriptProvider options={{
         "client-id": sandbox
@@ -57,7 +50,7 @@ export default function PayPal( {cart, shipping, user}) {
                         amount: {
                             value: total,
                         },
-                        custom_id: cart._id
+                        custom_id: user.cart
                     },
                 ],
             });
@@ -70,7 +63,7 @@ export default function PayPal( {cart, shipping, user}) {
                     headers: {
                       'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ id: cart._id, shippingPrice: shipping.shippingPrice})
+                    body: JSON.stringify({ id: user.cart, shippingPrice: shipping.shippingPrice})
                   }).then(() => {
                     window.location.assign('/cart/checkout/order-success');
                   })

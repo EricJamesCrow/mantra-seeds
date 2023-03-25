@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 
 //redux
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setOrders } from '../../../redux/slices/ordersSlice'
 
 // styles
 import './OrderHistory.css'
 
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 // components
 import Order from './components/Order'
@@ -18,11 +18,33 @@ import Pagination from '../../../components/Pagination'
 // chakra ui
 import { Select } from '@chakra-ui/react'
 
+const ORDERS_API_URL = '/api/orders/user'
+
 export default function OrderHistory() {
-    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('user'))
+    const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1); // pagination
     const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
+
+    const fetchOrders = async () => {
+      const id = user.id
+      const token = user.token;
+      console.log(user)
+      const headers = {
+          'Authorization': token,
+      };
+      const response = await fetch(`${ORDERS_API_URL}/${id}`, { headers });
+      const json = await response.json();
+      if (response.ok) {
+          dispatch(setOrders(json));
+      }
+  };
+  
+    useEffect(() => {
+      fetchOrders()
+    }, [])
+
     const orders = useSelector(state => state.orders.orders);
     if (!orders) return null; // only render once redux is loaded
   
@@ -68,7 +90,7 @@ export default function OrderHistory() {
             <input type="text" 
             id="searchInput" 
             placeholder={`Search Orders`} 
-            class="filter-sort-search-input"
+            className="filter-sort-search-input"
             onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>

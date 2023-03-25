@@ -54,6 +54,30 @@ const getOrder = async (req, res) => {
     res.status(200).json(order);
 };
 
+const getAllUserOrders = async (req, res) => {
+    const { id } = req.params;
+    const orders = await Order.find({ user: id });
+
+    if (!orders) {
+        return res.status(404).json({ error: 'No orders found for this user' });
+    }
+
+    orders.forEach(order => {
+        const address = order.address;
+        Object.keys(address).forEach(property => {
+            if (address[property]) {
+                const buffer = Buffer.from(address[property], 'base64');
+                const decrypted = crypto.privateDecrypt({ key: PRIVATE_KEY, passphrase: process.env.PASSPHRASE, padding: crypto.constants.RSA_PKCS1_OAEP_PADDING }, buffer);
+                address[property] = decrypted.toString('utf8');
+            }
+        });
+        order.address = address;
+    });
+
+    res.status(200).json(orders);
+};
+
+
 const getAllOrders = async (req, res) => {
     const orders = await Order.find();
 
@@ -77,5 +101,5 @@ const getAllOrders = async (req, res) => {
 };
 
 
-module.exports = { getOrder, getAllOrders }
+module.exports = { getOrder, getAllUserOrders, getAllOrders }
 
