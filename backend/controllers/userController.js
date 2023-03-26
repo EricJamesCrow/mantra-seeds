@@ -119,4 +119,17 @@ const changePassword = async (req, res) => {
     }
 };
 
-module.exports = { loginUser, signupUser, fetchUser, fetchUsers, changePassword };
+// reset password
+const resetPassword = async (req, res) => {
+    const { email } = req.body;
+    console.log("triggered")
+    if (!validator.isEmail(email)) {
+        return res.status(400).json({ error: "Invalid email" });
+    }
+    try {
+        return res.status(200).json({message: 'Password reset link sent to email'})
+    } catch (error) {
+    }
+}
+
+module.exports = { loginUser, signupUser, fetchUser, fetchUsers, changePassword, resetPassword };

@@ -32,7 +32,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <button className="details-page-btn" onClick={() => navigate(-1)}>
+      <button className="details-page-btn" onClick={() => navigate("/")}>
         <FontAwesomeIcon 
           icon={faChevronLeft} 
           style={{
