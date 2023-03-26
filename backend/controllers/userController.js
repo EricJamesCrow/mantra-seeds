@@ -124,7 +124,6 @@ const changePassword = async (req, res) => {
 };
 
 
-// reset password
 const resetPassword = async (req, res) => {
     const { email } = req.body;
     if (!validator.isEmail(email)) {
@@ -147,8 +146,21 @@ const resetPassword = async (req, res) => {
         // Create a password reset link containing the token
         const resetLink = `http://localhost:3000/reset-password/${token}`;
 
+        // Send the password reset link to the user's email
+        const emailParams = {
+            from: process.env.PASSWORD_RESET_EMAIL,
+            to: user.email,
+            subject: 'Password Reset',
+            text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste it into your browser to complete the process:\n\n${resetLink}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`,
+            html: `<p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p><p>Please click on the following link, or paste it into your browser to complete the process:</p><p><a href="${resetLink}">${resetLink}</a></p><p>If you did not request this, please ignore this email and your password will remain unchanged.</p>`
+        };
+
+        await sendEmail(emailParams);
+        res.status(200).json({ message: 'Password reset link sent to email' });
     } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'An error occurred while processing the request' });
     }
-}
+};
 
 module.exports = { loginUser, signupUser, fetchUser, fetchUsers, changePassword, resetPassword };

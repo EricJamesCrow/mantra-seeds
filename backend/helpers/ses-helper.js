@@ -2,7 +2,8 @@ const AWS = require('../config/aws-config');
 
 const ses = new AWS.SES();
 
-async function sendEmail({ from, to, subject, text, html }) {
+async function sendEmail(emailParams) {
+    const { from, to, subject, text, html} = emailParams;
     const params = {
         Source: from,
         Destination: {
