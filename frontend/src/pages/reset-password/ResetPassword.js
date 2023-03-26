@@ -33,6 +33,7 @@ export default function ResetPassword() {
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          backgroundColor="white"
           />
         </div>
       </div>

@@ -51,6 +51,7 @@ export default function Signup() {
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            backgroundColor="white"
             />
           </div>
           <div className="input-fields">
@@ -59,6 +60,7 @@ export default function Signup() {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            backgroundColor="white"
             />
           </div>
         </div>
