@@ -2,6 +2,8 @@ const User = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
 const createToken = (_id, email, role) => {
     return jwt.sign({_id, email, role}, process.env.SECRET, { expiresIn: '7d' })
@@ -119,15 +121,54 @@ const changePassword = async (req, res) => {
     }
 };
 
+// Configure your email transporter (replace with your email and app-specific password)
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.PASSWORD_RESET_EMAIL,
+        pass: process.env.PASSWORD_RESET_PASSWORD
+    }
+});
+
 // reset password
 const resetPassword = async (req, res) => {
     const { email } = req.body;
-    console.log("triggered")
     if (!validator.isEmail(email)) {
         return res.status(400).json({ error: "Invalid email" });
     }
     try {
-        return res.status(200).json({message: 'Password reset link sent to email'})
+        const user = await User.findOne({ email }); // Find the user by email
+        if (!user) {
+            return res.status(400).json({ error: "User not found" });
+        }
+
+        // Generate a unique token
+        const token = crypto.randomBytes(32).toString('hex');
+
+        // Save the token and its expiration time (1 hour) in the user's document
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        await user.save();
+
+        // Create a password reset link containing the token
+        const resetLink = `http://localhost:3000/reset-password/${token}`;
+
+        // Send the password reset link to the user's email
+        const mailOptions = {
+            to: user.email,
+            from: process.env.PASSWORD_RESET_EMAIL,
+            subject: 'Password Reset',
+            text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste it into your browser to complete the process:\n\n${resetLink}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`
+        };
+
+        transporter.sendMail(mailOptions, (err) => {
+            if (err) {
+                console.log(err)
+                
+                return res.status(400).json({ error: 'Error sending the email' });
+            }
+            res.status(200).json({ message: 'Password reset link sent to email' });
+        });
     } catch (error) {
     }
 }
