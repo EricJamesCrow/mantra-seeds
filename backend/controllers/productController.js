@@ -1,6 +1,8 @@
-const { uploadImage } = require('../helpers/s3-helper');
 const Product = require('../models/productModel')
 const mongoose = require('mongoose')
+
+// aws
+const { uploadImage } = require('../helpers/s3-helper');
 
 
 // get all products

@@ -4,6 +4,9 @@ const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto');
 
+// aws
+const { sendEmail } = require('../helpers/ses-helper');
+
 const createToken = (_id, email, role) => {
     return jwt.sign({_id, email, role}, process.env.SECRET, { expiresIn: '7d' })
 }
@@ -143,7 +146,7 @@ const resetPassword = async (req, res) => {
 
         // Create a password reset link containing the token
         const resetLink = `http://localhost:3000/reset-password/${token}`;
-        
+
     } catch (error) {
     }
 }

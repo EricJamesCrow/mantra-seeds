@@ -1,6 +1,5 @@
 const AWS = require('../config/aws-config');
 const { v4: uuidv4 } = require('uuid');
-require('dotenv').config()
 
 const s3 = new AWS.S3();
 
