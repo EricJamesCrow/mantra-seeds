@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+// hooks
+import useChangePassword from '../../../hooks/useChangePassword'
 
 // styles
 import './ChangePassword.css'
@@ -12,7 +15,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 export default function ChangePassword() {
-    const navigate = useNavigate();
+  // for back button  
+  const navigate = useNavigate();
+
+  // hook
+  const { changePassword, isLoading, error, success } = useChangePassword();
+
+  // states
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  // form submit
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      const response = await changePassword(oldPassword, newPassword, confirmNewPassword);
+      if(response === "Password changed successfully") {
+        setOldPassword("");
+        setNewPassword("");
+        setConfirmNewPassword("");
+      }
+    };
+
   return (
       <div className="login-container admin-orders-details-page-container">
       <button className="details-page-btn" onClick={() => navigate("/profile")}>
@@ -25,24 +49,41 @@ export default function ChangePassword() {
           />
       </button>
       <div className="change-password-wrapper">
-        <form>
+        <form onSubmit={handleSubmit}>
         <div className="login-fields-container">
           <h1>New Password</h1>
           <div className="input-fields">
-            <div>Password<span className="required-asterisk">*</span></div>
+            <div>Old Password<span className="required-asterisk">*</span></div>
             <Input
             type="password"
+            value={oldPassword}
+            onChange={(e) => setOldPassword(e.target.value)} 
+            required
             />
           </div>
           <div className="input-fields">
-            <div>Confirm Password<span className="required-asterisk">*</span></div>
+            <div>New Password<span className="required-asterisk">*</span></div>
             <Input
             type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)} 
+            required
+            />
+          </div>
+          <div className="input-fields">
+            <div>Confirm New Password<span className="required-asterisk">*</span></div>
+            <Input
+            type="password"
+            value={confirmNewPassword}
+            onChange={(e) => setConfirmNewPassword(e.target.value)} 
+            required
             />
           </div>
         </div>
         <div className="input-field-submit-container change-password">
-          <button>Done</button>
+          <button type="submit" disabled={isLoading}>Done</button>
+          {error && <div className="error-message">{error}</div>}
+          {success && <div className="success-message">{success}</div>}
         </div>
         </form>
       </div>

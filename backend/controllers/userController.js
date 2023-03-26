@@ -1,4 +1,6 @@
 const User = require('../models/userModel')
+const bcrypt = require('bcrypt')
+const validator = require('validator')
 const jwt = require('jsonwebtoken')
 
 const createToken = (_id, email, role) => {
@@ -72,4 +74,49 @@ const fetchUsers = async (req, res) => {
     }
 };
 
-module.exports = { loginUser, signupUser, fetchUser, fetchUsers }
+// change password
+const changePassword = async (req, res) => {
+    const { oldPassword, newPassword, confirmNewPassword } = req.body;
+    if (newPassword !== confirmNewPassword) {
+        return res.status(400).json({ error: "Passwords do not match" });
+    }
+
+    if (oldPassword === newPassword) {
+        return res.status(400).json({ error: "New password cannot be the same as old password" });
+    }
+
+    if (!validator.isStrongPassword(newPassword)) {
+        return res.status(400).json({ error: 'Password not strong enough' });
+    }
+
+    try {
+        const user = await User.findById(req.user.id);
+        const isMatch = await bcrypt.compare(oldPassword, user.password);
+        
+        if (!isMatch) {
+            return res.status(400).json({ error: 'Invalid credentials' });
+          };
+
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(newPassword, salt);
+        user.password = hash;
+        await user.save();
+        
+        // create a new jwt token
+        const id = user._id;
+        const cart = user.cart;
+        const email = user.email;
+        const role = user.role;
+        const token = createToken(id, email, role);
+        
+        if(role) {
+            return res.status(200).json({message: 'Password changed successfully', user: {id, email, cart, token, role}});
+        } else {
+            return res.status(200).json({message: 'Password changed successfully', user: {id, email, cart, token}});
+        }
+    } catch (error) {
+        res.status(400).json({error: 'Server error'});
+    }
+};
+
+module.exports = { loginUser, signupUser, fetchUser, fetchUsers, changePassword };
