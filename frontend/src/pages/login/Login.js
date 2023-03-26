@@ -23,9 +23,11 @@ export default function Login() {
   const {login, error, isLoading} = useLogin();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    await login(email, password)
-    navigate('/profile')
+    e.preventDefault();
+    const response = await login(email, password);
+    if(response === "success") {
+      navigate('/profile')
+    }
 }
 
   return (
@@ -62,7 +64,7 @@ export default function Login() {
         </div>
         <div className="input-field-submit-container">
           <button disabled={isLoading}>Sign In</button>
-          {error && <div className="error">{error}</div>}
+          {error && <div className="error-message">{error}</div>}
           <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
         </div>
         </form>

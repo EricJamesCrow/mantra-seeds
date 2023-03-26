@@ -40,9 +40,10 @@ export const useLogin = () => {
                   dispatch(setCart(json))
                 }
               }
-            fetchCart()
+            fetchCart();
 
-            setIsLoading(false)
+            setIsLoading(false);
+            return "success";
         }
     }
 

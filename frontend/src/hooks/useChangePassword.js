@@ -29,7 +29,6 @@ const useChangePassword = () => {
             setIsLoading(false)
             setError(null)
             setSuccess(json.message)
-            console.log(json.user)
             localStorage.setItem('user', JSON.stringify(json.user))
             return json.message;
         };
