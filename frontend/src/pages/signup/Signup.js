@@ -24,8 +24,10 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await signup(email, password)
-    navigate('/profile')
+    const response = await signup(email, password)
+    if(response === "success") {
+      navigate('/profile')
+    }
 }
 
   return (
@@ -39,7 +41,7 @@ export default function Signup() {
               cursor: "pointer"}}
           />
       </button>
-      <div className="change-password-wrapper">
+      <div className="login-wrapper">
         <form onSubmit={handleSubmit}>
         <div className="login-fields-container">
           <h1>Sign Up</h1>
@@ -62,7 +64,7 @@ export default function Signup() {
         </div>
         <div className="input-field-submit-container">
           <button disabled={isLoading}>Create Account</button>
-          {error && <div className="error">{error}</div>}
+          {error && <div className="error-message">{error}</div>}
           <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
         </div>
         </form>

@@ -4,8 +4,12 @@
     padding-bottom: 0;
 }
 
-.login-wrapper {
-    max-width: 600px;
+.login-wrapper .alternative-link {
+    max-width: 320px;
+}
+
+.login-wrapper form {
+    max-width: 400px;
     margin: 0 auto;
 }
 

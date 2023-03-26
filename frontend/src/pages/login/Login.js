@@ -41,40 +41,40 @@ export default function Login() {
               cursor: "pointer"}}
           />
       </button>
-        <div className="change-password-wrapper">
-        <form onSubmit={handleSubmit}>
-        <div className="login-fields-container">
-          <h1>Sign In</h1>
-          <div className="input-fields">
-            <div>Email</div>
-            <Input
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            />
-          </div>
-          <div className="input-fields">
-            <div>Password</div>
-            <Input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            />
-          </div>
-        </div>
-        <div className="input-field-submit-container">
-          <button disabled={isLoading}>Sign In</button>
-          {error && <div className="error-message">{error}</div>}
-          <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
-        </div>
-        </form>
-        <div className="alternative-link-container">
-              <h1>Don't have an account?</h1>
-              <Link to="/signup" className="alternative-link">
-                <div>Sign Up</div>
-                <ChevronRightIcon w={6} h={6}/>
-              </Link>
-        </div>
+        <div className="login-wrapper">
+          <form onSubmit={handleSubmit}>
+            <div className="login-fields-container">
+              <h1>Sign In</h1>
+              <div className="input-fields">
+                <div>Email</div>
+                <Input
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                />
+              </div>
+              <div className="input-fields">
+                <div>Password</div>
+                <Input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                />
+              </div>
+            </div>
+            <div className="input-field-submit-container">
+              <button disabled={isLoading}>Sign In</button>
+              {error && <div className="error-message">{error}</div>}
+              <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
+            </div>
+          </form>
+            <div className="alternative-link-container">
+                  <h1>Don't have an account?</h1>
+                  <Link to="/signup" className="alternative-link">
+                    <div>Sign Up</div>
+                    <ChevronRightIcon w={6} h={6}/>
+                  </Link>
+            </div>
       </div>
     </div>
   )

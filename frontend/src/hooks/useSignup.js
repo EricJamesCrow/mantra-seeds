@@ -32,6 +32,7 @@ export const useSignup = () => {
             dispatch(loginAuth(json))
 
             setIsLoading(false)
+            return "success";
         }
     }
 
