@@ -2,6 +2,7 @@
     min-height: 86vh;
     position: relative;
     margin-top: 0.75rem;
+    padding-bottom: 4rem;
 }
 
 .order-history-wrapper > div > h1 {

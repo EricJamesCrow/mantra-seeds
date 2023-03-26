@@ -25,6 +25,14 @@ const userSchema = new Schema({
     order: {
         type: mongoose.Schema.Types.ObjectId,
         required: false
+    },
+    resetPasswordToken: {
+        type: String,
+        required: false
+    },
+    resetPasswordExpires: {
+        type: Date,
+        required: false
     }
 })
 

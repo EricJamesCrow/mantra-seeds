@@ -1,5 +1,4 @@
-const AWS = require('aws-sdk');
-const { v4: uuidv4 } = require('uuid');
+const { uploadImage } = require('../helpers/s3-helper');
 const Product = require('../models/productModel')
 const mongoose = require('mongoose')
 
@@ -28,25 +27,20 @@ const getProduct = async (req, res) => {
     res.status(200).json(product)
 }
 
-const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  });
-
 // create new product
 const createProduct = async (req, res) => {
     const { name, file, description, price, chakra} = req.body;
     // Check for any errors with the file upload
     if (req.fileValidationError) {
       console.log(req.fileValidationError)
+      console.log("error")
       return res.status(400).json({ message: req.fileValidationError });
     } else if (!req.file) {
       console.log('No files were uploaded.')
       return res.status(400).json({ message: 'No files were uploaded.' });
     }
 
-    const image = req.file
-    console.log(image)
+    const image = req.file;
   
     let emptyFields = [];
   
@@ -66,14 +60,7 @@ const createProduct = async (req, res) => {
       return res.status(400).json({ error: 'Please fill in all the fields', emptyFields });
     }
   
-    const fileName = `${uuidv4()}.jpg`;
-    const imageUrl = await s3.upload({
-      Bucket: process.env.AWS_S3_BUCKET_NAME,
-      Key: fileName,
-      Body: image.buffer,
-      ContentType: image.mimetype
-    }).promise();
-    const imageLocation = imageUrl.Location;
+    const imageLocation = await uploadImage(image);
   
     // Add product to database
     try {
