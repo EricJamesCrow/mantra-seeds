@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 // hooks
@@ -6,6 +6,8 @@ import useResetPassword from '../../hooks/useResetPassword'
 
 // chakra ui
 import { Input } from '@chakra-ui/react'
+
+const CUSTOMERS_API_URL = '/api/user'
 
 export default function ChangePassword() {
   const navigate = useNavigate();
@@ -17,6 +19,19 @@ export default function ChangePassword() {
   // states
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  useEffect(() => {
+    const checkToken = async () => {
+        const response = await fetch(`${CUSTOMERS_API_URL}/check-reset-password-token/${id}`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'}
+        });
+        if(!response.ok) {
+            navigate("*")
+        }
+    }
+    checkToken();
+  } , [])
 
   // form submit
   const handleSubmit = async (e) => {

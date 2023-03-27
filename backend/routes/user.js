@@ -1,7 +1,7 @@
 const express = require('express')
 
 // controller functions
-const { signupUser, loginUser, fetchUser, fetchUsers, changePassword, requestResetPassword, resetPassword} = require('../controllers/userController')
+const { signupUser, loginUser, fetchUser, fetchUsers, changePassword, requestResetPassword, resetPassword, checkResetPasswordToken} = require('../controllers/userController')
 
 // middleware function
 const requireAuth = require('../middleware/requireAuth')
@@ -20,6 +20,9 @@ router.post('/change-password', requireAuth, changePassword)
 
 // reset password route
 router.post('/request-reset-password', requestResetPassword)
+
+// check reset password token route
+router.post('/check-reset-password-token/:token', checkResetPasswordToken)
 
 // reset password route
 router.post('/reset-password/:token', resetPassword)
