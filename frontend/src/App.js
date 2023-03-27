@@ -46,6 +46,9 @@ import OrderPage from './pages/new_profile/pages/OrderPage'
 import Search from "./pages/search/Search"
 import Contact from "./pages/contact/Contact"
 
+// error pages
+import NotFound from './pages/errors/NotFound';
+
 const PRODUCTS_API_URL = '/api/products/'
 const ORDERS_API_URL = '/api/orders'
 const CUSTOMERS_API_URL = '/api/user'
@@ -174,6 +177,7 @@ function App() {
       <Notifications/>
       <div className={location.pathname === "/" ? "home" : "routes"}>
       <Routes>
+        <Route path="*" element={<NotFound/>} />
         <Route path="/" element={<Home/>}/>
         <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/admin/orders" element={<AdminOrders/>} />

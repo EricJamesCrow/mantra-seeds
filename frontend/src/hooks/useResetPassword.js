@@ -23,7 +23,6 @@ const useResetPassword = () => {
             return json.error;
         };
         if (response.ok) {
-            setIsLoading(false)
             setError(null)
             setSuccess(json.message)
             return "Password changed successfully";

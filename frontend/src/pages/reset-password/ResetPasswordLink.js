@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 // hooks
 import useResetPassword from '../../hooks/useResetPassword'
@@ -8,6 +8,7 @@ import useResetPassword from '../../hooks/useResetPassword'
 import { Input } from '@chakra-ui/react'
 
 export default function ChangePassword() {
+  const navigate = useNavigate();
   const { id } = useParams()
 
   // hook
@@ -24,6 +25,9 @@ export default function ChangePassword() {
       if(response === "Password changed successfully") {
         setNewPassword("");
         setConfirmNewPassword("");
+        setTimeout(() => {
+           navigate("/login")
+        }, 1500)
       }
     };
 

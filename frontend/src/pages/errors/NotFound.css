@@ -1,0 +1,30 @@
+.error-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 87vh;
+    background-color: #f9f9f9;
+}
+
+.not-found-container {
+    font-family: 'Roboto';
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: 700;
+    color: #000;
+    margin: 3rem 1rem;
+}
+
+.not-found-container > h1 {
+    font-size: 64px;
+}
+
+.not-found-container > h2 {
+    font-size: 24px;
+}
+
+.not-found-container > p {
+    font-weight: 400;
+    font-size: 24px;
+}
