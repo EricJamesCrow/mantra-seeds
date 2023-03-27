@@ -3,7 +3,7 @@ const AWS = require('../config/aws-config');
 const ses = new AWS.SES();
 
 async function sendEmail(emailParams) {
-    const { from, to, subject, text, html} = emailParams;
+    const { from, to, subject, html} = emailParams;
     const params = {
         Source: from,
         Destination: {
@@ -18,10 +18,6 @@ async function sendEmail(emailParams) {
                 Html: {
                     Charset: 'UTF-8',
                     Data: html,
-                },
-                Text: {
-                    Charset: 'UTF-8',
-                    Data: text,
                 },
             },
         },

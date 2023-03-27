@@ -35,7 +35,8 @@ import Shop from "./pages/new_shop/Shop"
 import Cart from "./pages/new_cart/Cart"
 import Login from "./pages/login/Login"
 import Signup from "./pages/signup/Signup"
-import ResetPassword from "./pages/reset-password/ResetPassword"
+import RequestResetPassword from "./pages/reset-password/RequestResetPassword"
+import ResetPasswordLink from "./pages/reset-password/ResetPasswordLink"
 import ChangePassword from './pages/new_profile/pages/ChangePassword';
 import Checkout from './pages/new_checkout/Checkout';
 import OrderSuccess from './pages/new_checkout/OrderSuccess'
@@ -190,7 +191,8 @@ function App() {
         <Route path="/cart" element={<Cart/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
-        <Route path="/reset-password" element={<ResetPassword/>} />
+        <Route path="/reset-password" element={<RequestResetPassword/>} />
+        <Route path="/reset-password/:id" element={<ResetPasswordLink/>} />
         <Route path="/profile" 
         element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <Navigate to="/login"/>} 
         />

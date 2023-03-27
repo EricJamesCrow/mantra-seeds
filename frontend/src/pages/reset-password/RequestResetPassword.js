@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // hooks
-import useResetPassword from '../../hooks/useResetPassword'
+import useRequestResetPassword from '../../hooks/useRequestResetPassword'
 
 // chakra ui
 import { Input } from '@chakra-ui/react'
@@ -11,19 +11,19 @@ import { Input } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
-export default function ResetPassword() {
+export default function RequestResetPassword() {
     // for back button  
     const navigate = useNavigate();
 
     // hook
-    const { resetPassword, isLoading, error, success } = useResetPassword();
+    const { requestResetPassword, isLoading, error, success } = useRequestResetPassword();
 
     // state
     const [email, setEmail] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await resetPassword(email);
+        const response = await requestResetPassword(email);
         if(response === "Password reset link sent to email") {
             setEmail("");
         }

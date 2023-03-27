@@ -124,7 +124,7 @@ const changePassword = async (req, res) => {
 };
 
 
-const resetPassword = async (req, res) => {
+const requestResetPassword = async (req, res) => {
     const { email } = req.body;
     if (!validator.isEmail(email)) {
         return res.status(400).json({ error: "Invalid email" });
@@ -151,7 +151,6 @@ const resetPassword = async (req, res) => {
             from: process.env.PASSWORD_RESET_EMAIL,
             to: user.email,
             subject: 'Password Reset',
-            text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\nPlease click on the following link, or paste it into your browser to complete the process:\n\n${resetLink}\n\nIf you did not request this, please ignore this email and your password will remain unchanged.\n`,
             html: `<p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p><p>Please click on the following link, or paste it into your browser to complete the process:</p><p><a href="${resetLink}">${resetLink}</a></p><p>If you did not request this, please ignore this email and your password will remain unchanged.</p>`
         };
 
@@ -163,4 +162,48 @@ const resetPassword = async (req, res) => {
     }
 };
 
-module.exports = { loginUser, signupUser, fetchUser, fetchUsers, changePassword, resetPassword };
+const resetPassword = async (req, res) => {
+    const { token } = req.params;
+    const { newPassword, confirmNewPassword } = req.body;
+
+    console.log(token)
+
+    if (newPassword !== confirmNewPassword) {
+        return res.status(400).json({ error: "Passwords do not match" });
+    }
+
+    if (!validator.isStrongPassword(newPassword)) {
+        return res.status(400).json({ error: 'Password not strong enough' });
+    }
+
+    try {
+        const user = await User.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            return res.status(400).json({ error: "Invalid or expired token" });
+        }
+
+        const isMatch = await bcrypt.compare(newPassword, user.password);
+        if (isMatch) {
+            return res.status(400).json({ error: 'New password cannot be the same as old password' });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(newPassword, salt);
+        user.password = hash;
+        user.resetPasswordToken = null;
+        user.resetPasswordExpires = null;
+        await user.save();
+
+        return res.status(200).json({ message: 'Password reset successfully' });
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: 'An error occurred while processing the request' });
+    }
+};
+
+module.exports = { loginUser, signupUser, fetchUser, fetchUsers, changePassword, requestResetPassword, resetPassword };
