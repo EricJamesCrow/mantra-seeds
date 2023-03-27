@@ -26,7 +26,11 @@ export default function NewProductPage() {
     const url = PRODUCTS_API_URL+id;
     fetch(url)
         .then((response) => {
-            return response.json();
+            if (!response.ok) {
+                navigate("*");
+            } else {
+                return response.json();
+            }
         })
         .then((data) => {
             setProduct(data)
