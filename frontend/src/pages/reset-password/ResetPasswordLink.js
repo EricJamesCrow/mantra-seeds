@@ -27,7 +27,7 @@ export default function ChangePassword() {
             headers: {'Content-Type': 'application/json'}
         });
         if(!response.ok) {
-            navigate("*")
+            navigate("/invalid-token")
         }
     }
     checkToken();

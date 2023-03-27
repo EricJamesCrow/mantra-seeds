@@ -48,6 +48,7 @@ import Contact from "./pages/contact/Contact"
 
 // error pages
 import NotFound from './pages/errors/NotFound';
+import InvalidToken from './pages/errors/InvalidToken';
 
 const PRODUCTS_API_URL = '/api/products/'
 const ORDERS_API_URL = '/api/orders'
@@ -177,8 +178,8 @@ function App() {
       <Notifications/>
       <div className={location.pathname === "/" ? "home" : "routes"}>
       <Routes>
-        <Route path="*" element={<NotFound/>} />
         <Route path="/" element={<Home/>}/>
+        
         <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/admin/orders" element={<AdminOrders/>} />
         <Route path="/admin/orders/:id" element={<AdminOrdersDetailsPage/>} />
@@ -186,23 +187,30 @@ function App() {
         <Route path="/admin/customers/:id" element={<AdminCustomersDetailsPage/>} />
         <Route path="/admin/products" element={<AdminProducts/>} />
         <Route path="/admin/products/:id" element={<AdminProductsDetailsPage/>} />
+        
         <Route path="/shop/products/:id" element={<NewProductPage/>} />
         <Route path="/shop" element={<Shop/>} />
+        
         <Route path="/cart/checkout" element={<Checkout/>} />
         <Route path="/cart/checkout/order-success" element={<OrderSuccess/>} />
+        
         <Route path="/search/:id" element={<Search/>} />
         <Route path="/contact" element={<Contact/>} />
         <Route path="/cart" element={<Cart/>} />
+        
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
+        
         <Route path="/reset-password" element={<RequestResetPassword/>} />
         <Route path="/reset-password/:id" element={<ResetPasswordLink/>} />
-        <Route path="/profile" 
-        element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <Navigate to="/login"/>} 
-        />
+        
+        <Route path="/profile" element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <Navigate to="/login"/>} />
         <Route path="/profile/order-history" element={JSON.parse(localStorage.getItem('user')) ? <OrderHistory/> : <Navigate to="/login"/>} />
         <Route path="/profile/order-history/:id" element={JSON.parse(localStorage.getItem('user')) ? <OrderPage/> : <Navigate to="/login"/>} />
         <Route path="/profile/change-password" element={JSON.parse(localStorage.getItem('user')) ? <ChangePassword/> : <Navigate to="/login"/>} />
+
+        <Route path="*" element={<NotFound/>} />
+        <Route path="/invalid-token" element={<InvalidToken/>} />
       </Routes>
       </div>
       <div className="copyright">
