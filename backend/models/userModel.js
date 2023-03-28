@@ -30,6 +30,10 @@ const userSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    confirmationToken: {
+        type: String,
+        required: false,
+      },
     resetPasswordToken: {
         type: String,
         required: false

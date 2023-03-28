@@ -1,0 +1,16 @@
+.confirm-account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+    min-height: 79vh;
+    text-align: center;
+}
+
+.confirm-account-container > h1 {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 32px;
+    padding-top: 3rem;
+    width: 100%;
+}

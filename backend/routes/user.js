@@ -10,7 +10,7 @@ const {
     requestResetPassword, 
     resetPassword, 
     checkResetPasswordToken,
-    confirmEmail,
+    confirmAccount,
 } = require('../controllers/userController')
 
 // middleware function
@@ -26,7 +26,7 @@ router.post('/login', loginUser)
 router.post('/signup', signupUser)
 
 // confirm email route
-router.get('/confirm-email/:token', confirmEmail)
+router.get('/confirm-account/:token', confirmAccount)
 
 // change password route
 router.post('/change-password', requireAuth, changePassword)
