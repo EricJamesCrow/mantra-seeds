@@ -27,10 +27,12 @@ const loginUser = async (req, res) => {
 
         const cart = user.cart
 
+        const emailConfirmed = user.emailConfirmed;
+
         if(role) {
-            res.status(200).json({id, email, token, cart, role})
+            res.status(200).json({id, email, token, cart, role, emailConfirmed})
         } else {
-            res.status(200).json({id, email, cart, token})  
+            res.status(200).json({id, email, cart, token, emailConfirmed})  
         }
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -42,21 +44,37 @@ const signupUser = async (req, res) => {
     const {email, password} = req.body
 
     try {
-        const user = await User.signup(email, password)
+        // Generate a unique token
+        const confirmationToken = crypto.randomBytes(32).toString('hex');
+        const user = await User.signup(email, password, confirmationToken);
+
+        const confirmationLink = `http://localhost:3000/confirm-account/${confirmationToken}`;
+        
+        const emailParams = {
+            from: process.env.CONFIRMATION_EMAIL,
+            to: user.email,
+            subject: 'Confirm Your Account',
+            html: `<p>Welcome to Mantra Seeds!</p><p>Please click on the following link, or paste it into your browser to confirm your account:</p><p><a href="${confirmationLink}">${confirmationLink}</a></p>`
+        };
+
+        await sendEmail(emailParams);
 
         // create a token
-        const token = createToken(user._id, user.email)
+        const token = createToken(user._id, user.email);
 
-        res.status(200).json({email, token})
+        const id = user._id;
+        const emailConfirmed = user.emailConfirmed;
+
+        res.status(200).json({id, email, token, emailConfirmed});
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
-
+  
 const fetchUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findById(id).select('email role cart order');;
+        const user = await User.findById(id).select('email role cart order emailConfirmed');;
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
@@ -157,7 +175,6 @@ const requestResetPassword = async (req, res) => {
         await sendEmail(emailParams);
         res.status(200).json({ message: 'Password reset link sent to email' });
     } catch (error) {
-        console.log(error)
         res.status(500).json({ error: 'An error occurred while processing the request' });
     }
 };
@@ -182,8 +199,6 @@ const checkResetPasswordToken = async (req, res) => {
 const resetPassword = async (req, res) => {
     const { token } = req.params;
     const { newPassword, confirmNewPassword } = req.body;
-
-    console.log(token)
 
     if (newPassword !== confirmNewPassword) {
         return res.status(400).json({ error: "Passwords do not match" });
@@ -223,4 +238,34 @@ const resetPassword = async (req, res) => {
     }
 };
 
-module.exports = { loginUser, signupUser, fetchUser, fetchUsers, changePassword, requestResetPassword, resetPassword, checkResetPasswordToken };
+const confirmEmail = async (req, res) => {
+    const { token } = req.params;
+  
+    try {
+      const user = await User.findOne({ confirmationToken: token });
+  
+      if (!user) {
+        return res.status(400).json({ error: "Invalid or expired token" });
+      }
+  
+      user.emailConfirmed = true;
+      user.confirmationToken = null;
+      await user.save();
+  
+      res.status(200).json({ message: "Email confirmed successfully" });
+    } catch (error) {
+      res.status(500).json({ error: "An error occurred while processing the request" });
+    }
+  };
+
+module.exports = { 
+    loginUser, 
+    signupUser, 
+    fetchUser, 
+    fetchUsers, 
+    changePassword, 
+    requestResetPassword, 
+    resetPassword, 
+    checkResetPasswordToken,
+    confirmEmail, 
+};

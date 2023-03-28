@@ -2,6 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLogout } from '../../hooks/useLogout'
 
+// chakra ui
+import { Alert, AlertIcon } from '@chakra-ui/react'
+
 // redux
 import { useSelector } from "react-redux"
 
@@ -18,6 +21,8 @@ export default function Profile() {
     const user = useSelector(state => state.auth.user);
     let navigate = useNavigate()
     const { logout } = useLogout()
+    if(!user) return null;
+    const showAlert = !user.emailConfirmed
     
     const handleLogout = () => {
         navigate('/')
@@ -36,6 +41,11 @@ export default function Profile() {
 
   return (
     <div className="profile-wrapper">
+        {showAlert && 
+        <Alert status='warning' className='alert-banner'>
+            <AlertIcon />
+            Please check your email and click on the confirmation link to activate your account.
+        </Alert>}
         <div className="profile-container">
             <div>Profile</div>
             <div className="user-profile-and-btns-wrapper">
@@ -66,7 +76,7 @@ export default function Profile() {
                     ))}
                 </div>
             </div>
-        </div>
+    </div>
     </div>
   )
 }

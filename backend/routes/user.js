@@ -1,7 +1,17 @@
 const express = require('express')
 
 // controller functions
-const { signupUser, loginUser, fetchUser, fetchUsers, changePassword, requestResetPassword, resetPassword, checkResetPasswordToken} = require('../controllers/userController')
+const { 
+    signupUser, 
+    loginUser, 
+    fetchUser, 
+    fetchUsers, 
+    changePassword, 
+    requestResetPassword, 
+    resetPassword, 
+    checkResetPasswordToken,
+    confirmEmail,
+} = require('../controllers/userController')
 
 // middleware function
 const requireAuth = require('../middleware/requireAuth')
@@ -14,6 +24,9 @@ router.post('/login', loginUser)
 
 // signup route
 router.post('/signup', signupUser)
+
+// confirm email route
+router.get('/confirm-email/:token', confirmEmail)
 
 // change password route
 router.post('/change-password', requireAuth, changePassword)

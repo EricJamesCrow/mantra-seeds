@@ -1,11 +1,13 @@
 .profile-wrapper {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .profile-container {
-    margin: 1rem;
-    min-height: 80vh;
+    padding: 1rem;
+    min-height: 87vh;
     width: 100%;
     max-width: 600px;
 }
