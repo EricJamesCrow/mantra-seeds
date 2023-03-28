@@ -251,8 +251,9 @@ const confirmAccount = async (req, res) => {
       user.emailConfirmed = true;
       user.confirmationToken = null;
       await user.save();
-  
-      res.status(200).json({ message: "Email confirmed successfully" });
+
+      const emailConfirmed = user.emailConfirmed;
+      res.status(200).json({ emailConfirmed}); 
     } catch (error) {
       res.status(500).json(error);
     }
