@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { loginAuth } from '../redux/slices/authSlice'
+import { setCart } from '../redux/slices/cartSlice'
 
 export const useSignup = () => {
     const [error, setError] = useState(null)
@@ -12,10 +13,13 @@ export const useSignup = () => {
         setIsLoading(true)
         setError(null)
 
+        // Get the cart ID from localStorage
+        const localStorageCartId = localStorage.getItem('cart');
+
         const response = await fetch('/api/user/signup', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({email, password, localStorageCartId})
         })
         const json = await response.json()
 
@@ -30,6 +34,17 @@ export const useSignup = () => {
 
             // update the auth context
             dispatch(loginAuth(json))
+            const user = json
+            const fetchCart = async () => {
+                const response = await fetch('/api/carts/'+user.cart)
+                const json = await response.json()
+          
+                if (response.ok) {
+                  dispatch(setCart(json))
+                }
+              }
+            fetchCart();
+            localStorage.removeItem('cart');
 
             setIsLoading(false)
             return "success";

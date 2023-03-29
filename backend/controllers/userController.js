@@ -15,15 +15,12 @@ const createToken = (_id, email, role) => {
 // login user
 const loginUser = async (req, res) => {
     const { email, password, localStorageCartId } = req.body;
-
-    console.log(localStorageCartId)
   
     try {
       const user = await User.login(email, password);
   
       if (!user.cart && localStorageCartId) {
         const localStorageCart = await Cart.findById(localStorageCartId);
-        console.log(localStorageCart)
         if (localStorageCart) {
           user.cart = localStorageCart._id;
           await user.save();
@@ -92,12 +89,20 @@ const mergeCarts = async (userCart, localStorageCart) => {
 
 // signup user
 const signupUser = async (req, res) => {
-    const {email, password} = req.body
+    const {email, password, localStorageCartId} = req.body
 
     try {
         // Generate a unique token
         const confirmationToken = crypto.randomBytes(32).toString('hex');
         const user = await User.signup(email, password, confirmationToken);
+
+        if(localStorageCartId) {
+            const localStorageCart = await Cart.findById(localStorageCartId);
+            if (localStorageCart) {
+                user.cart = localStorageCart._id;
+                await user.save();
+            }
+        }
 
         const confirmationLink = `http://localhost:3000/confirm-account/${confirmationToken}`;
         
