@@ -15,7 +15,7 @@ import BitcoinSvg from "../../../images/payment_logos/Bitcoin-Logo.wine.svg"
 import StripeContainer from './stripe/StripeContainer'
 import PayPal from './paypal/PayPal'
 
-export default function Payment( { setCurrentStep, shipping, dispatch, cart, user } ) {
+export default function Payment( { setCurrentStep, shipping, cart, user } ) {
     const isDesktop = useMediaQuery({ minWidth: 980 });
     const [ encrypted, setEncrypted ] = useState(false);
     const [ value, setValue ] = useState(0);
@@ -33,7 +33,7 @@ export default function Payment( { setCurrentStep, shipping, dispatch, cart, use
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            id: user.cart,
+            id: cart._id,
             address: { 
               firstName: shipping.firstName,
               lastName: shipping.lastName,
@@ -130,7 +130,7 @@ export default function Payment( { setCurrentStep, shipping, dispatch, cart, use
             />
             <img src={BitcoinSvg}/>
           </div>
-          {encrypted && value === "bitcoin" && <PayPal cart={cart} shipping={shipping} user={user}/>}
+          {encrypted && value === "bitcoin" && <PayPal cart={cart} shipping={shipping}/>}
         </div>
       </RadioGroup>
       </div>

@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const orderSchema = new mongoose.Schema({
-    user: {
+    cart: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Cart',
         required: true
     },
     address:{
@@ -108,13 +108,13 @@ const orderSchema = new mongoose.Schema({
     timestamps: true
 });
 
-orderSchema.statics.createOrder = async (user, address, items, email, shipping, payment, total) => {
+orderSchema.statics.createOrder = async (cart, address, items, email, shipping, payment, total) => {
     try {
     // await Order.validateOrder(user, address, items, email, shipping, payment)
 
     // create order
     const order = await Order.create({
-        user,
+        cart,
         address,
         items,
         email,

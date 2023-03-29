@@ -4,7 +4,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const PAYPAL_API_URL = '/api/payment/paypal/'
 
-export default function PayPal( {cart, shipping, user}) {
+export default function PayPal( {cart, shipping}) {
     const [sandbox, setSandbox] = useState(null)
     const [total, setTotal] = useState(null)
 
@@ -20,7 +20,7 @@ export default function PayPal( {cart, shipping, user}) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                  id: user.cart,
+                  id: cart._id,
                   shippingPrice: shipping.shippingPrice,
                 }),
               }).then((res) => res.json())
@@ -50,7 +50,7 @@ export default function PayPal( {cart, shipping, user}) {
                         amount: {
                             value: total,
                         },
-                        custom_id: user.cart
+                        custom_id: cart._id
                     },
                 ],
             });
@@ -63,9 +63,11 @@ export default function PayPal( {cart, shipping, user}) {
                     headers: {
                       'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ id: user.cart, shippingPrice: shipping.shippingPrice})
-                  }).then(() => {
-                    window.location.assign('/cart/checkout/order-success');
+                    body: JSON.stringify({ id: cart._id, shippingPrice: shipping.shippingPrice})
+                  }).then((response) => {
+                    if(response.ok) {
+                      window.location.assign('/cart/checkout/order-success');
+                    }
                   })
                   .catch(error => {
                     console.error('Error creating order:', error);

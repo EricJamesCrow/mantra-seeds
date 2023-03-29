@@ -35,11 +35,11 @@ const calculateOrderAmount = async (req, res) => {
 };
 
 const createOrder = async (req, res, next) => {
+    console.log("triggered")
     try {
     const { id, shippingPrice } = req.body
     const finalShippingPrice = parseFloat(shippingPrice) * 100
     const cart = await Cart.findById(id);
-    const user = cart.user;
     const address = cart.address;
     const items = cart.cartItems;
     const email = cart.email;
@@ -47,11 +47,11 @@ const createOrder = async (req, res, next) => {
     const payment = "PayPal: pending"
     const total = cart.subtotal + finalShippingPrice
     // make this so create order adds the cart. this will be a unique id the webhook can find later
-    const order = await Order.createOrder(user, address, items, email, shipping, payment, total);
-    await User.findByIdAndUpdate(user , { $set: { order: order._id } }, { new: true });
-    // create update inventory function
-    await Cart.deleteCart(id);
-    next();
+    const order = await Order.createOrder(id, address, items, email, shipping, payment, total);
+    // await User.findByIdAndUpdate(user , { $set: { order: order._id } }, { new: true });
+    // // create update inventory function
+    // await Cart.deleteCart(id);
+    return res.status(200).send({ success: "Order created", order })
     } catch (e) {
         return res.status(400).send({
             error: {

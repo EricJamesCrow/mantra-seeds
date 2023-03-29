@@ -106,7 +106,6 @@ export default function Checkout() {
             setMaxStep(Math.max(maxStep, step));
           }}
           shipping={shipping}
-          dispatch={dispatch}
           cart={cart}
           user={user}
         />
