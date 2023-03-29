@@ -4,11 +4,13 @@ import React, { useEffect } from 'react';
 
 // redux
 import { useDispatch } from 'react-redux';
-import { setCart } from './redux/slices/cartSlice';
-import { setProducts } from './redux/slices/productSlice';
 import { loginAuth } from './redux/slices/authSlice';
 import { setOrders } from './redux/slices/ordersSlice';
 import { setCustomers } from './redux/slices/customersSlice';
+
+// hooks
+import { useCart } from './hooks/useCart';
+import { useFetchProducts } from './hooks/useFetchProducts';
 
 // styles
 import './App.css';
@@ -51,11 +53,13 @@ import Contact from "./pages/contact/Contact"
 import NotFound from './pages/errors/NotFound';
 import InvalidToken from './pages/errors/InvalidToken';
 
-const PRODUCTS_API_URL = '/api/products/'
 const ORDERS_API_URL = '/api/orders'
 const CUSTOMERS_API_URL = '/api/user'
 
 function App() {
+  // hooks
+  const { fetchCart, fetchUserCart } = useCart();
+  const { fetchProducts } = useFetchProducts();
   const location = useLocation()
   const dispatch = useDispatch();
 
@@ -88,30 +92,6 @@ function App() {
     console.log(e)
   }
     }
-
-  const fetchCart = async (user) => {
-    const response = await fetch('/api/carts/'+user.cart)
-    const json = await response.json()
-
-    if (response.ok) {
-      dispatch(setCart(json))
-    }
-    if (!response.ok) {
-      dispatch(setCart({cartItems: null, subtotal: 0}))
-    }
-  }
-
-  const fetchProducts = async () => {
-    const response = await fetch(PRODUCTS_API_URL)
-    const json = await response.json()
-
-    if (response.ok) {
-      dispatch(setProducts(json))
-    }
-    if (!response.ok) {
-      dispatch(setProducts(null))
-    }
-  }
 
   const fetchOrders = async (user) => {
       const token = user.token
@@ -154,7 +134,9 @@ function App() {
     fetchUser()
     fetchProducts()
     if(user) {
-      fetchCart(user)
+      fetchUserCart(user)
+    } else {
+      fetchCart()
     }
   }, [])
 

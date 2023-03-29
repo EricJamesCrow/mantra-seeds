@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
 
 // hooks
 import useAddToCart from '../hooks/useAddToCart';
@@ -14,7 +13,6 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 export default function NewProduct( { product } ) {
     const price = (product.price/100).toFixed(2);
-    const user = useSelector(state => state.auth.user);
     const { addToCart, loading } = useAddToCart();
 
   return (
@@ -40,7 +38,7 @@ export default function NewProduct( { product } ) {
             <div>{`$${price}`}</div>
             <button disabled={loading} className="add-to-cart-btn" onClick={(event) => {
         event.preventDefault(); // prevent the link from navigating
-        addToCart(user.id, product._id, 1, product.price);
+        addToCart(product._id, 1, product.price);
       }}>Add to Cart</button>
         </div>
         </div>

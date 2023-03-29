@@ -1,12 +1,12 @@
 const Cart = require('../models/cartModel')
-const User = require('../models/userModel')
 const Product = require('../models/productModel')
 const mongoose = require('mongoose')
 
 const updateItemQuantity = async (req, res) => {
-    const { user, product, quantity } = req.body;
+    const { id } = req.params;
+    const { product, quantity } = req.body;
   
-    if (!user || !product || !quantity) {
+    if (!product || !quantity) {
       return res.status(400).json({ error: "Missing required parameters" });
     }
   
@@ -15,7 +15,7 @@ const updateItemQuantity = async (req, res) => {
     }
   
     try {
-      const cart = await Cart.findOne({ user });
+      const cart = await Cart.findById(id);
   
       if (!cart) {
         return res.status(404).json({ error: "Cart not found" });
@@ -41,10 +41,10 @@ const updateItemQuantity = async (req, res) => {
   
 
 const addItemToCart = async (req, res) => {
-    const { user } = req.body;
+    const { id } = req.body;
     const { product, quantity, price } = req.body.cartItems[0];
     
-    if (!user || !product || !quantity || !price) {
+    if (!product || !quantity || !price) {
         return res.status(400).json({ error: "Missing required parameters" });
     }
 
@@ -65,15 +65,14 @@ const addItemToCart = async (req, res) => {
     }
 
     try {
-        const cart = await Cart.findOne({ user });
+        const cart = await Cart.findById(id);
         if (!cart) {
             const newCart = new Cart({
-                user,
                 cartItems: [{ product, quantity, price }],
                 subtotal: price * quantity
             });
             await newCart.save();
-            await User.findByIdAndUpdate(user, { cart: newCart._id }); 
+            // await User.findByIdAndUpdate(user, { cart: newCart._id }); 
             return res.status(201).json({ cart: newCart });
         } else {
             const cartItem = cart.cartItems.find(c => c.product.equals(product))
@@ -95,8 +94,9 @@ const addItemToCart = async (req, res) => {
 
 
 const removeItemFromCart = async (req, res) => {
-    const { user, product } = req.body;
-    if (!user || !product) {
+    const { id } = req.params;
+    const { product } = req.body;
+    if (!product) {
         return res.status(400).json({ error: "Missing required parameters" });
     }
 
@@ -109,7 +109,7 @@ const removeItemFromCart = async (req, res) => {
     }
     
     try {
-        const cart = await Cart.findOne({ user });
+        const cart = await Cart.findById(id);
         if (!cart) {
             return res.status(404).json({ error: "Cart not found" });
         } else {

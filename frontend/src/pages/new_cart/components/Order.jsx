@@ -8,9 +8,12 @@ import { DeleteIcon } from '@chakra-ui/icons'
 import { debounce } from 'lodash';
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteItem, updateCart } from '../../../redux/slices/cartSlice'
 import { setRemovedItem, setRemovedItemName } from '../../../redux/slices/notificationsSlice';
+
+// hooks
+import { useCart } from '../../../hooks/useCart'
 
 // styles
 import './Order.css'
@@ -20,9 +23,11 @@ const PRODUCTS_API_URL = '/api/products/'
 
 export default function Order( {item, user }) {
     const dispatch = useDispatch();
+    const cart = useSelector(state => state.cart);
     const [product, setProduct] = useState('')
     const price = (item.price/100).toFixed(2)
     const [quantity, setQuantity] = useState(item.quantity);
+    const { handleDelete } = useCart();
   
     useEffect(() => {
       const url = PRODUCTS_API_URL+item.product;
@@ -37,14 +42,13 @@ export default function Order( {item, user }) {
 
     const updateQuantity = useCallback(
         debounce(async (newQuantity) => {
-            const response = await fetch(CARTS_API_URL + item._id, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                user: user.id,
-                product: product._id,
-                quantity: newQuantity,
-            }),
+            const response = await fetch(CARTS_API_URL + cart._id, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    product: product._id,
+                    quantity: newQuantity,
+                }),
             });
             const json = await response.json();
             if (!response.ok) {
@@ -61,26 +65,6 @@ export default function Order( {item, user }) {
         setQuantity(newQuantity);
         updateQuantity(newQuantity);
       };
-  
-    const handleDelete = async () => { 
-      const response = await fetch(CARTS_API_URL+item._id, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            user:  user.id,
-            product: product._id
-        })
-    });
-      const json = await response.json(); // need to refactor backend so the response is the cart object
-      if(response.ok) {
-        dispatch(deleteItem(json));
-        dispatch(setRemovedItem(true));
-        dispatch(setRemovedItemName(product.name))
-        setTimeout(() => {
-            dispatch(setRemovedItem(false));
-          }, 0);
-      }
-    };
 
   return (
     <div className="cart-order-container">
@@ -97,7 +81,7 @@ export default function Order( {item, user }) {
                         <div>{`$${price}`}</div>
                     </div>
                     <div>
-                        <DeleteIcon onClick={handleDelete}/>
+                        <DeleteIcon onClick={() => handleDelete(cart._id, product)}/>
                         <div className="order-adjust-quantity-container">
                             <div className="order-adjust-quantity">
                                 <button className="order-adjust-quantity-btn" onClick={() => handleQuantityChange(-1)}>

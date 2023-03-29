@@ -4,7 +4,6 @@ const { addItemToCart,
     getUserCart,
     getAllCarts,
     updateItemQuantity } = require('../controllers/cartController')
-const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 
 // update quantity

@@ -1,19 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const setCartLocalStorage = (id) => {
+  let cart = localStorage.getItem('cart');
+
+  if (!cart) {
+    localStorage.setItem('cart', id);
+  }
+};
+
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
+      _id: null,
       cartItems: null,
       subtotal: 0
     },
     reducers: {
       setCart: (state, action) => {
+        state._id = action.payload._id;
         state.cartItems = action.payload.cartItems;
         state.subtotal = action.payload.subtotal;
       },
       updateCart: (state, action) => {
+        state._id = action.payload._id;
         state.cartItems = action.payload.cartItems;
         state.subtotal = action.payload.subtotal;
+        setCartLocalStorage(action.payload._id);
       },
       deleteItem: (state, action) => {
         const deletedItem = state.cartItems.find(item => item._id === action.payload._id);

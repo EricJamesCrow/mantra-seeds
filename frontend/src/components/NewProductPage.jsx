@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux';
 
 // hooks
 import useAddToCart from '../hooks/useAddToCart';
 
+// styles
 import './NewProductPage.css'
 
 // images
@@ -16,7 +16,6 @@ const PRODUCTS_API_URL = '/api/products/'
 export default function NewProductPage() {
   const { id } = useParams()
   const [product, setProduct] = useState('')
-  const user = useSelector(state => state.auth.user);
   const { addToCart, loading } = useAddToCart();
   const navigate = useNavigate();
   const price = (product.price/100).toFixed(2)
@@ -103,7 +102,7 @@ export default function NewProductPage() {
                 <div>Add to Favorites</div>
             </div>
         </div>
-        <button disabled={loading} className="add-to-cart-btn" onClick={() => addToCart(user.id, product._id, quantity, product.price)}>Add to Cart</button>
+        <button disabled={loading} className="add-to-cart-btn" onClick={() => addToCart(product._id, quantity, product.price)}>Add to Cart</button>
         </div>
         <div className="reviews-container">
             <div>Reviews</div>

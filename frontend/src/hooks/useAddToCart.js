@@ -1,24 +1,25 @@
 import { useState } from 'react';
 
 // redux
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateCart } from '../redux/slices/cartSlice';
 import { setAddToCart } from '../redux/slices/notificationsSlice';
 
 const useAddToCart = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const id = useSelector(state => state.cart._id);
     const dispatch = useDispatch();
 
-    const addToCart = async (id, product, quantity, price) => {
+    const addToCart = async (product, quantity, price) => {
         setLoading(true);
         try {
-            // Make a post request to the addItemToCart endpoint on the backend
+            // Makes a post request to the addItemToCart endpoint on the backend
             const response = await fetch('/api/carts', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    user:  id,
+                    id:  id,
                     cartItems: [{ product, quantity, price }]
                 })
             });
