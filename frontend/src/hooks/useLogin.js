@@ -14,10 +14,13 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
+        // Get the cart ID from localStorage
+        const localStorageCartId = localStorage.getItem('cart');
+
         const response = await fetch('/api/user/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({email, password, localStorageCartId})
         })
         const json = await response.json()
 
@@ -41,6 +44,7 @@ export const useLogin = () => {
                 }
               }
             fetchCart();
+            localStorage.removeItem('cart');
 
             setIsLoading(false);
             return "success";

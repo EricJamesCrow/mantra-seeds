@@ -1,11 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { deleteItem, setCart } from '../redux/slices/cartSlice'
 import { setRemovedItem, setRemovedItemName } from '../redux/slices/notificationsSlice'
 
 const CARTS_API_URL = '/api/carts/'
 
 export const useCart = () => {
-    const cart = useSelector(state => state.cart)
     const dispatch = useDispatch()
 
     const fetchCart = async () => {

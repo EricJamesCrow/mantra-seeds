@@ -16,7 +16,7 @@ const PRODUCTS_API_URL = '/api/products/'
 export default function NewProductPage() {
   const { id } = useParams()
   const [product, setProduct] = useState('')
-  const { addToCart, loading } = useAddToCart();
+  const { addToCart, loading, error } = useAddToCart();
   const navigate = useNavigate();
   const price = (product.price/100).toFixed(2)
   const [quantity, setQuantity] = useState(1)
@@ -103,6 +103,7 @@ export default function NewProductPage() {
             </div>
         </div>
         <button disabled={loading} className="add-to-cart-btn" onClick={() => addToCart(product._id, quantity, product.price)}>Add to Cart</button>
+        {error && <div className="error-message">{error}</div>}
         </div>
         <div className="reviews-container">
             <div>Reviews</div>

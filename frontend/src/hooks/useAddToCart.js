@@ -13,6 +13,7 @@ const useAddToCart = () => {
 
     const addToCart = async (product, quantity, price) => {
         setLoading(true);
+        setError(null);
         try {
             // Makes a post request to the addItemToCart endpoint on the backend
             const response = await fetch('/api/carts', {

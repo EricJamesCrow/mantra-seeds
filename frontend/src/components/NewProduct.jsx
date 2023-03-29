@@ -13,7 +13,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 export default function NewProduct( { product } ) {
     const price = (product.price/100).toFixed(2);
-    const { addToCart, loading } = useAddToCart();
+    const { addToCart, loading, error } = useAddToCart();
 
   return (
         <div className="product-card-container">
@@ -40,6 +40,7 @@ export default function NewProduct( { product } ) {
         event.preventDefault(); // prevent the link from navigating
         addToCart(product._id, 1, product.price);
       }}>Add to Cart</button>
+      {error && <div className="error-message">{error}</div>}
         </div>
         </div>
   )

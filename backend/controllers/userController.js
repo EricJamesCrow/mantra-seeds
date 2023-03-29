@@ -1,4 +1,5 @@
 const User = require('../models/userModel')
+const Cart = require('../models/cartModel')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
@@ -13,31 +14,81 @@ const createToken = (_id, email, role) => {
 
 // login user
 const loginUser = async (req, res) => {
-    const {email, password} = req.body
+    const { email, password, localStorageCartId } = req.body;
 
+    console.log(localStorageCartId)
+  
     try {
-        const user = await User.login(email, password)
-
-        // create a token
-        const token = createToken(user._id, user.email, user.role)
-
-        const role = user.role
-
-        const id = user._id
-
-        const cart = user.cart
-
-        const emailConfirmed = user.emailConfirmed;
-
-        if(role) {
-            res.status(200).json({id, email, token, cart, role, emailConfirmed})
-        } else {
-            res.status(200).json({id, email, cart, token, emailConfirmed})  
+      const user = await User.login(email, password);
+  
+      if (!user.cart && localStorageCartId) {
+        const localStorageCart = await Cart.findById(localStorageCartId);
+        console.log(localStorageCart)
+        if (localStorageCart) {
+          user.cart = localStorageCart._id;
+          await user.save();
         }
+      }
+      else if (user.cart && localStorageCartId) {
+        const userCart = await Cart.findById(user.cart);
+        const localStorageCart = await Cart.findById(localStorageCartId);
+        if (userCart && localStorageCart) {
+          const mergedCart = await mergeCarts(userCart, localStorageCart);
+          user.cart = mergedCart._id;
+          await user.save();
+        }
+      }
+  
+      // create a token
+      const token = createToken(user._id, user.email, user.role);
+  
+      const role = user.role;
+  
+      const id = user._id;
+  
+      const cart = user.cart;
+  
+      const emailConfirmed = user.emailConfirmed;
+  
+      if (role) {
+        res.status(200).json({ id, email, token, cart, role, emailConfirmed });
+      } else {
+        res.status(200).json({ id, email, cart, token, emailConfirmed });
+      }
     } catch (error) {
-        res.status(400).json({error: error.message})
+      res.status(400).json({ error: error.message });
     }
-}
+  };
+  
+const mergeCarts = async (userCart, localStorageCart) => {
+    const mergedCartItems = [...userCart.cartItems];
+  
+    for (const localStorageItem of localStorageCart.cartItems) {
+      const existingItem = mergedCartItems.find(
+        (item) => item.product.toString() === localStorageItem.product.toString()
+      );
+  
+      if (existingItem) {
+        existingItem.quantity += localStorageItem.quantity;
+      } else {
+        mergedCartItems.push(localStorageItem);
+      }
+    }
+  
+    userCart.cartItems = mergedCartItems;
+  
+    userCart.subtotal = mergedCartItems.reduce(
+      (sum, item) => sum + item.quantity * item.price,
+      0
+    );
+  
+    await userCart.save();
+  
+    await Cart.findByIdAndDelete(localStorageCart._id);
+  
+    return userCart;
+  };
+  
 
 // signup user
 const signupUser = async (req, res) => {

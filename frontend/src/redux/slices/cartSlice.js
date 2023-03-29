@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const setCartLocalStorage = (id) => {
-  let cart = localStorage.getItem('cart');
+  const user = localStorage.getItem('user');
 
-  if (!cart) {
-    localStorage.setItem('cart', id);
+  if (!user) {
+    let cart = localStorage.getItem('cart');
+
+    if (!cart) {
+      localStorage.setItem('cart', id);
+    }
   }
 };
 
@@ -35,6 +39,7 @@ const cartSlice = createSlice({
         state.subtotal = newSubtotal;
       },
       clearCart: (state) => {
+        state._id = null;
         state.cartItems = null;
         state.subtotal = 0;
       }

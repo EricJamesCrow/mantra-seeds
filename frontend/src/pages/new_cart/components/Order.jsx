@@ -38,7 +38,7 @@ export default function Order( {item, user }) {
           .then((data) => {
               setProduct(data)
           })
-  }, [])
+    }, [])
 
     const updateQuantity = useCallback(
         debounce(async (newQuantity) => {
