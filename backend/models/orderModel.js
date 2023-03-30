@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const orderSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: false
+    },
+    transaction: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Transaction',
+        required: true
+    },
     cart: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Cart',
@@ -86,19 +96,10 @@ const orderSchema = new mongoose.Schema({
             }
         }
     ,
-    payment: {
-        type: String,
-        ref: 'Payment',
-        required: true
-    },
     total: {
         type: Number,
         ref: 'Total',
         required: false
-    },
-    date: {
-        type: Date,
-        default: Date.now()
     },
     orderNumber: {
         type: String,
@@ -108,25 +109,27 @@ const orderSchema = new mongoose.Schema({
     timestamps: true
 });
 
-orderSchema.statics.createOrder = async (cart, address, items, email, shipping, payment, total) => {
+orderSchema.statics.createOrder = async (user, transaction, cart, address, items, email, shipping, total) => {
     try {
     // await Order.validateOrder(user, address, items, email, shipping, payment)
 
     // create order
     const order = await Order.create({
+        user,
+        transaction,
         cart,
         address,
         items,
         email,
         shipping,
-        payment,
         total,
     });
     return order;
     } catch (error) {
         console.log(error);
+        throw error;
     }
-}
+};
 
 orderSchema.statics.validateOrder = async function(user, address, items, email, shipping, payment, total) {
     // validation

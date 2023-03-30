@@ -9,6 +9,7 @@ const axios = require('axios');
 // models
 const Cart = require('../../models/cartModel')
 const Order = require('../../models/orderModel')
+const Transaction = require('../../models/transactionModel')
 const User = require('../../models/userModel')
 
 const WEBHOOK_ID = process.env.PAYPAL_WEBHOOK_ID;
@@ -34,23 +35,22 @@ const calculateOrderAmount = async (req, res) => {
     }
 };
 
-const createOrder = async (req, res, next) => {
-    console.log("triggered")
+const createOrder = async (req, res) => {
     try {
-    const { id, shippingPrice } = req.body
-    const finalShippingPrice = parseFloat(shippingPrice) * 100
-    const cart = await Cart.findById(id);
-    const address = cart.address;
-    const items = cart.cartItems;
-    const email = cart.email;
-    const shipping = cart.shipping;
-    const payment = "PayPal: pending"
-    const total = cart.subtotal + finalShippingPrice
-    // make this so create order adds the cart. this will be a unique id the webhook can find later
-    const order = await Order.createOrder(id, address, items, email, shipping, payment, total);
-    // await User.findByIdAndUpdate(user , { $set: { order: order._id } }, { new: true });
-    // // create update inventory function
-    // await Cart.deleteCart(id);
+        const { id, shippingPrice, transactionId, user } = req.body
+        const finalShippingPrice = parseFloat(shippingPrice) * 100
+        const cart = await Cart.findById(id);
+        const address = cart.address;
+        const items = cart.cartItems;
+        const email = cart.email;
+        const shipping = cart.shipping;
+        const total = cart.subtotal + finalShippingPrice
+        console.log(transactionId)
+        const transaction = await Transaction.createTransaction(transactionId, "PayPal", total, "Pending")
+        transaction = transaction._id
+        // make this so create order adds the cart. this will be a unique id the webhook can find later
+        const order = await Order.createOrder(user, transaction, id, address, items, email, shipping, total);
+        // create update inventory function
     return res.status(200).send({ success: "Order created", order })
     } catch (e) {
         return res.status(400).send({
@@ -63,17 +63,25 @@ const createOrder = async (req, res, next) => {
 
 
 const webhook = async (req, res) => {
-    const event = req.body;
-    const data = JSON.parse(event.toString());
-    if(data.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
-        const transactionId = data.resource.parent_payment;
-        const amount = data.resource.amount.value;
-        const cartId = data.resource.custom_id
-        console.log(`Payment capture completed for cart ID: ${cartId}.\n\nAmount: $${amount}.`)
-        await Order.findOneAndUpdate({ cartId }, { $set: { payment: "PayPal: Payment Confirmed"}})
+    console.log("paypal webhook triggered")
+    try {
+        const event = req.body;
+        const data = JSON.parse(event.toString());
+        if(data.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
+            const transactionId = data.resource.id;
+            const transactionUpdated = await Transaction.findOneAndUpdate({ transactionId }, { $set: { status: data.event_type}})
+            if(!transactionUpdated) {
+                throw Error(`Transaction ${transactionId} not found`)
+            }
+        } else {
+            console.log(`Unhandled event type: ${data.event_type}`);
+        }
+        return res.status(200).send({ success: "Webhook event processed" });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send({ error: "Webhook event processing failed" });
     }
 
-  return res.status(200).send({ success: "Webhook event processed" });
 };
 
 const verify = async (req, res, next) => {
@@ -103,12 +111,12 @@ const verify = async (req, res, next) => {
 
     if (result) {
         // The signature is verified
-        console.log('Signature verification succeeded');
+        console.log('PayPal webhook signature verification succeeded');
         next();
     } else {
         // The signature is not verified
-        console.error('Signature verification failed');
-        return res.status(400).send({ error: "Signature verification failed" });
+        console.error('PayPal webhook signature verification failed');
+        return res.status(400).send({ error: 'PayPal webhook signature verification failed' });
     }
 }
 
