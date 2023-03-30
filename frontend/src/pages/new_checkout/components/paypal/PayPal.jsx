@@ -4,7 +4,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const PAYPAL_API_URL = '/api/payment/paypal/'
 
-export default function PayPal( {cart, shipping, user}) {
+export default function PayPal( {cart, shipping, user, dispatch, clearCart}) {
     const [sandbox, setSandbox] = useState(null)
     const [total, setTotal] = useState(null)
 
@@ -72,7 +72,10 @@ export default function PayPal( {cart, shipping, user}) {
                   body: JSON.stringify(requestBody)
               }).then((response) => {
                   if (response.ok) {
-                      // window.location.assign('/cart/checkout/order-success');
+                    if (!user) {
+                        localStorage.removeItem("cart");
+                    }
+                    dispatch(clearCart())
                   }
               }).catch(error => {
                   console.error('Error creating order:', error);

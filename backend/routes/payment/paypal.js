@@ -50,6 +50,10 @@ const createOrder = async (req, res) => {
         const userId = user ? user._id : null;
         // make this so create order adds the cart. this will be a unique id the webhook can find later
         const order = await Order.createOrder(userId, transaction, id, address, items, email, shipping, total);
+        if (user) {
+            await Cart.findByIdAndUpdate(id, { status: "inactive" });
+            await User.findByIdAndUpdate(userId, { $unset: { cart: "" } });
+        }
         // create update inventory function
     return res.status(200).send({ success: "Order created", order })
     } catch (e) {

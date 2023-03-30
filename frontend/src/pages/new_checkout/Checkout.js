@@ -108,6 +108,7 @@ export default function Checkout() {
           shipping={shipping}
           cart={cart}
           user={user}
+          dispatch={dispatch}
         />
       )}
     </div>

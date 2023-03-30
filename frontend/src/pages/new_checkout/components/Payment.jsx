@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 
 import { useMediaQuery } from 'react-responsive'
 
+// redux
+import { clearCart } from '../../../redux/slices/cartSlice'
+
 // chakra ui
 import { Radio, RadioGroup } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
@@ -15,7 +18,7 @@ import BitcoinSvg from "../../../images/payment_logos/Bitcoin-Logo.wine.svg"
 import StripeContainer from './stripe/StripeContainer'
 import PayPal from './paypal/PayPal'
 
-export default function Payment( { setCurrentStep, shipping, cart, user } ) {
+export default function Payment( { setCurrentStep, shipping, cart, user, dispatch } ) {
     const isDesktop = useMediaQuery({ minWidth: 980 });
     const [ encrypted, setEncrypted ] = useState(false);
     const [ value, setValue ] = useState(0);
@@ -121,7 +124,7 @@ export default function Payment( { setCurrentStep, shipping, cart, user } ) {
             />
             <img src={PayPalSvg}/>
           </div>
-          {encrypted && value === "paypal" && <PayPal cart={cart} shipping={shipping} user={user}/>}
+          {encrypted && value === "paypal" && <PayPal cart={cart} shipping={shipping} user={user} dispatch={dispatch} clearCart={clearCart}/>}
         </div>
         <div className="payment-option-container">
           <div>

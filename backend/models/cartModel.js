@@ -4,6 +4,9 @@ const fs = require('fs');
 const PUBLIC_KEY = fs.readFileSync('./public.pem', 'utf8');
 
 const cartSchema = new mongoose.Schema({
+    status: {
+        type: String,
+    },
     cartItems: [{
         product: {
             type: mongoose.Schema.Types.ObjectId,
