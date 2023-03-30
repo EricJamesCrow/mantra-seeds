@@ -47,8 +47,9 @@ const createOrder = async (req, res) => {
         const total = cart.subtotal + finalShippingPrice
         var transaction = await Transaction.createTransaction(transactionId, "PayPal", total, "Pending")
         transaction = transaction._id
+        const userId = user ? user._id : null;
         // make this so create order adds the cart. this will be a unique id the webhook can find later
-        const order = await Order.createOrder(user, transaction, id, address, items, email, shipping, total);
+        const order = await Order.createOrder(userId, transaction, id, address, items, email, shipping, total);
         // create update inventory function
     return res.status(200).send({ success: "Order created", order })
     } catch (e) {
