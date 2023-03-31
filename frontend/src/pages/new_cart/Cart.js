@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 // styles
@@ -9,9 +9,12 @@ import './Cart.css'
 import Order from './components/Order'
 
 export default function Cart() {
+  const navigate = useNavigate();
   const user = useSelector(state => state.auth.user);
   const cart = useSelector(state => state.cart);
   const [ subtotal, setSubtotal ] = useState(null)
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
     useEffect(() => {
       // Listen for changes in the cart items and re-render the page
@@ -19,6 +22,30 @@ export default function Cart() {
         setSubtotal((cart.subtotal/100).toFixed(2))
       }
   }, [cart]);
+
+  const checkInventoryAndProceedToCheckout = async () => {
+    setError(null);
+    setLoading(true)
+    try {
+      const response = await fetch('/api/checkout/check-inventory', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart.cartItems }),
+      });
+  
+      if (response.ok) {
+        navigate('/cart/checkout');
+      } else {
+        const error = await response.json();
+        setError(error.error);
+      }
+    } catch (err) {
+      const errorMessage = JSON.parse(err.message);
+      setError(errorMessage.error);
+      setLoading(false);
+    }
+  };
+  
 
   return (
     <div className="cart-container">
@@ -37,8 +64,15 @@ export default function Cart() {
             <div>{`$${subtotal}`}</div>
           </div>
           <div className="checkout-btn-container">
-            <Link to="/cart/checkout" type="button" className="add-to-cart-btn">Proceed to Checkout</Link>
+                <button
+                  type="button"
+                  className="add-to-cart-btn"
+                  onClick={checkInventoryAndProceedToCheckout}
+                >
+                  Proceed to Checkout
+                </button>
           </div>
+          {error && <div className="error-message add-to-cart">{error}</div>}
         </div>
       </div>
       </div>
