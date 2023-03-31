@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+process.env.ORDER_CONFIRMATION_EMAIL
+// aws
+const { sendEmail } = require('../helpers/ses-helper');
+// decryption
+const { decryptAddress } = require('../helpers/encryption');
 
 const orderSchema = new mongoose.Schema({
     user: {
@@ -56,6 +61,11 @@ const orderSchema = new mongoose.Schema({
         }
     },
     items:[{
+        name: {
+            type: String,
+            ref: 'Name',
+            required: true
+        },
         product: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Product',
@@ -109,28 +119,63 @@ const orderSchema = new mongoose.Schema({
     timestamps: true
 });
 
+const generateOrderDetailsHtml = (items) => {
+    return items.map(item => {
+      return `<li>${item.name} (Quantity: ${item.quantity}, Price: ${(item.price / 100).toFixed(2)})</li>`;
+    }).join('');
+  };
+  
 orderSchema.statics.createOrder = async (user, transaction, cart, address, items, email, shipping, total) => {
-    try {
-    // await Order.validateOrder(user, address, items, email, shipping, payment)
-
+try {
     // create order
     const order = await Order.create({
-        user,
-        transaction,
-        cart,
-        address,
-        items,
-        email,
-        shipping,
-        total,
+    user,
+    transaction,
+    cart,
+    address,
+    items,
+    email,
+    shipping,
+    total,
     });
-    return order;
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
-};
 
+    const decryptedAddress = decryptAddress(address);
+
+    const formattedAddress = `
+        ${decryptedAddress.firstName} ${decryptedAddress.lastName}<br>
+        ${decryptedAddress.street}<br>
+        ${decryptedAddress.city}, ${decryptedAddress.state} ${decryptedAddress.zip}<br>
+        United States
+        `;
+
+    // Send order confirmation email
+    const emailParams = {
+    from: process.env.ORDER_CONFIRMATION_EMAIL,
+    to: email,
+    subject: `Order ${order.orderNumber} confirmation`,
+    html: `
+        <h1>Order Confirmation</h1>
+        <p>Thank you for your order at Mantra Seeds! Your order details are as follows:</p>
+        <ul>
+        ${generateOrderDetailsHtml(items)}
+        </ul>
+        <p><strong>Shipping Address:</strong></p>
+        <p>${formattedAddress}</p>
+        <p><strong>Shipping Method:</strong> ${shipping.delivery}</p>
+        <p><strong>Total:</strong> ${(total / 100).toFixed(2)} (USD)</p>
+        <p>If you have any questions, please contact our support team.</p>
+    `
+    };
+
+    await sendEmail(emailParams);
+
+    return order;
+} catch (error) {
+    console.log(error);
+    throw error;
+}
+};
+  
 orderSchema.statics.validateOrder = async function(user, address, items, email, shipping, payment, total) {
     // validation
     if (!user || !address || !items || !email || !shipping || !payment) {

@@ -107,7 +107,7 @@ const signupUser = async (req, res) => {
         const confirmationLink = `http://localhost:3000/confirm-account/${confirmationToken}`;
         
         const emailParams = {
-            from: process.env.CONFIRMATION_EMAIL,
+            from: process.env.USER_SIGNUP_CONFIRMATION_EMAIL,
             to: user.email,
             subject: 'Confirm Your Account',
             html: `<p>Welcome to Mantra Seeds!</p><p>Please click on the following link, or paste it into your browser to confirm your account:</p><p><a href="${confirmationLink}">${confirmationLink}</a></p>`

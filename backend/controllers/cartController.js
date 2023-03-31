@@ -64,11 +64,13 @@ const addItemToCart = async (req, res) => {
         return res.status(400).json({ error: "Invalid quantity" });
     }
 
+    const name = foundProduct.name;
+
     try {
         const cart = await Cart.findById(id);
         if (!cart) {
             const newCart = new Cart({
-                cartItems: [{ product, quantity, price }],
+                cartItems: [{ name, product, quantity, price }],
                 subtotal: price * quantity
             });
             await newCart.save();
@@ -80,7 +82,7 @@ const addItemToCart = async (req, res) => {
                 cartItem.quantity += quantity;
                 cart.subtotal += price * quantity;
             } else {
-                cart.cartItems.push({ product, quantity, price });
+                cart.cartItems.push({ name, product, quantity, price });
                 cart.subtotal += price * quantity;
             }
             cart.markModified('cartItems');
@@ -88,6 +90,7 @@ const addItemToCart = async (req, res) => {
             return res.status(200).json({ cart });
         }
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ error });
     }
 };

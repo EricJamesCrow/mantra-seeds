@@ -1,8 +1,6 @@
-const crypto = require('crypto');
-const fs = require('fs');
 const Order = require('../models/orderModel');
 
-const PRIVATE_KEY = fs.readFileSync('./private.pem', 'utf8');
+const { decryptAddress } = require('../helpers/encryption');
 
 /*
 const fs = require('fs');
@@ -41,15 +39,7 @@ const getOrder = async (req, res) => {
 
     const address = order.address;
     // decrypt each property of the address object
-    Object.keys(address).forEach(property => {
-        if (address[property]) {
-            const buffer = Buffer.from(address[property], 'base64');
-            const decrypted = crypto.privateDecrypt({ key: PRIVATE_KEY, passphrase: process.env.PASSPHRASE, padding: crypto.constants.RSA_PKCS1_OAEP_PADDING }, buffer);
-            address[property] = decrypted.toString('utf8');
-        }
-    });
-
-    order.address = address;
+    order.address = decryptAddress(address);
 
     res.status(200).json(order);
 };
@@ -64,14 +54,7 @@ const getAllUserOrders = async (req, res) => {
 
     orders.forEach(order => {
         const address = order.address;
-        Object.keys(address).forEach(property => {
-            if (address[property]) {
-                const buffer = Buffer.from(address[property], 'base64');
-                const decrypted = crypto.privateDecrypt({ key: PRIVATE_KEY, passphrase: process.env.PASSPHRASE, padding: crypto.constants.RSA_PKCS1_OAEP_PADDING }, buffer);
-                address[property] = decrypted.toString('utf8');
-            }
-        });
-        order.address = address;
+        order.address = decryptAddress(address);
     });
 
     res.status(200).json(orders);
@@ -87,14 +70,7 @@ const getAllOrders = async (req, res) => {
 
     orders.forEach(order => {
         const address = order.address;
-        Object.keys(address).forEach(property => {
-            if (address[property]) {
-                const buffer = Buffer.from(address[property], 'base64');
-                const decrypted = crypto.privateDecrypt({ key: PRIVATE_KEY, passphrase: process.env.PASSPHRASE, padding: crypto.constants.RSA_PKCS1_OAEP_PADDING }, buffer);
-                address[property] = decrypted.toString('utf8');
-            }
-        });
-        order.address = address;
+        order.address = decryptAddress(address);
     });
 
     res.status(200).json(orders);
