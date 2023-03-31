@@ -21,6 +21,8 @@ export default function NewProductPage() {
   const price = (product.price/100).toFixed(2)
   const [quantity, setQuantity] = useState(1)
 
+  const inStock = product.quantity > 0
+
   useEffect(() => {
     const url = PRODUCTS_API_URL+id;
     fetch(url)
@@ -79,7 +81,7 @@ export default function NewProductPage() {
         <div>{product.description}</div>
         </div>
         <div className="product-details-page-functionality">
-            <div className="adjust-quantity-container">
+            {inStock ? (<div className="adjust-quantity-container">
             <div>Quantity</div>
             <div className="adjust-quantity">
                 <button className="adjust-quantity-btn" onClick={handleQuantityDecrease}>
@@ -90,7 +92,9 @@ export default function NewProductPage() {
                     <div>+</div>
                 </button>
             </div>
-            </div>
+            </div>) : (<div className="adjust-quantity-container">
+            <div className="adjust-quantity out-of-stock">Out of Stock</div>
+            </div>)}
             <div className="add-to-favorites">
                 <FontAwesomeIcon
                 icon={faHeart}
@@ -102,7 +106,9 @@ export default function NewProductPage() {
                 <div>Add to Favorites</div>
             </div>
         </div>
-        <button disabled={loading} className="add-to-cart-btn" onClick={() => addToCart(product._id, quantity, product.price)}>Add to Cart</button>
+        {inStock ?
+        (<button disabled={loading} className="add-to-cart-btn" onClick={() => addToCart(product._id, quantity, product.price)}>Add to Cart</button>) :
+        (<button disabled={true} className="add-to-cart-btn out-of-stock">Out of Stock</button>)}
         {error && <div className="error-message">{error}</div>}
         </div>
         <div className="reviews-container">

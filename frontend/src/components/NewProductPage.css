@@ -82,6 +82,12 @@
     margin: 0 0.5rem;
 }
 
+.adjust-quantity.out-of-stock {
+    border: none;
+    color: #E74C3C;
+    font-size: 20px !important;
+}
+
 .adjust-quantity-btn > div {
     font-family: 'Roboto';
     font-style: normal;
@@ -120,6 +126,15 @@
     font-weight: 700;
     font-size: 16px;
     margin-top: 2rem;
+}
+
+.add-to-cart-btn.out-of-stock {
+    background: #E74C3C;
+}
+
+.add-to-cart-btn.out-of-stock {
+    background: #E74C3C !important;
+    cursor: default;
 }
 
 .reviews-container {

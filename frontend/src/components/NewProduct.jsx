@@ -15,6 +15,8 @@ export default function NewProduct( { product } ) {
     const price = (product.price/100).toFixed(2);
     const { addToCart, loading, error } = useAddToCart();
 
+    const inStock = product.quantity > 0;
+
   return (
         <div className="product-card-container">
         <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>
@@ -36,10 +38,10 @@ export default function NewProduct( { product } ) {
             </div>
             <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>{product.name}</Link>
             <div>{`$${price}`}</div>
-            <button disabled={loading} className="add-to-cart-btn" onClick={(event) => {
+            {inStock ? (<button disabled={loading} className="add-to-cart-btn" onClick={(event) => {
         event.preventDefault(); // prevent the link from navigating
         addToCart(product._id, 1, product.price);
-      }}>Add to Cart</button>
+      }}>Add to Cart</button>) : (<button disabled={true} className="add-to-cart-btn out-of-stock">Out of Stock</button>)}
       {error && <div className="error-message">{error}</div>}
         </div>
         </div>
