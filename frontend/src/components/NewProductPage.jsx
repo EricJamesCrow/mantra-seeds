@@ -109,7 +109,7 @@ export default function NewProductPage() {
         {inStock ?
         (<button disabled={loading} className="add-to-cart-btn" onClick={() => addToCart(product._id, quantity, product.price)}>Add to Cart</button>) :
         (<button disabled={true} className="add-to-cart-btn out-of-stock">Out of Stock</button>)}
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message add-to-cart">{error}</div>}
         </div>
         <div className="reviews-container">
             <div>Reviews</div>

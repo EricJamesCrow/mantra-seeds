@@ -24,6 +24,12 @@ const useAddToCart = () => {
                     cartItems: [{ product, quantity, price }]
                 })
             });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
+
             const json = await response.json();
             dispatch(updateCart(json.cart))
             dispatch(setAddToCart(true))
@@ -32,7 +38,8 @@ const useAddToCart = () => {
               }, 100);
             setLoading(false);
         } catch (err) {
-            setError(err);
+            const errorMessage = JSON.parse(err.message);
+            setError(errorMessage.error);
             setLoading(false);
         }
     };

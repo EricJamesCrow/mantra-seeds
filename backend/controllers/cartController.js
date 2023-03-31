@@ -66,6 +66,10 @@ const addItemToCart = async (req, res) => {
 
     const name = foundProduct.name;
 
+    if (quantity > foundProduct.quantity) {
+        return res.status(400).json({ error: "Requested quantity exceeds available stock" });
+    }
+
     try {
         const cart = await Cart.findById(id);
         if (!cart) {

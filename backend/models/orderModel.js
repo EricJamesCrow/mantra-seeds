@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-process.env.ORDER_CONFIRMATION_EMAIL
+const Product = require('./productModel');
 // aws
 const { sendEmail } = require('../helpers/ses-helper');
 // decryption
@@ -124,6 +124,21 @@ const generateOrderDetailsHtml = (items) => {
       return `<li>${item.name} (Quantity: ${item.quantity}, Price: ${(item.price / 100).toFixed(2)})</li>`;
     }).join('');
   };
+
+orderSchema.statics.updateInventory = async function(items) {
+    try {
+      for (const item of items) {
+        const product = await Product.findById(item.product);
+        if (product) {
+          product.quantity -= item.quantity;
+          await product.save();
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+};
   
 orderSchema.statics.createOrder = async (user, transaction, cart, address, items, email, shipping, total) => {
 try {
@@ -138,6 +153,8 @@ try {
     shipping,
     total,
     });
+
+    await Order.updateInventory(items);
 
     const decryptedAddress = decryptAddress(address);
 
