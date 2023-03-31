@@ -46,17 +46,20 @@ export default function AdminProducts() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage; // pagination
   const productsData = filteredProducts
     .slice(indexOfFirstItem, indexOfLastItem)
-    .map(product => ({
-      id: 'product',
-      cardId: product._id,
-      dateCreated: product.createdAt,
-      var1: product.name,
-      var2: 'active',
-      var3: product.price,
-      var4: '5',
-      var5: 'In Stock',
-      image: product.image,
-    }));
+    .map(product => {
+      const inStock = product.quantity > 0;
+      return {
+        id: 'product',
+        cardId: product._id,
+        dateCreated: product.createdAt,
+        var1: product.name,
+        var2: inStock ? 'active' : 'inactive',
+        var3: product.price,
+        var4: product.quantity,
+        var5: inStock ? 'In Stock' : 'Out of Stock',
+        image: product.image,
+      };
+    });
 
   return (
     <>

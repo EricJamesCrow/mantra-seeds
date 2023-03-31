@@ -23,13 +23,9 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
-    strain: {
-        type: String,
-        required: false
-    },
-    thc: {
-        type: String,
-        required: false
+    quantity: {
+        type: Number,
+        required: true
     }
 }, { timestamps: true})
 

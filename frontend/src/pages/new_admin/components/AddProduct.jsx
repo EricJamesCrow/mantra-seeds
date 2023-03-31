@@ -33,6 +33,7 @@ export default function AddProduct( { setShowAddProduct }) {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const [chakra, setChakra] = useState('')
+    const [quantity, setQuantity] = useState('')
 
     useEffect(() => {
       console.log(selectedImages)
@@ -51,6 +52,7 @@ export default function AddProduct( { setShowAddProduct }) {
       productData.append('price', price);
       productData.append('chakra', chakra);
       productData.append('image', selectedImages[0])
+      productData.append('quantity', quantity);
       
       
       const response = await fetch(PRODUCTS_API_URL, {
@@ -141,6 +143,12 @@ export default function AddProduct( { setShowAddProduct }) {
     {/* <InputRightElement children={<CheckIcon color='green.500' />} /> */}
   </InputGroup>
   </div>
+  <div style={{ marginRight: "1rem"}}>
+    <label style={{ paddingBottom: "0.5rem"}}>Quantity</label>
+    <Input placeholder='Enter amount'
+      onChange={(e) => setQuantity(e.target.value)}
+      value={quantity} />
+    </div>
   <div style={{ marginRight: "1rem"}}>
     <label style={{ paddingBottom: "0.5rem"}}>Chakra</label>
     <Select placeholder="Select" style={{ marginRight: "2rem"}}  onChange={(e) => setChakra(e.target.value)}

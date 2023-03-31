@@ -31,7 +31,7 @@ const getProduct = async (req, res) => {
 
 // create new product
 const createProduct = async (req, res) => {
-    const { name, file, description, price, chakra} = req.body;
+    const { name, quantity, description, price, chakra} = req.body;
     // Check for any errors with the file upload
     if (req.fileValidationError) {
       console.log(req.fileValidationError)
@@ -48,6 +48,9 @@ const createProduct = async (req, res) => {
   
     if (!name) {
       emptyFields.push('name');
+    }
+    if (!quantity) {
+      emptyFields.push('quantity');
     }
     if (!image) {
       emptyFields.push('image');
@@ -66,7 +69,7 @@ const createProduct = async (req, res) => {
   
     // Add product to database
     try {
-      const product = await Product.create({ name, image: imageLocation, description, price, chakra });
+      const product = await Product.create({ name, quantity, image: imageLocation, description, price, chakra });
       res.status(200).json(product);
     } catch (error) {
       res.status(400).json({ error: error.message });

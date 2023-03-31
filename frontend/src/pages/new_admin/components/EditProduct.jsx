@@ -25,6 +25,7 @@ export default function AddProduct( { setShowEditProduct, product }) {
     const [description, setDescription] = useState(product.description)
     const [price, setPrice] = useState((product.price/100).toFixed(2))
     const [chakra, setChakra] = useState(product.chakra)
+    const [quantity, setQuantity] = useState(product.quantity)
 
     const [error, setError] = useState(null)
     const [isActive, setIsActive] = useState(false);
@@ -41,7 +42,7 @@ export default function AddProduct( { setShowEditProduct, product }) {
           headers: { 
             "Authorization": token,
             "Content-Type": "application/json" },
-          body: JSON.stringify({ name, description, price: parseInt(price*100), chakra})
+          body: JSON.stringify({ name, description, price: parseInt(price*100), chakra, quantity})
         })
         const json = await response.json()
       
@@ -112,6 +113,11 @@ export default function AddProduct( { setShowEditProduct, product }) {
     {/* <InputRightElement children={<CheckIcon color='green.500' />} /> */}
   </InputGroup>
   </div>
+  <div style={{ marginRight: "1rem"}}>
+    <label style={{ paddingBottom: "0.5rem"}}>Quantity</label>
+    <Input placeholder={quantity} 
+      onChange={(e) => setQuantity(e.target.value)}/>
+    </div>
   <div style={{ marginRight: "1rem"}}>
     <label style={{ paddingBottom: "0.5rem"}}>Chakra</label>
     <Select placeholder="Select" style={{ marginRight: "2rem"}}  onChange={(e) => setChakra(e.target.value)}

@@ -60,17 +60,16 @@ export default function AdminCustomersDetailsPage() {
   const name = product.name
   const price = `$${(product.price / 100).toFixed(2)}`
   const chakra = product.chakra
-  const strain = product.strain
-  const thc = product.thc
   const description = product.description
+  const quantity = product.quantity
+
+  const inStock = quantity > 0;
 
   const cardDetails = [
     { id: 1, title: "Name", value: name, class: 'gray', },
     { id: 2, title: "Price", value: price},
-    { id: 3, title: "Quantity", value: "5", class: 'gray'},
+    { id: 3, title: "Quantity", value: quantity, class: 'gray'},
     { id: 4, title: "Chakra", value: chakra},
-    { id: 5, title: "Strain", value: strain, class: 'gray'},
-    { id: 6, title: "THC", value: thc},
   ]
 
   const handleDelete =  async () => {
@@ -108,7 +107,7 @@ export default function AdminCustomersDetailsPage() {
       <div className="admin-order-details-wrapper">
         <div className="order-customer-card-id-btn-container">
         <div>{name}</div>
-        <button className={`order-customer-card-btn active`}>{"In Stock"}</button>
+        <button className={`order-customer-card-btn ${inStock ? 'active' : 'inactive'}`}>{inStock ? "In Stock": "Out of Stock"}</button>
         </div>
         <div className="order-customer-card-details-container">
         <div className="product-card-image-details-container-desktop products">

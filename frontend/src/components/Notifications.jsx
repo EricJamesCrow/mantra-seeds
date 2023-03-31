@@ -29,7 +29,23 @@ export default function Notifications() {
 
     useEffect(() => {
         const showToast = () => {
-          if (!prevCartItems) return;
+          if (!prevCartItems) {
+            const productId = cartItems[0].product;
+            const productName = products.find((product) => product._id === productId).name
+            return (toast({
+              title: `${productName} added to cart`,
+              description: (
+                  <div onClick={() => {navigate("/cart")}}
+                  style={{
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    }}>Click here to view cart.</div>
+              ),
+              status: "success",
+              duration: 1500,
+              isClosable: true
+            }))
+          } ;
 
           const updatedItem = cartItems.find((currentItem, index) => {
             const prevItem = prevCartItems[index];
