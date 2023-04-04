@@ -18,10 +18,7 @@ import { Select } from '@chakra-ui/react'
 
 export default function FilterSort( { results, setSearchTerm, currentPage, itemsPerPage, setItemsPerPage, onSort }) {
     const desktop = useMediaQuery('(min-width:980px)');
-    const [clickedArrow, setClickedArrow] = useState(null);
     const [clickedArrowId, setClickedArrowId] = useState(null);
-
-
 
     let customers = false;
     let orders = false;
