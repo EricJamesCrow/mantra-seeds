@@ -7,10 +7,9 @@ import './FilterSort.css'
 
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilter, faSort, faSearch, faChevronDown, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons'
+import { faFilter, faSort, faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
 // chakra ui icons
-import { Stack } from '@chakra-ui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 
 // chakra ui
@@ -61,7 +60,7 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       { id: 3, name: 'CUSTOMER', field: 'email'},
       { id: 4, name: 'PAYMENT STATUS'},
       { id: 5, name: 'ORDER TOTAL', field: 'total'},
-      { id: 6, name: 'DELIVERY STATUS'},
+      { id: 6, name: 'DELIVERY STATUS', field: 'deliveryStatus'},
       { id: 7, name: 'STATUS'},
     ]
 

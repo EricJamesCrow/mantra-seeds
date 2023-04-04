@@ -91,6 +91,9 @@ const updateDeliveryStatus = async (req, res) => {
       if (!updatedOrder) {
         return res.status(404).json({ error: 'No such order' });
       }
+
+      const address = updatedOrder.address;
+      updatedOrder.address = decryptAddress(address);
   
       res.status(200).json(updatedOrder);
       console.log("success!");

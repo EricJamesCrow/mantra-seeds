@@ -65,7 +65,7 @@ export default function AdminOrders() {
     var1: order.email,
     var2: "pending",
     var3: order.total,
-    var4: "false",
+    var4: order.deliveryStatus,
     var5: "Pending"
   }));
   

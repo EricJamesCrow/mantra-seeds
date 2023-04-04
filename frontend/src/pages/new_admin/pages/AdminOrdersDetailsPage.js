@@ -28,23 +28,36 @@ export default function AdminOrdersDetailsPage() {
   const formattedAddress = `<div><span style="display: inline-block">${firstName} ${lastName}</span><br>${street}<br>${city}, ${state} ${zip}<br>United States</div>`
   const orderNumber = order.orderNumber
   const customer = order.email
+  const deliveryStatus = order.deliveryStatus
   const shippingMethod = order.shipping.delivery
   const shippingPrice = `$${order.shipping.price}`
   const orderTotal = `$${(order.total / 100).toFixed(2)}`
   const items = order.items
 
+  function getDeliveryStatusValue(status) {
+    if (status === 'Not Shipped') {
+      return 'false';
+    } else if (status === 'Shipped') {
+      return 'pending';
+    } else if (status === 'Delivered') {
+      return 'true';
+    }
+    return undefined;
+  }
+
+  const deliveryStatusValue = getDeliveryStatusValue(deliveryStatus);
+
   const cardDetails = [
     { id: 1, title: "Customer", value: customer, class: 'gray', },
     { id: 2, title: "Payment Method", value: "Stripe"},
     { id: 3, title: "Payment Status", value: "Pending", class: 'gray', status: "pending"},
-    { id: 4, title: "Delivery Status", value: "Not Shipped", status: "false"},
+    { id: 4, title: "Delivery Status", value: deliveryStatus, status: deliveryStatusValue},
     { id: 5, title: "Shipping Method", value: shippingMethod, class: 'gray'},
     { id: 6, title: "Shipping Price", value: shippingPrice},
     { id: 7, title: "Order Total", value: orderTotal, class: 'gray'}
   ]
 
   const handleUpdateDeliveryStatus = async (deliveryStatus) => {
-    console.log("triggered")
     await updateDeliveryStatus(id, deliveryStatus);
   };
 

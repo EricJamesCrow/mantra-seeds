@@ -33,7 +33,7 @@ const useUpdateDeliveryStatus = () => {
             }
 
             const json = await response.json();
-            // dispatch(updateOrders(json))
+            dispatch(updateOrders(json))
             setLoading(false);
         } catch (err) {
             const errorMessage = JSON.parse(err.message);

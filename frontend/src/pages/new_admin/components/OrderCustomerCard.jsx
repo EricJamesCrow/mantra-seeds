@@ -17,8 +17,20 @@ export default function OrderCustomerCard( { item } ) {
     const var2 = item.var2
     const var3 = item.id === 'order' ? `$${(item.var3 / 100).toFixed(2)}` : item.id === 'customer' ? item.var3 : null
     const var4 = item.var4
-    const var4Value = var4 === 'false' ? 'Not Shipped' : var4 === 'true' ? 'Shipped' : var4 === 'delivered' ? 'Delivered' : item.var4
     const var5 = item.var5
+
+    function getVar4Value(status) {
+      if (status === 'Not Shipped') {
+        return 'false';
+      } else if (status === 'Shipped') {
+        return 'pending';
+      } else if (status === 'Delivered') {
+        return 'true';
+      }
+      return undefined;
+    }
+  
+    const var4value = getVar4Value(var4);
 
     function toTitleCase(str) {
         return str.toLowerCase().split(' ').map(function(word) {
@@ -35,7 +47,7 @@ export default function OrderCustomerCard( { item } ) {
         { id: 1, title: title1, value: var1, class: 'gray', },
         { id: 2, title: title2, value: var5, status: item.id === 'order' ? var2 : null},
         { id: 3, title: title3, value: var3, class: 'gray'},
-        { id: 4, title: title4, value: var4Value, status: item.id === 'order' ? var4 : null}
+        { id: 4, title: title4, value: var4, status: item.id === 'order' ? var4value : null}
       ]
 
   return (
