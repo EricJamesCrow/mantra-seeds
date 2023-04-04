@@ -77,5 +77,31 @@ const getAllOrders = async (req, res) => {
 };
 
 
-module.exports = { getOrder, getAllUserOrders, getAllOrders }
+const updateDeliveryStatus = async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+  
+    try {
+      const updatedOrder = await Order.findByIdAndUpdate(
+        id,
+        { deliveryStatus: status },
+        { new: true, runValidators: true }
+      );
+  
+      if (!updatedOrder) {
+        return res.status(404).json({ error: 'No such order' });
+      }
+  
+      res.status(200).json(updatedOrder);
+      console.log("success!");
+    } catch (error) {
+      // Handle any errors that occurred during the update
+      console.error("Error updating delivery status:", error);
+      res.status(500).json({ error: "Error updating delivery status" });
+    }
+  };
+  
+
+
+module.exports = { getOrder, getAllUserOrders, getAllOrders, updateDeliveryStatus }
 

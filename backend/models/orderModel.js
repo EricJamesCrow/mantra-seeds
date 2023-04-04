@@ -111,6 +111,12 @@ const orderSchema = new mongoose.Schema({
         ref: 'Total',
         required: false
     },
+    deliveryStatus: {
+        type: String,
+        ref: 'DeliveryStatus',
+        default: 'Not Shipped',
+        enum: ['Not Shipped', 'Shipped', 'Delivered']
+    },
     orderNumber: {
         type: String,
         unique: true

@@ -3,6 +3,9 @@ import { useParams, useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useMediaQuery } from 'react-responsive';
 
+// hooks
+import useUpdateDeliveryStatus from '../../../hooks/useUpdateDeliveryStatus'
+
 // styles
 import './AdminOrdersDetailsPage.css'
 
@@ -11,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 export default function AdminOrdersDetailsPage() {
+  const { loading, error, updateDeliveryStatus } = useUpdateDeliveryStatus();
   const isDesktop = useMediaQuery({ minWidth: 980 });
   const { id } = useParams()
   const navigate = useNavigate();
@@ -38,6 +42,11 @@ export default function AdminOrdersDetailsPage() {
     { id: 6, title: "Shipping Price", value: shippingPrice},
     { id: 7, title: "Order Total", value: orderTotal, class: 'gray'}
   ]
+
+  const handleUpdateDeliveryStatus = async (deliveryStatus) => {
+    console.log("triggered")
+    await updateDeliveryStatus(id, deliveryStatus);
+  };
 
   return (
     !isDesktop ? (
@@ -87,8 +96,8 @@ export default function AdminOrdersDetailsPage() {
             <div dangerouslySetInnerHTML={{ __html: formattedAddress }}></div>
           </div>
           <div className="order-details-button-container">
-            <button className="order-details-button shipped">Mark Order as Shipped</button>
-            <button className="order-details-button delivered">Mark Order as Delivered</button>
+            <button className="order-details-button shipped" onClick={() => handleUpdateDeliveryStatus("Shipped")} disabled={loading}>Mark Order as Shipped</button>
+            <button className="order-details-button delivered" onClick={() => handleUpdateDeliveryStatus("Delivered")} disabled={loading}>Mark Order as Delivered</button>
             <button className="order-details-button canceled">Mark Order as Canceled</button>
           </div>
           </div>
@@ -144,8 +153,8 @@ export default function AdminOrdersDetailsPage() {
                     <div dangerouslySetInnerHTML={{ __html: formattedAddress }}></div>
                   </div>
                   <div className="order-details-button-container">
-                    <button className="order-details-button shipped">Mark Order as Shipped</button>
-                    <button className="order-details-button delivered">Mark Order as Delivered</button>
+                    <button className="order-details-button shipped" onClick={() => handleUpdateDeliveryStatus("Shipped")} disabled={loading}>Mark Order as Shipped</button>
+                    <button className="order-details-button delivered" onClick={() => handleUpdateDeliveryStatus("Delivered")} disabled={loading}>Mark Order as Delivered</button>
                     <button className="order-details-button canceled">Mark Order as Canceled</button>
                   </div>
                 </div>  
