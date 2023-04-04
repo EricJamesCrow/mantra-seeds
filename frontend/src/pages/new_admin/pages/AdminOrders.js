@@ -15,6 +15,14 @@ import Pagination from '../../../components/Pagination'
 
 
 export default function AdminOrders() {
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState(null);
+
+  const handleSort = (field, direction) => {
+    setSortField(field);
+    setSortDirection(direction);
+  };
+
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1); // pagination
   const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
@@ -26,9 +34,28 @@ export default function AdminOrders() {
     order.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+  const sortedOrders = [...filteredOrders].sort((a, b) => {
+    if (!sortField) return 0;
+    const aValue = a[sortField];
+    const bValue = b[sortField];
+    if (typeof aValue === "string") {
+      if (sortDirection === "asc") {
+        return aValue.localeCompare(bValue);
+      } else {
+        return bValue.localeCompare(aValue);
+      }
+    } else {
+      if (sortDirection === "asc") {
+        return aValue - bValue;
+      } else {
+        return bValue - aValue;
+      }
+    }
+  });
+
   const indexOfLastItem = currentPage * itemsPerPage; // pagination
   const indexOfFirstItem = indexOfLastItem - itemsPerPage; // pagination
-  const ordersData = filteredOrders
+  const ordersData = sortedOrders
   .slice(indexOfFirstItem, indexOfLastItem)
   .map(order => ({
     id: "order",
@@ -48,7 +75,7 @@ export default function AdminOrders() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader/>
-    <FilterSort results={filteredOrders.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage}/>
+    <FilterSort results={filteredOrders.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} onSort={handleSort}/>
     <div className="display-admin-orders">
     {ordersData.map(item => (
       <OrderCustomerCard 

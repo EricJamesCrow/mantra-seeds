@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useLocation } from 'react-router-dom';
 
@@ -7,13 +7,21 @@ import './FilterSort.css'
 
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilter, faSort, faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faFilter, faSort, faSearch, faChevronDown, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons'
+
+// chakra ui icons
+import { Stack } from '@chakra-ui/react';
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 
 // chakra ui
 import { Select } from '@chakra-ui/react'
 
-export default function FilterSort( { results, setSearchTerm, currentPage, itemsPerPage, setItemsPerPage }) {
+export default function FilterSort( { results, setSearchTerm, currentPage, itemsPerPage, setItemsPerPage, onSort }) {
     const desktop = useMediaQuery('(min-width:980px)');
+    const [clickedArrow, setClickedArrow] = useState(null);
+    const [clickedArrowId, setClickedArrowId] = useState(null);
+
+
 
     let customers = false;
     let orders = false;
@@ -41,9 +49,9 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
 
 
     const customersHeaders = [
-        { id: 1, name: 'REF.'},
-        { id: 2, name: 'CREATED'},
-        { id: 3, name: 'EMAIL'},
+        { id: 1, name: 'REF.', field: '_id'},
+        { id: 2, name: 'CREATED', field: 'createdAt'},
+        { id: 3, name: 'EMAIL', field: 'email'},
         { id: 4, name: 'RECENT ORDER'},
         { id: 5, name: 'TOTAL ORDERS'},
         { id: 6, name: 'TOTAL SPENT'},
@@ -51,23 +59,23 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       ]
     
     const ordersHeaders = [
-      { id: 1, name: 'REF.'},
-      { id: 2, name: 'CREATED'},
-      { id: 3, name: 'CUSTOMER'},
+      { id: 1, name: 'REF.', field: '_id'},
+      { id: 2, name: 'CREATED', field: 'createdAt'},
+      { id: 3, name: 'CUSTOMER', field: 'email'},
       { id: 4, name: 'PAYMENT STATUS'},
-      { id: 5, name: 'ORDER TOTAL'},
+      { id: 5, name: 'ORDER TOTAL', field: 'total'},
       { id: 6, name: 'DELIVERY STATUS'},
       { id: 7, name: 'STATUS'},
     ]
 
     const productsHeaders = [
-      { id: 1, name: 'REF.'},
-      { id: 2, name: 'CREATED'},
-      { id: 3, name: 'NAME'},
-      { id: 4, name: 'PRICE'},
-      { id: 5, name: 'QUANTITY'},
-      { id: 6, name: 'PRODUCT IMAGE'},
-      { id: 7, name: 'STATUS'},
+      { id: 1, name: 'REF.', field: '_id'},
+      { id: 2, name: 'CREATED', field: 'createdAt'},
+      { id: 3, name: 'NAME', field: 'name'},
+      { id: 4, name: 'PRICE', field: 'price'},
+      { id: 5, name: 'QUANTITY', field: 'quantity'},
+      { id: 6, name: 'PRODUCT IMAGE', field: 'image'},
+      { id: 7, name: 'STATUS', field: 'quantity'},
     ]
 
     let searchText = '';
@@ -182,43 +190,92 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
 </div>
 
     <div className="admin-desktop-sort">
-    {customers && customersHeaders.map(item => ( 
-      <div>
-      <div>{item.name}</div>
-      <FontAwesomeIcon 
-      icon={faSort} 
-      style={{
-          color: "#36454F",
-          fontSize: "1.3rem",
-          cursor: "pointer"
+    {customers && customersHeaders.map(header => ( 
+      <div key={header.id}>
+      <div>{header.name}</div>
+      <div className="sort-icons-container-headers">
+        <ChevronUpIcon
+          onClick={() => {
+            setClickedArrowId(`${header.id}-up`);
+            onSort(header.field, "asc");
+          }}
+        color={clickedArrowId === `${header.id}-up` ? "#36454F" : "#ccc"}
+        cursor="pointer"
+        _hover={{
+          color: "#2C2C2C",
         }}
-      />
+        />
+        <ChevronDownIcon
+          onClick={() => {
+            setClickedArrowId(`${header.id}-down`);
+            onSort(header.field, "desc");
+          }}
+        color={clickedArrowId === `${header.id}-down` ? "#36454F" : "#ccc"}
+        cursor="pointer"
+        _hover={{
+          color: "#2C2C2C",
+        }}
+        />
+      </div>
       </div>))
       }
-      {orders && ordersHeaders.map(item => ( 
-      <div>
-      <div>{item.name}</div>
-      <FontAwesomeIcon 
-      icon={faSort} 
-      style={{
-          color: "#36454F",
-          fontSize: "1.3rem",
-          cursor: "pointer"
+      {orders && ordersHeaders.map(header => ( 
+      <div key={header.id}>
+      <div>{header.name}</div>
+      <div className="sort-icons-container-headers">
+        <ChevronUpIcon
+          onClick={() => {
+            setClickedArrowId(`${header.id}-up`);
+            onSort(header.field, "asc");
+          }}
+        color={clickedArrowId === `${header.id}-up` ? "#36454F" : "#ccc"}
+        cursor="pointer"
+        _hover={{
+          color: "#2C2C2C",
         }}
-      />
+        />
+        <ChevronDownIcon
+          onClick={() => {
+            setClickedArrowId(`${header.id}-down`);
+            onSort(header.field, "desc");
+          }}
+        color={clickedArrowId === `${header.id}-down` ? "#36454F" : "#ccc"}
+        cursor="pointer"
+        _hover={{
+          color: "#2C2C2C",
+        }}
+        />
+      </div>
       </div>))
       }
-      {products && productsHeaders.map(item => ( 
-      <div>
-      <div>{item.name}</div>
-      <FontAwesomeIcon 
-      icon={faSort} 
-      style={{
-          color: "#36454F",
-          fontSize: "1.3rem",
-          cursor: "pointer"
+      {products && productsHeaders.map(header => ( 
+      <div key={header.id}>
+      <div>{header.name}</div>
+      <div className="sort-icons-container-headers">
+        <ChevronUpIcon
+          onClick={() => {
+            setClickedArrowId(`${header.id}-up`);
+            onSort(header.field, "asc");
+          }}
+        color={clickedArrowId === `${header.id}-up` ? "#36454F" : "#ccc"}
+        cursor="pointer"
+        _hover={{
+          color: "#2C2C2C",
         }}
-      />
+        />
+        <ChevronDownIcon
+          onClick={() => {
+            setClickedArrowId(`${header.id}-down`);
+            onSort(header.field, "desc");
+          }}
+        color={clickedArrowId === `${header.id}-down` ? "#36454F" : "#ccc"}
+        cursor="pointer"
+        _hover={{
+          color: "#2C2C2C",
+        }}
+        />
+      </div>
+
       </div>))
       }
     </div>

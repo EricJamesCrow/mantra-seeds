@@ -11,6 +11,14 @@ import Pagination from '../../../components/Pagination'
 import { useSelector } from 'react-redux'
 
 export default function AdminCustomers() {
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState(null);
+
+  const handleSort = (field, direction) => {
+    setSortField(field);
+    setSortDirection(direction);
+  };
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1); // pagination
   const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
@@ -19,11 +27,30 @@ export default function AdminCustomers() {
 
   const filteredCustomers = customers
   .filter(customer => customer.email.toLowerCase().includes(searchTerm.toLowerCase()))
+
+  const sortedCustomers = [...filteredCustomers].sort((a, b) => {
+    if (!sortField) return 0;
+    const aValue = a[sortField];
+    const bValue = b[sortField];
+    if (typeof aValue === "string") {
+      if (sortDirection === "asc") {
+        return aValue.localeCompare(bValue);
+      } else {
+        return bValue.localeCompare(aValue);
+      }
+    } else {
+      if (sortDirection === "asc") {
+        return aValue - bValue;
+      } else {
+        return bValue - aValue;
+      }
+    }
+  });
   
   const indexOfLastItem = currentPage * itemsPerPage; // pagination
   const indexOfFirstItem = indexOfLastItem - itemsPerPage; // pagination
 
-  const customersData = filteredCustomers
+  const customersData = sortedCustomers
   .slice(indexOfFirstItem, indexOfLastItem)
   .map(customer => ({
     id: "customer",
@@ -42,7 +69,7 @@ export default function AdminCustomers() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader/>
-    <FilterSort results={filteredCustomers.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage}/>
+    <FilterSort results={filteredCustomers.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} onSort={handleSort}/>
     <div className="display-admin-orders">
     {customersData.map(item => (
       <OrderCustomerCard 

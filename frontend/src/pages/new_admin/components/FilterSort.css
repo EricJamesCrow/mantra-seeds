@@ -43,6 +43,21 @@
     padding: 0.5rem;
   }
 
+.sort-icons-container-headers {
+    display: flex;
+    flex-direction: column;
+}
+
+.sort-icons-container-headers > svg {
+    transition: all 0.1s ease-in;
+    height: 35px;
+    width: 35px;
+}
+
+.sort-icons-container-headers > svg:first-child {
+    margin-bottom: -20px;
+}
+
 .admin-filter-sort-btn-container {
     display: flex;
     justify-content: space-between;
