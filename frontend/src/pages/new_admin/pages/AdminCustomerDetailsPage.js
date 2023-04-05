@@ -32,14 +32,24 @@ export default function AdminCustomersDetailsPage() {
   const customer = customers.find(c => c._id === id)
   
   const email = customer.email
-  const order = customer.order
+  const order = customer.mostRecentOrder
+  const orderTotal = customer.orderCount
+  const totalSpent = `$${(customer.totalSpent / 100).toFixed(2)}`
+  const lastLoggedIn = isActive(customer.lastLoggedIn);
 
-
+  function isActive(lastLoggedIn) {
+    const lastLoggedInDate = new Date(lastLoggedIn);
+    const currentDate = new Date();
+    const oneMonthInMilliseconds = 30 * 24 * 60 * 60 * 1000; // 30 days * 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+  
+    return (currentDate - lastLoggedInDate) <= oneMonthInMilliseconds;
+  }
+  
   const cardDetails = [
     { id: 1, title: "Email", value: email, class: 'gray', },
     { id: 2, title: "Recent Order", value: order},
-    { id: 3, title: "Number of Orders", value: "6", class: 'gray'},
-    { id: 4, title: "Total Spent", value: "$1029.99"}
+    { id: 3, title: "Number of Orders", value: orderTotal, class: 'gray'},
+    { id: 4, title: "Total Spent", value: totalSpent}
   ]
 
   return (
@@ -56,7 +66,7 @@ export default function AdminCustomersDetailsPage() {
       <div className="admin-order-details-wrapper">
         <div className="order-customer-card-id-btn-container">
         <div>Customer: {email}</div>
-        <button className={`order-customer-card-btn active`}>{"Active"}</button>
+        <button className={`order-customer-card-btn ${lastLoggedIn ? 'active' : 'inactive'}`}>{lastLoggedIn ? "Active" : "Inactive"}</button>
         </div>
         <div className="order-customer-card-details-container">
           <img src={defaultProfilePic} className="customer-details-profile-pic"/>

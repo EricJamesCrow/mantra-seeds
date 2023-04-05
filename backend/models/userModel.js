@@ -41,7 +41,13 @@ const userSchema = new Schema({
     resetPasswordExpires: {
         type: Date,
         required: false
-    }
+    },
+    lastLoggedIn: {
+        type: Date,
+        default: Date.now,
+      },
+}, {
+    timestamps: true
 })
 
 // static signup method

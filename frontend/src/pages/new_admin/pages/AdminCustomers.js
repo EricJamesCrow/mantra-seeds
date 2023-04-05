@@ -46,6 +46,15 @@ export default function AdminCustomers() {
       }
     }
   });
+
+  function isActive(lastLoggedIn) {
+    const lastLoggedInDate = new Date(lastLoggedIn);
+    const currentDate = new Date();
+    const oneMonthInMilliseconds = 30 * 24 * 60 * 60 * 1000; // 30 days * 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+  
+    return (currentDate - lastLoggedInDate) <= oneMonthInMilliseconds;
+  }
+  
   
   const indexOfLastItem = currentPage * itemsPerPage; // pagination
   const indexOfFirstItem = indexOfLastItem - itemsPerPage; // pagination
@@ -57,10 +66,10 @@ export default function AdminCustomers() {
     cardId: customer._id,
     dateCreated: customer.createdAt,
     var1: customer.email,
-    var2: "active",
-    var3: "6",
-    var4: "$386.99",
-    var5: customer.order
+    var2: isActive(customer.lastLoggedIn) ? 'Active' : 'Inactive',
+    var3: customer.orderCount,
+    var4: `$${(customer.totalSpent / 100).toFixed(2)}`,
+    var5: customer.mostRecentOrder
   }));
 
   return (

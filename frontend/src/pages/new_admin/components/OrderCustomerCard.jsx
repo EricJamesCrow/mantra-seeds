@@ -32,12 +32,6 @@ export default function OrderCustomerCard( { item } ) {
   
     const var4value = getVar4Value(var4);
 
-    function toTitleCase(str) {
-        return str.toLowerCase().split(' ').map(function(word) {
-          return word.charAt(0).toUpperCase() + word.slice(1);
-        }).join(' ');
-      }
-
     const title1 = item.id === 'order' ? 'Customer' : item.id === 'customer' ? 'Email' : null
     const title2 = item.id === 'order' ? 'Payment Status' : item.id === 'customer' ? 'Recent Order' : null
     const title3 = item.id === 'order' ? 'Order Total' : item.id === 'customer' ? 'Number of Orders' : null
@@ -45,7 +39,7 @@ export default function OrderCustomerCard( { item } ) {
 
     const cardDetails = [
         { id: 1, title: title1, value: var1, class: 'gray', },
-        { id: 2, title: title2, value: var5, status: item.id === 'order' ? var2 : null},
+        { id: 2, title: title2, value: var5, status: item.id === 'order' ? var2.toLowerCase() : null},
         { id: 3, title: title3, value: var3, class: 'gray'},
         { id: 4, title: title4, value: var4, status: item.id === 'order' ? var4value : null}
       ]
@@ -71,7 +65,7 @@ export default function OrderCustomerCard( { item } ) {
       </div>
       <div className="order-customer-card-id-btn-container">
         <div>{item.id === 'order' ? `#${item.orderNumber}` : item.cardId}</div>
-        <button className={`order-customer-card-btn ${var2}`}>{toTitleCase(var2)}</button>
+        <button className={`order-customer-card-btn ${var2.toLowerCase()}`}>{var2}</button>
       </div>
       <div className="order-customer-card-details-container">
         {cardDetails.map(item => (
@@ -102,7 +96,7 @@ export default function OrderCustomerCard( { item } ) {
         ))
         }
         <div className="order-customer-card-id-btn-container">
-        <button className={`order-customer-card-btn ${var2}`}>{toTitleCase(var2)}</button>
+        <button className={`order-customer-card-btn ${var2.toLowerCase()}`}>{var2}</button>
         </div>
         </div>
     }

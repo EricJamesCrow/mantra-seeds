@@ -68,7 +68,6 @@ const createOrder = async (req, res) => {
 
 
 const webhook = async (req, res) => {
-    console.log("paypal webhook triggered")
     try {
         const event = req.body;
         const data = JSON.parse(event.toString());
@@ -83,7 +82,6 @@ const webhook = async (req, res) => {
         }
         return res.status(200).send({ success: "Webhook event processed" });
     } catch (error) {
-        console.log(error);
         return res.status(400).send({ error: "Webhook event processing failed" });
     }
 

@@ -34,24 +34,24 @@ export default function AdminOrders() {
     order.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-  const sortedOrders = [...filteredOrders].sort((a, b) => {
-    if (!sortField) return 0;
-    const aValue = a[sortField];
-    const bValue = b[sortField];
-    if (typeof aValue === "string") {
-      if (sortDirection === "asc") {
-        return aValue.localeCompare(bValue);
+    const sortedOrders = [...filteredOrders].sort((a, b) => {
+      if (!sortField) return 0;
+      const aValue = sortField.split('.').reduce((obj, key) => obj && obj[key], a);
+      const bValue = sortField.split('.').reduce((obj, key) => obj && obj[key], b);
+      if (typeof aValue === "string") {
+        if (sortDirection === "asc") {
+          return aValue.localeCompare(bValue);
+        } else {
+          return bValue.localeCompare(aValue);
+        }
       } else {
-        return bValue.localeCompare(aValue);
+        if (sortDirection === "asc") {
+          return aValue - bValue;
+        } else {
+          return bValue - aValue;
+        }
       }
-    } else {
-      if (sortDirection === "asc") {
-        return aValue - bValue;
-      } else {
-        return bValue - aValue;
-      }
-    }
-  });
+    });
 
   const indexOfLastItem = currentPage * itemsPerPage; // pagination
   const indexOfFirstItem = indexOfLastItem - itemsPerPage; // pagination
@@ -63,11 +63,18 @@ export default function AdminOrders() {
     orderNumber: order.orderNumber,
     dateCreated: order.createdAt,
     var1: order.email,
-    var2: "pending",
+    var2: mapStatusToFriendlyStatus(order.transaction.status),
     var3: order.total,
     var4: order.deliveryStatus,
-    var5: "Pending"
+    var5: mapStatusToFriendlyStatus(order.transaction.status)
   }));
+
+  function mapStatusToFriendlyStatus(status) {
+    if (status === 'PAYMENT.CAPTURE.COMPLETED') {
+      return 'Paid';
+    }
+    return status;
+  }
   
   return (
     <>

@@ -1,5 +1,6 @@
 const User = require('../models/userModel')
 const Cart = require('../models/cartModel')
+const Order = require('../models/orderModel')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
@@ -18,6 +19,9 @@ const loginUser = async (req, res) => {
   
     try {
       const user = await User.login(email, password);
+
+      user.lastLoggedIn = new Date();
+      await user.save();
   
       if (!user.cart && localStorageCartId) {
         const localStorageCart = await Cart.findById(localStorageCartId);
@@ -143,10 +147,37 @@ const fetchUser = async (req, res) => {
 const fetchUsers = async (req, res) => {
     try {
         const users = await User.find({});
+
         if (!users) {
             return res.status(404).json({ error: "Users not found" });
         }
-        res.status(200).json(users);
+
+        const usersWithOrderCount = [];
+
+        for (const user of users) {
+            const orders = await Order.find({ user: user._id });
+            const orderCount = orders.length;
+            let mostRecentOrder = null;
+            let totalSpent = 0;
+
+            if (orderCount > 0) {
+                orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                mostRecentOrder = orders[0]._id;
+                
+                totalSpent = orders.reduce((acc, order) => acc + order.total, 0);
+            }
+
+            const userWithOrderCount = {
+                ...user.toObject(),
+                orderCount,
+                mostRecentOrder,
+                totalSpent
+            };
+
+            usersWithOrderCount.push(userWithOrderCount);
+        }
+
+        res.status(200).json(usersWithOrderCount);
     } catch (error) {
         res.status(500).json({ error });
     }

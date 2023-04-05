@@ -48,20 +48,20 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
         { id: 1, name: 'REF.', field: '_id'},
         { id: 2, name: 'CREATED', field: 'createdAt'},
         { id: 3, name: 'EMAIL', field: 'email'},
-        { id: 4, name: 'RECENT ORDER'},
-        { id: 5, name: 'TOTAL ORDERS'},
-        { id: 6, name: 'TOTAL SPENT'},
-        { id: 7, name: 'STATUS'},
+        { id: 4, name: 'RECENT ORDER', field: 'mostRecentOrder'},
+        { id: 5, name: 'TOTAL ORDERS', field: 'orderCount'},
+        { id: 6, name: 'TOTAL SPENT', field: 'totalSpent'},
+        { id: 7, name: 'STATUS', field: 'lastLoggedIn'},
       ]
     
     const ordersHeaders = [
       { id: 1, name: 'REF.', field: '_id'},
       { id: 2, name: 'CREATED', field: 'createdAt'},
       { id: 3, name: 'CUSTOMER', field: 'email'},
-      { id: 4, name: 'PAYMENT STATUS'},
+      { id: 4, name: 'PAYMENT STATUS', field: 'transaction.status'},
       { id: 5, name: 'ORDER TOTAL', field: 'total'},
       { id: 6, name: 'DELIVERY STATUS', field: 'deliveryStatus'},
-      { id: 7, name: 'STATUS'},
+      { id: 7, name: 'STATUS', field: 'transaction.status'},
     ]
 
     const productsHeaders = [

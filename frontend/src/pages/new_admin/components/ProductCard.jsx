@@ -9,7 +9,6 @@ import './ProductCard.css'
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import Cannabis from "../../../images/cannabis-leaf-green.svg"
 
 export default function ProductCard( {item} ) {
     const desktop = useMediaQuery('(min-width:980px)');
@@ -21,11 +20,11 @@ export default function ProductCard( {item} ) {
     const price = `$${(item.var3 / 100).toFixed(2)}` // Price
     const quantity = item.var4 // Quantity
 
-    function toTitleCase(str) {
-        return str.toLowerCase().split(' ').map(function(word) {
-          return word.charAt(0).toUpperCase() + word.slice(1);
-        }).join(' ');
-      }
+    // function toTitleCase(str) {
+    //     return str.toLowerCase().split(' ').map(function(word) {
+    //       return word.charAt(0).toUpperCase() + word.slice(1);
+    //     }).join(' ');
+    //   }
 
     const cardDetails = [
         { id: 1, title: 'Name', value: name, class: 'gray',},
@@ -93,7 +92,7 @@ export default function ProductCard( {item} ) {
       <img src={item.image}/>
       </div>
         <div className="order-customer-card-id-btn-container">
-        <button className={`order-customer-card-btn ${item.var2}`}>{toTitleCase(item.var2)}</button>
+        <button className={`order-customer-card-btn ${status}`}>{statusValue}</button>
         </div>
         </div>
     }
