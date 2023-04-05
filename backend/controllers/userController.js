@@ -20,6 +20,10 @@ const loginUser = async (req, res) => {
     try {
       const user = await User.login(email, password);
 
+      if(user.isBanned) {
+        return res.status(400).json({ error: 'Your account has been banned.' });
+        }
+
       user.lastLoggedIn = new Date();
       await user.save();
   
@@ -346,6 +350,24 @@ const confirmAccount = async (req, res) => {
     }
   };
 
+const banUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id)
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        user.isBanned = true;
+        await user.save();
+        res.status(200).json({ message: `User ${id} has been banned` });
+    } catch (error) {
+        res.status(500).json({ error: `An error occurred while processing the request to ban user: ${id}` });
+    }
+};
+
+
+
+
 module.exports = { 
     loginUser, 
     signupUser, 
@@ -355,5 +377,6 @@ module.exports = {
     requestResetPassword, 
     resetPassword, 
     checkResetPasswordToken,
-    confirmAccount, 
+    confirmAccount,
+    banUser 
 };

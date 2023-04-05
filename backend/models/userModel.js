@@ -46,6 +46,10 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now,
       },
+    isBanned: {
+    type: Boolean,
+    default: false
+    }
 }, {
     timestamps: true
 })

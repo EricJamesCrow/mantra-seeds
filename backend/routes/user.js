@@ -11,6 +11,7 @@ const {
     resetPassword, 
     checkResetPasswordToken,
     confirmAccount,
+    banUser
 } = require('../controllers/userController')
 
 // middleware function
@@ -18,6 +19,9 @@ const requireAuth = require('../middleware/requireAuth')
 const requireAdmin = require('../middleware/requireAdmin')
 
 const router = express.Router()
+
+// ban user route
+router.put('/ban/:id', requireAdmin, banUser)
 
 // login route
 router.post('/login', loginUser)

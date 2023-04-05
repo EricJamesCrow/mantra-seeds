@@ -2,6 +2,9 @@ import React from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+// hooks
+import useBanCustomer from '../../../hooks/useBanCustomer'
+
 // styles
 import './AdminOrdersDetailsPage.css'
 
@@ -23,6 +26,7 @@ import {
 } from '@chakra-ui/react'
 
 export default function AdminCustomersDetailsPage() {
+  const { loading, error, banCustomer } = useBanCustomer();
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef()
   const { id } = useParams()
@@ -51,6 +55,11 @@ export default function AdminCustomersDetailsPage() {
     { id: 3, title: "Number of Orders", value: orderTotal, class: 'gray'},
     { id: 4, title: "Total Spent", value: totalSpent}
   ]
+
+  const handleBan = async () => {
+    await banCustomer(id);
+    onClose();
+  };
 
   return (
     <div className="admin-orders-details-page-container">
@@ -112,7 +121,7 @@ export default function AdminCustomersDetailsPage() {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme='red' onClick={onClose} ml={3}>
+              <Button colorScheme='red' onClick={handleBan} ml={3}>
                 Ban
               </Button>
             </AlertDialogFooter>
