@@ -22,12 +22,15 @@ export default function AdminOrdersDetailsPage() {
   const { orders } = useSelector(state => state.orders)
 
   if(!orders) return null // This is needed to prevent the page from crashing when the orders are not loaded yet.
+  if(!products) return null
   const order = orders.find(o => o._id === id)
 
   const { firstName, lastName, state, city, street, zip } = order.address
   const formattedAddress = `<div><span style="display: inline-block">${firstName} ${lastName}</span><br>${street}<br>${city}, ${state} ${zip}<br>United States</div>`
   const orderNumber = order.orderNumber
   const customer = order.email
+  const paymentMethod = order.transaction.paymentMethod
+  const paymentStatus = mapStatusToFriendlyStatus(order.transaction.status)
   const deliveryStatus = order.deliveryStatus
   const shippingMethod = order.shipping.delivery
   const shippingPrice = `$${order.shipping.price}`
@@ -43,14 +46,22 @@ export default function AdminOrdersDetailsPage() {
       return 'true';
     }
     return undefined;
+  };
+
+  function mapStatusToFriendlyStatus(status) {
+    if (status === 'PAYMENT.CAPTURE.COMPLETED') {
+      return 'Paid';
+    }
+    return status;
   }
+  
 
   const deliveryStatusValue = getDeliveryStatusValue(deliveryStatus);
 
   const cardDetails = [
     { id: 1, title: "Customer", value: customer, class: 'gray', },
-    { id: 2, title: "Payment Method", value: "Stripe"},
-    { id: 3, title: "Payment Status", value: "Pending", class: 'gray', status: "pending"},
+    { id: 2, title: "Payment Method", value: paymentMethod},
+    { id: 3, title: "Payment Status", value: paymentStatus, class: 'gray', status: paymentStatus.toLowerCase()},
     { id: 4, title: "Delivery Status", value: deliveryStatus, status: deliveryStatusValue},
     { id: 5, title: "Shipping Method", value: shippingMethod, class: 'gray'},
     { id: 6, title: "Shipping Price", value: shippingPrice},
@@ -76,7 +87,7 @@ export default function AdminOrdersDetailsPage() {
       <div className="admin-order-details-wrapper">
           <div className="order-customer-card-id-btn-container">
           <div>Order: #{orderNumber}</div>
-          <button className={`order-customer-card-btn pending`}>{"Pending"}</button>
+          <button className={`order-customer-card-btn ${paymentStatus.toLowerCase()}`}>{paymentStatus}</button>
           </div>
           <div className="order-customer-card-details-container">
             {cardDetails.map(item => (
@@ -130,7 +141,7 @@ export default function AdminOrdersDetailsPage() {
                   <div className="first-wrapper-admin-orders">
                     <div className="order-customer-card-id-btn-container">
                     <div>Order: #{orderNumber}</div>
-                    <button className={`order-customer-card-btn pending`}>{"Pending"}</button>
+                    <button className={`order-customer-card-btn ${paymentStatus.toLowerCase()}`}>{paymentStatus}</button>
                     </div>
                     <div className="order-customer-card-details-container">
                       {cardDetails.map(item => (

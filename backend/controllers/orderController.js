@@ -1,4 +1,5 @@
 const Order = require('../models/orderModel');
+const mongoose = require('mongoose');
 
 const { decryptAddress } = require('../helpers/encryption');
 
@@ -61,19 +62,41 @@ const getAllUserOrders = async (req, res) => {
 };
 
 
+const getAllOrdersWithTransactions = async () => {
+  const result = await Order.aggregate([
+    {
+      $lookup: {
+        from: 'transactions',
+        localField: 'transaction',
+        foreignField: '_id',
+        as: 'transaction',
+      },
+    },
+    {
+      $unwind: '$transaction',
+    },
+  ]);
+
+  return result;
+};
+
 const getAllOrders = async (req, res) => {
-    const orders = await Order.find();
+  try {
+    const orders = await getAllOrdersWithTransactions();
 
     if (!orders) {
-        return res.status(404).json({ error: 'No orders found' });
+      return res.status(404).json({ error: 'No orders found' });
     }
 
     orders.forEach(order => {
-        const address = order.address;
-        order.address = decryptAddress(address);
+      const address = order.address;
+      order.address = decryptAddress(address);
     });
 
     res.status(200).json(orders);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 
@@ -92,17 +115,43 @@ const updateDeliveryStatus = async (req, res) => {
         return res.status(404).json({ error: 'No such order' });
       }
 
-      const address = updatedOrder.address;
-      updatedOrder.address = decryptAddress(address);
+      const updatedOrderWithTransaction = await getOrderWithTransaction(id);
+
+      const address = updatedOrderWithTransaction.address;
+      updatedOrderWithTransaction.address = decryptAddress(address);
   
-      res.status(200).json(updatedOrder);
+      res.status(200).json(updatedOrderWithTransaction);
       console.log("success!");
     } catch (error) {
       // Handle any errors that occurred during the update
       console.error("Error updating delivery status:", error);
       res.status(500).json({ error: "Error updating delivery status" });
     }
-  };
+};
+
+const getOrderWithTransaction = async (orderId) => {
+  const result = await Order.aggregate([
+    {
+      $match: {
+        _id: mongoose.Types.ObjectId(orderId),
+      },
+    },
+    {
+      $lookup: {
+        from: 'transactions',
+        localField: 'transaction',
+        foreignField: '_id',
+        as: 'transaction',
+      },
+    },
+    {
+      $unwind: '$transaction',
+    },
+  ]);
+
+  return result[0];
+};
+
   
 
 
