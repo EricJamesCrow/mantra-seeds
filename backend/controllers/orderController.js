@@ -120,11 +120,9 @@ const updateDeliveryStatus = async (req, res) => {
       const address = updatedOrderWithTransaction.address;
       updatedOrderWithTransaction.address = decryptAddress(address);
   
-      res.status(200).json(updatedOrderWithTransaction);
-      console.log("success!");
+      res.status(200).json({ order: updatedOrderWithTransaction, message: `Order: ${id} delivery status updated to ${status}`} );
     } catch (error) {
       // Handle any errors that occurred during the update
-      console.error("Error updating delivery status:", error);
       res.status(500).json({ error: "Error updating delivery status" });
     }
 };

@@ -36,7 +36,6 @@ const useMakeAdmin = () => {
             setLoading(false);
         } catch (err) {
             const parsedError = JSON.parse(err.message);
-            console.log(parsedError.error)
             dispatch(setError(true));
             dispatch(setErrorName(parsedError.error));
             setTimeout(() => {

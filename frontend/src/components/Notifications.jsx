@@ -110,7 +110,7 @@ export default function Notifications() {
               title: "Error",
               description: `${errorName}`,
               status: 'error',
-              duration: 1500,
+              duration: 2000,
               isClosable: true
             });
           };
@@ -123,7 +123,7 @@ export default function Notifications() {
               title: "Success",
               description: `${successName}`,
               status: 'success',
-              duration: 1500,
+              duration: 2000,
               isClosable: true
             });
           };

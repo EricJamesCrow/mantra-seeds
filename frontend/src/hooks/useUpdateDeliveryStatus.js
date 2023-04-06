@@ -3,6 +3,7 @@ import { useState } from 'react';
 // redux
 import { useDispatch } from 'react-redux'
 import { updateOrders } from '../redux/slices/ordersSlice';
+import { setSuccess, setSuccessName, setError, setErrorName } from '../redux/slices/notificationsSlice';
 
 const ORDERS_API_URL = '/api/orders/'
 
@@ -33,11 +34,20 @@ const useUpdateDeliveryStatus = () => {
             }
 
             const json = await response.json();
-            dispatch(updateOrders(json))
+            dispatch(updateOrders(json.order))
+            dispatch(setSuccess(true));
+            dispatch(setSuccessName(json.message));
+            setTimeout(() => {
+                dispatch(setSuccess(false));
+              }, 100);
             setLoading(false);
         } catch (err) {
-            const errorMessage = JSON.parse(err.message);
-            setError(errorMessage.error);
+            const parsedError = JSON.parse(err.message);
+            dispatch(setError(true));
+            dispatch(setErrorName(parsedError.error));
+            setTimeout(() => {
+                dispatch(setError(false));
+              }, 100);
             setLoading(false);
         }
     };
