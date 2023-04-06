@@ -23,6 +23,12 @@ export default function Notifications() {
     const addToCartTriggered = useSelector(state => state.notifications.addToCartTriggered);
     const removedItemTriggered = useSelector(state => state.notifications.removedItemTriggered);
     const removedItem = useSelector(state => state.notifications.removedItem);
+    const bannedCustomerTriggered = useSelector(state => state.notifications.bannedCustomerTriggered);
+    const bannedCustomer = useSelector(state => state.notifications.bannedCustomer);
+    const errorTriggered = useSelector(state => state.notifications.errorTriggered);
+    const errorName = useSelector(state => state.notifications.errorName);
+    const successTriggered = useSelector(state => state.notifications.successTriggered);
+    const successName = useSelector(state => state.notifications.successName);
     const toast = useToast();
 
     const prevCartItems = usePrevious(cartItems);
@@ -84,6 +90,45 @@ export default function Notifications() {
           };
           if(removedItemTriggered) showToast();
     }, [removedItemTriggered])
+
+    useEffect(() => {
+        const showToast = () => {
+            toast({
+              title: "Customer banned",
+              description: `${bannedCustomer}`,
+              status: 'error',
+              duration: 1500,
+              isClosable: true
+            });
+          };
+          if(bannedCustomerTriggered) showToast();
+    }, [bannedCustomerTriggered])
+
+    useEffect(() => {
+        const showToast = () => {
+            toast({
+              title: "Error",
+              description: `${errorName}`,
+              status: 'error',
+              duration: 1500,
+              isClosable: true
+            });
+          };
+          if(errorTriggered) showToast();
+    }, [errorTriggered])
+
+    useEffect(() => {
+        const showToast = () => {
+            toast({
+              title: "Success",
+              description: `${successName}`,
+              status: 'success',
+              duration: 1500,
+              isClosable: true
+            });
+          };
+          if(successTriggered) showToast();
+    }, [successTriggered])
       
   return null
 }

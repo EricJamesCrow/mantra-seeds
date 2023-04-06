@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 // hooks
 import useBanCustomer from '../../../hooks/useBanCustomer'
+import useMakeAdmin from '../../../hooks/useMakeAdmin'
 
 // styles
 import './AdminOrdersDetailsPage.css'
@@ -26,9 +27,12 @@ import {
 } from '@chakra-ui/react'
 
 export default function AdminCustomersDetailsPage() {
-  const { loading, error, banCustomer } = useBanCustomer();
+  const { loading, banCustomer } = useBanCustomer();
+  const { loading: loadingAdmin, makeAdmin } = useMakeAdmin();
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isOpenAdmin, onOpen: onOpenAdmin, onClose: onCloseAdmin } = useDisclosure()
   const cancelRef = React.useRef()
+  const cancelRefAdmin = React.useRef()
   const { id } = useParams()
   const navigate = useNavigate();
   const { customers } = useSelector(state => state.customers)
@@ -55,6 +59,11 @@ export default function AdminCustomersDetailsPage() {
     { id: 3, title: "Number of Orders", value: orderTotal, class: 'gray'},
     { id: 4, title: "Total Spent", value: totalSpent}
   ]
+
+  const handlePromote = async () => {
+    await makeAdmin(id);
+    onCloseAdmin();
+  };
 
   const handleBan = async () => {
     await banCustomer(id);
@@ -93,12 +102,11 @@ export default function AdminCustomersDetailsPage() {
           }
           <div className={`order-customer-card-details-order-details-address gray customer`}>
             <div>Shipping Address</div>
-            <div>1024 Address, Santa Cruz CA
-  95065-9623, United States</div>
+            <div>Not Available</div>
           </div>
           <div className="order-details-button-container">
-            <button className="order-details-button delivered">Make Customer Admin</button>
-            <button className="order-details-button delete" onClick={onOpen}>Ban Customer</button>
+            <button className="order-details-button delivered" onClick={onOpenAdmin} disabled={loadingAdmin}>Make Customer Admin</button>
+            <button className="order-details-button delete" onClick={onOpen} disabled={loading}>Ban Customer</button>
           </div>
         </div>
       </div>
@@ -123,6 +131,33 @@ export default function AdminCustomersDetailsPage() {
               </Button>
               <Button colorScheme='red' onClick={handleBan} ml={3}>
                 Ban
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+
+      <AlertDialog
+        isOpen={isOpenAdmin}
+        leastDestructiveRef={cancelRefAdmin}
+        onClose={onCloseAdmin}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Promote to Admin
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure you want to promote this customer to admin? You can't undo this action afterwards.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRefAdmin} onClick={onCloseAdmin}>
+                Cancel
+              </Button>
+              <Button colorScheme='green' onClick={handlePromote} ml={3}>
+                Promote
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>

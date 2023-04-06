@@ -357,6 +357,12 @@ const banUser = async (req, res) => {
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
+        if (user.role === 1) {
+            return res.status(403).json({ error: "You cannot ban an admin" });
+        }
+        if (user.isBanned) {
+            return res.status(200).json({ message: "User is already banned" });
+        }
         user.isBanned = true;
         await user.save();
         res.status(200).json({ message: `User ${id} has been banned` });
@@ -364,6 +370,27 @@ const banUser = async (req, res) => {
         res.status(500).json({ error: `An error occurred while processing the request to ban user: ${id}` });
     }
 };
+
+const promoteUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        if (user.role === 1) {
+            return res.status(403).json({ error: "User is already an admin" });
+        }
+        if (user.isBanned) {
+            return res.status(403).json({ error: "You want to promote a banned user...?" });
+        }
+        user.role = 1;
+        await user.save();
+        res.status(200).json({ message: `User ${id} has been promoted to admin` });
+    } catch (error) {
+        res.status(500).json({ error: `An error occurred while processing the request to promote user: ${id}` });
+    }
+}
 
 
 
@@ -378,5 +405,6 @@ module.exports = {
     resetPassword, 
     checkResetPasswordToken,
     confirmAccount,
-    banUser 
+    banUser,
+    promoteUser 
 };

@@ -2,21 +2,21 @@ import { useState } from 'react';
 
 // redux
 import { useDispatch } from 'react-redux'
-import { setBannedCustomer, setBannedCustomerName, setError, setErrorName } from '../redux/slices/notificationsSlice';
+import { setSuccess, setSuccessName, setError, setErrorName } from '../redux/slices/notificationsSlice';
 
 const CUSTOMERS_API_URL = '/api/user/'
 
-const useBanCustomer = () => {
+const useMakeAdmin = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const token = user.token;
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
-    const banCustomer = async (id) => {
+    const makeAdmin = async (id) => {
         setLoading(true);
         try {
             // Makes a post request to the addItemToCart endpoint on the backend
-            const response = await fetch(CUSTOMERS_API_URL+'ban/'+id, {
+            const response = await fetch(CUSTOMERS_API_URL+'promote/'+id, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json',
                             'Authorization': token}
@@ -28,10 +28,10 @@ const useBanCustomer = () => {
             }
 
             const json = await response.json();
-            dispatch(setBannedCustomer(true));
-            dispatch(setBannedCustomerName(json.message));
+            dispatch(setSuccess(true));
+            dispatch(setSuccessName(json.message));
             setTimeout(() => {
-                dispatch(setBannedCustomer(false));
+                dispatch(setSuccess(false));
               }, 100);
             setLoading(false);
         } catch (err) {
@@ -46,7 +46,7 @@ const useBanCustomer = () => {
         }
     };
 
-    return { loading, banCustomer };
+    return { loading, makeAdmin };
 };
 
-export default useBanCustomer;
+export default useMakeAdmin;

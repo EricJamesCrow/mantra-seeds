@@ -11,7 +11,8 @@ const {
     resetPassword, 
     checkResetPasswordToken,
     confirmAccount,
-    banUser
+    banUser,
+    promoteUser
 } = require('../controllers/userController')
 
 // middleware function
@@ -19,6 +20,9 @@ const requireAuth = require('../middleware/requireAuth')
 const requireAdmin = require('../middleware/requireAdmin')
 
 const router = express.Router()
+
+// promote user route
+router.put('/promote/:id', requireAdmin, promoteUser)
 
 // ban user route
 router.put('/ban/:id', requireAdmin, banUser)
