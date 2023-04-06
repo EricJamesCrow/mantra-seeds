@@ -75,7 +75,6 @@ export default function AddProduct( { setShowAddProduct }) {
         })
       }
       if (response.ok) {
-        console.log("new product added");
         dispatch(createProduct(json));
         toast({
           title: 'Product Created.',
@@ -88,6 +87,8 @@ export default function AddProduct( { setShowAddProduct }) {
         setDescription("");
         setPrice("");
         setChakra("");
+        setQuantity("");
+        setSelectedImages([])
       }
     };
 
@@ -163,19 +164,24 @@ export default function AddProduct( { setShowAddProduct }) {
     </Select>
     </div>
   </div>
-  {selectedImages.map((url, index) => (
-    <div className="add-product-img-container">
-  <img key={index} src={url} alt="Selected" className="add-product-img" />
-  <DeleteIcon onClick={() => {
-      setSelectedImages(prevSelectedImages => {
-        const newSelectedImages = [...prevSelectedImages];
-        newSelectedImages.splice(index, 1);
-        return newSelectedImages;
-      });
-    }}
-  />
-</div>
-))}
+  {selectedImages.map((file, index) => {
+  const imgUrl = URL.createObjectURL(file);
+  return (
+    <div key={index} className="add-product-img-container">
+      <img src={imgUrl} alt="Selected" className="add-product-img" />
+      <DeleteIcon
+        onClick={() => {
+          setSelectedImages((prevSelectedImages) => {
+            const newSelectedImages = [...prevSelectedImages];
+            newSelectedImages.splice(index, 1);
+            return newSelectedImages;
+          });
+        }}
+      />
+    </div>
+  );
+})}
+
   <StyledDropzone selectedImages={selectedImages} setSelectedImages={setSelectedImages}/>
   <div className="order-details-button-container create-product">
   <button 
