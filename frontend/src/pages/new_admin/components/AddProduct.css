@@ -39,7 +39,7 @@
     font-weight: 500;
     font-size: 16px;
     color: #1A1A1A;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 .add-product-form .form-group {
@@ -53,7 +53,7 @@
   }
 
   .add-product-form .form-group:last-child {
-    height: 300px;
+    /* height: 300px; */
   }
 
   .add-product-form .form-group-two-cols label {
@@ -77,7 +77,7 @@
   }
   
 .order-details-button-container.create-product {
-  margin: 10rem auto;
+  margin: 6.5rem auto;
 }
 
 .add-product-img-container {
