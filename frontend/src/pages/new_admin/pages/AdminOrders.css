@@ -1,5 +1,12 @@
 .display-admin-orders {
     background: #F7F9FB;
+    min-height: 50vh;
+}
+
+@media (min-width: 980px) {
+  .display-admin-orders {
+    min-height: 80vh;
+  }
 }
 
 @media (min-width: 620px) and (max-width: 980px){
