@@ -1,0 +1,88 @@
+.filter-sort-btn-container {
+    display: inline-flex;
+    position: relative;
+    justify-content: center;
+    width: 100%;
+    margin: 0 0.5rem;
+  }
+
+.admin-filter-sort-btn-dropdown {
+    position: absolute;
+    top: 100%;
+    z-index: 500;
+    width: 100%; /* You can adjust this value according to your preference */
+    padding: 0 0;
+    margin: 0.125rem 0;
+    color: #212529;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.drop-down-payment-status-container > .order-customer-card-btn {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 16px;
+    width: 70%;
+    border-radius: 5px;
+}
+
+.drop-down-payment-status-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.drop-down-payment-status-container > div:last-child {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 16px;
+    color: #000000;
+}
+
+.drop-down-payment-status-container:hover {
+    background: #E6F3FF;
+    cursor: pointer;
+}
+
+.new-admin-filter-sort-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+	cursor: pointer;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    height: 35px;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+}
+
+.new-admin-filter-sort-btn:hover {
+    background: #E6F3FF;
+}
+
+.new-admin-filter-sort-btn > svg {
+    padding-right: 0.25rem;
+}
+
+.new-admin-filter-sort-btn > div {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    color: #000000;
+    padding-left: 0.25rem;
+}
+
+.new-admin-filter-sort-btn.desktop > div{
+    font-size: 16px;
+}
+
+.new-admin-filter-sort-btn.desktop, .filter-sort-btn-container {
+    max-width: 300px;
+}
+

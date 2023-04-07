@@ -9,11 +9,12 @@ import './FilterSort.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilter, faSort, faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-// chakra ui icons
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
-
 // chakra ui
 import { Select } from '@chakra-ui/react'
+
+// components
+import FilterSortBtn from './FilterSortBtn'
+import FilterSortHeaders from './FilterSortHeaders'
 
 export default function FilterSort( { results, setSearchTerm, currentPage, itemsPerPage, setItemsPerPage, onSort }) {
     const desktop = useMediaQuery('(min-width:980px)');
@@ -32,15 +33,13 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       { id: 1, title: 'Payment Status'},
       { id: 2, title: 'Delivery Status'},
       { id: 3, title: 'Status'},
-      { id: 4, title: 'More Filters'},
     ]
     const desktopCustomersData = [
       { id: 1, title: 'Status'},
-      { id: 2, title: 'More Filters'}
     ]
     const desktopProductsData = [
       { id: 1, title: 'Status'},
-      { id: 2, title: 'More Filters'}
+
     ]
 
 
@@ -112,61 +111,37 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
     </form>
     <div className="admin-filter-sort-btn-container">
     {!desktop && buttonData.map(item => (
-          <button className="admin-filter-sort-btn">
-          <FontAwesomeIcon 
-                  key={item.id}
-                  icon={item.icon} 
-                  style={{
-                      color: "#000000",
-                      fontSize: "1.3rem",
-                      cursor: "pointer"}}
-                  />
-          <div>{item.title}</div>
-          </button>
+        <button className="admin-filter-sort-btn">
+        <div>{item.title}</div>
+        <FontAwesomeIcon 
+                icon={faChevronDown} 
+                style={{
+                    color: "#000000",
+                    fontSize: "1.3rem",
+                    cursor: "pointer",
+                    paddingLeft: "1rem"}}
+                />
+        </button>
     ))}
     {desktop && orders && desktopOrdersData.map(item => (
-      <button className="admin-filter-sort-btn desktop">
-      <div>{item.title}</div>
-      <FontAwesomeIcon 
-              key={item.id}
-              icon={faChevronDown} 
-              style={{
-                  color: "#000000",
-                  fontSize: "1.3rem",
-                  cursor: "pointer",
-                  paddingLeft: "1rem"}}
-              />
-      </button>
+      <FilterSortBtn
+      item={item}
+      page="orders"
+      />
     ))
     }
     {desktop && customers && desktopCustomersData.map(item => (
-      <button className="admin-filter-sort-btn desktop">
-      <div>{item.title}</div>
-      <FontAwesomeIcon 
-              key={item.id}
-              icon={faChevronDown} 
-              style={{
-                  color: "#000000",
-                  fontSize: "1.3rem",
-                  cursor: "pointer",
-                  paddingLeft: "1rem"}}
-              />
-      </button>
+      <FilterSortBtn
+      item={item}
+      page="customers"
+      />
     ))
     }
     {desktop && products && desktopProductsData.map(item => (
-      <button className="admin-filter-sort-btn desktop">
-      <div>{item.title}</div>
-      <FontAwesomeIcon 
-              key={item.id}
-              icon={faChevronDown} 
-              style={{
-                  color: "#000000",
-                  fontSize: "1.3rem",
-                  cursor: "pointer",
-                  paddingLeft: "1rem"}}
-              />
-      </button>
+      <FilterSortBtn
+      item={item}
+      page="products"
+      />
     ))
     }
     </div>
@@ -187,92 +162,28 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
 
     <div className="admin-desktop-sort">
     {customers && customersHeaders.map(header => ( 
-      <div key={header.id}>
-      <div>{header.name}</div>
-      <div className="sort-icons-container-headers">
-        <ChevronUpIcon
-          onClick={() => {
-            setClickedArrowId(`${header.id}-up`);
-            onSort(header.field, "asc");
-          }}
-        color={clickedArrowId === `${header.id}-up` ? "#36454F" : "#ccc"}
-        cursor="pointer"
-        _hover={{
-          color: "#2C2C2C",
-        }}
-        />
-        <ChevronDownIcon
-          onClick={() => {
-            setClickedArrowId(`${header.id}-down`);
-            onSort(header.field, "desc");
-          }}
-        color={clickedArrowId === `${header.id}-down` ? "#36454F" : "#ccc"}
-        cursor="pointer"
-        _hover={{
-          color: "#2C2C2C",
-        }}
-        />
-      </div>
-      </div>))
+      <FilterSortHeaders
+        header={header}
+        onSort={onSort}
+        clickedArrowId={clickedArrowId}
+        setClickedArrowId={setClickedArrowId}
+        />))
       }
       {orders && ordersHeaders.map(header => ( 
-      <div key={header.id}>
-      <div>{header.name}</div>
-      <div className="sort-icons-container-headers">
-        <ChevronUpIcon
-          onClick={() => {
-            setClickedArrowId(`${header.id}-up`);
-            onSort(header.field, "asc");
-          }}
-        color={clickedArrowId === `${header.id}-up` ? "#36454F" : "#ccc"}
-        cursor="pointer"
-        _hover={{
-          color: "#2C2C2C",
-        }}
-        />
-        <ChevronDownIcon
-          onClick={() => {
-            setClickedArrowId(`${header.id}-down`);
-            onSort(header.field, "desc");
-          }}
-        color={clickedArrowId === `${header.id}-down` ? "#36454F" : "#ccc"}
-        cursor="pointer"
-        _hover={{
-          color: "#2C2C2C",
-        }}
-        />
-      </div>
-      </div>))
+        <FilterSortHeaders
+          header={header}
+          onSort={onSort}
+          clickedArrowId={clickedArrowId}
+          setClickedArrowId={setClickedArrowId}
+        />))
       }
       {products && productsHeaders.map(header => ( 
-      <div key={header.id}>
-      <div>{header.name}</div>
-      <div className="sort-icons-container-headers">
-        <ChevronUpIcon
-          onClick={() => {
-            setClickedArrowId(`${header.id}-up`);
-            onSort(header.field, "asc");
-          }}
-        color={clickedArrowId === `${header.id}-up` ? "#36454F" : "#ccc"}
-        cursor="pointer"
-        _hover={{
-          color: "#2C2C2C",
-        }}
-        />
-        <ChevronDownIcon
-          onClick={() => {
-            setClickedArrowId(`${header.id}-down`);
-            onSort(header.field, "desc");
-          }}
-        color={clickedArrowId === `${header.id}-down` ? "#36454F" : "#ccc"}
-        cursor="pointer"
-        _hover={{
-          color: "#2C2C2C",
-        }}
-        />
-      </div>
-
-      </div>))
+        <FilterSortHeaders
+          header={header}
+          onSort={onSort}
+          clickedArrowId={clickedArrowId}
+          setClickedArrowId={setClickedArrowId}
+        />))
       }
     </div>
     </div>
