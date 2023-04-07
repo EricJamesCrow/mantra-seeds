@@ -38,6 +38,8 @@ export default function AdminCustomersDetailsPage() {
 
   useEffect(() => {
     // Disable scrollbar when AddProduct is visible
+    const overlay = document.querySelector('.admin-products-overlay');
+    overlay.classList.toggle('show', showEditProduct);
     if (showEditProduct) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -140,7 +142,7 @@ export default function AdminCustomersDetailsPage() {
       </div>
     </div>
     {showEditProduct &&
-      <div style={{ position: 'fixed', top: '61px', left: 0, right: 0, zIndex: 1, height: 'calc(100vh - 61px)', overflow: 'auto' }}>
+      <div className="admin-products-add-product-container">
       <EditProduct setShowEditProduct={setShowEditProduct} product={product}/>
       </div>}
       <AlertDialog
