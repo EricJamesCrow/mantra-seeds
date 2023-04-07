@@ -39,7 +39,7 @@ export default function SideBar() {
     ))
     }
     <div className="admin-side-bar-seperator"/>
-    <NavLink to='/admin/settings'>
+    <NavLink>
     <FontAwesomeIcon
         icon={faCog} 
         style={{
