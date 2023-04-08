@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faChevronDown, faChevronUp, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 // styles
 import './AdminHeader.css'
@@ -12,6 +12,7 @@ import './AdminHeader.css'
 export default function AdminHeader( { setShowAddProduct }) {
     const desktop = useMediaQuery('(min-width:980px)');
     const location = useLocation();
+    const [isOpen, setIsOpen] = useState(false);
     
     const handleClick = () => {
         document.querySelector('.admin-nav').classList.toggle('open')
@@ -33,6 +34,10 @@ export default function AdminHeader( { setShowAddProduct }) {
       setShowAddProduct(true);
     }
 
+    const handleExportClick = () => {
+      setIsOpen(!isOpen)
+    }
+
   return (
     <>
     <div className="admin-container">
@@ -48,16 +53,24 @@ export default function AdminHeader( { setShowAddProduct }) {
             <div>{headerText}</div>
             </div>
             {headerText !== "Dashboard" && <div className={headerText === 'Products' ? `admin-filter-sort-btn-container admin-header` : `admin-filter-sort-btn-container admin-header not-products`}>
-            <button className="admin-filter-sort-btn desktop admin-header">
+            {/* <div className="filter-sort-btn-container"> */}
+            <button className="admin-filter-sort-btn desktop admin-header" onClick={() => handleExportClick()}>
             <div style={{ paddingRight: "8px" }}>EXPORT</div>
           <FontAwesomeIcon 
-                  icon={faChevronDown}
+                  icon={isOpen ? faChevronUp : faChevronDown}
                   style={{
                       color: "#000000",
                       fontSize: "1.3rem",
                       cursor: "pointer"}}
                   />
           </button>
+          {/* {isOpen &&
+        <div className="admin-filter-sort-btn-dropdown header">
+            <div className="drop-down-payment-status-container">
+                <button className='order-customer-card-btn'>Save as CSV</button>
+            </div>
+            </div>}
+          </div> */}
           {headerText === 'Products' &&
           <button className="admin-filter-sort-btn desktop admin-header" onClick={handleCreateProduct}>
           <FontAwesomeIcon 

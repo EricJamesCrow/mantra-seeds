@@ -57,6 +57,10 @@
     justify-content: flex-end !important;
 }
 
+.admin-filter-sort-btn-dropdown.header {
+    width: 95%;
+}
+
 @media (max-width: 420px) {
     .admin-filter-sort-btn.admin-header > div:nth-child(2) {
         font-size: 11px !important;
