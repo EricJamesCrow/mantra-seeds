@@ -17,6 +17,7 @@ import Pagination from '../../../components/Pagination'
 export default function AdminOrders() {
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
+  const [filter, setFilter] = useState(null);
 
   const handleSort = (field, direction) => {
     setSortField(field);
@@ -29,9 +30,36 @@ export default function AdminOrders() {
   const orders = useSelector(state => state.orders.orders);
   if (!orders) return null; // only render once redux is loaded
 
+  const isOrderMatchingFilter = (order) => {
+    if (!filter) {
+      return true;
+    }
+  
+    switch (filter) {
+      case 'statusPaid':
+        return order.transaction.status === 'PAYMENT.CAPTURE.COMPLETED';
+      case 'statusPending':
+        return order.transaction.status === 'Pending';
+      case 'statusCancelled':
+        return false;
+      case 'paymentPaid':
+        return order.transaction.status === 'PAYMENT.CAPTURE.COMPLETED';
+      case 'paymentPending':
+        return order.transaction.status === 'Pending';
+      case 'delivered':
+        return order.deliveryStatus === 'Delivered';
+      case 'shipped':
+        return order.deliveryStatus === 'Shipped';
+      case 'notShipped':
+        return order.deliveryStatus === 'Not Shipped';
+      default:
+        return true;
+    }
+  };
+
   const filteredOrders = orders.filter(order => 
-    order.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    order.email.toLowerCase().includes(searchTerm.toLowerCase())
+    (order.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    order.email.toLowerCase().includes(searchTerm.toLowerCase()) ) && isOrderMatchingFilter(order)
     );
 
     const sortedOrders = [...filteredOrders].sort((a, b) => {
@@ -82,7 +110,7 @@ export default function AdminOrders() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader/>
-    <FilterSort results={filteredOrders.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} onSort={handleSort}/>
+    <FilterSort results={filteredOrders.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} onSort={handleSort} setFilter={setFilter} filter={filter}/>
     <div className="display-admin-orders">
     {ordersData.map(item => (
       <OrderCustomerCard 

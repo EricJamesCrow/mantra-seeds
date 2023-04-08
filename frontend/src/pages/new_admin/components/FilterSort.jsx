@@ -16,9 +16,11 @@ import { Select } from '@chakra-ui/react'
 import FilterSortBtn from './FilterSortBtn'
 import FilterSortHeaders from './FilterSortHeaders'
 
-export default function FilterSort( { results, setSearchTerm, currentPage, itemsPerPage, setItemsPerPage, onSort }) {
+export default function FilterSort( { results, setSearchTerm, currentPage, itemsPerPage, setItemsPerPage, onSort, setFilter, filter }) {
     const desktop = useMediaQuery('(min-width:980px)');
     const [clickedArrowId, setClickedArrowId] = useState(null);
+    const [activeDropdown, setActiveDropdown] = useState(null);
+
 
     let customers = false;
     let orders = false;
@@ -33,13 +35,15 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       { id: 1, title: 'Payment Status'},
       { id: 2, title: 'Delivery Status'},
       { id: 3, title: 'Status'},
+      { id: 4, title: 'More Filters'}
     ]
     const desktopCustomersData = [
       { id: 1, title: 'Status'},
+      { id: 2, title: 'More Filters'}
     ]
     const desktopProductsData = [
       { id: 1, title: 'Status'},
-
+      { id: 2, title: 'More Filters'}
     ]
 
 
@@ -127,6 +131,12 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       <FilterSortBtn
       item={item}
       page="orders"
+      activeDropdown={activeDropdown}
+      setActiveDropdown={setActiveDropdown}
+      setFilter={setFilter}
+      filter={filter}
+      setClickedArrowId={setClickedArrowId}
+      onSort={onSort}
       />
     ))
     }
@@ -134,6 +144,12 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       <FilterSortBtn
       item={item}
       page="customers"
+      activeDropdown={activeDropdown}
+      setActiveDropdown={setActiveDropdown}
+      setFilter={setFilter}
+      filter={filter}
+      setClickedArrowId={setClickedArrowId}
+      onSort={onSort}
       />
     ))
     }
@@ -141,6 +157,12 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       <FilterSortBtn
       item={item}
       page="products"
+      activeDropdown={activeDropdown}
+      setActiveDropdown={setActiveDropdown}
+      setFilter={setFilter}
+      filter={filter}
+      setClickedArrowId={setClickedArrowId}
+      onSort={onSort}
       />
     ))
     }

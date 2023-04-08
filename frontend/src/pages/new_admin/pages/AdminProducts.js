@@ -18,6 +18,8 @@ export default function AdminProducts() {
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
+  const [filter, setFilter] = useState(null);
+
 
   const handleSort = (field, direction) => {
     setSortField(field);
@@ -45,8 +47,23 @@ export default function AdminProducts() {
   const products = useSelector(state => state.products.products);
   if (!products) return null; // only render once redux is loaded
 
+  const isProductMatchingFilter = (product) => {
+    if (!filter) {
+      return true;
+    }
+  
+    switch (filter) {
+      case 'inStock':
+        return product.quantity > 0;
+      case 'outOfStock':
+        return product.quantity <= 0;
+      default:
+        return true;
+    }
+  };
+
   const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()) && isProductMatchingFilter(product)
   );
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -93,7 +110,7 @@ export default function AdminProducts() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader setShowAddProduct={setShowAddProduct}/>
-    <FilterSort results={filteredProducts.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} onSort={handleSort}/>
+    <FilterSort results={filteredProducts.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} onSort={handleSort} setFilter={setFilter} filter={filter}/>
     <div className="display-admin-orders">
     {productsData.map(item => (
       <ProductCard 

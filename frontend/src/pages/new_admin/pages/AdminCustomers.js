@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux'
 export default function AdminCustomers() {
   const [sortField, setSortField] = useState(null);
   const [sortDirection, setSortDirection] = useState(null);
+  const [filter, setFilter] = useState(null);
 
   const handleSort = (field, direction) => {
     setSortField(field);
@@ -25,8 +26,23 @@ export default function AdminCustomers() {
   const customers = useSelector(state => state.customers.customers);
   if (!customers) return null; // only render once redux is loaded
 
+  const isCustomerMatchingFilter = (customer) => {
+    if (!filter) {
+      return true;
+    }
+  
+    switch (filter) {
+      case 'active':
+        return isActive(customer.lastLoggedIn);
+      case 'inactive':
+        return isActive(customer.lastLoggedIn) === false;
+      default:
+        return true;
+    }
+  };
+
   const filteredCustomers = customers
-  .filter(customer => customer.email.toLowerCase().includes(searchTerm.toLowerCase()))
+  .filter(customer => customer.email.toLowerCase().includes(searchTerm.toLowerCase()) && isCustomerMatchingFilter(customer));
 
   const sortedCustomers = [...filteredCustomers].sort((a, b) => {
     if (!sortField) return 0;
@@ -78,7 +94,7 @@ export default function AdminCustomers() {
     <SideBar/>
     <div className="admin-main-content">
     <AdminHeader/>
-    <FilterSort results={filteredCustomers.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} onSort={handleSort}/>
+    <FilterSort results={filteredCustomers.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} onSort={handleSort} setFilter={setFilter} filter={filter}/>
     <div className="display-admin-orders">
     {customersData.map(item => (
       <OrderCustomerCard 

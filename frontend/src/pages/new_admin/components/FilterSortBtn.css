@@ -47,6 +47,10 @@
     cursor: pointer;
 }
 
+.drop-down-payment-status-container.selected {
+    background: #E6F3FF;
+}
+
 .new-admin-filter-sort-btn {
     display: flex;
     align-items: center;
