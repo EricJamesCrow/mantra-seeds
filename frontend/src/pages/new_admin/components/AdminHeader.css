@@ -44,8 +44,6 @@
     font-weight: 500;
     font-size: 14px;
     color: #1A1A1A;
-    padding: 0.5rem 1rem;
-    margin: 0 0.5rem;
     cursor: pointer;
 }
 
@@ -57,13 +55,96 @@
     justify-content: flex-end !important;
 }
 
-.admin-filter-sort-btn-dropdown.header {
-    width: 95%;
+.admin-filter-sort-btn-wrapper {
+    display: inline-flex;
+    position: relative;
+    justify-content: center;
+    max-width: 300px;
+    width: 100%;
+    margin: 0 0.5rem;
 }
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+	cursor: pointer;
+    background: #F7F9FB;
+    border: 1px solid #BCBDBC;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    height: 35px;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+}
+
+.export-btn:hover {
+    background: #E6F3FF;
+}
+
+.export-btn > svg {
+    padding-right: 0.25rem;
+}
+
+.export-btn > div {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000000;
+    padding-left: 0.25rem;
+}
+
+.export-btn.desktop > div{
+    font-size: 16px;
+}
+
+.admin-filter-sort-export-dropdown {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 2;
+    color: #212529;
+    background: #F7F9FB;
+    border: 1px solid #BCBDBC;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.drop-down-export-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem 0;
+}
+
+.drop-down-export-container > .order-customer-card-btn {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 16px;
+    width: 70%;
+    border-radius: 5px;
+}
+
+.admin-filter-sort-export-dropdown:hover {
+    background: #E6F3FF;
+}
+
 
 @media (max-width: 420px) {
     .admin-filter-sort-btn.admin-header > div:nth-child(2) {
         font-size: 11px !important;
+    }
+}
+
+@media (max-width: 620px) {
+    .admin-filter-sort-btn-wrapper {
+        width: 50%;
+    }
+    .admin-filter-sort-btn.admin-header {
+        width: 50%;
     }
 }
 
@@ -103,5 +184,8 @@
         width: 95%; 
         text-align: center;
         margin-bottom: 1rem;
+    }
+    .admin-filter-sort-export-dropdown {
+        margin-top: -0.25rem;
     }
 }

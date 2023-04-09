@@ -51,26 +51,26 @@ export default function AdminHeader( { setShowAddProduct }) {
             onClick={handleClick}
             />
             <div>{headerText}</div>
-            </div>
+        </div>
             {headerText !== "Dashboard" && <div className={headerText === 'Products' ? `admin-filter-sort-btn-container admin-header` : `admin-filter-sort-btn-container admin-header not-products`}>
-            {/* <div className="filter-sort-btn-container"> */}
-            <button className="admin-filter-sort-btn desktop admin-header" onClick={() => handleExportClick()}>
-            <div style={{ paddingRight: "8px" }}>EXPORT</div>
-          <FontAwesomeIcon 
-                  icon={isOpen ? faChevronUp : faChevronDown}
-                  style={{
-                      color: "#000000",
-                      fontSize: "1.3rem",
-                      cursor: "pointer"}}
-                  />
-          </button>
-          {/* {isOpen &&
-        <div className="admin-filter-sort-btn-dropdown header">
-            <div className="drop-down-payment-status-container">
-                <button className='order-customer-card-btn'>Save as CSV</button>
-            </div>
-            </div>}
-          </div> */}
+          <div className="admin-filter-sort-btn-wrapper">
+              <button className="export-btn" onClick={() => handleExportClick()}>
+              <div style={{ paddingRight: "8px" }}>EXPORT</div>
+            <FontAwesomeIcon 
+                    icon={isOpen ? faChevronUp : faChevronDown}
+                    style={{
+                        color: "#000000",
+                        fontSize: "1.3rem",
+                        cursor: "pointer"}}
+                    />
+            </button>
+            {isOpen &&
+              <div className="admin-filter-sort-export-dropdown">
+                  <div className="drop-down-export-container">
+                      <button className='order-customer-card-btn'>Save as CSV</button>
+                  </div>
+                  </div>}
+          </div>
           {headerText === 'Products' &&
           <button className="admin-filter-sort-btn desktop admin-header" onClick={handleCreateProduct}>
           <FontAwesomeIcon 

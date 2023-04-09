@@ -76,6 +76,8 @@
     width: 45%;
     height: 35px;
     transition: all 0.3s ease-in-out;
+    width: 100%;
+    margin: 0 0.5rem;
 }
 
 .admin-filter-sort-btn:hover {
@@ -164,11 +166,6 @@
     .admin-filter-sort-btn-container {
         width: 100%;
         margin-left: 1.5rem;
-    }
-
-    .admin-filter-sort-btn {
-        width: 100%;
-        margin: 0 0.5rem;
     }
 }
 
