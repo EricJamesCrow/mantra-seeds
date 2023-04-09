@@ -13,6 +13,21 @@
     overflow-y: auto;
 }
 
+.mobile-sort-data-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0.8;
+    overflow-y: auto;
+    padding: 0 1rem;
+}
+
+.filter-sort-header {
+    margin-bottom: 2rem;
+  }
+
 .mobile-filter-sort-clear-wrapper {
     display: flex;
     justify-content: center;
@@ -26,3 +41,4 @@
     font-weight: 700;
     font-size: 16px;
 }
+  

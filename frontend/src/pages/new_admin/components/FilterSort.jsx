@@ -249,7 +249,13 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       />
       </div>}
     {!desktop && showMobileSort && <div className="mobile-filter-sort-container">
-      <MobileSort handleClose={handleMobileSort}/>
+      <MobileSort 
+      handleClose={handleMobileSort}
+      onSort={onSort}
+      clickedArrowId={clickedArrowId}
+      setClickedArrowId={setClickedArrowId}
+      page={customers ? 'customers' : orders ? 'orders' : products ? 'products' : null}
+      />
       </div>}
     </>
   )
