@@ -38,21 +38,38 @@ export default function AdminHeader( { setShowAddProduct, state }) {
       setIsOpen(!isOpen)
     }
 
+    const flattenObject = (obj, prefix = '') => {
+      const flattened = {};
+    
+      for (const key in obj) {
+        const newKey = prefix ? `${prefix}.${key}` : key;
+    
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+          Object.assign(flattened, flattenObject(obj[key], newKey));
+        } else {
+          flattened[newKey] = obj[key];
+        }
+      }
+    
+      return flattened;
+    };
+    
     const downloadCSV = (data, fileName) => {
-      const headers = Object.keys(data[0]);
+      const flattenedData = data.map((item) => flattenObject(item));
+      const headers = Object.keys(flattenedData[0]);
       const csvRows = [];
-  
+    
       csvRows.push(headers.join(','));
-  
-      data.forEach((row) => {
+    
+      flattenedData.forEach((row) => {
         const values = headers.map((header) => row[header]);
         csvRows.push(values.join(','));
       });
-  
+    
       const csvString = csvRows.join('\r\n');
       const blob = new Blob([csvString], { type: 'text/csv' });
       const url = URL.createObjectURL(blob);
-  
+    
       const link = document.createElement('a');
       link.href = url;
       link.download = fileName;
@@ -60,6 +77,7 @@ export default function AdminHeader( { setShowAddProduct, state }) {
       link.click();
       document.body.removeChild(link);
     };
+    
 
     const handleExport = () => {
       downloadCSV(state, `${headerText}.csv`)
