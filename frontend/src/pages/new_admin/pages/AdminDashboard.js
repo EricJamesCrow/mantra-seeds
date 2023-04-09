@@ -18,6 +18,9 @@ export default function AdminDashboard() {
   const { products } = useSelector(state => state.products)
   const { orders } = useSelector(state => state.orders)
   const customers = useSelector(state => state.customers.customers);
+  if(!customers) return null;
+  if(!products) return null;
+  if(!orders) return null;
 
   const cardData = [
     { id: 1, title: 'Customers', value: customers.length, percentage: '-12.5%', icon: faUsers },

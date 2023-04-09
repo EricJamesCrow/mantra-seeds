@@ -9,6 +9,7 @@
 
 .admin-main-content {
     width: 100%;
+    min-height: 87vh;
   }
 
 .admin-side-bar > a:first-child {
