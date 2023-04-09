@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useLocation } from 'react-router-dom';
 
@@ -15,11 +15,15 @@ import { Select } from '@chakra-ui/react'
 // components
 import FilterSortBtn from './FilterSortBtn'
 import FilterSortHeaders from './FilterSortHeaders'
+import MobileFilter from './MobileFilter'
+import MobileSort from './MobileSort'
 
 export default function FilterSort( { results, setSearchTerm, currentPage, itemsPerPage, setItemsPerPage, onSort, setFilter, filter }) {
     const desktop = useMediaQuery('(min-width:980px)');
     const [clickedArrowId, setClickedArrowId] = useState(null);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const [showMobileFilter, setShowMobileFilter ] = useState(false);
+    const [showMobileSort, setShowMobileSort ] = useState(false);
 
 
     let customers = false;
@@ -27,9 +31,31 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
     let products = false;
 
     const location = useLocation();
+
+    const handleMobileFilter = () => {
+      setShowMobileFilter(!showMobileFilter)
+    }
+
+    const handleMobileSort = () => {
+      setShowMobileSort(!showMobileSort)
+    }
+
+    useEffect(() => {
+      if (showMobileFilter || showMobileSort) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    }, [showMobileFilter, showMobileSort])
+
+    useEffect(() => {
+      setShowMobileFilter(false)
+      setShowMobileSort(false)
+    }, [onSort, clickedArrowId])
+
     const buttonData = [
-        { id: 1, title: 'Filter', icon: faFilter },
-        { id: 2, title: 'Sort', icon: faSort }
+        { id: 1, title: 'Filter', icon: faFilter, function: handleMobileFilter },
+        { id: 2, title: 'Sort', icon: faSort, function: handleMobileSort },
       ]
     const desktopOrdersData = [
       { id: 1, title: 'Payment Status'},
@@ -90,10 +116,11 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       }
 
     const handleSelect = (e) => {
-      setItemsPerPage(e.target.value)
+      setItemsPerPage(e.target.value);
     }
     
   return (
+    <>
     <div className="admin-filter-sort-component-container">
       <div className="search-and-buttons-container">
     <form>
@@ -115,7 +142,7 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
     </form>
     <div className="admin-filter-sort-btn-container">
     {!desktop && buttonData.map(item => (
-        <button className="admin-filter-sort-btn">
+        <button className="admin-filter-sort-btn" onClick={item.function}>
         <div>{item.title}</div>
         <FontAwesomeIcon 
                 icon={faChevronDown} 
@@ -209,5 +236,21 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
       }
     </div>
     </div>
+    {!desktop && showMobileFilter && <div className="mobile-filter-sort-container">
+      <MobileFilter 
+      handleClose={handleMobileFilter}
+      activeDropdown={activeDropdown}
+      setActiveDropdown={setActiveDropdown}
+      setFilter={setFilter}
+      filter={filter}
+      setClickedArrowId={setClickedArrowId}
+      onSort={onSort}
+      page={customers ? 'customers' : orders ? 'orders' : products ? 'products' : null}
+      />
+      </div>}
+    {!desktop && showMobileSort && <div className="mobile-filter-sort-container">
+      <MobileSort handleClose={handleMobileSort}/>
+      </div>}
+    </>
   )
 }

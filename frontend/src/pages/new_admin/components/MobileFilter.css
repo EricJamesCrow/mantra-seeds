@@ -1,0 +1,28 @@
+.add-product-container.mobile-filter-sort {
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+}
+
+.mobile-filter-sort-data-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    flex-grow: 0.8;
+    overflow-y: auto;
+}
+
+.mobile-filter-sort-clear-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.mobile-filter-sort-clear-wrapper > button {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 16px;
+}

@@ -155,6 +155,16 @@
     max-width: 300px;
 }
 
+.mobile-filter-sort-container {
+    position: fixed; 
+    top: 61px;
+    left: 0; 
+    right: 0; 
+    z-index: 1;
+    height: calc(100vh - 61px); 
+    overflow: auto;
+}
+
 
 @media (min-width: 620px) {
     .search-and-buttons-container {

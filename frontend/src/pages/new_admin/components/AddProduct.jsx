@@ -35,10 +35,6 @@ export default function AddProduct( { setShowAddProduct }) {
     const [chakra, setChakra] = useState('')
     const [quantity, setQuantity] = useState('')
 
-    useEffect(() => {
-      console.log(selectedImages)
-    }, [selectedImages])
-
     const handleClose = () => {
         setShowAddProduct(false);
     }
