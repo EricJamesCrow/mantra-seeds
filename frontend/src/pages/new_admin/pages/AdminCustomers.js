@@ -93,7 +93,7 @@ export default function AdminCustomers() {
     <div className='admin-side-bar-main-content-container'>
     <SideBar/>
     <div className="admin-main-content">
-    <AdminHeader/>
+    <AdminHeader state={customers}/>
     <FilterSort results={filteredCustomers.length} setSearchTerm={setSearchTerm} currentPage={currentPage} itemsPerPage={itemsPerPage} setItemsPerPage={setItemsPerPage} onSort={handleSort} setFilter={setFilter} filter={filter}/>
     <div className="display-admin-orders">
     {customersData.map(item => (

@@ -9,7 +9,7 @@ import { faBars, faChevronDown, faChevronUp, faPlus } from '@fortawesome/free-so
 // styles
 import './AdminHeader.css'
 
-export default function AdminHeader( { setShowAddProduct }) {
+export default function AdminHeader( { setShowAddProduct, state }) {
     const desktop = useMediaQuery('(min-width:980px)');
     const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +35,34 @@ export default function AdminHeader( { setShowAddProduct }) {
     }
 
     const handleExportClick = () => {
+      setIsOpen(!isOpen)
+    }
+
+    const downloadCSV = (data, fileName) => {
+      const headers = Object.keys(data[0]);
+      const csvRows = [];
+  
+      csvRows.push(headers.join(','));
+  
+      data.forEach((row) => {
+        const values = headers.map((header) => row[header]);
+        csvRows.push(values.join(','));
+      });
+  
+      const csvString = csvRows.join('\r\n');
+      const blob = new Blob([csvString], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+  
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    const handleExport = () => {
+      downloadCSV(state, `${headerText}.csv`)
       setIsOpen(!isOpen)
     }
 
@@ -67,7 +95,7 @@ export default function AdminHeader( { setShowAddProduct }) {
             {isOpen &&
               <div className="admin-filter-sort-export-dropdown">
                   <div className="drop-down-export-container">
-                      <button className='order-customer-card-btn'>Save as CSV</button>
+                      <button className='order-customer-card-btn' onClick={() => handleExport()}>Save as CSV</button>
                   </div>
                   </div>}
           </div>
