@@ -4,6 +4,9 @@ const mongoose = require('mongoose')
 // aws
 const { uploadImage } = require('../helpers/s3-helper');
 
+// sharp
+const { resizeImage } = require('../helpers/sharp-helper');
+
 
 // get all products
 const getProducts = async (req, res) => {
@@ -64,8 +67,11 @@ const createProduct = async (req, res) => {
     if (emptyFields.length > 0) {
       return res.status(400).json({ error: 'Please fill in all the fields', emptyFields });
     }
+
+    // Resize image
+    const resizedImage = await resizeImage(image);
   
-    const imageLocation = await uploadImage(image);
+    const imageLocation = await uploadImage(resizedImage);
   
     // Add product to database
     try {
@@ -109,7 +115,6 @@ const updateProduct = async (req, res) => {
     if (!product) {
         return res.status(400).json({error: 'No such product'})
     }
-    console.log(product)
     res.status(200).json(product)
 }
 

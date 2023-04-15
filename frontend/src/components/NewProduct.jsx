@@ -20,7 +20,7 @@ export default function NewProduct( { product } ) {
   return (
         <div className="product-card-container">
         <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>
-        <img src={product.image} className="product-card-image"/>
+        <img src={product.image} alt={product.image} className="product-card-image"/>
         </Link>
         <div className="product-card-info-container">
             <div className="rating">

@@ -8,9 +8,10 @@
 }
 
 .product-card-container > a > img {
-    width: 60%;
+    width: 95%;
     margin: 0 auto;
-    padding-top: 2rem;
+    margin-top: 0.5rem;
+    border-radius: 5px;
 }
 
 .product-card-info-container {

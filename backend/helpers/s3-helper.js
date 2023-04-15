@@ -9,8 +9,8 @@ async function uploadImage(image) {
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
         Key: fileName,
-        Body: image.buffer,
-        ContentType: image.mimetype
+        Body: image,
+        ContentType: 'image/jpeg'
     };
     
     const result = await s3.upload(params).promise();
