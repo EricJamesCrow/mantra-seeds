@@ -59,7 +59,7 @@ const CUSTOMERS_API_URL = '/api/user'
 function App() {
   // hooks
   const { fetchCart, fetchUserCart } = useCart();
-  const { fetchProducts } = useFetchProducts();
+  const { fetchProducts, fetchReviews } = useFetchProducts();
   const location = useLocation()
   const dispatch = useDispatch();
 
@@ -133,6 +133,7 @@ function App() {
     }
     fetchUser()
     fetchProducts()
+    fetchReviews()
     if(user) {
       fetchUserCart(user)
     } else {

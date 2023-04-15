@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 
+//redux
+import { useSelector } from 'react-redux'
+
 // hooks
 import useAddToCart from '../hooks/useAddToCart';
 
@@ -10,6 +13,9 @@ import './NewProductPage.css'
 // images
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faStar, faHeart } from '@fortawesome/free-solid-svg-icons'
+
+// components
+import ReviewsContainer from './reviews/ReviewsContainer';
 
 const PRODUCTS_API_URL = '/api/products/'
 
@@ -37,6 +43,12 @@ export default function NewProductPage() {
             setProduct(data)
         })
 }, [id])
+
+    const reviews = useSelector(state => state.reviews.reviews);
+    if(reviews === null) return null; // only render once redux is loaded
+    const productReviews = reviews.filter(review => review.product === id);
+    const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0);
+    const averageRating = productReviews.length > 0 ? (totalRating / productReviews.length).toFixed(1) : 0;
 
     const handleQuantityIncrease = () => {
         setQuantity(quantity + 1)
@@ -68,12 +80,12 @@ export default function NewProductPage() {
             key={index}
             icon={faStar}
             style={{
-                color: index < 4 ? "#669c54" : "#E2E8F0",
+                color: index < averageRating ? "#669c54" : "#E2E8F0",
                 fontSize: "1rem",
             }}
             />
         ))}
-        <div className="num-of-reviews">12 reviews</div>
+        <div className="num-of-reviews">{productReviews.length} reviews</div>
         </div>
         <div className="product-details">
         <div>{product.name}</div>
@@ -111,54 +123,7 @@ export default function NewProductPage() {
         (<button disabled={true} className="add-to-cart-btn out-of-stock">Out of Stock</button>)}
         {error && <div className="error-message add-to-cart">{error}</div>}
         </div>
-        <div className="reviews-container">
-            <div>Reviews</div>
-            <div className="average-rating-container">
-                <div className="average-rating">4.3</div>
-                <div className="average-stars-and-num-of-reviews">
-                    <div>
-                        {[...Array(5)].map((_, index) => (
-                            <FontAwesomeIcon
-                            key={index}
-                            icon={faStar}
-                            style={{
-                                color: index < 4 ? "#669c54" : "#E2E8F0",
-                                fontSize: "1rem",
-                            }}
-                            />
-                        ))}
-                    </div>
-                    <div>Based on 12 reviews</div>
-                </div>
-            </div>
-            <div className="reviews-btns-container">
-                <button>See all reviews</button>
-                <button>Write a review</button>
-            </div>
-            <div className="review-container">
-                <div className="rating-and-title">
-                <div>
-                        {[...Array(5)].map((_, index) => (
-                            <FontAwesomeIcon
-                            key={index}
-                            icon={faStar}
-                            style={{
-                                color: index < 4 ? "#669c54" : "#E2E8F0",
-                                fontSize: "1rem",
-                            }}
-                            />
-                        ))}
-                    </div>
-                    <div>Love these seeds!</div>
-                </div>
-                <div className="review">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </div>
-                <div className="review-author">
-                by Christopher, July 15th 2020
-                </div>
-            </div>
-        </div>
+        <ReviewsContainer/>
     </div>
   </div>
   )

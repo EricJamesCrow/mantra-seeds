@@ -7,6 +7,7 @@ import authReducer from './slices/authSlice';
 import ordersReducer from './slices/ordersSlice';
 import customersReducer from './slices/customersSlice';
 import notificationsReducer from './slices/notificationsSlice';
+import reviewsReducer from './slices/reviewsSlice';
 
 export default configureStore({
     reducer: {
@@ -17,5 +18,6 @@ export default configureStore({
         orders: ordersReducer,
         customers: customersReducer,
         notifications: notificationsReducer,
+        reviews: reviewsReducer,
     }
 })

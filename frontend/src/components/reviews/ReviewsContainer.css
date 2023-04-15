@@ -1,0 +1,81 @@
+.reviews-container {
+    margin-top: 2rem;
+}
+
+.reviews-container  div {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 28px;
+}
+
+.average-rating-container {
+    display: flex;
+}
+
+.average-rating-container > .average-rating {
+    font-size: 32px;
+    align-self: center;
+}
+
+.average-stars-and-num-of-reviews {
+    margin-left: 0.75rem;
+}
+
+.average-stars-and-num-of-reviews > div:last-child {
+    font-size: 10px;
+}
+
+.reviews-btns-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.reviews-btns-container > button {
+    width: 48%;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid #EDF1F6;
+    border-radius: 2px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.reviews-btns-container > button:last-child {
+    background: #669c54;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.review-container {
+    margin-top: 2rem;
+}
+
+.review-container > .rating-and-title {
+    display: flex;
+}
+
+.review-container > .rating-and-title div {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.review-container > .rating-and-title > div:last-child {
+    margin-left: 0.5rem;
+}
+
+.review-container > .review {
+    margin-top: 0.5rem;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.review-container > .review-author {
+    margin-top: 0.5rem;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+}
