@@ -30,7 +30,7 @@ import { Select } from '@chakra-ui/react'
 export default function Shop() {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1); // pagination
-    const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
+    const [itemsPerPage, setItemsPerPage] = useState(12); // pagination
     const products = useSelector(state => state.products.products);
     const reviews = useSelector(state => state.reviews.reviews);
     if (!products || !reviews) return null; // only render once redux is loaded
@@ -96,10 +96,10 @@ export default function Shop() {
   <div>
     <div>Results per Page:</div>
     <Select size='xs' onChange={handleSelect}>
-      <option value='10'>10</option>
-      <option value='20'>20</option>
-      <option value='30'>30</option>
-      <option value='40'>40</option>
+      <option value='12'>12</option>
+      <option value='24'>24</option>
+      <option value='36'>36</option>
+      <option value='48'>48</option>
     </Select>
   </div>
 </div>

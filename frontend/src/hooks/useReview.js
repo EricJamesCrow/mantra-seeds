@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // redux
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { addReview } from '../redux/slices/reviewsSlice';
 import { setError, setErrorName, setSuccess, setSuccessName } from '../redux/slices/notificationsSlice';
 

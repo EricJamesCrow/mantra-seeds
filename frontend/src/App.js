@@ -22,6 +22,7 @@ import SideNav from './components/SideNav';
 import AdminNav from './pages/new_admin/components/AdminNav';
 import BottomNavBar from './components/BottomNavBar'
 import NewProductPage from './components/NewProductPage';
+import Reviews from './components/reviews/Reviews'
 
 // pages
 import Home from "./pages/new_home/Home"
@@ -172,6 +173,7 @@ function App() {
         <Route path="/admin/products" element={<AdminProducts/>} />
         <Route path="/admin/products/:id" element={<AdminProductsDetailsPage/>} />
         
+        <Route path="/shop/products/:id/reviews" element={<Reviews/>} />
         <Route path="/shop/products/:id" element={<NewProductPage/>} />
         <Route path="/shop" element={<Shop/>} />
         

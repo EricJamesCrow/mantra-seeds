@@ -23,6 +23,10 @@
     border-color: #456649;
 }
 
+.shop-container .admin-page-results-container div {
+    font-weight: 500;
+}
+
 .shop-chakra-filters {
     display: flex;
     overflow-x: auto;
