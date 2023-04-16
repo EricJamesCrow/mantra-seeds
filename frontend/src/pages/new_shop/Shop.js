@@ -32,7 +32,8 @@ export default function Shop() {
     const [currentPage, setCurrentPage] = useState(1); // pagination
     const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
     const products = useSelector(state => state.products.products);
-    if (!products) return null; // only render once redux is loaded
+    const reviews = useSelector(state => state.reviews.reviews);
+    if (!products || !reviews) return null; // only render once redux is loaded
   
     const filteredProducts = products.filter(product =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -107,6 +108,7 @@ export default function Shop() {
     <NewProduct
     key={product._id}
     product={product}
+    reviews={reviews}
     />
 ))
 }

@@ -11,9 +11,13 @@ import './NewProduct.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
-export default function NewProduct( { product } ) {
+export default function NewProduct( { product, reviews } ) {
     const price = (product.price/100).toFixed(2);
     const { addToCart, loading, error } = useAddToCart();
+
+    const productReviews = reviews.filter(review => review.product === product._id);
+    const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0);
+    const averageRating = productReviews.length > 0 ? (totalRating / productReviews.length).toFixed(1) : 0;
 
     const inStock = product.quantity > 0;
 
@@ -29,12 +33,12 @@ export default function NewProduct( { product } ) {
                     key={index}
                     icon={faStar}
                     style={{
-                        color: index < 4 ? "#669c54" : "#E2E8F0",
+                        color: index < averageRating ? "#669c54" : "#E2E8F0",
                         fontSize: "0.8rem",
                     }}
                     />
                 ))}
-                <div className="num-of-reviews">12 reviews</div>
+                <div className="num-of-reviews">{productReviews.length} reviews</div>
             </div>
             <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>{product.name}</Link>
             <div>{`$${price}`}</div>
