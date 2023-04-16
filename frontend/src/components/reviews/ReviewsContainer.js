@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 //redux
@@ -11,13 +11,38 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 // styles
 import './ReviewsContainer.css'
 
+// components
+import ReviewForm from './ReviewForm'
+
 export default function ReviewsContainer() {
+    const [showReviewForm, setShowReviewForm] = useState(false);
+
+    useEffect(() => {
+        // Disable scrollbar when AddProduct is visible
+        const overlay = document.querySelector('.admin-products-overlay');
+        overlay.classList.toggle('show', showReviewForm);
+        if (showReviewForm) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+        }
+        // Cleanup the effect
+        return () => {
+          document.body.style.overflow = 'auto';
+        };
+      }, [showReviewForm]);
+
+
     const { id } = useParams()
     const reviews = useSelector(state => state.reviews.reviews);
     if(reviews === null) return null; // only render once redux is loaded
     const productReviews = reviews.filter(review => review.product === id);
     const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0);
     const averageRating = productReviews.length > 0 ? (totalRating / productReviews.length).toFixed(1) : 0;
+
+    const handleShowWriteReview = () => {
+        setShowReviewForm(!showReviewForm);
+    }
 
 
   return (
@@ -43,7 +68,7 @@ export default function ReviewsContainer() {
     </div>
     <div className="reviews-btns-container">
         <button>See all reviews</button>
-        <button>Write a review</button>
+        <button onClick={() => handleShowWriteReview()}>Write a review</button>
     </div>
     {productReviews.map(review => (<div className="review-container">
         <div className="rating-and-title">
@@ -65,9 +90,14 @@ export default function ReviewsContainer() {
         {review.comment}
         </div>
         <div className="review-author">
-        by {review.user}, {new Date(review.createdAt).toLocaleDateString()}
+        by {review.name}, {new Date(review.createdAt).toLocaleDateString()}
         </div>
     </div>))}
+    {showReviewForm && 
+    <div className="admin-products-add-product-container">
+    <ReviewForm id={id} setShowReviewForm={setShowReviewForm} />
+    </div>
+    }
 </div>
   )
 }

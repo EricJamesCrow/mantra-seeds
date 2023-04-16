@@ -9,7 +9,7 @@ const reviewsSlice = createSlice({
         setReviews: (state, action) => {
             state.reviews = action.payload;
         },
-        createReview: (state, action) => {
+        addReview: (state, action) => {
             state.reviews = [action.payload, ...state.reviews];
         },
         deleteReview: (state, action) => {
@@ -23,6 +23,6 @@ const reviewsSlice = createSlice({
     },
 });
 
-export const { setReviews, createReview, deleteReview, updateReview } = reviewsSlice.actions;
+export const { setReviews, addReview, deleteReview, updateReview } = reviewsSlice.actions;
 
 export default reviewsSlice.reducer;

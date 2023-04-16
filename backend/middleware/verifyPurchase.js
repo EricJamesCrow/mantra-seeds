@@ -13,6 +13,8 @@ const verifyPurchase = async (req, res, next) => {
         order.items.some(item => item.product.toString() === id)
       );
 
+    console.log(hasPurchased)
+
     if (!hasPurchased) {
       return res.status(403).json({ message: 'User has not purchased this product.' });
     }

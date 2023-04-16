@@ -40,12 +40,22 @@
     font-family: 'Roboto';
     font-weight: 400;
     font-size: 16px;
+    transition: all 0.2s ease;
 }
 
 .reviews-btns-container > button:last-child {
     background: #669c54;
     color: #fff;
     border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.reviews-btns-container > button:first-child:hover {
+    background: #F0F0F0;
+}
+
+.reviews-btns-container > button:last-child:hover {
+    background: #7DB56A;
 }
 
 .review-container {
@@ -78,4 +88,10 @@
     font-family: 'Roboto';
     font-weight: 500;
     font-size: 12px;
+}
+
+@media (min-width: 980px) {
+    .reviews-container {
+        width: 55%;
+    }
 }

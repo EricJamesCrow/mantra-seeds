@@ -31,10 +31,16 @@ const getReview = async (req, res) => {
 
 // create new review
 const createReview = async (req, res) => {
-    const { id, user, rating, title, comment } = req.body;
+    const { id, user, name, title, rating, comment } = req.body;
 
     try {
         const product = await Product.findById(id)
+        if(!product) {
+            return res.status(404).json({
+                status: 'fail',
+                message: 'Product not found'
+            })
+        }
     } catch (error) {
         return res.status(404).json({
             status: 'fail',
@@ -42,7 +48,7 @@ const createReview = async (req, res) => {
         })
     }
 
-    if (!user || !rating || !comment) {
+    if (!name || !title || !rating || !comment) {
         return res.status(400).json({
             status: 'fail',
             message: 'Please provide all the required fields'
@@ -51,8 +57,9 @@ const createReview = async (req, res) => {
 
     const review = await Review.create({
         user,
-        rating,
+        name,
         title,
+        rating,
         comment,
         product: id
         })
