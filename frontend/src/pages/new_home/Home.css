@@ -71,7 +71,7 @@
 }
 
 .home-page-header-text-and-link-wrapper {
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -114,7 +114,7 @@
 }
 
 .home-page-header-text-and-link-wrapper-newsletter {
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
