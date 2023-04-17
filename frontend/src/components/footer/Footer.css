@@ -20,6 +20,10 @@
     gap: 0.5rem;
 }
 
+.footer-links-wrapper div:hover {
+    cursor: pointer;
+}
+
 .footer-social-media-wrapper {
     padding-top: 1rem;
     display: flex;
