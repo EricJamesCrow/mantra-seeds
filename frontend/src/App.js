@@ -50,6 +50,9 @@ import OrderPage from './pages/new_profile/pages/OrderPage'
 import Search from "./pages/search/Search"
 import Contact from "./pages/contact/Contact"
 
+// footer
+import Footer from './components/footer/Footer';
+
 // error pages
 import NotFound from './pages/errors/NotFound';
 import InvalidToken from './pages/errors/InvalidToken';
@@ -201,9 +204,7 @@ function App() {
         <Route path="/invalid-token" element={<InvalidToken/>} />
       </Routes>
       </div>
-      <div className="copyright">
-      <div></div>
-    </div>
+      {location.pathname !== "/" && <Footer/>}
     <BottomNavBar
     />
     </div>

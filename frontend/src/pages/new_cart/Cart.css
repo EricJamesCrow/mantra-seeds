@@ -38,14 +38,6 @@
     line-height: 48px;
 }
 
-.add-to-cart-btn {
-    transition: all 0.2s ease;
-}
-
-.add-to-cart-btn:hover {
-    background: #7DB56A;
-}
-
 @media (max-width: 979px) {
 }
 
