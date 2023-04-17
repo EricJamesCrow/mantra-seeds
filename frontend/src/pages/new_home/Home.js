@@ -10,6 +10,7 @@ import Meditating from '../../images/home/meditating.svg'
 
 // components
 import NewProduct from '../../components/NewProduct'
+import Review from '../../components/reviews/Review'
 
 //redux
 import { useSelector } from 'react-redux'
@@ -26,6 +27,7 @@ export default function Home() {
   const products = useSelector(state => state.products.products);
   const reviews = useSelector(state => state.reviews.reviews);
   if (!products || !reviews) return null; // only render once redux is loaded
+  const lastThreeReviews = reviews.slice(0, 8);
 
   return (
     <div className="landing-page-container">
@@ -59,7 +61,9 @@ export default function Home() {
               <div>View All</div>
             </div>
             <div className="shop-display-products-container">
-            <NewProduct product={products[0]} reviews={reviews} />
+              {lastThreeReviews.map(review => (
+                <Review review={review}/>
+              ))}
             </div>
         </div>
         <div className="home-page-content-wrapper newsletter">
