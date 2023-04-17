@@ -34,10 +34,6 @@ export default function Home() {
             <div>MANTRA SEEDS</div>
             <img src={Underline} alt="underline" />
         </div>
-        {/* <div className="birds-container">
-        <img src={TwoBirds} alt="two birds" className="two-birds" />
-        <img src={ThreeBirds} alt="three birds" className="three-birds" />
-        </div> */}
         <img src={Meditating} alt="meditating" className="meditating" />
         <div className="home-page-content-wrapper">
             <div className="home-page-header-text-and-link-wrapper">

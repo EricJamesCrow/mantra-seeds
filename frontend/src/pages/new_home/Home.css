@@ -3,7 +3,7 @@
 .landing-page-container {
     background-image: url('../../images/home/background_image.svg');
     background-repeat: no-repeat;
-    background-size: calc(1728px*1.05) calc(1117px*1.05);
+    background-size: calc(1728px*1.15) calc(1117px*1.05);
     background-position: center -360px;
     height: 100vh;
     background-attachment: fixed;
@@ -50,7 +50,7 @@
 }
 
 .meditating {
-    padding-top: 12rem;
+    padding-top: 14.8rem;
     margin: 0 auto;
     width: 320px;
     filter: drop-shadow(3px 6px 5px rgba(0, 0, 0, 0.5));
@@ -149,7 +149,7 @@
         font-size: 80px;
     }
     .meditating {
-        padding-top: 8rem;
+        padding-top: 11.55rem;
         width: 320px;
     }
     .landing-page-text > img {
