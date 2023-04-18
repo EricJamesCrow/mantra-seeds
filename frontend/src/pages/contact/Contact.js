@@ -51,7 +51,7 @@ export default function Contact() {
             variant='outline' 
             className="add-product-input"
             onChange={(e) => setSubject(e.target.value)}
-            placeholder="Your Email"
+            placeholder="Your Subject"
             value={subject}
             required={true}
             bg="white"
