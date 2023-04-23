@@ -40,7 +40,10 @@ export default function Reviews() {
 
     const { id } = useParams()
     const reviews = useSelector(state => state.reviews.reviews);
-    if(reviews === null) return null; // only render once redux is loaded
+    const products = useSelector(state => state.products.products); // Add this line
+    if(reviews === null || products === null) return null; // Check if both reviews and products are loaded
+  
+    const product = products.find(product => product._id === id); // Find the product by id
     const productReviews = reviews.filter(review => review.product === id);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -61,7 +64,7 @@ export default function Reviews() {
   return (
     <div className="reviews-container reviews-page">
     <div className="reviews-page-header-container-wrapper">
-        <div>Reviews</div>
+        <div>{product.name} Reviews</div>
         <div className="reviews-page-header-container">
             <div className="average-rating-container">
                 <div className="average-rating">{averageRating}</div>

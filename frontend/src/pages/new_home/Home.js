@@ -21,6 +21,9 @@ import { Input } from "@chakra-ui/react";
 // footer
 import Footer from '../../components/footer/Footer';
 
+// carousel
+import RBCarousel from '../../components/carousel/RBCarousel'
+
 export default function Home() {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
@@ -43,7 +46,7 @@ export default function Home() {
               <div onClick={() => navigate('/shop')}>View All</div>
             </div>
             <div className="shop-display-products-container">
-            <NewProduct product={products[0]} reviews={reviews} />
+            <RBCarousel items={products.slice(0,8)} reviews={reviews}/>
             </div>
         </div>
         <div className="home-page-content-wrapper educational">
