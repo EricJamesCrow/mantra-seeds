@@ -45,7 +45,7 @@ export default function Home() {
               <div>New Arrivals</div>
               <div onClick={() => navigate('/shop')}>View All</div>
             </div>
-            <div className="shop-display-products-container">
+            <div>
               <RBCarousel items={products.slice(0,8)} reviews={reviews}/>
             </div>
         </div>
@@ -54,8 +54,8 @@ export default function Home() {
               <div>Educational</div>
               <div>View All</div>
             </div>
-            <div className="shop-display-products-container">
-            <NewProduct product={products[0]} reviews={reviews} />
+            <div>
+              <RBCarousel items={products.slice(0,8)} reviews={reviews}/>
             </div>
         </div>
         <div className="home-page-content-wrapper testimonials">

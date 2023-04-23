@@ -1,11 +1,3 @@
-.bootstrap-carousel {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-}
-
 .bootstrap-carousel .product-card-container {
     width: 70%;
     margin-bottom: 4rem;
@@ -13,16 +5,12 @@
 
 .carousel-content-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 100vw;
-    padding-left: 6rem;
-    padding-right: 6rem;
+    margin: 0 auto;
+    width: 80%;
 }
 
 .carousel-content-wrapper .product-card-container {
-    width: 45%;
+    width: 40%;
 }
 
 @media (min-width: 980px) {
