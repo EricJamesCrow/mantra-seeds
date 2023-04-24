@@ -12,7 +12,6 @@ const useAddToCart = () => {
     const dispatch = useDispatch();
 
     const user = JSON.parse(localStorage.getItem('user'));
-    const userId = user.id
 
     const addToCart = async (product, quantity, price) => {
         setLoading(true);
@@ -24,7 +23,7 @@ const useAddToCart = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     id:  id,
-                    user: userId,
+                    user: user.id,
                     cartItems: [{ product, quantity, price }]
                 })
             });
