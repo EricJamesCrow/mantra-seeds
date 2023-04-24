@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux'
 // styles
 import './Search.css'
 
+
 export default function Search() {
     const { id } = useParams();
     const [currentPage, setCurrentPage] = useState(1); // pagination

@@ -18,8 +18,8 @@ import ContentCard from '../components/ContentCard'
 import Loading from '../../../components/loading/loading'
 
 export default function AdminDashboard() {
-  const { products } = useSelector(state => state.products)
-  const { orders } = useSelector(state => state.orders)
+  const products  = useSelector(state => state.products.products)
+  const orders = useSelector(state => state.orders.orders)
   const customers = useSelector(state => state.customers.customers);
   if(!customers || !products || !orders) return <Loading/>;
 

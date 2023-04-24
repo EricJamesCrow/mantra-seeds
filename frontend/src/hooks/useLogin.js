@@ -3,12 +3,16 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { loginAuth } from '../redux/slices/authSlice'
-import { setCart } from '../redux/slices/cartSlice'
+
+import { useCart } from './useCart'
+import { useFetchAdmin } from './useFetchAdmin'
 
 export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const dispatch = useDispatch()
+    const { fetchUserCart } = useCart()
+    const { fetchOrders, fetchCustomers } = useFetchAdmin()
 
     const login = async (email, password) => {
         setIsLoading(true)
@@ -33,19 +37,14 @@ export const useLogin = () => {
             localStorage.setItem('user', JSON.stringify(json))
 
             // update the auth context
-            dispatch(loginAuth(json))
-            const user = json
-            const fetchCart = async () => {
-                const response = await fetch('/api/carts/'+user.cart)
-                const json = await response.json()
-          
-                if (response.ok) {
-                  dispatch(setCart(json))
-                }
-              }
-            fetchCart();
+            dispatch(loginAuth(json));
+            const user = json;
+            fetchUserCart(user);
             localStorage.removeItem('cart');
-
+            if(user.role === 1) {
+                fetchOrders(user);
+                fetchCustomers(user);
+            }
             setIsLoading(false);
             return "success";
         }
