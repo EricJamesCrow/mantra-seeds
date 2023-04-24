@@ -11,6 +11,7 @@ import { setCustomers } from './redux/slices/customersSlice';
 // hooks
 import { useCart } from './hooks/useCart';
 import { useFetchProducts } from './hooks/useFetchProducts';
+import { useFetchAdmin } from './hooks/useFetchAdmin';
 
 // styles
 import './App.css';
@@ -57,13 +58,11 @@ import Footer from './components/footer/Footer';
 import NotFound from './pages/errors/NotFound';
 import InvalidToken from './pages/errors/InvalidToken';
 
-const ORDERS_API_URL = '/api/orders'
-const CUSTOMERS_API_URL = '/api/user'
-
 function App() {
   // hooks
   const { fetchCart, fetchUserCart } = useCart();
   const { fetchProducts, fetchReviews } = useFetchProducts();
+  const { fetchOrders, fetchCustomers } = useFetchAdmin();
   const location = useLocation()
   const dispatch = useDispatch();
 
@@ -97,30 +96,6 @@ function App() {
     console.log(e)
   }
     }
-
-  const fetchOrders = async (user) => {
-      const token = user.token
-      const headers = {
-          'Authorization': token
-      }
-      const response = await fetch(ORDERS_API_URL, { headers });
-      const json = await response.json();
-      if(response.ok) {
-        dispatch(setOrders(json))
-      }
-  }
-
-  const fetchCustomers = async (user) => {
-    const token = user.token
-    const headers = {
-        'Authorization': token
-    }
-    const response = await fetch(CUSTOMERS_API_URL, { headers });
-    const json = await response.json();
-    if(response.ok) {
-      dispatch(setCustomers(json))
-    }
-  }
 
   useEffect(() => {
     // TODO: store cart in local storage        

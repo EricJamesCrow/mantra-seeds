@@ -17,17 +17,17 @@ export const useLogin = () => {
     const login = async (email, password) => {
         setIsLoading(true)
         setError(null)
-
+    
         // Get the cart ID from localStorage
         const localStorageCartId = localStorage.getItem('cart');
-
+    
         const response = await fetch('/api/user/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password, localStorageCartId})
         })
         const json = await response.json()
-
+    
         if (!response.ok) {
             setIsLoading(false)
             setError(json.error)
@@ -35,20 +35,26 @@ export const useLogin = () => {
         if (response.ok) {
             // save the user to local store
             localStorage.setItem('user', JSON.stringify(json))
-
+    
             // update the auth context
             dispatch(loginAuth(json));
             const user = json;
-            fetchUserCart(user);
+            
+            const actions = [fetchUserCart(user)];
             localStorage.removeItem('cart');
             if(user.role === 1) {
-                fetchOrders(user);
-                fetchCustomers(user);
+                actions.push(fetchOrders(user));
+                actions.push(fetchCustomers(user));
             }
+            
+            // Execute async actions concurrently
+            await Promise.all(actions);
+    
             setIsLoading(false);
             return "success";
         }
     }
+    
 
     return { login, isLoading, error }
 }
