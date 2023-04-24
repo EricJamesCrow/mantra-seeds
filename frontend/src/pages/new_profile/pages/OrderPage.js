@@ -7,14 +7,17 @@ import { useMediaQuery } from 'react-responsive';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
+// loading
+import Loading from '../../../components/loading/loading'
+
 export default function OrderPage() {
     const isDesktop = useMediaQuery({ minWidth: 980 });
     const { id } = useParams()
     const navigate = useNavigate();
     const { products } = useSelector(state => state.products)
-    const { orders } = useSelector(state => state.orders)
+    const orders  = useSelector(state => state.orders.orders)
   
-    if(!orders) return null // This is needed to prevent the page from crashing when the orders are not loaded yet.
+    if(!orders || !products) return <Loading/> // This is needed to prevent the page from crashing when the orders are not loaded yet.
     const order = orders.find(o => o._id === id)
   
     const { firstName, lastName, state, city, street, zip } = order.address
