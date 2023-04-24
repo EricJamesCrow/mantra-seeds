@@ -1,4 +1,5 @@
 const Cart = require('../models/cartModel')
+const User = require('../models/userModel')
 const Product = require('../models/productModel')
 const mongoose = require('mongoose')
 
@@ -42,6 +43,7 @@ const updateItemQuantity = async (req, res) => {
 
 const addItemToCart = async (req, res) => {
     const { id } = req.body;
+    const { user } = req.body;
     const { product, quantity, price } = req.body.cartItems[0];
     
     if (!product || !quantity || !price) {
@@ -78,7 +80,9 @@ const addItemToCart = async (req, res) => {
                 subtotal: price * quantity
             });
             await newCart.save();
-            // await User.findByIdAndUpdate(user, { cart: newCart._id }); 
+            if(user) {
+                await User.findByIdAndUpdate(user, { cart: newCart._id });
+            }
             return res.status(201).json({ cart: newCart });
         } else {
             const cartItem = cart.cartItems.find(c => c.product.equals(product))

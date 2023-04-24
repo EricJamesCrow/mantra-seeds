@@ -83,6 +83,7 @@ function App() {
     if(response.ok) {
         // merge the json data with the user object
         const updatedUser = {...user, ...json}
+        localStorage.setItem('user', JSON.stringify(updatedUser))
         // update the state with the merged data
         dispatch(loginAuth(updatedUser))
     }
