@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 // components
 import NewProduct from '../../components/NewProduct'
 import Pagination from '../../components/Pagination'
+import Loading from '../../components/loading/loading'
 
 // styles
 import './Shop.css'
@@ -33,7 +34,7 @@ export default function Shop() {
     const [itemsPerPage, setItemsPerPage] = useState(12); // pagination
     const products = useSelector(state => state.products.products);
     const reviews = useSelector(state => state.reviews.reviews);
-    if (!products || !reviews) return null; // only render once redux is loaded
+    if (!products || !reviews) return <Loading/>; // only render once redux is loaded
   
     const filteredProducts = products.filter(product =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

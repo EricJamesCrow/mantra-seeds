@@ -1,0 +1,39 @@
+.loading-page-container {
+    font-family: 'Be Vietnam Pro';
+    background: #E9E4CA;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-page-container h1 {
+    font-weight: 200;
+    font-size: 40px;
+    color: #333333;
+    padding-top: 5rem;
+}
+
+.loading-page-container h2 {
+    padding-top: 2rem;
+    font-size: 24px;
+    font-weight: 200;
+}
+
+.loading-page-container div {
+    margin-top: 2rem;
+}
+
+@media (min-width: 980px) {
+    .loading-page-container {
+        justify-content: center;
+        align-items: center;
+        min-height: 92.5vh;
+    }
+
+    .loading-page-container h1 {
+        font-size: 60px;
+        padding-top: 0;
+    }
+
+}

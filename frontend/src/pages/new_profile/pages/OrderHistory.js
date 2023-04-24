@@ -15,6 +15,9 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import Order from './components/Order'
 import Pagination from '../../../components/Pagination'
 
+// loading
+import Loading from '../../../components/loading/loading'
+
 // chakra ui
 import { Select } from '@chakra-ui/react'
 
@@ -45,7 +48,7 @@ export default function OrderHistory() {
     }, [])
 
     const orders = useSelector(state => state.orders.orders);
-    if (!orders) return null; // only render once redux is loaded
+    if (!orders) return <Loading/>; // only render once redux is loaded
   
     const filteredOrders = orders.filter(order => 
       order.orderNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -17,6 +17,9 @@ import { faChevronLeft, faStar, faHeart } from '@fortawesome/free-solid-svg-icon
 // components
 import ReviewsContainer from './reviews/ReviewsContainer';
 
+// loading
+import Loading from './loading/loading'
+
 const PRODUCTS_API_URL = '/api/products/'
 
 export default function NewProductPage() {
@@ -45,7 +48,7 @@ export default function NewProductPage() {
 }, [id])
 
     const reviews = useSelector(state => state.reviews.reviews);
-    if(reviews === null) return null; // only render once redux is loaded
+    if(reviews === null) return <Loading/>; // only render once redux is loaded
     const productReviews = reviews.filter(review => review.product === id);
     const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0);
     const averageRating = productReviews.length > 0 ? (totalRating / productReviews.length).toFixed(1) : 0;

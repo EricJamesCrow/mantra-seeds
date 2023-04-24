@@ -18,6 +18,9 @@ import { Select } from '@chakra-ui/react'
 import ReviewForm from './ReviewForm'
 import Pagination from '../../components/Pagination'
 
+// loading
+import Loading from '../../components/loading/loading'
+
 export default function Reviews() {
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -41,7 +44,7 @@ export default function Reviews() {
     const { id } = useParams()
     const reviews = useSelector(state => state.reviews.reviews);
     const products = useSelector(state => state.products.products); // Add this line
-    if(reviews === null || products === null) return null; // Check if both reviews and products are loaded
+    if(reviews === null || products === null) return <Loading/>; // Check if both reviews and products are loaded
   
     const product = products.find(product => product._id === id); // Find the product by id
     const productReviews = reviews.filter(review => review.product === id);

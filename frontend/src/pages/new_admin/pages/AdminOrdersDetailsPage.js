@@ -13,16 +13,18 @@ import './AdminOrdersDetailsPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
+// loading
+import Loading from '../../../components/loading/loading'
+
 export default function AdminOrdersDetailsPage() {
   const { loading, error, updateDeliveryStatus } = useUpdateDeliveryStatus();
   const isDesktop = useMediaQuery({ minWidth: 980 });
   const { id } = useParams()
   const navigate = useNavigate();
-  const { products } = useSelector(state => state.products)
+  const products  = useSelector(state => state.products.products)
   const { orders } = useSelector(state => state.orders)
 
-  if(!orders) return null // This is needed to prevent the page from crashing when the orders are not loaded yet.
-  if(!products) return null
+  if(!orders || !products) return <Loading/> // This is needed to prevent the page from crashing when the orders are not loaded yet.
   const order = orders.find(o => o._id === id)
 
   const { firstName, lastName, state, city, street, zip } = order.address

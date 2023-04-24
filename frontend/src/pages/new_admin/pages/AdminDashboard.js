@@ -14,13 +14,14 @@ import AdminHeader from '../components/AdminHeader'
 import SideBar from '../components/SideBar'
 import ContentCard from '../components/ContentCard'
 
+// loading
+import Loading from '../../../components/loading/loading'
+
 export default function AdminDashboard() {
   const { products } = useSelector(state => state.products)
   const { orders } = useSelector(state => state.orders)
   const customers = useSelector(state => state.customers.customers);
-  if(!customers) return null;
-  if(!products) return null;
-  if(!orders) return null;
+  if(!customers || !products || !orders) return <Loading/>;
 
   const cardData = [
     { id: 1, title: 'Customers', value: customers.length, percentage: '-12.5%', icon: faUsers },

@@ -7,6 +7,9 @@ import SideBar from '../components/SideBar'
 import OrderCustomerCard from '../components/OrderCustomerCard'
 import Pagination from '../../../components/Pagination'
 
+// loading
+import Loading from '../../../components/loading/loading'
+
 //redux
 import { useSelector } from 'react-redux'
 
@@ -24,7 +27,7 @@ export default function AdminCustomers() {
   const [currentPage, setCurrentPage] = useState(1); // pagination
   const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
   const customers = useSelector(state => state.customers.customers);
-  if (!customers) return null; // only render once redux is loaded
+  if (!customers) return <Loading/>; // only render once redux is loaded
 
   const isCustomerMatchingFilter = (customer) => {
     if (!filter) {

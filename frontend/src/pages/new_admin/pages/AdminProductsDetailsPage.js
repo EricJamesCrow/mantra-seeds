@@ -13,6 +13,9 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 // components
 import EditProduct from '../components/EditProduct'
 
+// loading
+import Loading from '../../../components/loading/loading'
+
 // chakra ui
 import {
   AlertDialog,
@@ -52,12 +55,12 @@ export default function AdminCustomersDetailsPage() {
 
   const { products } = useSelector(state => state.products)
   const user = useSelector(state => state.auth.user);
-  if (!products) return null; // only render once redux is loaded
+  if (!products) return <Loading/>; // only render once redux is loaded
 
   const product = products.find(p => p._id === id)
   const token = user.token
 
-  if(!product) return null
+  if(!product) return <Loading/>;
   const name = product.name
   const price = `$${(product.price / 100).toFixed(2)}`
   const chakra = product.chakra

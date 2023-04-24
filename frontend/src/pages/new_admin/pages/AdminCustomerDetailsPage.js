@@ -14,6 +14,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import defaultProfilePic from '../../../images/abstract-user-flat.svg'
 
+// loading
+import Loading from '../../../components/loading/loading'
+
 // chakra ui
 import {
   AlertDialog,
@@ -36,7 +39,7 @@ export default function AdminCustomersDetailsPage() {
   const { id } = useParams()
   const navigate = useNavigate();
   const { customers } = useSelector(state => state.customers)
-  if (!customers) return null; // TODO: add loading spinner
+  if (!customers) return <Loading/>; // TODO: add loading spinner
   const customer = customers.find(c => c._id === id)
   
   const email = customer.email

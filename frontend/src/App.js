@@ -50,6 +50,9 @@ import OrderPage from './pages/new_profile/pages/OrderPage'
 import Search from "./pages/search/Search"
 import Contact from "./pages/contact/Contact"
 
+// loading
+import Loading from './components/loading/loading'
+
 // footer
 import Footer from './components/footer/Footer';
 
@@ -167,6 +170,7 @@ function App() {
       <div className={location.pathname === "/" ? "home" : "routes"}>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/loading" element={<Loading/>}/>
         
         <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/admin/orders" element={<AdminOrders/>} />

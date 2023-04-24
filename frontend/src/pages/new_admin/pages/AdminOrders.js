@@ -13,6 +13,9 @@ import SideBar from '../components/SideBar'
 import OrderCustomerCard from '../components/OrderCustomerCard'
 import Pagination from '../../../components/Pagination'
 
+// loading
+import Loading from '../../../components/loading/loading'
+
 
 export default function AdminOrders() {
   const [sortField, setSortField] = useState(null);
@@ -28,7 +31,7 @@ export default function AdminOrders() {
   const [currentPage, setCurrentPage] = useState(1); // pagination
   const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
   const orders = useSelector(state => state.orders.orders);
-  if (!orders) return null; // only render once redux is loaded
+  if (!orders) return <Loading/> // only render once redux is loaded
 
   const isOrderMatchingFilter = (order) => {
     if (!filter) {

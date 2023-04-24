@@ -8,6 +8,9 @@ import { Alert, AlertIcon } from '@chakra-ui/react'
 // redux
 import { useSelector } from "react-redux"
 
+// loading
+import Loading from '../../components/loading/loading'
+
 // styles
 import './Profile.css'
 
@@ -21,7 +24,7 @@ export default function Profile() {
     const user = useSelector(state => state.auth.user);
     let navigate = useNavigate()
     const { logout } = useLogout()
-    if(!user) return null;
+    if(!user) return <Loading />;
     const showAlert = !user.emailConfirmed
     
     const handleLogout = () => {

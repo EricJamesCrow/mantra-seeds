@@ -11,6 +11,9 @@ import Pagination from '../../../components/Pagination'
 //redux
 import { useSelector } from 'react-redux'
 
+// loading
+import Loading from '../../../components/loading/loading'
+
 // styles
 import './AdminProducts.css'
 
@@ -45,7 +48,7 @@ export default function AdminProducts() {
   const [currentPage, setCurrentPage] = useState(1); // pagination
   const [itemsPerPage, setItemsPerPage] = useState(10); // pagination
   const products = useSelector(state => state.products.products);
-  if (!products) return null; // only render once redux is loaded
+  if (!products) return <Loading/>; // only render once redux is loaded
 
   const isProductMatchingFilter = (product) => {
     if (!filter) {
