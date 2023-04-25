@@ -2,7 +2,7 @@
 const { sendEmail } = require('../helpers/ses-helper');
 
 const contact = async (req, res) => {
-    const { name, email, subject, message } = contactForm;
+    const { name, email, subject, message } = req.body;
 
     if(!name || !email || !subject || !message) {
         return res.status(400).json({ error: 'All fields are required' });
@@ -24,9 +24,9 @@ const contact = async (req, res) => {
   
     try {
       await sendEmail(emailParams);
-      console.log('Email sent successfully');
+      return res.status(200).json({success: 'Email sent successfully!'})
     } catch (error) {
-      console.error('Error sending email:', error);
+        return res.status(401).json({error: 'Unable to send email'})
     }
 };
 
