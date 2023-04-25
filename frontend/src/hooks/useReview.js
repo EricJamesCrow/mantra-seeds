@@ -9,8 +9,12 @@ const REVIEWS_API_URL = '/api/reviews/'
 
 const useReview = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const userId = user.id;
-    const token = user.token;
+    let userId = null;
+    let token = null;
+    if(user) {
+        userId = user.id;
+        token = user.token;
+    }
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
@@ -41,7 +45,11 @@ const useReview = () => {
         } catch (err) {
             const parsedError = JSON.parse(err.message);
             dispatch(setError(true));
-            dispatch(setErrorName(parsedError.message));
+            if(parsedError.error === 'Request is not authorized') {
+                dispatch(setErrorName('You must be logged in to leave a review!'))
+            } else {
+                dispatch(setErrorName(parsedError.error));
+            }
             setTimeout(() => {
                 dispatch(setError(false));
               }, 100);

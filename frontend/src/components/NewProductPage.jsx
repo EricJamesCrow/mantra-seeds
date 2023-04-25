@@ -20,35 +20,37 @@ import ReviewsContainer from './reviews/ReviewsContainer';
 // loading
 import Loading from './loading/loading'
 
-const PRODUCTS_API_URL = '/api/products/'
+// const PRODUCTS_API_URL = '/api/products/'
 
 export default function NewProductPage() {
   const { id } = useParams()
-  const [product, setProduct] = useState('')
+//   const [product, setProduct] = useState('')
   const { addToCart, loading, error } = useAddToCart();
   const navigate = useNavigate();
-  const price = (product.price/100).toFixed(2)
   const [quantity, setQuantity] = useState(1)
 
-  const inStock = product.quantity > 0
-
-  useEffect(() => {
-    const url = PRODUCTS_API_URL+id;
-    fetch(url)
-        .then((response) => {
-            if (!response.ok) {
-                navigate("*");
-            } else {
-                return response.json();
-            }
-        })
-        .then((data) => {
-            setProduct(data)
-        })
-}, [id])
+//   useEffect(() => {
+//     const url = PRODUCTS_API_URL+id;
+//     fetch(url)
+//         .then((response) => {
+//             if (!response.ok) {
+//                 navigate("*");
+//             } else {
+//                 return response.json();
+//             }
+//         })
+//         .then((data) => {
+//             setProduct(data)
+//         })
+// }, [id])
 
     const reviews = useSelector(state => state.reviews.reviews);
-    if(reviews === null) return <Loading/>; // only render once redux is loaded
+    const products = useSelector(state => state.products.products);
+    if(reviews === null || products === null) return <Loading/>; // only render once redux is loaded
+    const product = products.find(p => p._id === id);
+    if(product === null) return <Loading/>;
+    const price = (product.price/100).toFixed(2)
+    const inStock = product.quantity > 0
     const productReviews = reviews.filter(review => review.product === id);
     const totalRating = productReviews.reduce((sum, review) => sum + review.rating, 0);
     const averageRating = productReviews.length > 0 ? (totalRating / productReviews.length).toFixed(1) : 0;

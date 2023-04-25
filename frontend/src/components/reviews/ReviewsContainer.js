@@ -102,7 +102,7 @@ export default function ReviewsContainer() {
     </div>))}
     {showReviewForm && 
     <div className="admin-products-add-product-container">
-    <ReviewForm id={id} setShowReviewForm={setShowReviewForm} />
+      <ReviewForm id={id} setShowReviewForm={setShowReviewForm} />
     </div>
     }
 </div>
