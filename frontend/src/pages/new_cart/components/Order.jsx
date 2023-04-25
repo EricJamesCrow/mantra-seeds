@@ -21,7 +21,7 @@ import './Order.css'
 const CARTS_API_URL = '/api/carts/'
 const PRODUCTS_API_URL = '/api/products/'
 
-export default function Order( {item, user }) {
+export default function Order( {item, user, setUpdatingSubtotal }) {
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart);
     const [product, setProduct] = useState('')
@@ -57,10 +57,12 @@ export default function Order( {item, user }) {
             }
             if(response.ok) {
                 dispatch(updateCart(json));
+                setUpdatingSubtotal(false)
             }
     }, 500), [product]);
 
     const handleQuantityChange = (delta) => {
+        setUpdatingSubtotal(true)
         const newQuantity = Math.max(1, quantity + delta);
         setQuantity(newQuantity);
         updateQuantity(newQuantity);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 // styles
@@ -8,6 +8,9 @@ import './Cart.css'
 // components
 import Order from './components/Order'
 
+// chakra ui
+import { Spinner } from '@chakra-ui/react'
+
 export default function Cart() {
   const navigate = useNavigate();
   const user = useSelector(state => state.auth.user);
@@ -15,6 +18,7 @@ export default function Cart() {
   const [ subtotal, setSubtotal ] = useState(null)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [updatingSubtotal, setUpdatingSubtotal] = useState(false)
 
     useEffect(() => {
       // Listen for changes in the cart items and re-render the page
@@ -54,14 +58,15 @@ export default function Cart() {
           <h1>My Cart</h1>
           <div className="cart-products-container">
           {cart.cartItems && cart.cartItems.map(item => (
-            <Order key={item._id} item={item} user={user}/>
+            <Order key={item._id} item={item} user={user} setUpdatingSubtotal={setUpdatingSubtotal}/>
           ))}
             </div>
         </div>
         <div className="cart-second-wrapper">
           <div className="subtotal-container">
             <div>Subtotal:</div>
-            <div>{`$${subtotal}`}</div>
+            {!updatingSubtotal && <div>{`$${subtotal}`}</div>}
+            {updatingSubtotal && <Spinner />}
           </div>
           <div className="checkout-btn-container">
                 <button
