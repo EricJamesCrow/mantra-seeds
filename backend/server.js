@@ -15,6 +15,7 @@ const shippingRoutes = require('./routes/shipping')
 const paymentRoutes = require('./routes/payment/payment')
 const stripeRoutes = require('./routes/payment/stripe')
 const paypalRoutes = require('./routes/payment/paypal')
+const contactRoutes = require('./routes/contact')
 
 // express app
 const app = express()
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 })
 
 // routes
+app.use('/api/contact', contactRoutes)
 app.use('/api/products', productsRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/carts', cartRoutes)
