@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: 16
   pre_build:
     commands:
       # Retrieve the .env content and create the .env file in the backend folder
