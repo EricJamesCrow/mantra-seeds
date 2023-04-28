@@ -7,7 +7,7 @@ phases:
   pre_build:
     commands:
       # Retrieve the .env content and create the .env file in the backend folder
-      - export ENV_CONTENT=$(aws secretsmanager get-secret-value --secret-id mantra-seeds/secrets/backend/env --query 'SecretString' --output text --region us-west-1)
+      - export ENV_CONTENT=$(aws secretsmanager get-secret-value --secret-id arn:aws:secretsmanager:us-west-1:223794032227:secret:mantra-seeds/secrets/backend/env --query 'SecretString' --output text --region us-west-1)
       - echo -e "$ENV_CONTENT" > backend/.env
       # Install dependencies for both frontend and backend
       - cd frontend && npm install && cd ..
