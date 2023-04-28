@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+  pre_build:
+    commands:
+      # Retrieve the .env content and create the .env file in the backend folder
+      - export ENV_CONTENT=$(aws secretsmanager get-secret-value --secret-id mantra-seeds/secrets/backend/env --query 'SecretString' --output text --region us-west-1)
+      - echo -e "$ENV_CONTENT" > backend/.env
+      # Install dependencies for both frontend and backend
+      - cd frontend && npm install && cd ..
+      - cd backend && npm install && cd ..
+  build:
+    commands:
+      # Build the React app in the frontend folder
+      - cd frontend && npm run build && cd ..
+      # Add your commands to build the backend here, if needed
+  post_build:
+    commands:
+      # Add any post-build commands, if needed
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: frontend/build
+
+cache:
+  paths:
+    - frontend/node_modules/**/*
+    - backend/node_modules/**/*
