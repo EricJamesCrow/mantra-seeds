@@ -13,8 +13,8 @@ phases:
       # Retrieve the .env content and create the .env file in the backend folder
       - echo -e "$SECRET_VALUE" > backend/.env
       # Install dependencies for both frontend and backend
-      - cd frontend && npm install && cd ..
-      - cd backend && npm install && cd ..
+      - cd frontend && sudo npm install && cd ..
+      - cd backend && sudo npm install && cd ..
   build:
     commands:
       # Build the React app in the frontend folder

@@ -7,10 +7,5 @@ sudo yum update -y
 sudo yum install -y nginx
 
 # Install PM2 globally
-npm install -g pm2
+sudo npm install -g pm2
 
-# Add local directory to PATH environment variable
-echo 'export PATH=$PATH:~/.npm-global/bin' >> ~/.bashrc
-
-# Reload the configuration
-source ~/.bashrc
