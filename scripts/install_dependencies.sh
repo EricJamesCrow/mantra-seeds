@@ -1,10 +1,11 @@
 #!/bin/bash
 
+echo "Installing dependencies..."
 # Update package lists
-apt-get update
+sudo apt-get update
 
 # Install Nginx
-apt-get install -y nginx
+sudo apt-get install -y nginx
 
 # Install PM2 globally
-npm install -g pm2
+sudo npm install -g pm2
