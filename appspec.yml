@@ -6,7 +6,7 @@ files:
   - source: backend
     destination: /var/backend
   - source: configurations/nginx.conf
-    destination: /etc/nginx/conf.d/default.conf
+    destination: /etc/nginx/conf.d
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies.sh
