@@ -29,6 +29,7 @@ artifacts:
     - appspec.yml
     - frontend/build/**/*
     - backend/**/*
+    - scripts/*
 
 cache:
   paths:
