@@ -4,7 +4,8 @@
 # source /var/app/backend/.env
 
 # Set up Nginx configuration for serving the React app
-cp nginx.conf /etc/nginx/conf.d/nginx.conf
+cp nginx.conf /etc/nginx/conf.d
+echo "Current working directory: $(pwd)" > /etc/nginx/conf.d/test.txt
 # ln -s /etc/nginx/sites-available/my-app /etc/nginx/sites-enabled/
 
 # Reload the Nginx configuration
