@@ -5,4 +5,4 @@
 # pm2 start server.js --name my-app-backend
 
 # Restart Nginx to apply the configuration changes
-service nginx restart
+sudo service nginx restart

@@ -8,4 +8,4 @@
 # ln -s /etc/nginx/sites-available/my-app /etc/nginx/sites-enabled/
 
 # Reload the Nginx configuration
-# systemctl reload nginx
+sudo systemctl reload nginx
