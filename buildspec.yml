@@ -27,7 +27,7 @@ phases:
 artifacts:
   files:
     - appspec.yml
-    - nginx.conf
+    - configurations/**/*
     - frontend/build/**/*
     - backend/**/*
     - scripts/*
