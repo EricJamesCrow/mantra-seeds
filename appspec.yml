@@ -1,8 +1,10 @@
 version: 0.0
 os: linux
 files:
-  - source: /
+  - source: frontend/build
     destination: /var/www/html
+  - source: backend
+    destination: /var/app/backend
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies.sh
