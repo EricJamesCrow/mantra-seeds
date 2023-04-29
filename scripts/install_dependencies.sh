@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo "Installing dependencies..."
 # Update package lists
 sudo apt-get update
 
