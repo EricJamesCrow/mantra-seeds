@@ -19,7 +19,7 @@ phases:
       # Install dependencies for both frontend and backend
       - echo "$(npm)"
       - cd frontend && npm install && cd ..
-      # - cd backend && npm install && cd ..
+      - cd backend && npm install && cd ..
   build:
     commands:
       # Build the React app in the frontend folder
