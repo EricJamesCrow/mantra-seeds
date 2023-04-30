@@ -12,10 +12,12 @@ const useAddToCart = () => {
     const dispatch = useDispatch();
 
     const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user ? user.id : null;
 
     const addToCart = async (product, quantity, price) => {
         setLoading(true);
         setError(null);
+        
         try {
             // Makes a post request to the addItemToCart endpoint on the backend
             const response = await fetch('/api/carts', {
@@ -23,7 +25,7 @@ const useAddToCart = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     id:  id,
-                    user: user.id,
+                    user: userId,
                     cartItems: [{ product, quantity, price }]
                 })
             });
@@ -41,8 +43,12 @@ const useAddToCart = () => {
               }, 100);
             setLoading(false);
         } catch (err) {
-            const errorMessage = JSON.parse(err.message);
-            setError(errorMessage.error);
+            try {
+                const errorMessage = JSON.parse(err.message);
+                setError(errorMessage.error);
+              } catch (jsonErr) {
+                setError(err.message);
+              }
             setLoading(false);
         }
     };
