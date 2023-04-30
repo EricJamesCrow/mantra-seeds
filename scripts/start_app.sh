@@ -2,7 +2,7 @@
 
 # Start the Node.js server with PM2, assuming the main entry point is named server.js
 cd /var/backend
-sudo npm install
+# sudo npm install
 # npm run start
 
 # Restart Nginx to apply the configuration changes
