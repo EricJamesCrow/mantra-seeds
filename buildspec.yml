@@ -3,6 +3,8 @@ version: 0.2
 env:
   secrets-manager:
     SECRET_VALUE: arn:aws:secretsmanager:us-west-1:223794032227:secret:mantra-seeds/secrets/backend/env-9ivJZd
+    PRIVATE_KEY: arn:aws:secretsmanager:us-west-1:223794032227:secret:backend/encryption/rsa/private-CF4qD0
+    PUBLIC_KEY: arn:aws:secretsmanager:us-west-1:223794032227:secret:backend/encryption/rsa/public-zqTpth
 
 phases:
   install:
@@ -12,6 +14,8 @@ phases:
     commands:
       # Retrieve the .env content and create the .env file in the backend folder
       - echo -e "$SECRET_VALUE" > backend/.env
+      - echo -e "$PRIVATE_KEY" > backend/private.pem
+      - echo -e "$PUBLIC_KEY" > backend/public.pem
       # Install dependencies for both frontend and backend
       - echo "$(npm)"
       - cd frontend && npm install && cd ..
