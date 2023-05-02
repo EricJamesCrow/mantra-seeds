@@ -58,6 +58,8 @@ import Footer from './components/footer/Footer';
 import NotFound from './pages/errors/NotFound';
 import InvalidToken from './pages/errors/InvalidToken';
 
+// test
+
 function App() {
   // hooks
   const { fetchCart, fetchUserCart } = useCart();
