@@ -5,6 +5,7 @@ env:
     SECRET_VALUE: arn:aws:secretsmanager:us-west-1:223794032227:secret:mantra-seeds/secrets/backend/env-9ivJZd
     PRIVATE_KEY: arn:aws:secretsmanager:us-west-1:223794032227:secret:backend/encryption/rsa/private-CF4qD0
     PUBLIC_KEY: arn:aws:secretsmanager:us-west-1:223794032227:secret:backend/encryption/rsa/public-zqTpth
+    MONGODB_CERT: arn:aws:secretsmanager:us-west-1:223794032227:secret:backend/encryption/rsa/mongodbcert-EUjg1t
 
 phases:
   install:
@@ -16,6 +17,7 @@ phases:
       - echo -e "$SECRET_VALUE" > backend/.env
       - echo -e "$PRIVATE_KEY" > backend/private.pem
       - echo -e "$PUBLIC_KEY" > backend/public.pem
+      - echo -e "$MONGODB_CERT" > backend/mongodb-cert.pem
       # Install dependencies for both frontend and backend
       - echo "$(npm)"
       - cd frontend && npm install && cd ..
