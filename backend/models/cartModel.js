@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto');
-const fs = require('fs');
-const PUBLIC_KEY = fs.readFileSync('./public.pem', 'utf8');
 
 const cartSchema = new mongoose.Schema({
     status: {
@@ -96,19 +93,6 @@ const cartSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
-
-cartSchema.statics.encryptAddress = async function(address) {
-    try {
-    Object.keys(address).forEach(property => {
-        const buffer = Buffer.from(address[property], 'utf8');
-        const encrypted = crypto.publicEncrypt({ key: PUBLIC_KEY, padding: crypto.constants.RSA_PKCS1_OAEP_PADDING }, buffer);
-        address[property] = encrypted.toString('base64')
-        return address;
-    });
-    } catch (err) {
-        console.log(err)
-    }
-}
 
 cartSchema.statics.deleteCart = async (id) => {
     try {

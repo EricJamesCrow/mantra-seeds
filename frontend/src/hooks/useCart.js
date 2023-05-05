@@ -19,6 +19,7 @@ export const useCart = () => {
             }
             if (!response.ok) {
               dispatch(setCart({_id: null, cartItems: null, subtotal: 0}));
+              localStorage.removeItem('cart');
             }
         }
       }

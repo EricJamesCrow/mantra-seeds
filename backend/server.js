@@ -1,5 +1,4 @@
 require('dotenv').config()
-// this is a test for my ec2 instance
 
 // const https = require('https');
 // const fs = require('fs');

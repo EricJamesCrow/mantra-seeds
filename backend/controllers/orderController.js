@@ -1,7 +1,7 @@
 const Order = require('../models/orderModel');
 const mongoose = require('mongoose');
 
-const { decryptAddress } = require('../helpers/encryption');
+const { decrypt, decryptAddress } = require('../helpers/encryption-helper');
 
 /*
 const fs = require('fs');
@@ -39,8 +39,9 @@ const getOrder = async (req, res) => {
     }
 
     const address = order.address;
-    // decrypt each property of the address object
     order.address = decryptAddress(address);
+    const email = order.email;
+    order.email = decrypt(email);
 
     res.status(200).json(order);
 };
@@ -56,6 +57,8 @@ const getAllUserOrders = async (req, res) => {
     orders.forEach(order => {
         const address = order.address;
         order.address = decryptAddress(address);
+        const email = order.email;
+        order.email = decrypt(email);
     });
 
     res.status(200).json(orders);
@@ -91,6 +94,8 @@ const getAllOrders = async (req, res) => {
     orders.forEach(order => {
       const address = order.address;
       order.address = decryptAddress(address);
+      const email = order.email;
+      order.email = decrypt(email);
     });
 
     res.status(200).json(orders);

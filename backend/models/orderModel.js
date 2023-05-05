@@ -4,7 +4,7 @@ const Product = require('./productModel');
 // aws
 const { sendEmail } = require('../helpers/ses-helper');
 // decryption
-const { decryptAddress } = require('../helpers/encryption');
+const { decrypt, decryptAddress } = require('../helpers/encryption-helper');
 
 const orderSchema = new mongoose.Schema({
     user: {
@@ -171,10 +171,12 @@ try {
         United States
         `;
 
+    const decryptedEmail = decrypt(email);
+
     // Send order confirmation email
     const emailParams = {
     from: process.env.ORDER_CONFIRMATION_EMAIL,
-    to: email,
+    to: decryptedEmail,
     subject: `Order ${order.orderNumber} confirmation`,
     html: `
         <h1>Order Confirmation</h1>
