@@ -45,7 +45,7 @@ export default function AddProduct( { setShowAddProduct }) {
       const productData = new FormData();
       productData.append('name', name);
       productData.append('description', description);
-      productData.append('price', price);
+      productData.append('price', parseInt(price*100));
       productData.append('chakra', chakra);
       productData.append('image', selectedImages[0])
       productData.append('quantity', quantity);
