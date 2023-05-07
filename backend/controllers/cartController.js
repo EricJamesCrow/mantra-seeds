@@ -14,6 +14,12 @@ const updateItemQuantity = async (req, res) => {
     if (isNaN(quantity) || typeof quantity !== 'number' || quantity < 1) {
       return res.status(400).json({ error: "Invalid quantity" });
     }
+
+    const foundProduct = await Product.findById(product);
+
+    if (!foundProduct) {
+        return res.status(404).json({ error: "Invalid product" });
+    }
   
     try {
       const cart = await Cart.findById(id);
@@ -26,9 +32,37 @@ const updateItemQuantity = async (req, res) => {
         if (!cartItem) {
           return res.status(404).json({ error: "Item not found in cart" });
         } else {
-          cart.subtotal -= cartItem.price * cartItem.quantity; // Subtract the old price
-          cartItem.quantity = quantity; // Update the quantity for the item
-          cart.subtotal += cartItem.price * cartItem.quantity; // Add the new price
+          
+        if (quantity > foundProduct.quantity - foundProduct.reserved) {
+            return res.status(400).json({ error: "Requested quantity exceeds available stock" });
+        }
+
+          cart.subtotal -= cartItem.price * cartItem.quantity;
+          
+          if(cartItem.reservationTimestamp === null) {
+            cartItem.reservationTimestamp = new Date();
+            foundProduct.reserved += cartItem.quantity;
+            }
+          
+          foundProduct.reserved -= cartItem.quantity;
+          foundProduct.reserved += quantity;
+          await foundProduct.save();
+
+          for (const item of cart.cartItems) {
+            if (!item.product.equals(product)) {
+                if (item.reservationTimestamp === null) {
+                    item.reservationTimestamp = new Date();
+                    const otherProduct = await Product.findById(item.product);
+                    otherProduct.reserved += item.quantity;
+                    await otherProduct.save();
+                }
+            }
+        }
+        
+
+          cartItem.quantity = quantity;
+          cart.subtotal += cartItem.price * cartItem.quantity;
+          cartItem.reservationTimestamp = Date.now();
   
           cart.markModified('cartItems');
           await cart.save();
@@ -36,10 +70,117 @@ const updateItemQuantity = async (req, res) => {
         }
       }
     } catch (error) {
+        console.log(error);
       return res.status(500).json({ error });
     }
   };
   
+
+// const addItemToCart = async (req, res) => {
+//     const { id } = req.body;
+//     const { user } = req.body;
+//     const { product, quantity, price } = req.body.cartItems[0];
+    
+//     if (!product || !quantity || !price) {
+//         return res.status(400).json({ error: "Missing required parameters" });
+//     }
+
+//     const foundProduct = await Product.findById(product);
+
+//     if (!foundProduct) {
+//         return res.status(404).json({ error: "Invalid product" });
+//     }
+
+//     if (isNaN(quantity) || typeof quantity !== 'number') {
+//         return res.status(400).json({ error: "Invalid quantity" });
+//     }
+
+//     if (isNaN(price) || typeof price !== 'number') {
+//         return res.status(400).json({ error: "Invalid price" });
+//     }
+
+//     const name = foundProduct.name;
+
+//     if (quantity > foundProduct.quantity - foundProduct.reserved) {
+//         return res.status(400).json({ error: "Requested quantity exceeds available stock" });
+//     }
+
+//     try {
+//         const cart = await Cart.findById(id);
+//         if (!cart) {
+//             const newCart = new Cart({
+//                 cartItems: [{ name, product, quantity, price }],
+//                 subtotal: price * quantity
+//             });
+//             await newCart.save();
+//             if(user) {
+//                 await User.findByIdAndUpdate(user, { cart: newCart._id });
+//             }
+
+//             foundProduct.reserved += quantity;
+//             await foundProduct.save();
+
+//             return res.status(201).json({ cart: newCart });
+//         } else {
+//             const cartItem = cart.cartItems.find(c => c.product.equals(product))
+//             if (cartItem) {
+//                 cartItem.quantity += quantity;
+//                 cart.subtotal += price * quantity;
+//                 if(cartItem.reservationTimestamp === null) {
+//                     cartItem.reservationTimestamp = new Date();
+//                     foundProduct.reserved += cartItem.quantity;
+//                 }
+//             } else {
+//                 cart.cartItems.push({ name, product, quantity, price });
+//                 cart.subtotal += price * quantity;
+//             }
+
+//             foundProduct.reserved += quantity;
+//             await foundProduct.save();
+
+//             for (const item of cart.cartItems) {
+//                 if (!item.product.equals(product)) {
+//                   item.reservationTimestamp = new Date();
+//                   const otherProduct = await Product.findById(item.product);
+//                   otherProduct.reserved = item.quantity;
+//                   await otherProduct.save();
+//                 }
+//               }
+
+//             const updatedCart = await Cart.findOneAndUpdate({ _id: id }, {
+//               $set: {
+//                 cartItems: cart.cartItems,
+//                 subtotal: cart.subtotal,
+//               },
+//             }, { new: true });
+
+//             return res.status(200).json({ cart: updatedCart });
+//         }
+//     } catch (error) {
+//         console.log(error)
+//         return res.status(500).json({ error });
+//     }
+// };
+
+
+const MAX_RETRIES = 3;
+
+const updateCartWithRetry = async (cartId, update, options, session) => {
+  for (let i = 0; i < MAX_RETRIES; i++) {
+    try {
+      const updatedCart = await Cart.findOneAndUpdate({ _id: cartId }, update, { ...options, session });
+      return updatedCart;
+    } catch (error) {
+      if (error.message && error.message.includes('WriteConflict')) {
+        console.log(`WriteConflict occurred, retrying (${i + 1}/${MAX_RETRIES})`);
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  throw new Error('Max retries reached for updating cart');
+};
 
 const addItemToCart = async (req, res) => {
     const { id } = req.body;
@@ -50,63 +191,99 @@ const addItemToCart = async (req, res) => {
         return res.status(400).json({ error: "Missing required parameters" });
     }
 
-    // Find the product
-    const foundProduct = await Product.findById(product);
-
-    // If the product is not found, return an error message
-    if (!foundProduct) {
-        return res.status(404).json({ error: "Invalid product" });
-    }
-
-    if (isNaN(quantity) || typeof quantity !== 'number') {
-        return res.status(400).json({ error: "Invalid quantity" });
-    }
-
-    if (isNaN(price) || typeof price !== 'number') {
-        return res.status(400).json({ error: "Invalid quantity" });
-    }
-
-    const name = foundProduct.name;
-
-    if (quantity > foundProduct.quantity) {
-        return res.status(400).json({ error: "Requested quantity exceeds available stock" });
-    }
+    const session = await mongoose.startSession();
+    session.startTransaction();
 
     try {
-        const cart = await Cart.findById(id);
+        const foundProduct = await Product.findById(product).session(session);
+
+        if (!foundProduct) {
+            throw new Error("Invalid product");
+        }
+
+        if (isNaN(quantity) || typeof quantity !== 'number') {
+            throw new Error("Invalid quantity");
+        }
+
+        if (isNaN(price) || typeof price !== 'number') {
+            throw new Error("Invalid price");
+        }
+
+        const name = foundProduct.name;
+
+        if (quantity > foundProduct.quantity - foundProduct.reserved) {
+            throw new Error("Requested quantity exceeds available stock");
+        }
+
+        const cart = await Cart.findById(id).session(session);
+
         if (!cart) {
             const newCart = new Cart({
                 cartItems: [{ name, product, quantity, price }],
                 subtotal: price * quantity
             });
-            await newCart.save();
+            await newCart.save({ session });
             if(user) {
-                await User.findByIdAndUpdate(user, { cart: newCart._id });
+                await User.findByIdAndUpdate(user, { cart: newCart._id }, { session });
             }
+
+            foundProduct.reserved += quantity;
+            await foundProduct.save({ session });
+
+            await session.commitTransaction();
+
             return res.status(201).json({ cart: newCart });
         } else {
             const cartItem = cart.cartItems.find(c => c.product.equals(product))
             if (cartItem) {
                 cartItem.quantity += quantity;
                 cart.subtotal += price * quantity;
+                if(cartItem.reservationTimestamp === null) {
+                    cartItem.reservationTimestamp = new Date();
+                    foundProduct.reserved += cartItem.quantity;
+                }
             } else {
                 cart.cartItems.push({ name, product, quantity, price });
                 cart.subtotal += price * quantity;
             }
-            cart.markModified('cartItems');
-            await cart.save();           
-            return res.status(200).json({ cart });
+
+            foundProduct.reserved += quantity;
+            await foundProduct.save({ session });
+
+            for (const item of cart.cartItems) {
+                if (!item.product.equals(product)) {
+                  item.reservationTimestamp = new Date();
+                  const otherProduct = await Product.findById(item.product).session(session);
+                  otherProduct.reserved = item.quantity;
+                  await otherProduct.save({ session });
+                }
+            }
+
+            const updatedCart = await updateCartWithRetry(id, {
+                $set: {
+                  cartItems: cart.cartItems,
+                  subtotal: cart.subtotal,
+                },
+              }, { new: true }, session);
+
+            await session.commitTransaction();
+
+            return res.status(200).json({ cart: updatedCart });
         }
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({ error });
+        console.log(error.message)
+        await session.abortTransaction();
+        return res.status(500).json({ error: error.message || "An error occurred" });
+    } finally {
+    session.endSession();
     }
-};
+    };
 
 
 const removeItemFromCart = async (req, res) => {
     const { id } = req.params;
     const { product } = req.body;
+    console.log("initially triggered")
     if (!product) {
         return res.status(400).json({ error: "Missing required parameters" });
     }
@@ -118,6 +295,8 @@ const removeItemFromCart = async (req, res) => {
     if (!foundProduct) {
         return res.status(404).json({ error: "Invalid product" });
     }
+
+    console.log(foundProduct.name)
     
     try {
         const cart = await Cart.findById(id);
@@ -128,6 +307,11 @@ const removeItemFromCart = async (req, res) => {
             if (!cartItem) {
                 return res.status(404).json({ error: "Item not found in cart" });
             } else {
+                if(cartItem.reservationTimestamp !== null) {
+                    console.log("triggered")
+                    foundProduct.reserved -= cartItem.quantity;
+                    await foundProduct.save();
+                }
                 cart.subtotal -= cartItem.price * cartItem.quantity;
                 cart.cartItems.pull(cartItem);
                 cart.markModified('cartItems');
@@ -144,13 +328,13 @@ const getUserCart = async (req, res) => {
     const { id } = req.params 
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such product'})
+        return res.status(404).json({error: 'No such cart'})
     }
 
     const cart = await Cart.findById(id)
 
     if (!cart) {
-        return res.status(404).json({error: 'No such product'})
+        return res.status(404).json({error: 'No such cart'})
     }
 
     res.status(200).json(cart)

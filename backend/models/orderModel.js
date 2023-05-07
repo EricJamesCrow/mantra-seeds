@@ -137,6 +137,7 @@ orderSchema.statics.updateInventory = async function(items) {
         const product = await Product.findById(item.product);
         if (product) {
           product.quantity -= item.quantity;
+          product.reserved -= item.quantity;
           await product.save();
         }
       }

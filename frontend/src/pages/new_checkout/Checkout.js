@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { setError, setErrorName } from '../../redux/slices/notificationsSlice';
+import { useNavigate } from 'react-router-dom';
 
 // chakra ui
 import { CheckCircleIcon } from '@chakra-ui/icons';
@@ -19,6 +21,44 @@ export default function Checkout() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const { shipping } = useSelector((state) => state.shipping);
+  const navigate = useNavigate();
+
+  const checkInventory = async () => {
+    try {
+      const response = await fetch('/api/checkout/check-inventory', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cartId: cart._id }),
+      });
+  
+      if (!response.ok) {
+        const error = await response.json();
+        dispatch(setError(true))
+        dispatch(setErrorName(error.error));
+        setTimeout(() => {
+          dispatch(setError(false));
+        }, 100);
+        navigate('/cart');
+      }
+    } catch (err) {
+      const errorMessage = JSON.parse(err.message);
+      dispatch(setError(true))
+      dispatch(setErrorName(errorMessage.error));
+      setTimeout(() => {
+        dispatch(setError(false));
+      }, 100);
+      navigate('/cart');
+    }
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      checkInventory();
+    }, 0.5 * 60 * 1000);
+  
+    return () => clearInterval(intervalId);
+  }, []);
+  
 
   return (
     <div className="checkout-container">

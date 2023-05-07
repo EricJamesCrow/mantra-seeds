@@ -34,7 +34,7 @@ export default function Cart() {
       const response = await fetch('/api/checkout/check-inventory', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cart.cartItems }),
+        body: JSON.stringify({ cartId: cart._id }),
       });
   
       if (response.ok) {

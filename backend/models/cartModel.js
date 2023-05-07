@@ -22,7 +22,8 @@ const cartSchema = new mongoose.Schema({
         price: {
             type: Number,
             required: true
-        }
+        },
+        reservationTimestamp: { type: Date, default: Date.now }
     }],
     subtotal: {
         type: Number,

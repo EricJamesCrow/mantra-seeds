@@ -26,7 +26,8 @@ const productSchema = new Schema({
     quantity: {
         type: Number,
         required: true
-    }
+    },
+    reserved: { type: Number, default: 0 }
 }, { timestamps: true})
 
 module.exports = mongoose.model('Product', productSchema)

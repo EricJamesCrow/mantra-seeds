@@ -17,6 +17,9 @@ const stripeRoutes = require('./routes/payment/stripe')
 const paypalRoutes = require('./routes/payment/paypal')
 const contactRoutes = require('./routes/contact')
 
+// inventory
+const { releaseReservedItems } = require('./utilities/inventoryUtils')
+
 // express app
 const app = express()
 
@@ -57,6 +60,7 @@ mongoose.connect(process.env.MONGO_URI)
         app.listen(process.env.PORT, () => {
             console.log('connected to db & listening on port', process.env.PORT)
         })
+        setInterval(releaseReservedItems, 5 * 60 * 1000);
     })
     .catch((error) => {
         console.log(error)
