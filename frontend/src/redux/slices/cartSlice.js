@@ -42,6 +42,14 @@ const cartSlice = createSlice({
         state._id = null;
         state.cartItems = null;
         state.subtotal = 0;
+        let user = localStorage.getItem('user');
+        if(user) {
+          user = JSON.parse(user);
+          delete user.cart;
+          localStorage.setItem('user', JSON.stringify(user));
+        } else {
+          localStorage.removeItem('cart');
+        }
       }
     }
   });

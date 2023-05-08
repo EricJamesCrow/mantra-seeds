@@ -18,7 +18,7 @@ import BitcoinSvg from "../../../images/payment_logos/Bitcoin-Logo.wine.svg"
 import StripeContainer from './stripe/StripeContainer'
 import PayPal from './paypal/PayPal'
 
-export default function Payment( { setCurrentStep, shipping, cart, user, dispatch } ) {
+export default function Payment( { setCurrentStep, shipping, cart, user, dispatch, checkInventory } ) {
     const isDesktop = useMediaQuery({ minWidth: 980 });
     const [ encrypted, setEncrypted ] = useState(false);
     const [ value, setValue ] = useState(0);
@@ -124,7 +124,7 @@ export default function Payment( { setCurrentStep, shipping, cart, user, dispatc
             />
             <img src={PayPalSvg}/>
           </div>
-          {encrypted && value === "paypal" && <PayPal cart={cart} shipping={shipping} user={user} dispatch={dispatch} clearCart={clearCart}/>}
+          {encrypted && value === "paypal" && <PayPal cart={cart} shipping={shipping} user={user} dispatch={dispatch} clearCart={clearCart} checkInventory={checkInventory}/>}
         </div>
         <div className="payment-option-container">
           <div>

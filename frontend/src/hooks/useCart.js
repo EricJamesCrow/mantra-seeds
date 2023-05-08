@@ -25,6 +25,7 @@ export const useCart = () => {
       }
 
     const fetchUserCart = async (user) => {
+        // refactor this incase there is no user.cart
         const response = await fetch(CARTS_API_URL+user.cart);
         const json = await response.json();
     

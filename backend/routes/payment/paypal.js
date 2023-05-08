@@ -7,6 +7,7 @@ const forge = require('node-forge');
 const axios = require('axios');
 
 // models
+const Product = require('../../models/productModel')
 const Cart = require('../../models/cartModel')
 const Order = require('../../models/orderModel')
 const Transaction = require('../../models/transactionModel')
@@ -45,11 +46,12 @@ const createOrder = async (req, res) => {
         const email = cart.email;
         const shipping = cart.shipping;
         const total = cart.subtotal + finalShippingPrice
+        const checkInventoryResult = await checkInventory(id);
         var transaction = await Transaction.createTransaction(transactionId, "PayPal", total, "Pending")
         transaction = transaction._id
         const userId = user ? user._id : null;
         // make this so create order adds the cart. this will be a unique id the webhook can find later
-        const order = await Order.createOrder(userId, transaction, id, address, items, email, shipping, total);
+        const order = await Order.createOrder(userId, transaction, id, address, items, email, shipping, total, checkInventoryResult);
         if (user) {
             await Cart.findByIdAndUpdate(id, { status: "inactive" });
             await User.findByIdAndUpdate(userId, { $unset: { cart: "" } });
@@ -65,6 +67,37 @@ const createOrder = async (req, res) => {
         })
     }
 }
+
+const checkInventory = async (cartId) => {
+    try {
+      // Fetch the cart from MongoDB
+      const cart = await Cart.findById(cartId);
+  
+      // Iterate over cart items from the database
+      for (const item of cart.cartItems) {
+        const product = await Product.findById(item.product);
+        if (!product || (product.quantity - product.reserved) < item.quantity) {
+          return false;
+        }
+  
+        // If the reservationTimestamp is null, reserve the item again and update the timestamp
+        if (item.reservationTimestamp === null) {
+          item.reservationTimestamp = new Date();
+          product.reserved += item.quantity;
+          await product.save();
+        }
+      }
+  
+      cart.markModified('cartItems');
+      await cart.save();
+  
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+  
 
 
 const webhook = async (req, res) => {

@@ -54,7 +54,7 @@ export default function Checkout() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       checkInventory();
-    }, 0.5 * 60 * 1000);
+    }, 5 * 60 * 1000);
   
     return () => clearInterval(intervalId);
   }, []);
@@ -149,6 +149,7 @@ export default function Checkout() {
           cart={cart}
           user={user}
           dispatch={dispatch}
+          checkInventory={checkInventory}
         />
       )}
     </div>

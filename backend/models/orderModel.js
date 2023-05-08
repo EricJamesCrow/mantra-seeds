@@ -111,6 +111,11 @@ const orderSchema = new mongoose.Schema({
         ref: 'Total',
         required: false
     },
+    refund: {
+        type: Boolean,
+        ref: 'Refund',
+        required: false
+    },
     deliveryStatus: {
         type: String,
         ref: 'DeliveryStatus',
@@ -147,8 +152,14 @@ orderSchema.statics.updateInventory = async function(items) {
     }
 };
   
-orderSchema.statics.createOrder = async (user, transaction, cart, address, items, email, shipping, total) => {
+orderSchema.statics.createOrder = async (user, transaction, cart, address, items, email, shipping, total, checkInventoryResult) => {
 try {
+    let refund = false;
+
+    if (!checkInventoryResult) {
+      refund = true;
+    }
+
     // create order
     const order = await Order.create({
     user,
@@ -159,9 +170,8 @@ try {
     email,
     shipping,
     total,
+    refund
     });
-
-    await Order.updateInventory(items);
 
     const decryptedAddress = decryptAddress(address);
 
@@ -174,12 +184,26 @@ try {
 
     const decryptedEmail = decrypt(email);
 
-    // Send order confirmation email
-    const emailParams = {
-    from: process.env.ORDER_CONFIRMATION_EMAIL,
-    to: decryptedEmail,
-    subject: `Order ${order.orderNumber} confirmation`,
-    html: `
+    let subject, html;
+
+    if (checkInventoryResult) {
+       await Order.updateInventory(items);
+       subject = `Order ${order.orderNumber} confirmation`;
+       html = `
+       <h1>Order Confirmation</h1>
+       <p>Thank you for your order at Mantra Seeds! Your order details are as follows:</p>
+       <ul>
+       ${generateOrderDetailsHtml(items)}
+       </ul>
+       <p><strong>Shipping Address:</strong></p>
+       <p>${formattedAddress}</p>
+       <p><strong>Shipping Method:</strong> ${shipping.delivery}</p>
+       <p><strong>Total:</strong> ${(total / 100).toFixed(2)} (USD)</p>
+       <p>If you have any questions, please contact our support team.</p>
+   `
+    } else {
+        subject = `Order ${order.orderNumber} confirmation (Inventory Error)`;
+        html = `
         <h1>Order Confirmation</h1>
         <p>Thank you for your order at Mantra Seeds! Your order details are as follows:</p>
         <ul>
@@ -189,8 +213,16 @@ try {
         <p>${formattedAddress}</p>
         <p><strong>Shipping Method:</strong> ${shipping.delivery}</p>
         <p><strong>Total:</strong> ${(total / 100).toFixed(2)} (USD)</p>
-        <p>If you have any questions, please contact our support team.</p>
+        <p>Unfortunately, one or more of the items in your order is out of stock. We apologize for the inconvenience. Please contact our support team for more information.</p>
     `
+    }
+
+    // Send order confirmation email
+    const emailParams = {
+    from: process.env.ORDER_CONFIRMATION_EMAIL,
+    to: decryptedEmail,
+    subject: subject,
+    html: html
     };
 
     await sendEmail(emailParams);

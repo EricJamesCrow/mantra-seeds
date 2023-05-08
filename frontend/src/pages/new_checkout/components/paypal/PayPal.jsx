@@ -4,7 +4,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 const PAYPAL_API_URL = '/api/payment/paypal/'
 
-export default function PayPal( {cart, shipping, user, dispatch, clearCart}) {
+export default function PayPal( {cart, shipping, user, dispatch, clearCart, checkInventory}) {
     const [sandbox, setSandbox] = useState(null)
     const [total, setTotal] = useState(null)
 
@@ -43,18 +43,28 @@ export default function PayPal( {cart, shipping, user, dispatch, clearCart}) {
         "client-id": sandbox
     }}>
        <PayPalButtons
-            createOrder={(data, actions) => {
-            return actions.order.create({
-                purchase_units: [
-                    {
+            createOrder={async (data, actions) => {
+                try {
+                  // Call the checkInventory function before creating the order
+                  await checkInventory();
+              
+                  // If everything is fine, proceed with order creation
+                  return actions.order.create({
+                    purchase_units: [
+                      {
                         amount: {
-                            value: total,
+                          value: total,
                         },
-                        custom_id: cart._id
-                    },
-                ],
-            });
-        }}
+                        custom_id: cart._id,
+                      },
+                    ],
+                  });
+                } catch (error) {
+                  console.log("Inventory check failed:", error);
+                  // Show an error message or handle it accordingly
+                  // Here, you can use a state variable to display an error message, for example
+                }
+              }}
         onApprove={(data, actions) => {
           return actions.order.capture().then((details) => {
               const transactionId = details.purchase_units[0].payments.captures[0].id;
@@ -72,9 +82,6 @@ export default function PayPal( {cart, shipping, user, dispatch, clearCart}) {
                   body: JSON.stringify(requestBody)
               }).then((response) => {
                   if (response.ok) {
-                    if (!user) {
-                        localStorage.removeItem("cart");
-                    }
                     dispatch(clearCart())
                   }
               }).catch(error => {
