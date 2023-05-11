@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux"
 
 import { logoutAuth } from "../redux/slices/authSlice"
 import { clearCart } from "../redux/slices/cartSlice"
+import { clearOrders } from "../redux/slices/ordersSlice"
 
 export const useLogout = () => {
     const dispatch = useDispatch()
@@ -13,6 +14,7 @@ export const useLogout = () => {
         // dispatch logout action
         dispatch(logoutAuth())
         dispatch(clearCart())
+        dispatch(clearOrders())
     }
 
     return { logout }

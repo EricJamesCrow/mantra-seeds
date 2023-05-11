@@ -24,18 +24,23 @@ export const useCart = () => {
         }
       }
 
-    const fetchUserCart = async (user) => {
-        // refactor this incase there is no user.cart
-        const response = await fetch(CARTS_API_URL+user.cart);
-        const json = await response.json();
-    
-        if (response.ok) {
-          dispatch(setCart(json));
+      const fetchUserCart = async (user) => {
+        if (!user || !user.cart) {
+          dispatch(setCart({_id: null, cartItems: null, subtotal: 0}));
+          return;
         }
-        if (!response.ok) {
-            dispatch(setCart({_id: null, cartItems: null, subtotal: 0}));
+      
+        try {
+          const response = await fetch(CARTS_API_URL+user.cart);
+          if (!response.ok) {
+            throw new Error('Cart not found');
           }
-      }
+          const json = await response.json();
+          dispatch(setCart(json));
+        } catch (error) {
+          dispatch(setCart({_id: null, cartItems: null, subtotal: 0}));
+        }
+      }      
 
     const handleDelete = async (id, product) => { 
         const response = await fetch(CARTS_API_URL+id, {
@@ -45,7 +50,7 @@ export const useCart = () => {
               product: product._id
           })
       });
-        const json = await response.json(); // need to refactor backend so the response is the cart object
+        const json = await response.json();
         if(response.ok) {
           dispatch(deleteItem(json));
           dispatch(setRemovedItem(true));

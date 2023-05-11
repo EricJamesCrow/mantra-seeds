@@ -38,6 +38,13 @@ const useAddToCart = () => {
             const json = await response.json();
             dispatch(updateCart(json.cart))
             dispatch(setAddToCart(true))
+
+            // If there is a user and no user.cart, append the cart to the user
+            if (user && !user.cart) {
+                user.cart = json.cart._id;
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+
             setTimeout(() => {
                 dispatch(setAddToCart(false));
               }, 100);

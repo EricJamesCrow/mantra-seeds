@@ -18,6 +18,9 @@ import BitcoinSvg from "../../../images/payment_logos/Bitcoin-Logo.wine.svg"
 import StripeContainer from './stripe/StripeContainer'
 import PayPal from './paypal/PayPal'
 
+// styles
+import './Payment.css'
+
 export default function Payment( { setCurrentStep, shipping, cart, user, dispatch, checkInventory } ) {
     const isDesktop = useMediaQuery({ minWidth: 980 });
     const [ encrypted, setEncrypted ] = useState(false);
@@ -97,16 +100,19 @@ export default function Payment( { setCurrentStep, shipping, cart, user, dispatc
           </div>
         </div>
       </div>
-      {isDesktop && <div className="alternative-link-container">
+      {/* {isDesktop && <div className="alternative-link-container">
         <div className="alternative-link">
           <div>Submit Order</div>
           <ChevronRightIcon w={6} h={6}/>
         </div>
-      </div>}
+      </div>} */}
       </div>
       <div className="payment-method-wrapper">
       <h1>Choose a payment method</h1>
-      <div className="review-order-containers">
+      <div className="paypal-wrapper">
+        <PayPal cart={cart} shipping={shipping} user={user} dispatch={dispatch} clearCart={clearCart} checkInventory={checkInventory}/>
+      </div>
+      {/* <div className="review-order-containers">
       <RadioGroup onChange={setValue} value={value}>
         <div className={value === "stripe" ? "payment-option-container stripe" : "payment-option-container"}>
           <div>
@@ -136,13 +142,13 @@ export default function Payment( { setCurrentStep, shipping, cart, user, dispatc
           {encrypted && value === "bitcoin" && <PayPal cart={cart} shipping={shipping}/>}
         </div>
       </RadioGroup>
-      </div>
-      {!isDesktop && <div className="alternative-link-container shipping">
+      </div> */}
+      {/* {!isDesktop && <div className="alternative-link-container shipping">
         <div className="alternative-link">
           <div>Submit Order</div>
           <ChevronRightIcon w={6} h={6}/>
         </div>
-      </div>}
+      </div>} */}
       </div>
     </div>
   )

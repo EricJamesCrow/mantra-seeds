@@ -8,8 +8,15 @@ import { ChevronRightIcon } from '@chakra-ui/icons'
 import { updateShipping } from '../../../redux/slices/shippingSlice';
 
 export default function Shipping( { setCurrentStep, shipping, dispatch } ) {
-  const [ shippingMethods, setShippingMethods ] = useState([]);
-  const [ selectedShipping, setSelectedShipping ] = useState(null);
+  const freeShippingMethod = {
+    provider: 'Free Shipping',
+    service_level: '',
+    amount: 0,
+    estimated_days: 'Estimated Delivery 3 - 7 days'
+  };
+
+  const [ shippingMethods, setShippingMethods ] = useState([freeShippingMethod]);
+  const [ selectedShipping, setSelectedShipping ] = useState(freeShippingMethod);
 
   const handleShippingSelection = (value) => {
     setSelectedShipping(shippingMethods[value]);
@@ -23,34 +30,34 @@ export default function Shipping( { setCurrentStep, shipping, dispatch } ) {
     setCurrentStep(3);
   }
 
-  // Shipping API
-  const calculateShipping = async (shipping) => {
-    const response = await fetch('/api/shipping', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({shipping})
-    })
-    const shippingOptions = await response.json()
+  // // Shipping API
+  // const calculateShipping = async (shipping) => {
+  //   const response = await fetch('/api/shipping', {
+  //     method: 'POST',
+  //     headers: {'Content-Type': 'application/json'},
+  //     body: JSON.stringify({shipping})
+  //   })
+  //   const shippingOptions = await response.json()
 
-    if(!response.ok) {
-      console.log(shippingOptions.error)
-    }
+  //   if(!response.ok) {
+  //     console.log(shippingOptions.error)
+  //   }
 
-    if(response.ok) {
-      shippingOptions.forEach(method => {
-        const today = new Date();
-        let delivery = new Date();
-        delivery.setDate(today.getDate() + parseInt(method.estimated_days));
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        method.estimated_days = "Estimated delivery " + delivery.toLocaleDateString("en-US", options);
-    });
-      setShippingMethods(shippingOptions);
-    }
-  };
+  //   if(response.ok) {
+  //     shippingOptions.forEach(method => {
+  //       const today = new Date();
+  //       let delivery = new Date();
+  //       delivery.setDate(today.getDate() + parseInt(method.estimated_days));
+  //       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  //       method.estimated_days = "Estimated delivery " + delivery.toLocaleDateString("en-US", options);
+  //   });
+  //     setShippingMethods(shippingOptions);
+  //   }
+  // };
 
-  useEffect(() => {
-    calculateShipping(shipping);
-  }, [shipping]);
+  // useEffect(() => {
+  //   calculateShipping(shipping);
+  // }, [shipping]);
 
   return (
     <div className="shipping-wrapper">

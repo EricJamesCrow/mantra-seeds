@@ -66,14 +66,7 @@ export default function OrderHistory() {
         return 'Paid';
       }
       return status;
-    }
-
-    function toTitleCase(str) {
-      return str.toLowerCase().split(' ').map(function(word) {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-      }).join(' ');
-    }
-  
+    }  
   
     const indexOfLastItem = currentPage * itemsPerPage; // pagination
     const indexOfFirstItem = indexOfLastItem - itemsPerPage; // pagination
