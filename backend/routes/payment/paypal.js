@@ -146,13 +146,14 @@ const verify = async (req, res, next) => {
     }
 
     const validationString = `${transmissionId}|${transmissionTime}|${WEBHOOK_ID}|${unsigned_crc}`
-
     const certResult = await axios.get(certUrl)
     const cert = forge.pki.certificateFromPem(certResult.data);
     const publicKey = forge.pki.publicKeyToPem(cert.publicKey);
     const verify = crypto.createVerify('RSA-SHA256');
     verify.update(validationString);
     const result = verify.verify(publicKey, signature, 'base64')
+
+    console.log(result)
 
     if (result) {
         // The signature is verified

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { useSelector } from 'react-redux'
 
@@ -9,7 +9,6 @@ import Loading from '../../components/loading/loading'
 import './OrderSuccess.css'
 
 export default function OrderSuccess() {
-  const user = useSelector(state => state.auth.user);
   const order = useSelector(state => state.orders.order);
 
   function mapStatusToFriendlyStatus(status) {
@@ -19,7 +18,7 @@ export default function OrderSuccess() {
     return status;
   }
 
-    if(!user || !order) return <Loading/>
+    if(!order) return <Loading/>
 
   return (
     <>
