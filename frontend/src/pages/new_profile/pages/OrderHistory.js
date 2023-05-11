@@ -60,6 +60,20 @@ export default function OrderHistory() {
     const handleSelect = (e) => {
       setItemsPerPage(e.target.value)
     }
+
+    function mapStatusToFriendlyStatus(status) {
+      if (status === 'PAYMENT.CAPTURE.COMPLETED') {
+        return 'Paid';
+      }
+      return status;
+    }
+
+    function toTitleCase(str) {
+      return str.toLowerCase().split(' ').map(function(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }).join(' ');
+    }
+  
   
     const indexOfLastItem = currentPage * itemsPerPage; // pagination
     const indexOfFirstItem = indexOfLastItem - itemsPerPage; // pagination
@@ -70,10 +84,8 @@ export default function OrderHistory() {
       orderNumber: order.orderNumber,
       dateCreated: order.createdAt,
       orderTotal: order.total,
-      paymentStatus: "pending",
-      deliveryStatus: "Not Shipped",
-      var4: "false",
-      var5: "Pending"
+      paymentStatus: mapStatusToFriendlyStatus(order.transaction.status),
+      deliveryStatus: order.deliveryStatus
     }));
     
   return (
@@ -114,7 +126,7 @@ export default function OrderHistory() {
             <div className="customer-orders-wrapper">
             {ordersData.map(order => (
             <Order
-            key={order}
+            key={order.id}
             id={order.id}
             orderNumber={order.orderNumber}
             date={order.dateCreated}

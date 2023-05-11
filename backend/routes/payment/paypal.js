@@ -50,7 +50,7 @@ const createOrder = async (req, res) => {
         const checkInventoryResult = await checkInventory(id);
         var transaction = await Transaction.createTransaction(transactionId, "PayPal", total, "Pending")
         transaction = transaction._id
-        const userId = user ? user._id : null;
+        const userId = user ? user.id : null;
         // make this so create order adds the cart. this will be a unique id the webhook can find later
         let order = await Order.createOrder(userId, transaction, id, address, items, email, shipping, total, checkInventoryResult);
         if (user) {

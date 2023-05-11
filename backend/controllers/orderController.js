@@ -47,22 +47,40 @@ const getOrder = async (req, res) => {
 };
 
 const getAllUserOrders = async (req, res) => {
-    const { id } = req.params;
-    const orders = await Order.find({ user: id });
+  const { id } = req.params;
+  const orders = await Order.aggregate([
+    {
+      $match: {
+        user: new mongoose.Types.ObjectId(id),
+      },
+    },
+    {
+      $lookup: {
+        from: 'transactions',
+        localField: 'transaction',
+        foreignField: '_id',
+        as: 'transaction',
+      },
+    },
+    {
+      $unwind: '$transaction',
+    },
+  ]);
 
-    if (!orders) {
-        return res.status(404).json({ error: 'No orders found for this user' });
-    }
+  if (!orders) {
+    return res.status(404).json({ error: 'No orders found for this user' });
+  }
 
-    orders.forEach(order => {
-        const address = order.address;
-        order.address = decryptAddress(address);
-        const email = order.email;
-        order.email = decrypt(email);
-    });
+  orders.forEach(order => {
+    const address = order.address;
+    order.address = decryptAddress(address);
+    const email = order.email;
+    order.email = decrypt(email);
+  });
 
-    res.status(200).json(orders);
+  res.status(200).json(orders);
 };
+
 
 
 const getAllOrdersWithTransactions = async () => {

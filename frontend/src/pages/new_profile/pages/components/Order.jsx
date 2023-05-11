@@ -17,10 +17,21 @@ export default function Order( { id, orderNumber, date, orderTotal, paymentStatu
     }).join(' ');
   }
 
+  function getShippingStatusIndicator(status) {
+    if (status === 'Not Shipped') {
+      return 'false';
+    } else if (status === 'Shipped') {
+      return 'pending';
+    } else if (status === 'Delivered') {
+      return 'true';
+    }
+    return undefined;
+  }
+
   const cardDetails = [
     { id: 1, title: 'Order Total', value: `$${(orderTotal/100).toFixed(2)}`, class: 'gray'},
-    { id: 2, title: 'Payment Status', value: toTitleCase(paymentStatus), status: paymentStatus.toLowerCase()},
-    { id: 3, title: 'Delivery Status', value: deliveryStatus, class: 'gray', status: 'false'},
+    { id: 2, title: 'Payment Status', value: paymentStatus, status: paymentStatus.toLowerCase()},
+    { id: 3, title: 'Delivery Status', value: deliveryStatus, class: 'gray', status: getShippingStatusIndicator(deliveryStatus)},
   ]
 
   return (
