@@ -5,6 +5,7 @@ const crypto = require("crypto");
 const CRC32 = require('crc-32')
 const forge = require('node-forge');
 const axios = require('axios');
+const { decrypt, decryptAddress } = require('../../helpers/encryption-helper');
 
 // models
 const Product = require('../../models/productModel')
@@ -51,13 +52,20 @@ const createOrder = async (req, res) => {
         transaction = transaction._id
         const userId = user ? user._id : null;
         // make this so create order adds the cart. this will be a unique id the webhook can find later
-        const order = await Order.createOrder(userId, transaction, id, address, items, email, shipping, total, checkInventoryResult);
+        let order = await Order.createOrder(userId, transaction, id, address, items, email, shipping, total, checkInventoryResult);
         if (user) {
             await Cart.findByIdAndUpdate(id, { status: "inactive" });
             await User.findByIdAndUpdate(userId, { $unset: { cart: "" } });
         }
         // create update inventory function
-    return res.status(200).send({ success: "Order created", order })
+
+        // Populate transaction info in the order
+        order = await Order.findById(order._id).populate('transaction');
+        const encryptedAddress = order.address;
+        order.address = decryptAddress(encryptedAddress);
+        const encryptedEmail = order.email;
+        order.email = decrypt(encryptedEmail);
+        return res.status(200).send({ success: "Order created", order })
     } catch (e) {
         console.log(e)
         return res.status(400).send({
@@ -115,6 +123,7 @@ const webhook = async (req, res) => {
         }
         return res.status(200).send({ success: "Webhook event processed" });
     } catch (error) {
+        console.log(error)
         return res.status(400).send({ error: "Webhook event processing failed" });
     }
 

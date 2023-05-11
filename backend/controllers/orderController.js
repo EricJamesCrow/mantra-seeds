@@ -27,7 +27,7 @@ fs.writeFileSync('./public.pem', publicKey);
 
 const getOrder = async (req, res) => {
     const { id } = req.params;
-    const order = await Order.findById(id);
+    const order = await getOrderWithTransaction(id);
 
     if (!order) {
         return res.status(404).json({ error: 'No such order' });
@@ -136,7 +136,7 @@ const getOrderWithTransaction = async (orderId) => {
   const result = await Order.aggregate([
     {
       $match: {
-        _id: mongoose.Types.ObjectId(orderId),
+        _id: new mongoose.Types.ObjectId(orderId),
       },
     },
     {

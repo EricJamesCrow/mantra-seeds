@@ -3,9 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const ordersSlice = createSlice({
   name: 'orders',
   initialState: {
-    orders: null
+    orders: [],
+    order: null,
   },
   reducers: {
+    setOrder: (state, action) => {
+      state.order = action.payload;
+      state.orders.push(action.payload);
+    },
     setOrders: (state, action) => {
       state.orders = action.payload;
     },
@@ -17,6 +22,6 @@ const ordersSlice = createSlice({
   },
 });
 
-export const { setOrders, updateOrders } = ordersSlice.actions;
+export const { setOrder, setOrders, updateOrders } = ordersSlice.actions;
 
 export default ordersSlice.reducer;
