@@ -77,6 +77,7 @@ const updateItemQuantity = async (req, res) => {
   
 
 const addItemToCart = async (req, res) => {
+    console.log("triggered")
     const { id } = req.body;
     const { user } = req.body;
     const { product, quantity, price } = req.body.cartItems[0];
