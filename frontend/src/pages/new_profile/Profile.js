@@ -54,9 +54,9 @@ export default function Profile() {
             <div className="user-profile-and-btns-wrapper">
                 <div className="user-profile-container">
                     <div className="avatar-and-info">
-                        <Avatar name='Eric Crow' w='16' h='16'/>
+                        <Avatar name='' w='16' h='16'/>
                         <div className='name-and-email-container'>
-                            <div>Eric Crow</div>
+                            <div></div>
                             <div>{user.email}</div>
                         </div>
                     </div>
