@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alex+Brush:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .landing-page-container {
-    background-image: url('../../images/home/background_image.svg');
+    background-image: url('https://mantra-seeds-images.s3.us-west-2.amazonaws.com/background_image.svg');
     background-repeat: no-repeat;
     background-size: calc(1728px*1.15) calc(1117px*1.05);
     background-position: center -360px;
