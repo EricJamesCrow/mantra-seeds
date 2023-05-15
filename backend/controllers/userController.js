@@ -112,7 +112,7 @@ const signupUser = async (req, res) => {
             }
         }
 
-        const confirmationLink = `http://localhost:3000/confirm-account/${confirmationToken}`;
+        const confirmationLink = `${process.env.WEBSITE_URL}/confirm-account/${confirmationToken}`;
         
         const emailParams = {
             from: process.env.USER_SIGNUP_CONFIRMATION_EMAIL,
@@ -318,7 +318,7 @@ const requestResetPassword = async (req, res) => {
         await user.save();
 
         // Create a password reset link containing the token
-        const resetLink = `http://localhost:3000/reset-password/${token}`;
+        const resetLink = `${process.env.WEBSITE_URL}/reset-password/${token}`;
 
         // Send the password reset link to the user's email
         const emailParams = {
