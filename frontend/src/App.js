@@ -175,6 +175,7 @@ function App() {
         <Route path="/profile" element={JSON.parse(localStorage.getItem('user')) ? <Profile /> : <Navigate to="/login"/>} />
         <Route path="/profile/order-history" element={JSON.parse(localStorage.getItem('user')) ? <OrderHistory/> : <Navigate to="/login"/>} />
         <Route path="/profile/order-history/:id" element={JSON.parse(localStorage.getItem('user')) ? <OrderPage/> : <Navigate to="/login"/>} />
+        <Route path="/order-details/:id" element={<OrderPage/>} />
         <Route path="/profile/change-password" element={JSON.parse(localStorage.getItem('user')) ? <ChangePassword/> : <Navigate to="/login"/>} />
 
         <Route path="*" element={<NotFound/>} />

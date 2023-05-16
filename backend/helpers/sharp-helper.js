@@ -1,13 +1,13 @@
 const sharp = require('sharp');
 
+const WIDTH = 420;
+const HEIGHT = 420;
+
 // Resize image
-const resizeImage = async (image) => {
-    const width = 420;
-    const height = 420;
-  
+const resizeImage = async (image) => { 
     try {
       const outputBuffer = await sharp(image.buffer)
-        .resize(width, height, {
+        .resize(WIDTH, HEIGHT, {
           fit: 'cover',
           position: 'center',
         })

@@ -2,3 +2,21 @@
     color: #0BADA2;
     margin-left: 2px;
   }
+
+.terms-and-conditions-wrapper {
+  display: flex;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 16px;
+  align-items: center; /* Add this line to vertically center the content */
+  margin-bottom: 16px;
+}
+
+.terms-and-conditions-wrapper > a {
+  margin-left: 4px;
+  margin-top: 0;
+}
+
+.terms-and-conditions-wrapper > a:hover {
+  text-decoration: underline;
+}

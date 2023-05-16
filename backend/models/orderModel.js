@@ -173,6 +173,46 @@ try {
     refund
     });
 
+    const getOrderWithTransactionAndProductDetails = async (orderId) => {
+        const result = await Order.aggregate([
+            {
+                $match: {
+                    _id: new mongoose.Types.ObjectId(orderId),
+                },
+            },
+            {
+                $lookup: {
+                    from: 'transactions',
+                    localField: 'transaction',
+                    foreignField: '_id',
+                    as: 'transaction',
+                },
+            },
+            { $unwind: "$items" },
+            {
+                $lookup: {
+                    from: 'products',
+                    localField: 'items.product',
+                    foreignField: '_id',
+                    as: 'items.product',
+                },
+            },
+            { $unwind: "$items.product" },
+            {
+                $group: {
+                    _id: "$_id",
+                    items: { $push: "$items" },
+                    transaction: { $first: "$transaction" }
+                    // Add any other fields from the Order document that you need
+                }
+            }
+        ]);
+        return result[0];
+    };
+    
+
+    const orderWithDetails = await getOrderWithTransactionAndProductDetails(order._id);
+
     const decryptedAddress = decryptAddress(address);
 
     const formattedAddress = `
@@ -184,22 +224,147 @@ try {
 
     const decryptedEmail = decrypt(email);
 
+    let itemsHtml = '';
+    for (const item of orderWithDetails.items) {
+        itemsHtml += `
+        <div style="margin: 12px">
+            <div style="border-radius: 5px; padding: 12px 0; margin: 12px 0; width: 100%; max-width: 520px; margin: 0 auto;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <img src="${item.product.image}" style="width: 150px; height: 150px; border-radius: 5px; margin-left: 12px;" />
+                        </td>
+                        <td style="margin-left: 12px; font-weight: 400; font-size: 16px; text-align: left;">
+                            <p>Item: ${item.name}</p>
+                            <p>QTY: ${item.quantity}</p>
+                            <p>Price: $${(item.price / 100).toFixed(2)}</p>
+                            <p>Subtotal: $${((item.price * item.quantity) / 100).toFixed(2)}</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>`;
+    }
+
     let subject, html;
 
     if (checkInventoryResult) {
        await Order.updateInventory(items);
        subject = `Order ${order.orderNumber} confirmation`;
-       html = `
-       <h1>Order Confirmation</h1>
-       <p>Thank you for your order at Mantra Seeds! Your order details are as follows:</p>
-       <ul>
-       ${generateOrderDetailsHtml(items)}
-       </ul>
-       <p><strong>Shipping Address:</strong></p>
-       <p>${formattedAddress}</p>
-       <p><strong>Shipping Method:</strong> ${shipping.delivery}</p>
-       <p><strong>Total:</strong> ${(total / 100).toFixed(2)} (USD)</p>
-       <p>If you have any questions, please contact our support team.</p>
+       html = `<!DOCTYPE html>
+       <html lang="en">
+       <head>
+           <meta charset="UTF-8">
+           <meta http-equiv="X-UA-Compatible" content="IE=edge">
+           <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           <title>Order Confirmation</title>
+           <style>
+               body {
+                   margin: 0;
+                   padding: 0;
+                   font-family: 'Arial', sans-serif;
+               }
+               h1 {
+                   margin: 0;
+                   padding: 0;
+                   text-align: left;
+                   margin: 6px;
+                   margin-left: 24px;
+               }
+               .centered-title {
+                   text-align: center;
+                   margin-top: 24px;
+               }
+           </style>
+       </head>
+       <body>
+           <table width="100%" style="background: #637748; padding: 0 12px; height: 78px;">
+               <tr>
+                   <td>
+                       <h2 style="font-size: 24px; color: #FAFAFA;">MANTRA SEEDS</h2>
+                   </td>
+                   <td align="right">
+                       <img src="https://d3uvzdy3c3m6ij.cloudfront.net/meditating.svg" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 55px; height: 55px;" />
+                   </td>
+               </tr>
+           </table>
+           <div style="margin: 0; padding: 0;">
+               <table width="100%" cellpadding="0" cellspacing="0">
+                   <tr style="text-align: center; background: #C2C5A2; font-family: 'Roboto'; padding: 24px 12px 12px 12px;">
+                       <td colspan="2">
+                           <h1 class="centered-title">Order Confirmation</h1>
+                           <p style="padding: 12px 24px; word-wrap: break-word; font-weight: 400; font-size: 20px;">Thank you for your order at Mantra Seeds! Your order details are as follows:</p>
+                           <h1>Order: #${order.orderNumber}</h1>
+                           <h1>Items</h1>
+                           <!-- Item -->
+                            ${itemsHtml}
+                           <h1>Shipping Details</h1>
+                           <table style="text-align: left; padding: 0; margin: 12px 0; display: inline-block; font-size: 20px;">
+                               <tr>
+                                   <td>${decryptedAddress.firstName} ${decryptedAddress.lastName}</td>
+                               </tr>
+                               <tr>
+                                   <td>${decryptedAddress.street}</td>
+                               </tr>
+                               <tr>
+                                   <td>${decryptedAddress.city}, ${decryptedAddress.state} ${decryptedAddress.zip}</td>
+                               </tr>
+                               <tr>
+                                   <td>United States</td>
+                               </tr>
+                           </table>
+                           <h1>Shipping Method</h1>
+                           <table style="text-align: left; padding: 0; margin: 12px 0; display: inline-block; font-size: 20px;">
+                               <tr>
+                                   <td>${order.shipping.delivery}</td>
+                               </tr>
+                           </table>
+                           <h1>Payment Method</h1>
+                           <table style="text-align: left; padding: 0; margin: 12px 0; display: inline-block; font-size: 20px;">
+                               <tr>
+                                   <td>${orderWithDetails.transaction[0].paymentMethod}</td>
+                               </tr>
+                           </table>
+                           <h1>Order Total</h1>
+                           <table style="text-align: left; padding: 0; margin: 12px 0; display: inline-block; font-size: 20px;">
+                               <tr>
+                                   <td>$${(total / 100).toFixed(2)}</td>
+                               </tr>
+                           </table>
+                       </td>
+                   </tr>
+               </table>
+               <table width="100%" style="background: #456649; padding: 24px; text-align: center; color: #fff;">
+                   <tr>
+                       <td style="padding-bottom: 12px;">
+                           <a href="https://mantra-seeds.com/about-us" style="color: #fff; text-decoration: none;">About Us</a>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td style="padding-bottom: 12px;">
+                           <a href="https://mantra-seeds.com/privacy-policy" style="color: #fff; text-decoration: none;">Privacy Policy</a>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td style="padding-bottom: 12px;">
+                           <a href="https://www.instagram.com" style="outline: none;">
+                               <img src='https://d3uvzdy3c3m6ij.cloudfront.net/social_media/instagram.svg' alt='Instagram' style='width: 40px; margin-right: 10px;' />
+                           </a>
+                           <a href="https://www.facebook.com" style="outline: none;">
+                               <img src='https://d3uvzdy3c3m6ij.cloudfront.net/social_media/facebook.svg' alt='Facebook' style='width: 40px; margin-right: 10px ' />
+                           </a>
+                           <a href="https://www.twitter.com" style="outline: none;">
+                               <img src='https://d3uvzdy3c3m6ij.cloudfront.net/social_media/twitter.svg' alt='Twitter' style='width: 40px;' />
+                           </a>
+                       </td>
+                   </tr>
+                   <tr>
+                       <td style='margin-top: 12px; font-size: 16px;'>© 2023 Mantra Seeds</td>
+                   </tr>
+               </table> 
+           </div>
+       </body>
+       </html>
    `
     } else {
         subject = `Order ${order.orderNumber} confirmation (Inventory Error)`;

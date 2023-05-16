@@ -65,6 +65,10 @@ export default function Signup() {
           </div>
         </div>
         <div className="input-field-submit-container">
+          <div className="terms-and-conditions-wrapper">
+            <p>By signing up, you agree to our </p>
+            <Link to="/terms-and-conditions" className="forgot-password"> Terms and Conditions.</Link>
+          </div>
           <button disabled={isLoading}>Create Account</button>
           {error && <div className="error-message">{error}</div>}
           <Link to="/reset-password" className="forgot-password">Forgot password?</Link>

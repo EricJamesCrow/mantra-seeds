@@ -38,7 +38,22 @@
     line-height: 48px;
 }
 
-@media (max-width: 979px) {
+.empty-cart {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 28px;
+    text-align: center;
+    margin: 32px auto;
+}
+
+.empty-cart > h2 > button {
+    text-decoration: underline;
+}
+
+.empty-cart > h2 > button:hover {
+    cursor: pointer;
+    /* choose a nice gray color */
+    color: #808080;
 }
 
 @media (min-width: 620px) {

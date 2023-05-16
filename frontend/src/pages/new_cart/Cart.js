@@ -60,6 +60,10 @@ export default function Cart() {
           {cart.cartItems && cart.cartItems.map(item => (
             <Order key={item._id} item={item} user={user} setUpdatingSubtotal={setUpdatingSubtotal}/>
           ))}
+          {(cart?.cartItems?.length === 0 || !cart?.cartItems) && 
+          <div className="empty-cart">
+            <h2>Your cart is empty. <button onClick={() => navigate('/shop')}>Click here to return to shop.</button></h2>
+          </div>}
             </div>
         </div>
         <div className="cart-second-wrapper">
@@ -69,13 +73,13 @@ export default function Cart() {
             {updatingSubtotal && <Spinner />}
           </div>
           <div className="checkout-btn-container">
-                <button
+                {cart.cartItems?.length > 0 && <button
                   type="button"
                   className="add-to-cart-btn"
                   onClick={checkInventoryAndProceedToCheckout}
                 >
                   Proceed to Checkout
-                </button>
+                </button>}
           </div>
           {error && <div className="error-message add-to-cart">{error}</div>}
         </div>

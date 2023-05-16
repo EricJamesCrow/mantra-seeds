@@ -10,12 +10,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 export default function Order( { id, orderNumber, date, orderTotal, paymentStatus, deliveryStatus }) {
   const navigate = useNavigate();
-
-  function toTitleCase(str) {
-    return str.toLowerCase().split(' ').map(function(word) {
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    }).join(' ');
-  }
+  const user = JSON.parse(localStorage.getItem('user'));
 
   function getShippingStatusIndicator(status) {
     if (status === 'Not Shipped') {
@@ -35,7 +30,7 @@ export default function Order( { id, orderNumber, date, orderTotal, paymentStatu
   ]
 
   return (
-      <div className="order-customer-card-container customer" onClick={() => navigate(`/profile/order-history/${id}`)}>
+      <div className="order-customer-card-container customer" onClick={() => navigate(user ? `/profile/order-history/${id}` : `/order-details/${id}`)}>
             <div className="order-customer-card-see-details-container">
               <div>{date}</div>
               <div>

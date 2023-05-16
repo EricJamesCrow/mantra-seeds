@@ -14,7 +14,12 @@ async function uploadImage(image) {
     };
     
     const result = await s3.upload(params).promise();
-    return result.Location;
+
+    // replace S3 bucket URL with CloudFront URL
+    const cloudFrontDomain = process.env.CLOUDFRONT_URL;  // replace with your CloudFront domain
+    const cloudFrontUrl = result.Location.replace(`https://${process.env.AWS_S3_BUCKET_NAME}.s3.us-west-2.amazonaws.com`, cloudFrontDomain);
+
+    return cloudFrontUrl;
 };
 
 
