@@ -51,12 +51,16 @@ import OrderPage from './pages/new_profile/pages/OrderPage'
 import Search from "./pages/search/Search"
 import Contact from "./pages/contact/Contact"
 
+// legal stuff
+import TermsOfService from "./pages/terms-and-conditions/TermsAndConditions"
+
 // footer
 import Footer from './components/footer/Footer';
 
 // error pages
 import NotFound from './pages/errors/NotFound';
 import InvalidToken from './pages/errors/InvalidToken';
+import TermsAndConditions from './pages/terms-and-conditions/TermsAndConditions';
 
 
 function App() {
@@ -177,6 +181,9 @@ function App() {
         <Route path="/profile/order-history/:id" element={JSON.parse(localStorage.getItem('user')) ? <OrderPage/> : <Navigate to="/login"/>} />
         <Route path="/order-details/:id" element={<OrderPage/>} />
         <Route path="/profile/change-password" element={JSON.parse(localStorage.getItem('user')) ? <ChangePassword/> : <Navigate to="/login"/>} />
+
+        // legal stuff
+        <Route path="/terms-and-conditions" element={<TermsAndConditions/>} />
 
         <Route path="*" element={<NotFound/>} />
         <Route path="/invalid-token" element={<InvalidToken/>} />

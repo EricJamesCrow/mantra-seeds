@@ -1,0 +1,28 @@
+.terms-and-conditions-container > h1 {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 48px;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.terms-and-conditions-content {
+    margin: 0.75rem;
+}
+
+.terms-and-conditions-content {
+    font-family: 'Roboto';
+    font-size: 20px;
+}
+
+.terms-and-conditions-content h1 {
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size: 32px;
+}
+
+.terms-and-conditions-content p {
+    padding: 0 2rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
