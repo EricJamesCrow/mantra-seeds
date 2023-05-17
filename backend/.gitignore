@@ -5,4 +5,5 @@ mantra-seeds-key-pair.pem
 aws_private_key.pem
 mantra-seeds-key-pair-us-west-1.pem
 MongoDB-Mantra-Seeds.pem
+e-commerce-web-app-keys.pem
 node_modules/*
