@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// chakra ui
+import { Spinner } from '@chakra-ui/react'
+
 import { setOrder } from '../../../../redux/slices/ordersSlice';
 
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
@@ -42,6 +45,12 @@ export default function PayPal( {cart, shipping, user, dispatch, clearCart, chec
 
   return (
     <>
+    {sandbox === null && total === null &&
+    <div style={{ marginTop: '3rem'}}>
+      <Spinner
+      size='xl'
+      />
+    </div>}
     {sandbox !== null && total !== null &&
     <PayPalScriptProvider options={{
         "client-id": sandbox
