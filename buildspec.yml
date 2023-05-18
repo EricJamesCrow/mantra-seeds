@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   secrets-manager:
-    SECRET_VALUE: arn:aws:secretsmanager:us-west-1:223794032227:secret:mantra-seeds/secrets/backend/env-9ivJZd
+    SECRET_VALUE: arn:aws:secretsmanager:us-west-1:839826583728:secret:e-commerce/secrets/backend/env-TqiTfl
 phases:
   install:
     runtime-versions:
