@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# AMI already has dependencies installed
+
 # Update package lists
-sudo yum update -y
+#sudo yum update -y
 
 # Install Nginx
-sudo yum install -y nginx
+#sudo yum install -y nginx
 
 # Install PM2 globally
-sudo npm install -g pm2
+#sudo npm install -g pm2
