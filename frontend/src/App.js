@@ -51,9 +51,6 @@ import OrderPage from './pages/new_profile/pages/OrderPage'
 import Search from "./pages/search/Search"
 import Contact from "./pages/contact/Contact"
 
-// legal stuff
-import TermsOfService from "./pages/terms-and-conditions/TermsAndConditions"
-
 // footer
 import Footer from './components/footer/Footer';
 
@@ -62,14 +59,17 @@ import NotFound from './pages/errors/NotFound';
 import InvalidToken from './pages/errors/InvalidToken';
 import TermsAndConditions from './pages/terms-and-conditions/TermsAndConditions';
 
-
 function App() {
   // hooks
   const { fetchCart, fetchUserCart } = useCart();
   const { fetchProducts, fetchReviews } = useFetchProducts();
   const { fetchOrders, fetchCustomers } = useFetchAdmin();
-  const location = useLocation()
+  const location = useLocation();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   const fetchUser = async (user) => {
   try {
