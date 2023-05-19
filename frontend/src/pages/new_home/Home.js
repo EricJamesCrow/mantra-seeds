@@ -9,7 +9,6 @@ import Underline from '../../images/home/underline.svg'
 import Meditating from '../../images/home/meditating.svg'
 
 // components
-import NewProduct from '../../components/NewProduct'
 import Review from '../../components/reviews/Review'
 
 //redux

@@ -284,7 +284,7 @@ try {
                        <h2 style="font-size: 24px; color: #FAFAFA;">MANTRA SEEDS</h2>
                    </td>
                    <td align="right">
-                       <img src="https://d3uvzdy3c3m6ij.cloudfront.net/meditating.svg" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 55px; height: 55px;" />
+                       <img src="${process.env.CLOUDFRONT_URL}/meditating.svg" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 55px; height: 55px;" />
                    </td>
                </tr>
            </table>
@@ -348,13 +348,13 @@ try {
                    <tr>
                        <td style="padding-bottom: 12px;">
                            <a href="https://www.instagram.com" style="outline: none;">
-                               <img src='https://d3uvzdy3c3m6ij.cloudfront.net/social_media/instagram.svg' alt='Instagram' style='width: 40px; margin-right: 10px;' />
+                               <img src='${process.env.CLOUDFRONT_URL}/social_media/instagram.svg' alt='Instagram' style='width: 40px; margin-right: 10px;' />
                            </a>
                            <a href="https://www.facebook.com" style="outline: none;">
-                               <img src='https://d3uvzdy3c3m6ij.cloudfront.net/social_media/facebook.svg' alt='Facebook' style='width: 40px; margin-right: 10px ' />
+                               <img src='${process.env.CLOUDFRONT_URL}/social_media/facebook.svg' alt='Facebook' style='width: 40px; margin-right: 10px ' />
                            </a>
                            <a href="https://www.twitter.com" style="outline: none;">
-                               <img src='https://d3uvzdy3c3m6ij.cloudfront.net/social_media/twitter.svg' alt='Twitter' style='width: 40px;' />
+                               <img src='${process.env.CLOUDFRONT_URL}/social_media/twitter.svg' alt='Twitter' style='width: 40px;' />
                            </a>
                        </td>
                    </tr>
