@@ -5,8 +5,6 @@ import React, { useEffect } from 'react';
 // redux
 import { useDispatch } from 'react-redux';
 import { loginAuth } from './redux/slices/authSlice';
-import { setOrders } from './redux/slices/ordersSlice';
-import { setCustomers } from './redux/slices/customersSlice';
 
 // hooks
 import { useCart } from './hooks/useCart';
@@ -59,6 +57,9 @@ import NotFound from './pages/errors/NotFound';
 import InvalidToken from './pages/errors/InvalidToken';
 import TermsAndConditions from './pages/terms-and-conditions/TermsAndConditions';
 
+// functionality
+import ScrollToTop from './components/functionality/ScrollToTop';
+
 function App() {
   // hooks
   const { fetchCart, fetchUserCart } = useCart();
@@ -66,10 +67,6 @@ function App() {
   const { fetchOrders, fetchCustomers } = useFetchAdmin();
   const location = useLocation();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
 
   const fetchUser = async (user) => {
   try {
@@ -126,17 +123,9 @@ function App() {
     }
   }, [])
 
-  const ScrollToTop = ({ children }) => {
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [children]);
-  
-    return children;
-  };
-
-
   return (
     <>
+    <ScrollToTop/>
     <SideNav/>
     <AdminNav/>
     <div className="admin-products-overlay"/>

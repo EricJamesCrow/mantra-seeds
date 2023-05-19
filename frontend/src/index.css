@@ -7,6 +7,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  scroll-behavior: auto !important;
+}
+
+
 a {
   -webkit-tap-highlight-color: transparent;
 }
