@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const Product = require('./productModel');
+const Cart = require('./cartModel');
 // aws
 const { sendEmail } = require('../helpers/ses-helper');
 // decryption
@@ -136,16 +137,23 @@ const generateOrderDetailsHtml = (items) => {
     }).join('');
   };
 
-orderSchema.statics.updateInventory = async function(items) {
+orderSchema.statics.updateInventory = async function(items, cartId) {
     try {
+      const cart = await Cart.findById(cartId);
       for (const item of items) {
         const product = await Product.findById(item.product);
         if (product) {
           product.quantity -= item.quantity;
           product.reserved -= item.quantity;
           await product.save();
+          const cartItem = cart.cartItems.find(c => c.product._id.equals(item.product));
+          if (cartItem) {
+              cartItem.reservationTimestamp = null;
+          }
         }
       }
+      cart.markModified('cartItems');
+      await cart.save();
     } catch (error) {
       console.log(error);
       throw error;
@@ -249,7 +257,7 @@ try {
     let subject, html;
 
     if (checkInventoryResult) {
-       await Order.updateInventory(items);
+       await Order.updateInventory(items, cart);
        subject = `Order ${order.orderNumber} confirmation`;
        html = `<!DOCTYPE html>
        <html lang="en">
