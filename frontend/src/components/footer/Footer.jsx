@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 // styles
 import './Footer.css'
@@ -12,8 +13,8 @@ export default function Footer() {
   return (
     <div className="footer">
         <div className="footer-links-wrapper">
-            <div>About Us</div>
-            <div>Privacy Policy</div>
+            <Link to="/about-us">About Us</Link>
+            <Link to="/privacy-policy">Privacy Policy</Link>
         </div>
         <div className="footer-social-media-wrapper">
             <img src={Instagram} alt="Instagram" />

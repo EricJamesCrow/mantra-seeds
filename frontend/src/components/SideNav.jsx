@@ -58,7 +58,13 @@ export default function SideNav() {
     <NavLink to="/admin/dashboard" onClick={toggleOpen}>Admin Dashboard</NavLink>
     </li>
         }
-        <li>
+    {!user && <li>
+    <NavLink to="/login" onClick={toggleOpen}>Log In</NavLink>
+    </li>}
+    {!user && <li>
+    <NavLink to="/signup" onClick={toggleOpen}>Sign Up</NavLink>
+    </li>}
+    <li>
     <NavLink to="/shop" onClick={toggleOpen}>Shop Products</NavLink>
     </li>
     <li>

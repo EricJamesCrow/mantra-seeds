@@ -20,8 +20,9 @@
     gap: 0.5rem;
 }
 
-.footer-links-wrapper div:hover {
+.footer-links-wrapper a:hover {
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .footer-social-media-wrapper {

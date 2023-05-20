@@ -55,7 +55,10 @@ import Footer from './components/footer/Footer';
 // error pages
 import NotFound from './pages/errors/NotFound';
 import InvalidToken from './pages/errors/InvalidToken';
+
+// legal stuff
 import TermsAndConditions from './pages/terms-and-conditions/TermsAndConditions';
+import PrivacyPolicy from './pages/privacy-policy/PrivacyPolicy';
 
 // functionality
 import ScrollToTop from './components/functionality/ScrollToTop';
@@ -173,6 +176,7 @@ function App() {
 
         // legal stuff
         <Route path="/terms-and-conditions" element={<TermsAndConditions/>} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
 
         <Route path="*" element={<NotFound/>} />
         <Route path="/invalid-token" element={<InvalidToken/>} />
