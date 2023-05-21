@@ -10,7 +10,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
-    color: #BCBDBC;
+    color: #595959;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -34,7 +34,7 @@
 
 .order-customer-card-container > div:nth-child(2) > span {
     display: inline-block;
-    border: 1px solid #BCBDBC;
+    border: 1px solid #595959;
     width: 95%; 
     margin-bottom: 0.5rem;
 }
@@ -111,7 +111,7 @@
 }
 
 .order-customer-card-details > div:first-child {
-    color: #ADAFB1;
+    color: #595959;
 }
 
 .order-customer-card-details > div:last-child {
@@ -144,7 +144,7 @@
 
 .admin-desktop-sort.order-customer-card-desktop {
     background: #FFFFFF;
-    border-bottom: 1px solid #BCBDBC;
+    border-bottom: 1px solid #595959;
     padding: 0.75rem 0;
     transition: all 0.1s ease;
 }

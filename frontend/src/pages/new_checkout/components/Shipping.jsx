@@ -88,7 +88,7 @@ export default function Shipping( { setCurrentStep, shipping, dispatch } ) {
         </div>
       </div>
       <div className="alternative-link-container shipping">
-            <div className="alternative-link" onClick={() => selectedShipping ? handleSubmit() : null}>
+            <div className="alternative-link" onClick={() => selectedShipping ? handleSubmit() : null} aria-label="Confirm and continue">
               <div>Confirm and continue</div>
               <ChevronRightIcon w={6} h={6}/>
             </div>

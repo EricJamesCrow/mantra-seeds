@@ -74,8 +74,8 @@ export default function ReviewsContainer() {
         </div>
     </div>
     <div className="reviews-btns-container">
-        <button onClick={() => navigate(`${location.pathname}/reviews`)}>See all reviews</button>
-        <button onClick={() => handleShowWriteReview()}>Write a review</button>
+        <button onClick={() => navigate(`${location.pathname}/reviews`)} aria-label="See all reviews">See all reviews</button>
+        <button onClick={() => handleShowWriteReview()} aria-label="Write a review">Write a review</button>
     </div>
     {recentProductReviews.map(review => (<div className="review-container">
         <div className="rating-and-title">

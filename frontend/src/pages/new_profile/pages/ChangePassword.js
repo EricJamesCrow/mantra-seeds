@@ -39,7 +39,7 @@ export default function ChangePassword() {
 
   return (
       <div className="login-container admin-orders-details-page-container">
-      <button className="details-page-btn" onClick={() => navigate("/profile")}>
+      <button className="details-page-btn" onClick={() => navigate("/profile")} aria-label="Go back to Profile">
         <FontAwesomeIcon 
           icon={faChevronLeft} 
           style={{
@@ -56,6 +56,7 @@ export default function ChangePassword() {
             <div>Old Password<span className="required-asterisk">*</span></div>
             <Input
             type="password"
+            aria-label="Old Password"
             value={oldPassword}
             onChange={(e) => setOldPassword(e.target.value)} 
             required
@@ -65,6 +66,7 @@ export default function ChangePassword() {
             <div>New Password<span className="required-asterisk">*</span></div>
             <Input
             type="password"
+            aria-label="New Password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)} 
             required
@@ -74,6 +76,7 @@ export default function ChangePassword() {
             <div>Confirm New Password<span className="required-asterisk">*</span></div>
             <Input
             type="password"
+            aria-label="Confirm New Password"
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)} 
             required
@@ -81,7 +84,7 @@ export default function ChangePassword() {
           </div>
         </div>
         <div className="input-field-submit-container change-password">
-          <button type="submit" disabled={isLoading}>Done</button>
+          <button type="submit" disabled={isLoading} aria-label="Submit and change password">Done</button>
           {error && <div className="error-message">{error}</div>}
           {success && <div className="success-message">{success}</div>}
         </div>

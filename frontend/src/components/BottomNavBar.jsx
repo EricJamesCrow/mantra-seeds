@@ -23,7 +23,7 @@ export default function BottomNavBar() {
 
   return (
     <nav className="bottom-nav">
-        <NavLink to="/">
+        <NavLink to="/" aria-label="Home">
             <FontAwesomeIcon
                 icon={faHouse}
                 style={{
@@ -34,7 +34,7 @@ export default function BottomNavBar() {
                 }}
             />
         </NavLink>
-        <NavLink to="/profile">
+        <NavLink to="/profile" aria-label="Profile">
             <FontAwesomeIcon
                 icon={faUser}
                 style={{
@@ -45,7 +45,7 @@ export default function BottomNavBar() {
                 }}
             />
         </NavLink>
-        <NavLink to="/cart">
+        <NavLink to="/cart" aria-label="Cart">
         <div style={{ position: 'relative'}}>
             <FontAwesomeIcon
                 icon={faCartShopping}
@@ -74,7 +74,7 @@ export default function BottomNavBar() {
             }
         </div>
         </NavLink>
-        <NavLink onClick={handleClick}>
+        <NavLink onClick={handleClick} aria-label="Show Menu">
             <FontAwesomeIcon
                 icon={faBars}
                 style={{

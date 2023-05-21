@@ -133,7 +133,7 @@ export default function FilterSort( { results, setSearchTerm, currentPage, items
         }}
       />
     <input type="text" 
-    id="searchInput" 
+    id={`Search ${searchText}`} 
     placeholder={`Search ${searchText}`} 
     class="filter-sort-search-input"
     onChange={(e) => setSearchTerm(e.target.value)}

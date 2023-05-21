@@ -44,7 +44,7 @@
 }
 
 .reviews-btns-container > button:last-child {
-    background: #669c54;
+    background: #2C621A;
     color: #fff;
     border-radius: 5px;
     transition: all 0.2s ease;
@@ -55,7 +55,7 @@
 }
 
 .reviews-btns-container > button:last-child:hover {
-    background: #7DB56A;
+    background: #3E7C2B;
 }
 
 .review-container {

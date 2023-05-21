@@ -32,7 +32,7 @@ export default function Signup() {
 
   return (
     <div className="login-container">
-      <button className="details-page-btn" onClick={() => navigate("/")}>
+      <button className="details-page-btn" onClick={() => navigate("/")} aria-label="Return to home page">
         <FontAwesomeIcon 
           icon={faChevronLeft} 
           style={{
@@ -52,6 +52,7 @@ export default function Signup() {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             backgroundColor="white"
+            aria-label="email"
             />
           </div>
           <div className="input-fields">
@@ -61,22 +62,23 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             backgroundColor="white"
+            aria-label="password"
             />
           </div>
         </div>
         <div className="input-field-submit-container">
           <div className="terms-and-conditions-wrapper">
             <p>By signing up, you agree to our </p>
-            <Link to="/terms-and-conditions" className="forgot-password"> Terms and Conditions.</Link>
+            <Link to="/terms-and-conditions" className="forgot-password" aria-label="Terms and Conditions"> Terms and Conditions.</Link>
           </div>
           <button disabled={isLoading}>Create Account</button>
           {error && <div className="error-message">{error}</div>}
-          <Link to="/reset-password" className="forgot-password">Forgot password?</Link>
+          <Link to="/reset-password" className="forgot-password" aria-label="Forgot password?">Forgot password?</Link>
         </div>
         </form>
         <div className="alternative-link-container">
               <h1>Have an account?</h1>
-              <Link to="/login" className="alternative-link">
+              <Link to="/login" className="alternative-link" aria-label="Log In">
                 <div>Sign In</div>
                 <ChevronRightIcon w={6} h={6}/>
               </Link>

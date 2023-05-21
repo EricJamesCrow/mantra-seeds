@@ -65,6 +65,7 @@ export default function Checkout() {
       <div className="checkout-header">
         <div
           className="checkout-step-container"
+          aria-label="Address"
           onClick={() => {
             if (maxStep >= 1) setCurrentStep(1);
           }}
@@ -78,6 +79,7 @@ export default function Checkout() {
         </div>
         <div
           className="checkout-step-container"
+          aria-label="Shipping"
           onClick={() => {
             if (maxStep >= 2) setCurrentStep(2);
           }}
@@ -99,6 +101,7 @@ export default function Checkout() {
         </div>
         <div
           className="checkout-step-container"
+          aria-label="Payment"
           onClick={() => {
             if (maxStep >= 3) setCurrentStep(3);
           }}

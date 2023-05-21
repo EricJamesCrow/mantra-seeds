@@ -72,25 +72,25 @@ export default function Order( {item, user, setUpdatingSubtotal }) {
     <div className="cart-order-container">
         <div className="cart-order-details-container">
             <div>
-                <Link to={`/shop/products/${item.product}`} style={{ textDecoration: "none"}}>
-                    <img src={product.image}/>
+                <Link to={`/shop/products/${item.product}`} style={{ textDecoration: "none"}} aria-label={`Link to ${product.name} details page`}>
+                    <img src={product.image} alt={`${product.name} image`}/>
                 </Link>
             </div>
             <div className="cart-order-details">
                 <div className="details-wrapper">
                     <div>
-                    <Link to={`/shop/products/${item.product}`} style={{ textDecoration: "none"}}>{product.name}</Link>
+                    <Link to={`/shop/products/${item.product}`} style={{ textDecoration: "none"}} aria-label={`Link to ${product.name} details page`}>{product.name}</Link>
                         <div>{`$${price}`}</div>
                     </div>
                     <div>
-                        <DeleteIcon onClick={() => handleDelete(cart._id, product)}/>
+                        <DeleteIcon onClick={() => handleDelete(cart._id, product)} aria-label={`Delete ${product.name} from cart`}/>
                         <div className="order-adjust-quantity-container">
                             <div className="order-adjust-quantity">
-                                <button className="order-adjust-quantity-btn" onClick={() => handleQuantityChange(-1)}>
+                                <button className="order-adjust-quantity-btn" onClick={() => handleQuantityChange(-1)} aria-label={`Decrease quantity for ${product.name}`}>
                                     <div>-</div>
                                 </button>
                                 <div>{quantity}</div>
-                                <button className="order-adjust-quantity-btn" onClick={() => handleQuantityChange(1)}>
+                                <button className="order-adjust-quantity-btn" onClick={() => handleQuantityChange(1)} aria-label={`Increase quantity for ${product.name}`}>
                                     <div>+</div>
                                 </button>
                             </div>

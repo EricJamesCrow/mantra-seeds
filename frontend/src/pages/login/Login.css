@@ -44,7 +44,7 @@
 .input-field-submit-container > button {
     width: 80%;
     height: 48px;
-    background: #669C54;
+    background: #2C621A;
     border-radius: 0.25rem;
     font-family: 'Roboto';
     font-style: normal;
@@ -55,7 +55,7 @@
 }
 
 .input-field-submit-container > button:hover {
-    background: #7DB56A;
+    background: #3E7C2B;
 }
 
 .forgot-password {
@@ -97,7 +97,7 @@
     font-size: 16px;
     color: #fff;
     text-decoration: none;
-    background: #669C54;
+    background: #2C621A;
     border-radius: 0.25rem;
     width: 80%;
     height: 48px;
@@ -108,7 +108,7 @@
 }
 
 .alternative-link:hover {
-    background: #7DB56A;
+    background: #3E7C2B;
 }
 
 .alternative-link > div {

@@ -99,7 +99,7 @@ export default function AdminCustomersDetailsPage() {
   return (
     <>
     <div className="admin-orders-details-page-container">
-      <button className="details-page-btn" onClick={() => navigate(-1)}>
+      <button className="details-page-btn" onClick={() => navigate(-1)} aria-label="Go back to previous page">
       <FontAwesomeIcon 
         icon={faChevronLeft} 
         style={{
@@ -115,7 +115,7 @@ export default function AdminCustomersDetailsPage() {
         </div>
         <div className="order-customer-card-details-container">
         <div className="product-card-image-details-container-desktop products">
-        <img src={product.image}/>
+        <img src={product.image} alt={product.name}/>
         </div>
           {cardDetails.map(item => (
           <div key={item.id} className={`order-customer-card-details ${item.class}`}>

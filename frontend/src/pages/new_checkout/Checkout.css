@@ -127,12 +127,12 @@
 
 .review-order-container > div:first-child > div:last-child {
     font-size: 14px;
-    color: #0BADA2;
+    color: #007366;
     cursor: pointer;
 }
 
 .review-order-container > div:first-child > div:last-child:hover {
-    color: #45D5CA;
+    color: #00868B;
 }
 
 .review-order-container > div:last-child {
@@ -158,7 +158,7 @@
 }
 
 .order-summary-container div > div:first-child {
-    color: #98999A
+    color: #575859;
 }
 
 .order-summary-container > div:last-child > div:first-child, .order-summary-container > div:last-child > div:last-child {

@@ -57,9 +57,9 @@ export default function Navbar() {
     <nav className='sticky-nav'>
     <div className={location.pathname === "/" && isScrolled ? 'navbar-container background' : location.pathname === "/" && !isScrolled ? 'navbar-container' : 'navbar-container background'}>
         <div className="logo-container">
-        <Link to="/" className="title" onClick={hideSearch}>MANTRA SEEDS</Link>
+        <Link to="/" className="title" aria-label="Home" onClick={hideSearch}>MANTRA SEEDS</Link>
         </div>
-        <button href="#" className="toggle-button" onClick={displayMobileMenu}>
+        <button href="#" className="toggle-button" aria-label="Main Menu" onClick={displayMobileMenu}>
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
@@ -67,22 +67,23 @@ export default function Navbar() {
         <div className="navbar-links">
             <ul>
             <li>
-                <NavLink to="/" onClick={hideSearch}>Home</NavLink>
+                <NavLink to="/" aria-label="Home" onClick={hideSearch}>Home</NavLink>
             </li>
             {user && user.role === 1 &&
             <li>
-            <NavLink to="/admin/dashboard" onClick={hideSearch}>Admin</NavLink>
+            <NavLink to="/admin/dashboard" aria-label="Admin" onClick={hideSearch}>Admin</NavLink>
             </li>
             }
             <li>
-                <NavLink to="/shop" onClick={hideSearch}>Shop</NavLink>
+                <NavLink to="/shop" aria-label="Shop" onClick={hideSearch}>Shop</NavLink>
             </li>
             <li>
-                <NavLink to="/contact" onClick={hideSearch}>Contact</NavLink>
+                <NavLink to="/contact" aria-label="Contact" onClick={hideSearch}>Contact</NavLink>
             </li>
             <li>
             <FontAwesomeIcon 
             icon={faSearch} 
+            aria-label="Search" 
             style={{
                 fontSize: "1.6rem",
                 padding: "15px 20px",
@@ -91,7 +92,7 @@ export default function Navbar() {
             />
             </li>
             <li>
-                <NavLink to="/profile" onClick={hideSearch}> 
+                <NavLink to="/profile" aria-label="Profile" onClick={hideSearch}> 
                 <FontAwesomeIcon 
             icon={faUser} 
             style={{
@@ -101,7 +102,7 @@ export default function Navbar() {
                 </NavLink>
                 </li>
             <li>
-                <NavLink to="/cart" onClick={hideSearch}>
+                <NavLink to="/cart" aria-label="Cart" onClick={hideSearch}>
                 <FontAwesomeIcon 
             icon={faCartShopping} 
             style={{

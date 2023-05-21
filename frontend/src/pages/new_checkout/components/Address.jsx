@@ -53,39 +53,39 @@ export default function Address( {setCurrentStep, shipping, dispatch }) {
         <h1>Enter your shipping address</h1>
           <div className="input-fields">
               <div>First Name<span className="required-asterisk">*</span></div>
-              <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} required/> 
+              <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} aria-label="First Name" required/> 
           </div>
           <div className="input-fields">
               <div>Last Name<span className="required-asterisk">*</span></div>
-              <Input value={lastName} onChange={(e) => setLastName(e.target.value)} required/> 
+              <Input value={lastName} onChange={(e) => setLastName(e.target.value)} aria-label="Last Name" required/> 
           </div>
           <div className="input-fields">
               <div>Company</div>
-              <Input value={company} onChange={(e) => setCompany(e.target.value)}/> 
+              <Input value={company} onChange={(e) => setCompany(e.target.value)} aria-label="Company"/> 
           </div>
           <div className="input-fields">
               <div>Address<span className="required-asterisk">*</span></div>
-              <Input value={address} onChange={(e) => setAddress(e.target.value)} required/> 
+              <Input value={address} onChange={(e) => setAddress(e.target.value)} aria-label="Address" required/> 
           </div>
           <div className="input-fields">
               <div>Apartment, suite, etc. (optional)</div>
-              <Input value={apt} onChange={(e) => setApt(e.target.value)}/> 
+              <Input value={apt} onChange={(e) => setApt(e.target.value)} aria-label="Apartment, suite, etc. (optional)"/> 
           </div>
           <div className="input-fields">
               <div>City<span className="required-asterisk">*</span></div>
-              <Input value={city} onChange={(e) => setCity(e.target.value)} required/> 
+              <Input value={city} onChange={(e) => setCity(e.target.value)} aria-label="City" required/> 
           </div>
           <div className="input-fields">
               <div>State<span className="required-asterisk">*</span></div>
-              <Input value={state} onChange={(e) => setState(e.target.value)} required/> 
+              <Input value={state} onChange={(e) => setState(e.target.value)} aria-label="State" required/> 
           </div>
           <div className="input-fields">
               <div>Zip<span className="required-asterisk">*</span></div>
-              <Input value={zip} onChange={(e) => setZip(e.target.value)} required/> 
+              <Input value={zip} onChange={(e) => setZip(e.target.value)} aria-label="Zip" required/> 
           </div>
           <div className="input-fields">
               <div>Phone</div>
-              <Input value={phone} onChange={(e) => setPhone(e.target.value)}/> 
+              <Input value={phone} onChange={(e) => setPhone(e.target.value)} aria-label="Phone"/> 
           </div>     
       </div>
       <div className="contact-wrapper">
@@ -96,10 +96,11 @@ export default function Address( {setCurrentStep, shipping, dispatch }) {
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   required={true}
+                  aria-label="Email"
                   /> 
             </div>
             <div className="alternative-link-container">
-                <button type="submit" className="alternative-link">
+                <button type="submit" className="alternative-link" aria-label="Confirm and continue">
                   <div>Confirm and continue</div>
                   <ChevronRightIcon w={6} h={6}/>
                 </button>

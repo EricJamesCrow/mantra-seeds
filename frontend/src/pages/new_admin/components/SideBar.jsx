@@ -16,7 +16,7 @@ export default function SideBar() {
         ]
   return (
     <div className="admin-side-bar">
-    <NavLink to="/admin/dashboard">
+    <NavLink to="/admin/dashboard" aria-label='Admin Dashboard'>
     <FontAwesomeIcon
           icon={faDashboard} 
           style={{
@@ -27,7 +27,7 @@ export default function SideBar() {
     </NavLink>
     <div className="admin-side-bar-seperator"/>
     {dashboardLinks.map(item => (
-    <NavLink to={`/admin/${item.title}`}>
+    <NavLink to={`/admin/${item.title}`} aria-label={`${item.title}`}>
     <FontAwesomeIcon
         icon={item.icon} 
         style={{
@@ -39,7 +39,7 @@ export default function SideBar() {
     ))
     }
     <div className="admin-side-bar-seperator"/>
-    <NavLink>
+    <NavLink aria-label="Settings">
     <FontAwesomeIcon
         icon={faCog} 
         style={{

@@ -37,9 +37,9 @@ export default function Profile() {
     }
 
     const userProfileBtns = [
-        {id: 1, icon: faHistory, text: 'Order History', onClick: () => handleClick('/profile/order-history')},
-        {id: 2, icon: faUnlockKeyhole, text: 'Change Password', onClick: () => handleClick('/profile/change-password')},
-        {id: 3, icon: faSignOutAlt, text:"Logout", onClick: handleLogout}
+        {id: 1, icon: faHistory, text: 'Order History', onClick: () => handleClick('/profile/order-history'), label: 'order-history'},
+        {id: 2, icon: faUnlockKeyhole, text: 'Change Password', onClick: () => handleClick('/profile/change-password'), label: 'change-password'},
+        {id: 3, icon: faSignOutAlt, text:"Logout", onClick: handleLogout, label: 'logout'}
     ]
 
   return (
@@ -64,7 +64,7 @@ export default function Profile() {
                 </div>
                 <div className="user-profile-btns-container">
                     {userProfileBtns.map(btn => (
-                    <div className="user-profile-btn" onClick={btn.onClick}>
+                    <div className="user-profile-btn" onClick={btn.onClick} aria-label={btn.label}>
                         <div>
                             <div>
                                 <FontAwesomeIcon

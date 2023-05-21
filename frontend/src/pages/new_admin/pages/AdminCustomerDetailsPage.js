@@ -75,7 +75,7 @@ export default function AdminCustomersDetailsPage() {
 
   return (
     <div className="admin-orders-details-page-container">
-      <button className="details-page-btn" onClick={() => navigate(-1)}>
+      <button className="details-page-btn" onClick={() => navigate(-1)} aria-label="Go back to previous page">
       <FontAwesomeIcon 
         icon={faChevronLeft} 
         style={{
@@ -90,7 +90,7 @@ export default function AdminCustomersDetailsPage() {
         <button className={`order-customer-card-btn ${lastLoggedIn ? 'active' : 'inactive'}`}>{lastLoggedIn ? "Active" : "Inactive"}</button>
         </div>
         <div className="order-customer-card-details-container">
-          <img src={defaultProfilePic} className="customer-details-profile-pic"/>
+          <img src={defaultProfilePic} className="customer-details-profile-pic" alt="customer-profile-picture"/>
           {cardDetails.map(item => (
           <div key={item.id} className={`order-customer-card-details ${item.class}`}>
             <div>{item.title}</div>

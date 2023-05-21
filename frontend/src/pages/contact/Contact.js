@@ -36,6 +36,7 @@ export default function Contact() {
           <label>Name</label>
           <Input 
             variant='outline' 
+            aria-label='Name'
             className="add-product-input"
             onChange={(e) => setName(e.target.value)}
             placeholder="Your Name"
@@ -49,6 +50,7 @@ export default function Contact() {
           <label>Email</label>
           <Input 
             variant='outline' 
+            aria-label='Email'
             className="add-product-input"
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your Email"
@@ -62,6 +64,7 @@ export default function Contact() {
           <label>Subject</label>
           <Input 
             variant='outline' 
+            aria-label='Subject'
             className="add-product-input"
             onChange={(e) => setSubject(e.target.value)}
             placeholder="Your Subject"
@@ -75,6 +78,7 @@ export default function Contact() {
           <label>Message</label>
           <Textarea
             variant='outline' 
+            aria-label='Message'
             className="add-product-input"
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Your Message"
@@ -84,7 +88,7 @@ export default function Contact() {
             bg="white"
             />
         </div>
-        <button className="add-to-cart-btn contact" type="submit" disabled={loading}>Send Email</button>
+        <button className="add-to-cart-btn contact" type="submit" disabled={loading} aria-label="Send Email">Send Email</button>
       </form>
     </div>
   )

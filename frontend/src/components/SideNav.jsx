@@ -33,6 +33,7 @@ export default function SideNav() {
     <div className={`side-nav`}>
     <FontAwesomeIcon
     onClick={toggleOpen}
+    aria-label="Close Side Nav"
     icon={faXmark} 
     style={{
     color: "#000000",
@@ -48,6 +49,7 @@ export default function SideNav() {
     }}
   type="text" 
   id="searchInput" 
+  aria-label="Search"
   placeholder="Search"
   value={search} 
   className="search-input"/>
@@ -55,23 +57,23 @@ export default function SideNav() {
     <ul className='side-nav-links'>
         {user && user.role === 1 &&
     <li>
-    <NavLink to="/admin/dashboard" onClick={toggleOpen}>Admin Dashboard</NavLink>
+    <NavLink to="/admin/dashboard" onClick={toggleOpen} aria-label="Admin Dashboard">Admin Dashboard</NavLink>
     </li>
         }
     {!user && <li>
-    <NavLink to="/login" onClick={toggleOpen}>Log In</NavLink>
+    <NavLink to="/login" onClick={toggleOpen} aria-label="Log In">Log In</NavLink>
     </li>}
     {!user && <li>
-    <NavLink to="/signup" onClick={toggleOpen}>Sign Up</NavLink>
+    <NavLink to="/signup" onClick={toggleOpen} aria-label="Sign Up">Sign Up</NavLink>
     </li>}
     <li>
-    <NavLink to="/shop" onClick={toggleOpen}>Shop Products</NavLink>
+    <NavLink to="/shop" onClick={toggleOpen} aria-label="Shop Products">Shop Products</NavLink>
     </li>
     <li>
-    <NavLink to="/cart" onClick={toggleOpen}>View Cart</NavLink>
+    <NavLink to="/cart" onClick={toggleOpen} aria-label="View Cart">View Cart</NavLink>
     </li>
     <li>
-    <NavLink to="/contact" onClick={toggleOpen}>Contact Us</NavLink>
+    <NavLink to="/contact" onClick={toggleOpen} aria-label="Contact Us">Contact Us</NavLink>
     </li>
     </ul>
   </div>

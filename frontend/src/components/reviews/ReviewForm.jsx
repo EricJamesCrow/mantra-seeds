@@ -56,7 +56,8 @@ export default function ReviewForm( { id, setShowReviewForm } ) {
     <div className="write-a-review-container">
         <div>Write a review</div>
         <FontAwesomeIcon 
-            icon={faX} 
+            icon={faX}
+            aria-label="Close Review Form" 
             style={{
                 color: "#000000",
                 fontSize: "1.6rem",
@@ -76,6 +77,7 @@ export default function ReviewForm( { id, setShowReviewForm } ) {
     className="add-product-input"
     onChange={(e) => setName(e.target.value)}
     placeholder="Your name"
+    aria-label="Your name"
     value={name}
     required={true}
     />
@@ -87,6 +89,7 @@ export default function ReviewForm( { id, setShowReviewForm } ) {
     className="add-product-input"
     onChange={(e) => setTitle(e.target.value)}
     placeholder="Your title"
+    aria-label="Your title"
     value={title}
     required={true}
     />
@@ -100,6 +103,7 @@ export default function ReviewForm( { id, setShowReviewForm } ) {
             onClick={() => handleStarClick(index)}
             onMouseEnter={() => handleStarMouseEnter(index)}
             onMouseLeave={handleStarMouseLeave}
+            aria-label={`${index + 1} out of 5`}
             icon={faStar}
             style={{
                 color: "#669c54",
@@ -117,12 +121,13 @@ export default function ReviewForm( { id, setShowReviewForm } ) {
     style={{ marginTop: "0.5rem"}}
     onChange={(e) => setComment(e.target.value)}
     placeholder="Your comment"
+    aria-label="Your comment"
     value={comment}
     required={true}
      />
   </div>
   <div className="reviews-btns-container review-form">
-  <button type="submit">Submit Review</button>
+  <button type="submit" aria-label="Submit Review">Submit Review</button>
   </div>
 </form>
 </div>

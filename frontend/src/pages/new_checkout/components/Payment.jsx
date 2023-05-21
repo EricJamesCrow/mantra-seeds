@@ -73,14 +73,14 @@ export default function Payment( { setCurrentStep, shipping, cart, user, dispatc
         <div className="review-order-container">
           <div>
             <div>Contact</div>
-            <div onClick={handleEdit}>Edit</div>
+            <div onClick={handleEdit} aria-label="Edit Contact Info">Edit</div>
           </div>
           <div>{shipping.email}</div>
         </div>
         <div className="review-order-container">
           <div>
             <div>Shipping Address</div>
-            <div onClick={handleEdit}>Edit</div>
+            <div onClick={handleEdit} aria-label="Edit Address Info">Edit</div>
           </div>
           <div>{`${shipping.address}, ${shipping.city} ${shipping.state} ${shipping.zip}, United States`}</div>
         </div>

@@ -33,7 +33,7 @@ export default function ProductCard( {item} ) {
       ]
 
   return (
-    <NavLink to={`/admin/products/${cardId}`}>
+    <NavLink to={`/admin/products/${cardId}`} aria-label={`Go to product details page for ${item.title}`}>
     {!desktop && <div className="order-customer-card-container">
     <div className="order-customer-card-see-details-container">
       <div>{item.dateCreated}</div>
@@ -57,7 +57,7 @@ export default function ProductCard( {item} ) {
     </div>
     <div className="product-card-image-details-container">
       <div className="product-card-image-details-container-desktop">
-      <img src={item.image}/>
+      <img src={item.image} alt="product image"/>
       </div>
     <div className="order-customer-card-details-container">
       {cardDetails.map(item => (
@@ -89,7 +89,7 @@ export default function ProductCard( {item} ) {
         ))
         }
       <div className="product-card-image-details-container-desktop">
-      <img src={item.image}/>
+      <img src={item.image} alt="product image"/>
       </div>
         <div className="order-customer-card-id-btn-container">
         <button className={`order-customer-card-btn ${status}`}>{statusValue}</button>

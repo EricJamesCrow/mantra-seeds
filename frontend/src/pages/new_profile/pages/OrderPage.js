@@ -72,7 +72,7 @@ export default function OrderPage() {
   return (
     !isDesktop ? (
         <div className="admin-orders-details-page-container">
-        <button className="details-page-btn" onClick={() => navigate(-1)}>
+        <button className="details-page-btn" onClick={() => navigate(-1)} aria-label="Go back to previous page">
         <FontAwesomeIcon 
           icon={faChevronLeft} 
           style={{
@@ -105,7 +105,7 @@ export default function OrderPage() {
               <div className='admin-order-details-page-order-images-container'>
               {items.map(item => (<div className="admin-order-details-page-order-details">
               <div>
-              <img src={products.find(p => p._id === item.product).image}/>
+              <img src={products.find(p => p._id === item.product).image} alt={products.find(p => p._id === item.product).name}/>
               </div>
               <div>{products.find(p => p._id === item.product).name}</div>
               <div>${(item.price / 100).toFixed(2)}</div>
@@ -120,7 +120,7 @@ export default function OrderPage() {
         </div>
       </div>) : (
                 <div className="admin-orders-details-page-container">
-                <button className="details-page-btn" onClick={() => navigate(-1)}>
+                <button className="details-page-btn" onClick={() => navigate(-1)} aria-label="Go back to previous page">
                 <FontAwesomeIcon 
                   icon={faChevronLeft} 
                   style={{
@@ -154,7 +154,7 @@ export default function OrderPage() {
                         <div className='admin-order-details-page-order-images-container'>
                         {items.map(item => (<div className="admin-order-details-page-order-details">
                         <div>
-                        <img src={products.find(p => p._id === item.product).image}/>
+                        <img src={products.find(p => p._id === item.product).image} alt={products.find(p => p._id === item.product).name}/>
                         </div>
                         <div>{products.find(p => p._id === item.product).name}</div>
                         <div>${(item.price / 100).toFixed(2)}</div>

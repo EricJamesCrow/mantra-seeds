@@ -75,8 +75,8 @@ export default function Shop() {
                 }}
               />
             <input type="text" 
-            id="searchInput" 
-            placeholder={`Search Products`} 
+            id="searchProducts" 
+            placeholder='Search Products'
             className="filter-sort-search-input"
             onChange={(e) => setSearchTerm(e.target.value)}
             />

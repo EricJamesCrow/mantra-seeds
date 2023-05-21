@@ -54,7 +54,7 @@ export default function OrderCustomerCard( { item } ) {
         <FontAwesomeIcon 
           icon={faChevronRight} 
           style={{
-              color: "#BCBDBC",
+              color: "#595959",
               fontSize: "1.15rem",
               cursor: "pointer"}}
           />

@@ -30,7 +30,7 @@ export default function Order( { id, orderNumber, date, orderTotal, paymentStatu
   ]
 
   return (
-      <div className="order-customer-card-container customer" onClick={() => navigate(user ? `/profile/order-history/${id}` : `/order-details/${id}`)}>
+      <div className="order-customer-card-container customer" onClick={() => navigate(user ? `/profile/order-history/${id}` : `/order-details/${id}`)} aria-label={`Navigate to order: #${orderNumber} details page`}>
             <div className="order-customer-card-see-details-container">
               <div>{date}</div>
               <div>

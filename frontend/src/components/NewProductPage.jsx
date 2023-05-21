@@ -20,29 +20,11 @@ import ReviewsContainer from './reviews/ReviewsContainer';
 // loading
 import Loading from './loading/loading'
 
-// const PRODUCTS_API_URL = '/api/products/'
-
 export default function NewProductPage() {
-  const { id } = useParams()
-//   const [product, setProduct] = useState('')
-  const { addToCart, loading, error } = useAddToCart();
-  const navigate = useNavigate();
-  const [quantity, setQuantity] = useState(1)
-
-//   useEffect(() => {
-//     const url = PRODUCTS_API_URL+id;
-//     fetch(url)
-//         .then((response) => {
-//             if (!response.ok) {
-//                 navigate("*");
-//             } else {
-//                 return response.json();
-//             }
-//         })
-//         .then((data) => {
-//             setProduct(data)
-//         })
-// }, [id])
+    const { id } = useParams()
+    const { addToCart, loading, error } = useAddToCart();
+    const navigate = useNavigate();
+    const [quantity, setQuantity] = useState(1)
 
     const reviews = useSelector(state => state.reviews.reviews);
     const products = useSelector(state => state.products.products);
@@ -67,7 +49,7 @@ export default function NewProductPage() {
 
   return (
     <div className="admin-orders-details-page-container">
-    <button className="details-page-btn" onClick={() => navigate(-1)}>
+    <button className="details-page-btn" onClick={() => navigate(-1)} aria-label="Go to previous page">
     <FontAwesomeIcon 
       icon={faChevronLeft} 
       style={{
@@ -101,11 +83,11 @@ export default function NewProductPage() {
             {inStock ? (<div className="adjust-quantity-container">
             <div>Quantity</div>
             <div className="adjust-quantity">
-                <button className="adjust-quantity-btn" onClick={handleQuantityDecrease}>
+                <button className="adjust-quantity-btn" onClick={handleQuantityDecrease} aria-label="Decrease Quantity">
                     <div>-</div>
                 </button>
                 <div>{quantity}</div>
-                <button className="adjust-quantity-btn" onClick={handleQuantityIncrease}>
+                <button className="adjust-quantity-btn" onClick={handleQuantityIncrease} aria-label="Increase Quantity">
                     <div>+</div>
                 </button>
             </div>
@@ -124,8 +106,8 @@ export default function NewProductPage() {
             </div>
         </div>
         {inStock ?
-        (<button disabled={loading} className="add-to-cart-btn" onClick={() => addToCart(product._id, quantity, product.price)}>Add to Cart</button>) :
-        (<button disabled={true} className="add-to-cart-btn out-of-stock">Out of Stock</button>)}
+        (<button disabled={loading} className="add-to-cart-btn" onClick={() => addToCart(product._id, quantity, product.price)} aria-label="Add to Cart">Add to Cart</button>) :
+        (<button disabled={true} className="add-to-cart-btn out-of-stock" aria-label="Out of Stock">Out of Stock</button>)}
         {error && <div className="error-message add-to-cart">{error}</div>}
         </div>
         <ReviewsContainer/>

@@ -75,6 +75,7 @@ export default function Cart() {
           <div className="checkout-btn-container">
                 {cart.cartItems?.length > 0 && <button
                   type="button"
+                  aria-label="Proceed to Checkout"
                   className="add-to-cart-btn"
                   onClick={checkInventoryAndProceedToCheckout}
                 >
