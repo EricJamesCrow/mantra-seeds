@@ -155,7 +155,7 @@ export default function AddProduct( { setShowAddProduct }) {
         <option value='solar'>Solar</option>
         <option value='heart'>Heart</option>
         <option value='throat'>Throat</option>
-        <option value='third-eye'>Third Eye</option>
+        <option value='third eye'>Third Eye</option>
         <option value='crown'>Crown</option>
     </Select>
     </div>

@@ -5,13 +5,13 @@ const s3 = new AWS.S3();
 
 async function uploadImage(image) {
     try {
-        const fileName = `${uuidv4()}.jpg`;
+        const fileName = `${uuidv4()}.webp`;
 
         const params = {
             Bucket: process.env.AWS_S3_BUCKET_NAME,
             Key: fileName,
             Body: image,
-            ContentType: 'image/jpeg'
+            ContentType: 'image/webp'
         };
         
         const result = await s3.upload(params).promise();
