@@ -5,6 +5,7 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+var compression = require('compression')
 const productsRoutes = require('./routes/products')
 const userRoutes = require('./routes/user')
 const cartRoutes = require('./routes/cart')
@@ -22,6 +23,9 @@ const { releaseReservedItems } = require('./utilities/inventoryUtils')
 
 // express app
 const app = express()
+
+// compress all responses
+app.use(compression())
 
 // middleware
 app.use('/api/payment/stripe/webhook', express.raw({type: 'application/json'}))
