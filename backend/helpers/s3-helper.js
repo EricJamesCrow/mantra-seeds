@@ -12,9 +12,7 @@ async function uploadImage(image) {
             Key: fileName,
             Body: image,
             ContentType: 'image/webp',
-            Metadata: {
-                'Cache-Control': 'public, max-age=31536000, immutable'
-            }
+            CacheControl: 'public, max-age=31536000, immutable'
         };
         
         const result = await s3.upload(params).promise();
