@@ -6,16 +6,16 @@ import { useMediaQuery } from 'react-responsive'
 import { clearCart } from '../../../redux/slices/cartSlice'
 
 // chakra ui
-import { Radio, RadioGroup } from '@chakra-ui/react'
-import { ChevronRightIcon } from '@chakra-ui/icons'
+// import { Radio, RadioGroup } from '@chakra-ui/react'
+// import { ChevronRightIcon } from '@chakra-ui/icons'
 
 // images
-import StripeSvg from "../../../images/payment_logos/Stripe.wine.svg"
-import PayPalSvg from "../../../images/payment_logos/PayPal-Logo.wine.svg"
-import BitcoinSvg from "../../../images/payment_logos/Bitcoin-Logo.wine.svg"
+// import StripeSvg from "../../../images/payment_logos/Stripe.wine.svg"
+// import PayPalSvg from "../../../images/payment_logos/PayPal-Logo.wine.svg"
+// import BitcoinSvg from "../../../images/payment_logos/Bitcoin-Logo.wine.svg"
 
 // components
-import StripeContainer from './stripe/StripeContainer'
+// import StripeContainer from './stripe/StripeContainer'
 import PayPal from './paypal/PayPal'
 
 // styles
