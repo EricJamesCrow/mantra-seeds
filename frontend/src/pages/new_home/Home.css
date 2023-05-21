@@ -2,8 +2,7 @@
 
 .landing-page-container {
     /* background-image: url('https://d1hf9un2w0qv80.cloudfront.net/background_image.svg'); */
-    /* background-image: url('https://d1hf9un2w0qv80.cloudfront.net/background.png'); */
-    background-image: url('https://d1hf9un2w0qv80.cloudfront.net/background.webp');
+    background-image: url('https://d1hf9un2w0qv80.cloudfront.net/home_background.webp');
     background-repeat: no-repeat;
     /* background-size: calc(1728px*1.15) calc(1117px*1.05); */
     background-position: center -360px;
