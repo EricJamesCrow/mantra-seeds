@@ -11,7 +11,10 @@ async function uploadImage(image) {
             Bucket: process.env.AWS_S3_BUCKET_NAME,
             Key: fileName,
             Body: image,
-            ContentType: 'image/webp'
+            ContentType: 'image/webp',
+            Metadata: {
+                'Cache-Control': 'public, max-age=31536000, immutable'
+            }
         };
         
         const result = await s3.upload(params).promise();
