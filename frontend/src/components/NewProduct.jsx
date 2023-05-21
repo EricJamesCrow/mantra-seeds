@@ -25,7 +25,7 @@ export default function NewProduct( { product, reviews } ) {
         <div className="product-card-container">
         <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>
         <div className="product-card-image-container">
-            <img src={product.image} alt={product.image} className="product-card-image"/>
+            <img src={product.image} alt={product.name} className="product-card-image"/>
         </div>
         </Link>
         <div className="product-card-info-container">

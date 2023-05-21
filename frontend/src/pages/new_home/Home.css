@@ -32,6 +32,11 @@
     font-size: 40px;
 }
 
+.landing-page-text > img {
+    width: 129px;
+    height: 7px;
+}
+
 .birds-container {
     display: flex;
 }
@@ -55,6 +60,7 @@
     padding-top: 14.8rem;
     margin: 0 auto;
     width: 320px;
+    height: 569.5px;
     filter: drop-shadow(3px 6px 5px rgba(0, 0, 0, 0.5));
 }
 
@@ -154,9 +160,12 @@
     .meditating {
         padding-top: 11.55rem;
         width: 320px;
+        height: 517.5px;
     }
     .landing-page-text > img {
         width: 320px;
+        height: 17.5px;
     }
 }
+
 
