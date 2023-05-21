@@ -11,7 +11,7 @@ const resizeImage = async (image) => {
           fit: 'cover',
           position: 'center',
         })
-        .toFormat('jpeg', { quality: 100 })
+        .toFormat('jpeg', { quality: 80 })
         .toBuffer();
   
       return outputBuffer;
