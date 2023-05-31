@@ -1,5 +1,5 @@
 // aws
-const { sendEmail } = require('../helpers/ses-helper');
+const { sendEmail } = require('../helpers/mailgun-helper');
 
 const contact = async (req, res) => {
     const { name, email, subject, message } = req.body;

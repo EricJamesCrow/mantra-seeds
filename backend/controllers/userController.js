@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 const crypto = require('crypto');
 
 // aws
-const { sendEmail } = require('../helpers/ses-helper');
+const { sendEmail } = require('../helpers/mailgun-helper');
 
 const createToken = (_id, email, role) => {
     return jwt.sign({_id, email, role}, process.env.SECRET, { expiresIn: '7d' })

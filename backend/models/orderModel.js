@@ -3,7 +3,7 @@ const validator = require('validator');
 const Product = require('./productModel');
 const Cart = require('./cartModel');
 // aws
-const { sendEmail } = require('../helpers/ses-helper');
+const { sendEmail } = require('../helpers/mailgun-helper');
 // decryption
 const { decrypt, decryptAddress } = require('../helpers/encryption-helper');
 
