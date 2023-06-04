@@ -17,6 +17,7 @@ const paymentRoutes = require('./routes/payment/payment')
 // const stripeRoutes = require('./routes/payment/stripe')
 const paypalRoutes = require('./routes/payment/paypal')
 const contactRoutes = require('./routes/contact')
+const recipientRoutes = require('./routes/recipient')
 
 // inventory
 const { releaseReservedItems } = require('./utilities/inventoryUtils')
@@ -49,6 +50,7 @@ app.use('/api/shipping', shippingRoutes)
 app.use('/api/payment', paymentRoutes)
 // app.use('/api/payment/stripe', stripeRoutes)
 app.use('/api/payment/paypal', paypalRoutes)
+app.use('/api/recipient', recipientRoutes)
 
 // stripe public key
 app.get("/config", (req, res) => {
