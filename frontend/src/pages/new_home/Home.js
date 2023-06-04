@@ -34,8 +34,8 @@ export default function Home() {
         </div>
         <img src={Meditating} alt="meditating" className="meditating" />
         <NewArrivals />
-        <Educational />
-        <Testimonials />
+        {/* <Educational />
+        <Testimonials /> */}
         <Newsletter />
         <Footer />
     </div>
