@@ -36,7 +36,6 @@ export default function AddProduct( { setShowEditProduct, product }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (isActive && e.target === document.activeElement) {
         const response = await fetch(PRODUCTS_API_URL + product._id, {
           method: 'PATCH',
           headers: { 
@@ -50,16 +49,8 @@ export default function AddProduct( { setShowEditProduct, product }) {
           dispatch(updateProduct(json));
           setShowEditProduct(false);
         }
-    }
+    
       }
-
-    function handleMouseDown() {
-      setIsActive(true);
-    }
-  
-    function handleMouseUp() {
-      setIsActive(false);
-    }
 
   return (
     <div className="add-product-container">
@@ -136,9 +127,7 @@ export default function AddProduct( { setShowEditProduct, product }) {
   <button 
   type="button"
   className="order-details-button create-product"
-  onMouseDown={handleMouseDown}
-  onMouseUp={handleMouseUp}
-  onTransitionEnd={handleSubmit}>Save Changes</button>
+  onClick={handleSubmit}>Save Changes</button>
 </div>
 </form>
 </div>
