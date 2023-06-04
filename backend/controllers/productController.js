@@ -10,9 +10,13 @@ const { resizeImage } = require('../helpers/sharp-helper');
 
 // get all products
 const getProducts = async (req, res) => {
-    const products = await Product.find({}).sort({createdAt: -1})
-
-    res.status(200).json(products)
+  try {
+    const products = await Product.find({deleted: {$ne: true}}).sort({ createdAt: -1 });
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while retrieving the products." });
+  }
 }
 
 // get a single product
@@ -23,7 +27,7 @@ const getProduct = async (req, res) => {
         return res.status(404).json({error: 'No such product'})
     }
 
-    const product = await Product.findById(id)
+    const product = await Product.findOne({ _id: id, deleted: {$ne: true} });
 
     if (!product) {
         return res.status(404).json({error: 'No such product'})
@@ -92,7 +96,7 @@ const deleteProduct = async (req, res) => {
         return res.status(404).json({error: 'No such product'})
     }
     
-    const product = await Product.findOneAndDelete({_id: id})
+    const product = await Product.findByIdAndUpdate(id, { deleted: true }, {new: true})
 
     if (!product) {
         return res.status(400).json({error: 'No such product'})
