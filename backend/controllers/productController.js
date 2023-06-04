@@ -34,52 +34,54 @@ const getProduct = async (req, res) => {
 
 // create new product
 const createProduct = async (req, res) => {
-    const { name, quantity, description, price, chakra} = req.body;
-    // Check for any errors with the file upload
-    if (req.fileValidationError) {
-      console.log(req.fileValidationError)
-      console.log("error")
-      return res.status(400).json({ message: req.fileValidationError });
-    } else if (!req.file) {
-      console.log('No files were uploaded.')
-      return res.status(400).json({ message: 'No files were uploaded.' });
-    }
-
-    const image = req.file;
-  
-    let emptyFields = [];
-  
-    if (!name) {
-      emptyFields.push('name');
-    }
-    if (!quantity) {
-      emptyFields.push('quantity');
-    }
-    if (!image) {
-      emptyFields.push('image');
-    }
-    if (!price) {
-      emptyFields.push('price');
-    }
-    if (!chakra) {
-      emptyFields.push('chakra');
-    }
-    if (emptyFields.length > 0) {
-      return res.status(400).json({ error: 'Please fill in all the fields', emptyFields });
-    }
-
-    // Resize image
-    const resizedImage = await resizeImage(image);
-  
-    const imageLocation = await uploadImage(resizedImage);
-  
-    // Add product to database
     try {
+      const { name, quantity, description, price, chakra} = req.body;
+      // Check for any errors with the file upload
+      if (req.fileValidationError) {
+        console.log(req.fileValidationError)
+        console.log("error")
+        return res.status(400).json({ message: req.fileValidationError });
+      } else if (!req.file) {
+        console.log('No files were uploaded.')
+        return res.status(400).json({ message: 'No files were uploaded.' });
+      }
+
+      const image = req.file;
+    
+      let emptyFields = [];
+    
+      if (!name) {
+        emptyFields.push('name');
+      }
+      if (!quantity) {
+        emptyFields.push('quantity');
+      }
+      if (!image) {
+        emptyFields.push('image');
+      }
+      if (!price) {
+        emptyFields.push('price');
+      }
+      if (!chakra) {
+        emptyFields.push('chakra');
+      }
+      if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields });
+      }
+
+      // Resize image
+      const resizedImage = await resizeImage(image);
+    
+      const imageLocation = await uploadImage(resizedImage);
+    
+      // Add product to database
       const product = await Product.create({ name, quantity, image: imageLocation, description, price, chakra });
       res.status(200).json(product);
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      console.error(error);
+      res.status(500).json({ error: error.message });
     }
+
   };
 
 // delete a product
