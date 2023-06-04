@@ -13,7 +13,7 @@ const resizeImage = async (image) => {
       if (inputBuffer.byteLength > MAX_SIZE) {
         // Compress the image if size > MAX_SIZE
         inputBuffer = await sharp(inputBuffer)
-          .jpeg({ quality: 50 })  // You can adjust the quality value to fit your needs
+          .jpeg({ quality: 10 })  // You can adjust the quality value to fit your needs
           .toBuffer();
       }
 
