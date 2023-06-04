@@ -2,8 +2,11 @@ import { Spacer, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, Mo
 
 import React, { useEffect, useState } from 'react'
 
+import { useNavigate} from 'react-router-dom'
+
 export default function AgeConfirmation() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
   
     // show the modal only if the user hasn't confirmed their age
     useEffect(() => {
@@ -12,6 +15,13 @@ export default function AgeConfirmation() {
         setIsModalOpen(true);
       }
     }, []);
+
+    useEffect(() => {
+        const userAgeConfirmed = localStorage.getItem('userAgeConfirmed');
+        if (!userAgeConfirmed) {
+          setIsModalOpen(true);
+        }
+    }, [isModalOpen]);
   
     const handleConfirm = () => {
       // store the confirmation in local storage
@@ -19,7 +29,10 @@ export default function AgeConfirmation() {
       setIsModalOpen(false);
     };
   
-    const onClose = () => setIsModalOpen(false);
+    const onClose = () => {
+        setIsModalOpen(false);
+        navigate(-1);
+    }
   return (
     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
     <ModalOverlay />
