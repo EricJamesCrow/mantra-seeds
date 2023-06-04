@@ -38,17 +38,16 @@ export default function AgeConfirmation() {
     <ModalOverlay />
     <ModalContent>
       <ModalHeader>Age Confirmation</ModalHeader>
-      <ModalCloseButton />
       <ModalBody>
-        Are you over 21 years old?
+      Please confirm that you are 21 years of age or older.
       </ModalBody>
       <ModalFooter>
       <Button onClick={onClose}>
                 No, take me back
               </Button>
               <Spacer />
-        <Button colorScheme="blue" mr={3} onClick={handleConfirm}>
-          Yes, I'm over 21
+        <Button colorScheme="green" mr={3} onClick={handleConfirm}>
+          Yes, I am 21+
         </Button>
       </ModalFooter>
     </ModalContent>

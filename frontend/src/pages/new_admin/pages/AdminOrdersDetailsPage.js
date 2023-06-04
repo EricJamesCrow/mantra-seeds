@@ -74,6 +74,12 @@ export default function AdminOrdersDetailsPage() {
     await updateDeliveryStatus(id, deliveryStatus);
   };
 
+  const fetchProduct = async (id) => {
+    const response = await fetch(`/api/products/${id}`)
+    const json = await response.json()
+    return json
+  }
+
   return (
     !isDesktop ? (
       <div className="admin-orders-details-page-container">
