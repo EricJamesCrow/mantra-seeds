@@ -44,7 +44,7 @@ export default function AgeConfirmation() {
       </ModalBody>
       <ModalFooter>
       <Button onClick={onClose}>
-                Cancel
+                No, take me back
               </Button>
               <Spacer />
         <Button colorScheme="blue" mr={3} onClick={handleConfirm}>
