@@ -63,6 +63,9 @@ import PrivacyPolicy from './pages/privacy-policy/PrivacyPolicy';
 // functionality
 import ScrollToTop from './components/functionality/ScrollToTop';
 
+// age confirmation
+import AgeConfirmation from './components/age-confirmation/AgeConfirmation';
+
 function App() {
   // hooks
   const { fetchCart, fetchUserCart } = useCart();
@@ -186,6 +189,7 @@ function App() {
     <BottomNavBar
     />
     </div>
+    <AgeConfirmation/>
     </>
   );
 }
