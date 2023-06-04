@@ -27,7 +27,7 @@ export default function PrivacyPolicy() {
           <p>Mantra Seeds reserves the right to modify this Privacy Policy at any time. We will always post the most current version of this Policy on our website. If we make material changes, we will notify you. By continuing to use our services after changes become effective, you agree to these changes.</p>
 
           <h1>7. Contact Us</h1>
-          <p>If you have any questions about this Privacy Policy, please contact us at [email].</p>
+          <p>If you have any questions about this Privacy Policy, please contact us at mantrafam@protonmail.com.</p>
         </div>
     </div>
   )

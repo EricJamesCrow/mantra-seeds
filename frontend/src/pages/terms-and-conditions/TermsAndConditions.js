@@ -17,20 +17,14 @@ export default function TermsAndConditions() {
           <h1>4. Product Information and Availability</h1>
           <p>While we strive to keep our product descriptions accurate and current, there may be instances where product information on our Services may contain inaccuracies, omissions, or outdated information. Mantra Seeds reserves the right to correct any errors, inaccuracies, or omissions and to change or update information at any time without prior notice.</p>
           <h1>5. Prices and Payment</h1>
-          <p>All prices on our website are displayed in the currency relevant to your selected location, and unless otherwise stated, are exclusive of sales tax and other applicable taxes. The total cost of your order will be the price of the products ordered plus the appropriate delivery charges. More information about pricing and sales tax is available on our FAQ page.
-
-Payments for the products (including all applicable delivery charges) are processed securely through PayPal, or other payment processing services as made available. Upon completing your order, you will be directed to the PayPal site (or other payment processing service) to complete your purchase securely. We do not directly handle or store your credit card information.
-
-Please note that products and prices are subject to change. All prices on our website are applicable only to purchases made on the website. Prices in physical store locations may vary.
-
-Keep in mind that if you add more payment methods in the future, you should update your terms and conditions to reflect these changes.</p>
+          <p>All prices on our website are displayed in the currency relevant to your selected location, and unless otherwise stated, are exclusive of sales tax and other applicable taxes. The total cost of your order will be the price of the products ordered plus the appropriate delivery charges. Payments for the products (including all applicable delivery charges) are processed securely through PayPal, or other payment processing services as made available. Upon completing your order, you will be directed to the PayPal site (or other payment processing service) to complete your purchase securely. We do not directly handle or store your credit card information. Please note that products and prices are subject to change. All prices on our website are applicable only to purchases made on the website. </p>
           <h1>6. Delivery, Ownership, and Risk</h1>
           <p>Delivery times given are estimates only. Ownership of the Products will pass to you once we have received payment in full for the Products and the Products have been delivered to you.</p>
           <h1>7. Returns and Refunds</h1>
-          <p><strong>7.1 Return Policy:</strong> Our goal is your satisfaction. If you are unsatisfied with your purchase, you can return it to us within 14 days of the delivery date. To be eligible for a return, your item must be unused, in the same condition that you received it, and in its original packaging. Returns that do not meet these criteria will not be accepted.</p>
+          <p><strong>7.1 Return Policy:</strong> Our goal is your satisfaction. If you are unsatisfied with your purchase, you can return it to us within 30 days of the delivery date. To be eligible for a return, your item must be unused, in the same condition that you received it, and in its original packaging. Returns that do not meet these criteria will not be accepted.</p>
           <p><strong>7.2 Non-Returnable Items:</strong> Please note that certain items may be exempt from being returned. These include perishable goods, gift cards, downloadable software products, and personal care items.</p>
           <p><strong>7.3 Refunds:</strong> Once we receive your returned item and inspect it, we will notify you of the approval or rejection of your refund. If approved, your refund will be processed, and a credit will be applied to your original payment method within a certain number of days.</p>
-          <p><strong>7.4 Damaged or Incorrect Items:</strong> If you received a damaged item or an item different from what you ordered, please contact us immediately at [email], so we can resolve the issue.</p>
+          <p><strong>7.4 Damaged or Incorrect Items:</strong> If you received a damaged item or an item different from what you ordered, please contact us immediately at mantrafam@protonmail.com, so we can resolve the issue.</p>
           <p><strong>7.5 Return Shipping:</strong> You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are non-refundable. We recommend using a trackable shipping service or purchasing shipping insurance for items of significant value.</p>
           <h1>8. Privacy and Data Collection</h1>
           <p>By using the Services, you agree that Mantra Seeds can use such data in accordance with our Privacy Policy. Our Privacy Policy is incorporated into these Terms by reference.</p>
@@ -53,7 +47,7 @@ Keep in mind that if you add more payment methods in the future, you should upda
           <h1>17. Changes to the Terms</h1>
           <p>Mantra Seeds reserves the right to modify these Terms at any time. We will always post the most current version of these Terms on our website. If we make material changes, we will notify you. By continuing to use our Services after any changes become effective, you agree to those changes.</p>
           <h1>18. Contact Us</h1>
-          <p>If you have any questions about these Terms, please contact us at [email].</p>
+          <p>If you have any questions about these Terms, please contact us at mantrafam@protonmail.com.</p>
         </div>
     </div>
   )
