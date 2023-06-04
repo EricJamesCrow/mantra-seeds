@@ -17,9 +17,15 @@ export default function Footer() {
             <Link to="/privacy-policy">Privacy Policy</Link>
         </div>
         <div className="footer-social-media-wrapper">
+          <a href="https://www.instagram.com/mantraseeds" target="_blank" rel="noopener noreferrer">
             <img src={Instagram} alt="Instagram" />
-            <img src={Facebook} alt="Facebook" />
-            <img src={Twitter} alt="Twitter" />
+          </a>
+          <a href="https://www.facebook.com/mantraseeds" target="_blank" rel="noopener noreferrer">
+              <img src={Facebook} alt="Facebook" />
+          </a>
+          <a href="https://www.twitter.com/mantraseeds" target="_blank" rel="noopener noreferrer">
+              <img src={Twitter} alt="Twitter" />
+          </a>
         </div>
         <div className="footer-copyright">© 2023 Mantra Seeds</div>
     </div>

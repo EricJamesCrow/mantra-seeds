@@ -167,13 +167,13 @@ const signupUser = async (req, res) => {
                     </tr>                    
                     <tr>
                         <td style="padding-bottom: 12px;">
-                            <a href="https://www.instagram.com" style="outline: none;">
+                            <a href="https://www.instagram.com/mantraseeds" style="outline: none;">
                                 <img src='${process.env.CLOUDFRONT_URL}/social_media/instagram.svg' alt='Instagram' style='width: 40px; margin-right: 10px;' />
                             </a>
-                            <a href="https://www.facebook.com" style="outline: none;">
+                            <a href="https://www.facebook.com/mantraseeds" style="outline: none;">
                                 <img src='${process.env.CLOUDFRONT_URL}/social_media/facebook.svg' alt='Facebook' style='width: 40px; margin-right: 10px;' />
                             </a>
-                            <a href="https://www.twitter.com" style="outline: none;">
+                            <a href="https://www.twitter.com/mantraseeds" style="outline: none;">
                                 <img src='${process.env.CLOUDFRONT_URL}/social_media/twitter.svg' alt='Twitter' style='width: 40px;' />
                             </a>
                         </td>
@@ -374,13 +374,13 @@ const requestResetPassword = async (req, res) => {
                     </tr>                    
                     <tr>
                         <td style="padding-bottom: 12px;">
-                            <a href="https://www.instagram.com" style="outline: none;">
+                            <a href="https://www.instagram.com/mantraseeds" style="outline: none;">
                                 <img src='${process.env.CLOUDFRONT_URL}/social_media/instagram.svg' alt='Instagram' style='width: 40px; margin-right: 10px;' />
                             </a>
-                            <a href="https://www.facebook.com" style="outline: none;">
+                            <a href="https://www.facebook.com/mantraseeds" style="outline: none;">
                                 <img src='${process.env.CLOUDFRONT_URL}/social_media/facebook.svg' alt='Facebook' style='width: 40px; margin-right: 10px;' />
                             </a>
-                            <a href="https://www.twitter.com" style="outline: none;">
+                            <a href="https://www.twitter.com/mantraseeds" style="outline: none;">
                                 <img src='${process.env.CLOUDFRONT_URL}/social_media/twitter.svg' alt='Twitter' style='width: 40px;' />
                             </a>
                         </td>
