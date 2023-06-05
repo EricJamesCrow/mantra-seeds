@@ -24,16 +24,33 @@ export default function AdminOrdersDetailsPage() {
   const products  = useSelector(state => state.products.products)
   const { orders } = useSelector(state => state.orders)
   const [enrichedItems, setEnrichedItems] = useState(null);
+
+  const fetchProduct = async (id) => {
+    const response = await fetch(`/api/products/${id}`)
+    const json = await response.json()
+    return json
+  }
   
   useEffect(() => {
     if (products && orders) {
-      const order = orders.find(o => o._id === id);
-      const enrichedItems = order.items.map(item => {
-        const product = products.find(p => p._id === item.product);
-        return { ...item, product };
-      });
-  
-      setEnrichedItems(enrichedItems);
+        const order = orders.find(o => o._id === id);
+        
+        const enrichedItemsPromises = order.items.map(async item => {
+            let product = products.find(p => p._id === item.product);
+
+            // If the product isn't found in the products array, fetch it from the API
+            if (!product) {
+                product = await fetchProduct(item.product);
+            }
+
+            return { ...item, product };
+        });
+
+        // Since fetching product data is asynchronous, we need to use Promise.all to wait for all promises to resolve.
+        Promise.all(enrichedItemsPromises)
+            .then(enrichedItems => {
+                setEnrichedItems(enrichedItems);
+            });
     }
   }, [products, orders, id]);
 
@@ -86,12 +103,6 @@ export default function AdminOrdersDetailsPage() {
   const handleUpdateDeliveryStatus = async (deliveryStatus) => {
     await updateDeliveryStatus(id, deliveryStatus);
   };
-
-  const fetchProduct = async (id) => {
-    const response = await fetch(`/api/products/${id}`)
-    const json = await response.json()
-    return json
-  }
 
   return (
     !isDesktop ? (
