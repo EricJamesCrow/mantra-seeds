@@ -34,7 +34,7 @@ export default function AdminOrdersDetailsPage() {
   useEffect(() => {
     if (products && orders) {
         const order = orders.find(o => o._id === id);
-        
+        if(!order) return <Loading/> // This is needed to prevent the page from crashing when the order is not loaded yet.
         const enrichedItemsPromises = order.items.map(async item => {
             let product = products.find(p => p._id === item.product);
 
