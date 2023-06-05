@@ -56,6 +56,7 @@ export default function AdminOrdersDetailsPage() {
 
   if(!orders || !products) return <Loading/> // This is needed to prevent the page from crashing when the orders are not loaded yet.
   const order = orders.find(o => o._id === id)
+  if(!order) return <Loading/> // This is needed to prevent the page from crashing when the order is not loaded yet.
 
   const { firstName, lastName, state, city, street, zip } = order.address
   const formattedAddress = `<div><span style="display: inline-block">${firstName} ${lastName}</span><br>${street}<br>${city}, ${state} ${zip}<br>United States</div>`
