@@ -141,10 +141,10 @@ export default function AdminOrdersDetailsPage() {
             <div className='admin-order-details-page-order-images-container'>
             {enrichedItems && enrichedItems.map(item => (
             <div className="admin-order-details-page-order-details">
-              <div>
-                <img src={item.product.image} alt={item.product.name}/>
-              </div>
-              <div>{item.product.name}</div>
+            <div>
+              <img src={item?.product?.image ?? null} alt={item?.product?.name ?? null}/>
+            </div>
+            <div>{item?.product?.name ?? null}</div>
               <div>${(item.price / 100).toFixed(2)}</div>
               <div>Quantity: {item.quantity}</div>
             </div>
@@ -195,14 +195,16 @@ export default function AdminOrdersDetailsPage() {
                         <div>Order</div>
                       </div>
                       <div className='admin-order-details-page-order-images-container'>
-                      {items.map(item => (<div className="admin-order-details-page-order-details">
-                      <div>
-                      <img src={products.find(p => p._id === item.product).image} alt={products.find(p => p._id === item.product).name}/>
-                      </div>
-                      <div>{products.find(p => p._id === item.product).name}</div>
-                      <div>${(item.price / 100).toFixed(2)}</div>
-                      <div>Quantity: {item.quantity}</div>
-                      </div>))}
+                      {enrichedItems && enrichedItems.map(item => (
+                        <div className="admin-order-details-page-order-details">
+                        <div>
+                          <img src={item?.product?.image ?? null} alt={item?.product?.name ?? null}/>
+                        </div>
+                        <div>{item?.product?.name ?? null}</div>
+                          <div>${(item.price / 100).toFixed(2)}</div>
+                          <div>Quantity: {item.quantity}</div>
+                        </div>
+                      ))}
                       </div>
                   </div>
                 </div>
