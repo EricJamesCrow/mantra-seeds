@@ -27,7 +27,7 @@ const getProduct = async (req, res) => {
         return res.status(404).json({error: 'No such product'})
     }
 
-    const product = await Product.findOneById(id)
+    const product = await Product.findById(id)
 
     if (!product) {
         return res.status(404).json({error: 'No such product'})

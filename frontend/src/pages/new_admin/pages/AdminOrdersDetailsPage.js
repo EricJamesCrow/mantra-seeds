@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useMediaQuery } from 'react-responsive';
@@ -23,6 +23,19 @@ export default function AdminOrdersDetailsPage() {
   const navigate = useNavigate();
   const products  = useSelector(state => state.products.products)
   const { orders } = useSelector(state => state.orders)
+  const [enrichedItems, setEnrichedItems] = useState(null);
+  
+  useEffect(() => {
+    if (products && orders) {
+      const order = orders.find(o => o._id === id);
+      const enrichedItems = order.items.map(item => {
+        const product = products.find(p => p._id === item.product);
+        return { ...item, product };
+      });
+  
+      setEnrichedItems(enrichedItems);
+    }
+  }, [products, orders, id]);
 
   if(!orders || !products) return <Loading/> // This is needed to prevent the page from crashing when the orders are not loaded yet.
   const order = orders.find(o => o._id === id)
@@ -114,14 +127,16 @@ export default function AdminOrdersDetailsPage() {
               <div>Order</div>
             </div>
             <div className='admin-order-details-page-order-images-container'>
-            {items.map(item => (<div className="admin-order-details-page-order-details">
-            <div>
-            <img src={products.find(p => p._id === item.product).image} alt={products.find(p => p._id === item.product).name}/>
+            {enrichedItems && enrichedItems.map(item => (
+            <div className="admin-order-details-page-order-details">
+              <div>
+                <img src={item.product.image} alt={item.product.name}/>
+              </div>
+              <div>{item.product.name}</div>
+              <div>${(item.price / 100).toFixed(2)}</div>
+              <div>Quantity: {item.quantity}</div>
             </div>
-            <div>{products.find(p => p._id === item.product).name}</div>
-            <div>${(item.price / 100).toFixed(2)}</div>
-            <div>Quantity: {item.quantity}</div>
-            </div>))}
+          ))}
             </div>
           <div className={`order-customer-card-details-order-details-address gray`}>
             <div>Shipping Address</div>
