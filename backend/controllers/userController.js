@@ -6,6 +6,10 @@ const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto');
 
+// emails
+const confirmAccountEmail = require('../email_templates/account-confirmation')
+const passwordResetEmail = require('../email_templates/password-reset')
+
 // aws
 const { sendEmail } = require('../helpers/mailgun-helper');
 
@@ -118,72 +122,7 @@ const signupUser = async (req, res) => {
             from: process.env.USER_SIGNUP_CONFIRMATION_EMAIL,
             to: user.email,
             subject: 'Confirm Your Account',
-            html: `<!DOCTYPE html>
-            <html lang='en'>
-            <head>
-                <meta charset='UTF-8'>
-                <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>Password Reset</title>
-                <style>
-                    body, h1 {
-                        margin: 0;
-                        padding: 0;
-                        font-family: 'Arial', sans-serif; /* Use a web-safe font as fallback */
-                    }
-                </style>
-            </head>
-            <body>
-                <table width='100%' style='background: #637748; padding: 0 12px; height: 78px;'>
-                    <tr>
-                        <td>
-                            <h1 style='font-size: 24px; color: #FAFAFA;'>MANTRA SEEDS</h1>
-                        </td>
-                        <td align='right'>
-                            <img src='${process.env.CLOUDFRONT_URL}/meditating.svg' style='filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 55px; height: 55px;'/>
-                        </td>
-                    </tr>
-                </table>
-                <table width='100%' style='text-align: center; background: #C2C5A2; padding: 24px 12px;'>
-                    <tr>
-                        <td>
-                            <h1>Confirm Your Account</h1>
-                            <p style='padding: 12px 24px; word-wrap: break-word; font-size: 20px;'>Welcome to Mantra Seeds!</p>
-                            <a href='${confirmationLink}' style='color: #fff; background: #456649; border-radius: 8px; text-decoration: none; word-wrap: break-word; padding: 12px; margin: 4px; display: inline-block;'>Click here to confirm</a>
-                            <p style='padding: 12px 24px; word-wrap: break-word; font-size: 20px;'>If you did not sign up for an account with Mantra Seeds, it's possible that someone else entered your email address by mistake. Please disregard this email or contact our support team if you have any concerns</p>
-                        </td>
-                    </tr>
-                </table>
-                <table width='100%' style='background: #456649; padding: 24px; text-align: center; color: #fff;'>
-                    <tr>
-                        <td style="padding-bottom: 12px;">
-                            <a href="https://mantra-seeds.com/about-us" style="color: #fff; text-decoration: none;">About Us</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding-bottom: 12px;">
-                            <a href="https://mantra-seeds.com/privacy-policy" style="color: #fff; text-decoration: none;">Privacy Policy</a>
-                        </td>
-                    </tr>                    
-                    <tr>
-                        <td style="padding-bottom: 12px;">
-                            <a href="https://www.instagram.com/mantraseeds" style="outline: none;">
-                                <img src='${process.env.CLOUDFRONT_URL}/social_media/instagram.svg' alt='Instagram' style='width: 40px; margin-right: 10px;' />
-                            </a>
-                            <a href="https://www.facebook.com/mantraseeds" style="outline: none;">
-                                <img src='${process.env.CLOUDFRONT_URL}/social_media/facebook.svg' alt='Facebook' style='width: 40px; margin-right: 10px;' />
-                            </a>
-                            <a href="https://www.twitter.com/mantraseeds" style="outline: none;">
-                                <img src='${process.env.CLOUDFRONT_URL}/social_media/twitter.svg' alt='Twitter' style='width: 40px;' />
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                    <td style='margin-top: 12px; font-size: 16px;'>© 2023 Mantra Seeds</td>
-                </tr>
-            </table>
-        </body>
-        </html>`
+            html: confirmAccountEmail(confirmationLink)
         };
 
         await sendEmail(emailParams);
@@ -325,72 +264,7 @@ const requestResetPassword = async (req, res) => {
             from: process.env.PASSWORD_RESET_EMAIL,
             to: user.email,
             subject: 'Password Reset',
-            html: `<!DOCTYPE html>
-            <html lang='en'>
-            <head>
-                <meta charset='UTF-8'>
-                <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>Password Reset</title>
-                <style>
-                    body, h1 {
-                        margin: 0;
-                        padding: 0;
-                        font-family: 'Arial', sans-serif; /* Use a web-safe font as fallback */
-                    }
-                </style>
-            </head>
-            <body>
-                <table width='100%' style='background: #637748; padding: 0 12px; height: 78px;'>
-                    <tr>
-                        <td>
-                            <h1 style='font-size: 24px; color: #FAFAFA;'>MANTRA SEEDS</h1>
-                        </td>
-                        <td align='right'>
-                            <img src='${process.env.CLOUDFRONT_URL}/meditating.svg' style='filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 55px; height: 55px;'/>
-                        </td>
-                    </tr>
-                </table>
-                <table width='100%' style='text-align: center; background: #C2C5A2; padding: 24px 12px;'>
-                    <tr>
-                        <td>
-                            <h1>Password Reset</h1>
-                            <p style='padding: 12px 24px; word-wrap: break-word; font-size: 20px;'>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
-                            <a href='${resetLink}' style='color: #fff; background: #456649; border-radius: 8px; text-decoration: none; word-wrap: break-word; padding: 12px; margin: 4px; display: inline-block;'>Reset Password</a>
-                            <p style='padding: 12px 24px; word-wrap: break-word; font-size: 20px;'>If you did not request this, please ignore this email and your password will remain unchanged.</p>
-                        </td>
-                    </tr>
-                </table>
-                <table width='100%' style='background: #456649; padding: 24px; text-align: center; color: #fff;'>
-                    <tr>
-                        <td style="padding-bottom: 12px;">
-                            <a href="https://mantra-seeds.com/about-us" style="color: #fff; text-decoration: none;">About Us</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding-bottom: 12px;">
-                            <a href="https://mantra-seeds.com/privacy-policy" style="color: #fff; text-decoration: none;">Privacy Policy</a>
-                        </td>
-                    </tr>                    
-                    <tr>
-                        <td style="padding-bottom: 12px;">
-                            <a href="https://www.instagram.com/mantraseeds" style="outline: none;">
-                                <img src='${process.env.CLOUDFRONT_URL}/social_media/instagram.svg' alt='Instagram' style='width: 40px; margin-right: 10px;' />
-                            </a>
-                            <a href="https://www.facebook.com/mantraseeds" style="outline: none;">
-                                <img src='${process.env.CLOUDFRONT_URL}/social_media/facebook.svg' alt='Facebook' style='width: 40px; margin-right: 10px;' />
-                            </a>
-                            <a href="https://www.twitter.com/mantraseeds" style="outline: none;">
-                                <img src='${process.env.CLOUDFRONT_URL}/social_media/twitter.svg' alt='Twitter' style='width: 40px;' />
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                    <td style='margin-top: 12px; font-size: 16px;'>© 2023 Mantra Seeds</td>
-                </tr>
-            </table>
-        </body>
-        </html>`
+            html: passwordResetEmail(resetLink)
             
         };
 

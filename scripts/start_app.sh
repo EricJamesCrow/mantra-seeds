@@ -5,6 +5,7 @@ cd /var/backend
 # testing
 # npm_prefix=$(npm config get prefix)
 # export PATH=$PATH:${npm_prefix}/bin
+pm2 stop 0
 pm2 start server.js --name mantra-seeds-backend
 
 # Restart Nginx to apply the configuration changes
