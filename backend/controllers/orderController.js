@@ -120,6 +120,7 @@ const updateDeliveryStatus = async (req, res) => {
       }
 
       const updatedOrderWithTransaction = await getOrderWithTransaction(id);
+      const populatedOrder = await Order.findById(id).populate('items.product');
 
       const address = updatedOrderWithTransaction.address;
       const decryptedAddress = decryptAddress(address);
@@ -128,7 +129,7 @@ const updateDeliveryStatus = async (req, res) => {
       updatedOrderWithTransaction.email = decryptedEmail;
 
       let itemsHtml = '';
-      for (const item of updatedOrderWithTransaction.items) {
+      for (const item of populatedOrder.items) {
           itemsHtml += `
           <div style="margin: 12px">
               <div style="border-radius: 5px; padding: 12px 0; margin: 12px 0; width: 100%; max-width: 520px; margin: 0 auto;">
