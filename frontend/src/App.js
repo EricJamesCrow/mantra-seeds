@@ -74,6 +74,8 @@ function App() {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  const user = JSON.parse(localStorage.getItem('user'))
+
   const fetchUser = async (user) => {
   try {
     const token = user.token;
@@ -144,13 +146,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         
-        <Route path="/admin/dashboard" element={<AdminDashboard/>} />
-        <Route path="/admin/orders" element={<AdminOrders/>} />
-        <Route path="/admin/orders/:id" element={<AdminOrdersDetailsPage/>} />
-        <Route path="/admin/customers" element={<AdminCustomers/>} />
-        <Route path="/admin/customers/:id" element={<AdminCustomersDetailsPage/>} />
-        <Route path="/admin/products" element={<AdminProducts/>} />
-        <Route path="/admin/products/:id" element={<AdminProductsDetailsPage/>} />
+        <Route path="/admin/dashboard" element={user && user.role == 1 ? <AdminDashboard/> : <NotFound/>} />
+        <Route path="/admin/orders" element={user && user.role == 1 ? <AdminOrders/> : <NotFound/>} />
+        <Route path="/admin/orders/:id" element={user && user.role == 1 ? <AdminOrdersDetailsPage/> : <NotFound/>} />
+        <Route path="/admin/customers" element={user && user.role == 1 ? <AdminCustomers/> : <NotFound/>} />
+        <Route path="/admin/customers/:id" element={user && user.role == 1 ? <AdminCustomersDetailsPage/> : <NotFound/>} />
+        <Route path="/admin/products" element={user && user.role == 1 ? <AdminProducts/> : <NotFound/>} />
+        <Route path="/admin/products/:id" element={user && user.role == 1 ? <AdminProductsDetailsPage/> : <NotFound/>} />
         
         <Route path="/shop/products/:id/reviews" element={<Reviews/>} />
         <Route path="/shop/products/:id" element={<NewProductPage/>} />
