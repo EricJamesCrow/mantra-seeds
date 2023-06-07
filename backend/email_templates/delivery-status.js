@@ -32,7 +32,7 @@ const deliveryStatusEmail = (status, updatedOrderWithTransaction, itemsHtml, dec
                     <h2 style="font-size: 24px; color: #FAFAFA;">MANTRA SEEDS</h2>
                 </td>
                 <td align="right">
-                    <img src="${process.env.CLOUDFRONT_URL}/meditating.svg" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 55px; height: 55px;" />
+                    <img src="${process.env.CLOUDFRONT_URL}/meditating.png" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); width: 55px; height: 55px;" />
                 </td>
             </tr>
         </table>
@@ -96,13 +96,13 @@ const deliveryStatusEmail = (status, updatedOrderWithTransaction, itemsHtml, dec
                 <tr>
                     <td style="padding-bottom: 12px;">
                         <a href="https://www.instagram.com/mantraseeds" style="outline: none;">
-                            <img src='${process.env.CLOUDFRONT_URL}/social_media/instagram.svg' alt='Instagram' style='width: 40px; margin-right: 10px;' />
+                            <img src='${process.env.CLOUDFRONT_URL}/social_media/instagram.png' alt='Instagram' style='width: 40px; margin-right: 10px;' />
                         </a>
                         <a href="https://www.facebook.com/mantraseeds" style="outline: none;">
-                            <img src='${process.env.CLOUDFRONT_URL}/social_media/facebook.svg' alt='Facebook' style='width: 40px; margin-right: 10px ' />
+                            <img src='${process.env.CLOUDFRONT_URL}/social_media/facebook.png' alt='Facebook' style='width: 40px; margin-right: 10px ' />
                         </a>
                         <a href="https://www.twitter.com/mantraseeds" style="outline: none;">
-                            <img src='${process.env.CLOUDFRONT_URL}/social_media/twitter.svg' alt='Twitter' style='width: 40px;' />
+                            <img src='${process.env.CLOUDFRONT_URL}/social_media/twitter.png' alt='Twitter' style='width: 40px;' />
                         </a>
                     </td>
                 </tr>
