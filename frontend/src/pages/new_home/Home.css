@@ -165,6 +165,15 @@
         width: 320px;
         height: 17.5px;
     }
+    .home-page-header-text-and-link-wrapper > div:first-child,
+    .home-page-header-text-and-link-wrapper-newsletter > div:first-child {
+        margin-left: 4rem;
+        font-size: 60px;
+    }
+    .home-page-header-text-and-link-wrapper > div:last-child {
+        font-size: 30px;
+        margin-right: 4rem;
+    }
 }
 
 
