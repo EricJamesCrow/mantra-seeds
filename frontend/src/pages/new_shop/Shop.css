@@ -124,6 +124,8 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-gap: 10px;
+        max-width: 2560px;
+        margin: 0 auto;
     }
     .shop-container .filter-sort-search-container {
         margin-left: 2rem;

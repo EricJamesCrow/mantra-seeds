@@ -5,6 +5,8 @@
     width: 90%;
     margin: 1.2rem auto;
     padding-bottom: 1.2rem;
+    max-width: 354px;
+    max-height: 556px;
 }
 
 .product-card-image-container {

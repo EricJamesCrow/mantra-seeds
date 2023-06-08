@@ -18,7 +18,7 @@ export default function NewArrivals() {
       <div>New Arrivals</div>
       <div onClick={() => navigate('/shop')}>View All</div>
     </div>
-    <div>
+    <div className="new-arrivals-carousel-wrapper">
       <RBCarousel items={products.slice(0,9)} reviews={reviews}/>
     </div>
 </div>

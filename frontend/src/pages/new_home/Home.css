@@ -6,7 +6,6 @@
     background-repeat: no-repeat;
     /* background-size: calc(1728px*1.15) calc(1117px*1.05); */
     background-position: center -360px;
-    height: 200vh;
     background-attachment: fixed;
 }
 
@@ -65,7 +64,7 @@
 
 .home-page-content-wrapper {
     background-color: #B5BB8D;
-    min-height: 50vh;
+    /* min-height: 25vh; */
     padding-bottom: 1.5rem;
 }
 
@@ -127,12 +126,18 @@
     align-items: center;
 }
 
+.home-page-content-wrapper > .new-arrivals-carousel-wrapper {
+    max-width: 2400px;
+    margin: 0 auto;
+}
+
 .newsletter-signup-wrapper {
     display: flex;
     flex-direction: column;
     width: 80%;
     margin: 0 auto;
     margin-top: 2rem;
+    margin-bottom: 2rem;
     max-width: 400px;
 }
 
@@ -146,6 +151,13 @@
 .newsletter-signup-wrapper button:hover {
     cursor: pointer;
     background: #C2C5A2;
+}
+
+@media (min-width: 1800px) {
+    .landing-page-container {
+        background-size:  100% 100%;
+        background-position: center -1200px;
+    }
 }
 
 @media (min-width: 980px) {
