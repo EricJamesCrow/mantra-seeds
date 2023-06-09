@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate} from 'react-router-dom'
 
 // images
@@ -19,6 +19,16 @@ export default function SearchModel( { hideSearch }) {
       hideSearch();
     }
   }
+
+    useEffect(() => {
+      document.body.style.overflow = 'hidden';
+      var viewportHeight = window.innerHeight;
+      console.log('The viewport height is ' + viewportHeight + 'px');
+  
+      return () => {
+        document.body.style.overflow = 'unset';
+      };
+    }, []);
 
   return (
     <div className="search-model">
