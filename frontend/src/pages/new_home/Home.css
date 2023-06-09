@@ -156,7 +156,14 @@
 @media (min-width: 1800px) {
     .landing-page-container {
         background-size:  100% 100%;
-        background-position: center -1200px;
+        background-position: center -25vh;
+    }
+}
+
+
+@media (min-width: 3000px) and (min-height: 1800px) {
+    .landing-page-container {
+        background-position: center -50vh;
     }
 }
 
