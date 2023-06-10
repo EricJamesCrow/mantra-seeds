@@ -73,7 +73,7 @@ export default function Login() {
             </div>
           </form>
             <div className="alternative-link-container">
-                  <h1>Don't have an account?</h1>
+                  <h2>Don't have an account?</h2>
                   <Link to="/signup" className="alternative-link" aria-label="Signup">
                     <div>Sign Up</div>
                     <ChevronRightIcon w={6} h={6}/>

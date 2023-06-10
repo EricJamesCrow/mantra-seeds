@@ -64,7 +64,7 @@ export default function Shop() {
 
   return (
     <div className="shop-container">
-        <div>Shop Products</div>
+        <h1>Shop Products</h1>
         <div className="search-and-filters-container">
         <form>
           <div className="filter-sort-search-container">
