@@ -3,7 +3,7 @@ import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
 import React, { useEffect } from 'react';
 
 // Google Analytics
-import ReactGA from 'react-ga4';
+// import ReactGA from 'react-ga4';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -79,15 +79,15 @@ function App() {
 
   const user = JSON.parse(localStorage.getItem('user'))
 
-  useEffect(() => {
-    // Initialize Google Analytics
-    ReactGA.initialize('G-T07JPMZWYJ');
-  }, []);
+  // useEffect(() => {
+  //   // Initialize Google Analytics
+  //   ReactGA.initialize('G-T07JPMZWYJ');
+  // }, []);
 
-  useEffect(() => {
-    // This code logs the page view to Google Analytics whenever the location changes
-    ReactGA.send(location.pathname);
-  }, [location]);
+  // useEffect(() => {
+  //   // This code logs the page view to Google Analytics whenever the location changes
+  //   ReactGA.send(location.pathname);
+  // }, [location]);
 
 
   const fetchUser = async (user) => {
