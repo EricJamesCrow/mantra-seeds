@@ -20,6 +20,9 @@ import ReviewsContainer from './reviews/ReviewsContainer';
 // loading
 import Loading from './loading/loading'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function NewProductPage() {
     const { id } = useParams()
     const { addToCart, loading, error } = useAddToCart();
@@ -49,6 +52,13 @@ export default function NewProductPage() {
 
   return (
     <div className="admin-orders-details-page-container">
+        <Helmet>
+          <title>{product.name} | Mantra Seeds</title>
+          <meta
+            name="description"
+            content={product.description}
+          />        
+        </Helmet>
     <button className="details-page-btn" onClick={() => navigate(-1)} aria-label="Go to previous page">
     <FontAwesomeIcon 
       icon={faChevronLeft} 

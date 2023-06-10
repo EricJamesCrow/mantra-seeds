@@ -16,6 +16,9 @@ import './Signup.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function Signup() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -32,6 +35,13 @@ export default function Signup() {
 
   return (
     <div className="login-container">
+      <Helmet>
+          <title>Sign Up | Mantra Seeds</title>
+          <meta
+            name="description"
+            content="Create a new account with Mantra Seeds and join our community."
+          />        
+      </Helmet>
       <button className="details-page-btn" onClick={() => navigate("/")} aria-label="Return to home page">
         <FontAwesomeIcon 
           icon={faChevronLeft} 

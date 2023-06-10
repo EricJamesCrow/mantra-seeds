@@ -3,9 +3,19 @@ import React from 'react'
 // styles
 import './PrivacyPolicy.css'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function PrivacyPolicy() {
   return (
     <div className="privacy-policy-container">
+        <Helmet>
+          <title>Privacy Policy | Mantra Seeds</title>
+          <meta
+            name="description"
+            content="We are committed to protecting your privacy. Learn how we collect, use, and protect your personal information."
+          />        
+        </Helmet>
         <h1>Privacy Policy</h1>
         <div className="privacy-policy-content">
           <h2>1. Information We Collect</h2>

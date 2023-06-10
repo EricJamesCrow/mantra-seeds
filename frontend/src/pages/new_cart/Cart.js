@@ -11,6 +11,9 @@ import Order from './components/Order'
 // chakra ui
 import { Spinner } from '@chakra-ui/react'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function Cart() {
   const navigate = useNavigate();
   const user = useSelector(state => state.auth.user);
@@ -53,6 +56,13 @@ export default function Cart() {
 
   return (
     <div className="cart-container">
+      <Helmet>
+          <title>My Cart | Mantra Seeds</title>
+          <meta
+            name="description"
+            content="View your cart and proceed to checkout."
+          />        
+      </Helmet>
       <div className="cart-wrapper">
         <div className="cart-first-wrapper">
           <h1>My Cart</h1>

@@ -1,6 +1,5 @@
 User-agent: *
 Disallow: /admin/
-Disallow: /cart/
 Sitemap: https://mantra-seeds.com/sitemap.xml
 Allow: /shop/
 Allow: /contact/

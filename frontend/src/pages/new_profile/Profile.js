@@ -20,6 +20,9 @@ import { EditIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHistory, faUnlockKeyhole, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function Profile() {
     const user = useSelector(state => state.auth.user);
     let navigate = useNavigate()
@@ -44,6 +47,13 @@ export default function Profile() {
 
   return (
     <div className="profile-wrapper">
+        <Helmet>
+          <title>{user.email} | Mantra Seeds</title>
+          <meta
+            name="description"
+            content={`Welcome back ${user.email}!`}
+          />        
+        </Helmet>
         {showAlert && 
         <Alert status='warning' className='alert-banner'>
             <AlertIcon />

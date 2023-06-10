@@ -19,6 +19,9 @@ import Educational from './components/Educational'
 import Testimonials from './components/Testimonials'
 import Newsletter from './components/Newsletter'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function Home() {
   const [email, setEmail] = useState('');
   const products = useSelector(state => state.products.products);
@@ -27,6 +30,13 @@ export default function Home() {
 
   return (
     <div className="landing-page-container">
+        <Helmet>
+          <title>Mantra Seeds</title>
+          <meta
+            name="description"
+            content="Mantra Seeds offers a wide variety of high-quality distinctive seeds and other types of seeds for all your gardening needs. Browse our collection and order online today."
+          />
+        </Helmet>
         <div className="landing-page-text">
             <div>Handcrafted Seeds</div>
             <div>MANTRA SEEDS</div>

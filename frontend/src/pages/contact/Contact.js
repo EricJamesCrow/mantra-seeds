@@ -10,6 +10,9 @@ import { Input, Textarea } from "@chakra-ui/react";
 // hooks
 import useContact from "../../hooks/useContact"
 
+// react helmet
+import { Helmet } from "react-helmet-async";
+
 export default function Contact() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -30,6 +33,13 @@ export default function Contact() {
 
   return (
     <div className="contact-us-container">
+      <Helmet>
+          <title>Contact Us | Mantra Seeds</title>
+          <meta
+            name="description"
+            content="Get in touch with us for any inquiries, suggestions, or issues. We're here to help and would love to hear from you."
+          />        
+      </Helmet>
       <h1>Contact Us</h1>
       <form className="contact-us-form" onSubmit={handleSubmit}>
         <div className="label-and-input-wrapper">

@@ -3,9 +3,19 @@ import React from 'react'
 // styles
 import './TermsAndConditions.css'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function TermsAndConditions() {
   return (
     <div className="terms-and-conditions-container">
+        <Helmet>
+          <title>Terms and Conditions | Mantra Seeds</title>
+          <meta
+            name="description"
+            content="Review our terms and conditions to understand the rules and guidelines for using our services and purchasing our products."
+          />        
+        </Helmet>
         <h1>Terms and Conditions</h1>
         <div className="terms-and-conditions-content">
           <h2>1. Acceptance of Terms</h2>

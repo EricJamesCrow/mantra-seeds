@@ -14,6 +14,9 @@ import Payment from './components/Payment';
 // styles
 import './Checkout.css';
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function Checkout() {
   const [currentStep, setCurrentStep] = useState(1);
   const [maxStep, setMaxStep] = useState(1);
@@ -62,6 +65,13 @@ export default function Checkout() {
 
   return (
     <div className="checkout-container">
+      <Helmet>
+          <title>Checkout | Mantra Seeds</title>
+          <meta
+            name="description"
+            content="Secure and easy checkout. Review your order, choose your payment method and finalize your purchase. Enjoy shopping with us."
+          />        
+      </Helmet>
       <div className="checkout-header">
         <div
           className="checkout-step-container"

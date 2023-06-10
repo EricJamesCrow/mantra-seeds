@@ -28,6 +28,8 @@ import { useSelector } from 'react-redux'
 // chakra ui
 import { Select } from '@chakra-ui/react'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
 
 export default function Shop() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -64,6 +66,13 @@ export default function Shop() {
 
   return (
     <div className="shop-container">
+        <Helmet>
+          <title>Shop Products | Mantra Seeds</title>
+          <meta
+            name="description"
+            content="Mantra Seeds offers a wide variety of high-quality distinctive seeds and other types of seeds for all your gardening needs. Browse our collection and order online today."
+          />        
+        </Helmet>
         <h1>Shop Products</h1>
         <div className="search-and-filters-container">
         <form>

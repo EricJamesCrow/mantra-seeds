@@ -16,6 +16,9 @@ import './Login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -32,6 +35,13 @@ export default function Login() {
 
   return (
     <div className="login-container">
+      <Helmet>
+          <title>Log In | Mantra Seeds</title>
+          <meta
+            name="description"
+            content="Access your account to manage your orders and update your profile."
+          />        
+      </Helmet>
       <button className="details-page-btn" onClick={() => navigate("/")} aria-label="Return to home page">
         <FontAwesomeIcon 
           icon={faChevronLeft} 

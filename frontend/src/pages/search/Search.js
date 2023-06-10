@@ -14,6 +14,8 @@ import { useSelector } from 'react-redux'
 // styles
 import './Search.css'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
 
 export default function Search() {
     const { id } = useParams();
@@ -42,6 +44,13 @@ export default function Search() {
 
   return (
     <div className="search-page-container">
+        <Helmet>
+          <title>Search {searchTerm} | Mantra Seeds</title>
+          <meta
+            name="description"
+            content={`Search results for ${searchTerm}`}
+          />        
+        </Helmet>
         <h1>Search Results</h1>
         <h2>{`We found ${results} results for ${searchTerm}`}</h2>
         <div className="admin-page-results-container">
