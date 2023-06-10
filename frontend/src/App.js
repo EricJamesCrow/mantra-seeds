@@ -3,7 +3,7 @@ import { Route, Routes, Navigate, useLocation } from 'react-router-dom'
 import React, { useEffect } from 'react';
 
 // Google Analytics
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 
 // redux
 import { useDispatch } from 'react-redux';
@@ -86,8 +86,7 @@ function App() {
 
   useEffect(() => {
     // This code logs the page view to Google Analytics whenever the location changes
-    ReactGA.set({ page: location.pathname });
-    ReactGA.pageview(location.pathname);
+    ReactGA.send(location.pathname);
   }, [location]);
 
 
