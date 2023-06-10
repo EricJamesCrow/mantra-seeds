@@ -75,9 +75,9 @@ export default function NewProductPage() {
         <div className="num-of-reviews">{productReviews.length} reviews</div>
         </div>
         <div className="product-details">
-        <div>{product.name}</div>
-        <div>{`$${price}`}</div>
-        <div>{product.description}</div>
+            <h1>{product.name}</h1>
+            <div>{`$${price}`}</div>
+            <div>{product.description}</div>
         </div>
         <div className="product-details-page-functionality">
             {inStock ? (<div className="adjust-quantity-container">

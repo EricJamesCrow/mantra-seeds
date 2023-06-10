@@ -30,7 +30,7 @@
     font-size: 20px;
 }
 
-.product-details-information-container > .product-details > div:first-child {
+.product-details-information-container > .product-details > h1 {
     margin-top: 0.75rem;
 }
 
@@ -170,7 +170,7 @@
     .rating > .num-of-reviews {
         /* font-size: 20px; */
     }
-    .product-details-information-container > .product-details > div:first-child {
+    .product-details-information-container > .product-details > h1 {
         font-size: 36px;
     }
     
