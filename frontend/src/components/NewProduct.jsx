@@ -40,7 +40,7 @@ export default function NewProduct( { product, reviews } ) {
                     }}
                     />
                 ))}
-                <div className="num-of-reviews">{productReviews.length} reviews</div>
+                <div className="num-of-reviews product-card">{productReviews.length} reviews</div>
             </div>
             <Link to={`/shop/products/${product._id}`} style={{ textDecoration: "none", color: "inherit"}}>{product.name}</Link>
             <div>{`$${price}`}</div>

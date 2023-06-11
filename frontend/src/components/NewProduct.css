@@ -43,6 +43,10 @@
     align-items: center;
 }
 
+.num-of-reviews.product-card {
+    margin-top: 0.3rem;
+}
+
 .product-card-container .add-to-cart-btn {
     margin-top: 0.5rem;
     height: 42px;
