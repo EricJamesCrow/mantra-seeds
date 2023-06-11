@@ -39,7 +39,8 @@ export default function RequestResetPassword() {
         <meta
           name="description"
           content="Enter your email and click the link below to request a password reset."
-        />        
+        />
+        <link rel="canonical" href="https://mantra-seeds.com/reset-password" />        
       </Helmet>
     <button className="details-page-btn" onClick={() => navigate(-1)}>
       <FontAwesomeIcon 

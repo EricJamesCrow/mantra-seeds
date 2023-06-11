@@ -57,7 +57,8 @@ export default function NewProductPage() {
           <meta
             name="description"
             content={product.description}
-          />        
+          />
+          <link rel="canonical" href={`https://mantra-seeds.com/shop/products/${id}`} />        
         </Helmet>
     <button className="details-page-btn" onClick={() => navigate(-1)} aria-label="Go to previous page">
     <FontAwesomeIcon 

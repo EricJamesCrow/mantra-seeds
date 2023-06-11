@@ -14,7 +14,8 @@ export default function TermsAndConditions() {
           <meta
             name="description"
             content="Review our terms and conditions to understand the rules and guidelines for using our services and purchasing our products."
-          />        
+          />  
+          <link rel="canonical" href="https://mantra-seeds.com/privacy-policy" />      
         </Helmet>
         <h1>Terms and Conditions</h1>
         <div className="terms-and-conditions-content">

@@ -40,7 +40,8 @@ export default function Login() {
           <meta
             name="description"
             content="Access your account to manage your orders and update your profile."
-          />        
+          /> 
+          <link rel="canonical" href="https://mantra-seeds.com/login" />       
       </Helmet>
       <button className="details-page-btn" onClick={() => navigate("/")} aria-label="Return to home page">
         <FontAwesomeIcon 

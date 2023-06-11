@@ -49,7 +49,7 @@ export default function Search() {
           <meta
             name="description"
             content={`Search results for ${searchTerm}`}
-          />        
+          />      
         </Helmet>
         <h1>Search Results</h1>
         <h2>{`We found ${results} results for ${searchTerm}`}</h2>

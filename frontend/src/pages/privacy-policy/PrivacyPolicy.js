@@ -14,7 +14,8 @@ export default function PrivacyPolicy() {
           <meta
             name="description"
             content="We are committed to protecting your privacy. Learn how we collect, use, and protect your personal information."
-          />        
+          />   
+          <link rel="canonical" href="https://mantra-seeds.com/privacy-policy" />     
         </Helmet>
         <h1>Privacy Policy</h1>
         <div className="privacy-policy-content">

@@ -36,6 +36,7 @@ export default function Home() {
             name="description"
             content="Mantra Seeds offers a wide variety of high-quality distinctive seeds and other types of seeds for all your gardening needs. Browse our collection and order online today."
           />
+          <link rel="canonical" href="https://mantra-seeds.com/" />
         </Helmet>
         <div className="landing-page-text">
             <div>Handcrafted Seeds</div>

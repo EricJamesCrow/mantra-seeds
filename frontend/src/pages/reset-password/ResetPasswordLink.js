@@ -7,6 +7,9 @@ import useResetPassword from '../../hooks/useResetPassword'
 // chakra ui
 import { Input } from '@chakra-ui/react'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 const CUSTOMERS_API_URL = '/api/user'
 
 export default function ChangePassword() {
@@ -48,6 +51,13 @@ export default function ChangePassword() {
 
   return (
       <div className="login-container admin-orders-details-page-container">
+        <Helmet>
+          <title>New Password | Mantra Seeds</title>
+          <meta
+          name="description"
+          content="Enter your new password and confirm it to reset your password."
+        />
+        </Helmet>
       <div className="change-password-wrapper">
         <form onSubmit={handleSubmit}>
         <div className="login-fields-container">

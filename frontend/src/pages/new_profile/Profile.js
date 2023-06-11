@@ -52,7 +52,8 @@ export default function Profile() {
           <meta
             name="description"
             content={`Welcome back ${user.email}!`}
-          />        
+          /> 
+          <link rel="canonical" href="https://mantra-seeds.com/profile" />       
         </Helmet>
         {showAlert && 
         <Alert status='warning' className='alert-banner'>

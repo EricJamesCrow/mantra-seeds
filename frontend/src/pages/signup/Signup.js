@@ -40,7 +40,8 @@ export default function Signup() {
           <meta
             name="description"
             content="Create a new account with Mantra Seeds and join our community."
-          />        
+          /> 
+          <link rel="canonical" href="https://mantra-seeds.com/signup" />       
       </Helmet>
       <button className="details-page-btn" onClick={() => navigate("/")} aria-label="Return to home page">
         <FontAwesomeIcon 
