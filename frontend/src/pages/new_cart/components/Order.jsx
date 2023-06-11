@@ -11,6 +11,7 @@ import { debounce } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteItem, updateCart } from '../../../redux/slices/cartSlice'
 import { setRemovedItem, setRemovedItemName } from '../../../redux/slices/notificationsSlice';
+import { setError, setErrorName } from '../../../redux/slices/notificationsSlice';
 
 // hooks
 import { useCart } from '../../../hooks/useCart'
@@ -58,6 +59,14 @@ export default function Order( {item, user, setUpdatingSubtotal }) {
             if(response.ok) {
                 dispatch(updateCart(json));
                 setUpdatingSubtotal(false)
+            }
+            if(!response.ok) {
+                dispatch(setError(true));
+                dispatch(setErrorName('Requested quantity exceeds available stock.'));
+                setTimeout(() => {
+                    dispatch(setError(false));
+                    dispatch(setErrorName(''));
+                }, 3000);    
             }
     }, 500), [product]);
 
