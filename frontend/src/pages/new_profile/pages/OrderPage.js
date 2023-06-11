@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useMediaQuery } from 'react-responsive';
@@ -15,10 +15,41 @@ export default function OrderPage() {
     const { id } = useParams()
     const navigate = useNavigate();
     const { products } = useSelector(state => state.products)
-    const orders  = useSelector(state => state.orders.orders)
+    const orders = useSelector(state => state.orders.orders)
+    const [enrichedItems, setEnrichedItems] = useState(null);
+
+    const fetchProduct = async (id) => {
+      const response = await fetch(`/api/products/${id}`)
+      const json = await response.json()
+      return json
+    }
+    
+    useEffect(() => {
+      if (products && orders) {
+          const order = orders.find(o => o._id === id);
+          if(!order) return// This is needed to prevent the page from crashing when the order is not loaded yet.
+          const enrichedItemsPromises = order.items.map(async item => {
+              let product = products.find(p => p._id === item.product);
   
+              // If the product isn't found in the products array, fetch it from the API
+              if (!product) {
+                  product = await fetchProduct(item.product);
+              }
+  
+              return { ...item, product };
+          });
+  
+          // Since fetching product data is asynchronous, we need to use Promise.all to wait for all promises to resolve.
+          Promise.all(enrichedItemsPromises)
+              .then(enrichedItems => {
+                  setEnrichedItems(enrichedItems);
+              });
+      }
+    }, [products, orders, id]);
+
     if(!orders || !products) return <Loading/> // This is needed to prevent the page from crashing when the orders are not loaded yet.
     const order = orders.find(o => o._id === id)
+    if(!order || !enrichedItems) return <Loading/> // This is needed to prevent the page from crashing when the order is not loaded yet.
   
     const { firstName, lastName, state, city, street, zip } = order.address
     const formattedAddress = `<div><span style="display: inline-block">${firstName} ${lastName}</span><br>${street}<br>${city}, ${state} ${zip}<br>United States</div>`
@@ -103,15 +134,17 @@ export default function OrderPage() {
                 <div>Order</div>
               </div>
               <div className='admin-order-details-page-order-images-container'>
-              {items.map(item => (<div className="admin-order-details-page-order-details">
+              {enrichedItems && enrichedItems.map(item => (
+              <div className="admin-order-details-page-order-details">
               <div>
-              <img src={products.find(p => p._id === item.product).image} alt={products.find(p => p._id === item.product).name}/>
+                <img src={item?.product?.image ?? null} alt={item?.product?.name ?? null}/>
               </div>
-              <div>{products.find(p => p._id === item.product).name}</div>
-              <div>${(item.price / 100).toFixed(2)}</div>
-              <div>Quantity: {item.quantity}</div>
-              </div>))}
+              <div>{item?.product?.name ?? null}</div>
+                <div>${(item.price / 100).toFixed(2)}</div>
+                <div>Quantity: {item.quantity}</div>
               </div>
+            ))}
+            </div>
             <div className={`order-customer-card-details-order-details-address gray`}>
               <div>Shipping Address</div>
               <div dangerouslySetInnerHTML={{ __html: formattedAddress }}></div>
@@ -152,15 +185,17 @@ export default function OrderPage() {
                           <div>Order</div>
                         </div>
                         <div className='admin-order-details-page-order-images-container'>
-                        {items.map(item => (<div className="admin-order-details-page-order-details">
+                      {enrichedItems && enrichedItems.map(item => (
+                        <div className="admin-order-details-page-order-details">
                         <div>
-                        <img src={products.find(p => p._id === item.product).image} alt={products.find(p => p._id === item.product).name}/>
+                          <img src={item?.product?.image ?? null} alt={item?.product?.name ?? null}/>
                         </div>
-                        <div>{products.find(p => p._id === item.product).name}</div>
-                        <div>${(item.price / 100).toFixed(2)}</div>
-                        <div>Quantity: {item.quantity}</div>
-                        </div>))}
+                        <div>{item?.product?.name ?? null}</div>
+                          <div>${(item.price / 100).toFixed(2)}</div>
+                          <div>Quantity: {item.quantity}</div>
                         </div>
+                      ))}
+                      </div>
                     </div>
                   </div>
                   <div className="second-wrapper-admin-orders">
