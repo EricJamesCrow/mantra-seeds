@@ -112,7 +112,7 @@
         margin: 0 1rem;
     }
 
-    .shop-container > div:first-child {
+    .shop-container > h1 {
         font-size: 48px;
     }
 
