@@ -89,6 +89,11 @@ function App() {
   //   ReactGA.send(location.pathname);
   // }, [location]);
 
+  useEffect(() => {
+    const overlay = document.querySelector('.admin-products-overlay');
+    overlay.classList.toggle('show', false);
+  }, [location])
+
 
   const fetchUser = async (user) => {
   try {
