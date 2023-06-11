@@ -37,7 +37,7 @@ const addToNewsletter = async (req, res) => {
         res.status(200).json({ success: `${email} added to the newsletter!` })
     }
     catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ message: "Email is required." })
     }
 };
 
