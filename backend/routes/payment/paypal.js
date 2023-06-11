@@ -84,7 +84,15 @@ const checkInventory = async (cartId) => {
       // Iterate over cart items from the database
       for (const item of cart.cartItems) {
         const product = await Product.findById(item.product);
-        if (!product || (product.quantity - product.reserved) < item.quantity) {
+        if (!product) {
+          console.log(`Product not found for item: ${item.name}`);
+          return false;
+        }
+  
+        const reserved = item.reservationTimestamp === null ? product.reserved : 0;
+  
+        if ((product.quantity - reserved) < item.quantity) {
+          console.log(`Insufficient quantity for product: ${item.name}`);
           return false;
         }
   
@@ -102,6 +110,7 @@ const checkInventory = async (cartId) => {
       return true;
     } catch (error) {
       console.log(error);
+      console.log("check intentory failed")
       return false;
     }
   };

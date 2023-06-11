@@ -15,7 +15,15 @@ const checkInventory = async (req, res) => {
     // Iterate over cart items from the database
     for (const item of cart.cartItems) {
       const product = await Product.findById(item.product);
-      if (!product || (product.quantity - product.reserved) < item.quantity) {
+      if (!product) {
+        return res.status(400).json({
+          error: `Product not found for item: ${item.name}`,
+        });
+      }
+
+      const reserved = item.reservationTimestamp === null ? product.reserved : 0;
+
+      if ((product.quantity - reserved) < item.quantity) {
         return res.status(400).json({
           error: `Insufficient quantity for product: ${item.name}`,
         });
@@ -40,6 +48,7 @@ const checkInventory = async (req, res) => {
     });
   }
 };
+
 
 module.exports = {
   checkInventory,

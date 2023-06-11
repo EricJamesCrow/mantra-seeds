@@ -14,11 +14,11 @@ const updateItemQuantity = async (req, res) => {
     if (isNaN(quantity) || typeof quantity !== 'number' || quantity < 1) {
       return res.status(400).json({ error: "Invalid quantity" });
     }
-
+  
     const foundProduct = await Product.findById(product);
-
+  
     if (!foundProduct) {
-        return res.status(404).json({ error: "Invalid product" });
+      return res.status(404).json({ error: "Invalid product" });
     }
   
     try {
@@ -32,34 +32,34 @@ const updateItemQuantity = async (req, res) => {
         if (!cartItem) {
           return res.status(404).json({ error: "Item not found in cart" });
         } else {
+          const reserved = cartItem.reservationTimestamp === null ? foundProduct.reserved : 0;
           
-        if (quantity > foundProduct.quantity - foundProduct.reserved) {
+          if (quantity > foundProduct.quantity - reserved) {
             return res.status(400).json({ error: "Requested quantity exceeds available stock" });
-        }
-
+          }
+  
           cart.subtotal -= cartItem.price * cartItem.quantity;
           
           if(cartItem.reservationTimestamp === null) {
             cartItem.reservationTimestamp = new Date();
             foundProduct.reserved += cartItem.quantity;
-            }
+          }
           
           foundProduct.reserved -= cartItem.quantity;
           foundProduct.reserved += quantity;
           await foundProduct.save();
-
+  
           for (const item of cart.cartItems) {
             if (!item.product.equals(product)) {
-                if (item.reservationTimestamp === null) {
-                    item.reservationTimestamp = new Date();
-                    const otherProduct = await Product.findById(item.product);
-                    otherProduct.reserved += item.quantity;
-                    await otherProduct.save();
-                }
+              if (item.reservationTimestamp === null) {
+                item.reservationTimestamp = new Date();
+                const otherProduct = await Product.findById(item.product);
+                otherProduct.reserved += item.quantity;
+                await otherProduct.save();
+              }
             }
-        }
-        
-
+          }
+  
           cartItem.quantity = quantity;
           cart.subtotal += cartItem.price * cartItem.quantity;
           cartItem.reservationTimestamp = Date.now();
@@ -70,7 +70,7 @@ const updateItemQuantity = async (req, res) => {
         }
       }
     } catch (error) {
-        console.log(error);
+      console.log(error);
       return res.status(500).json({ error });
     }
   };
