@@ -11,6 +11,9 @@ import { Input } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
+// react helmet
+import { Helmet } from 'react-helmet-async';
+
 export default function RequestResetPassword() {
     // for back button  
     const navigate = useNavigate();
@@ -31,6 +34,13 @@ export default function RequestResetPassword() {
     
   return (
     <div className="login-container admin-orders-details-page-container">
+      <Helmet>
+        <title>Forgot Password | Mantra Seeds</title>
+        <meta
+          name="description"
+          content="Enter your email and click the link below to request a password reset."
+        />        
+      </Helmet>
     <button className="details-page-btn" onClick={() => navigate(-1)}>
       <FontAwesomeIcon 
         icon={faChevronLeft} 
