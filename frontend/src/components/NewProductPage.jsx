@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useParams, useNavigate} from 'react-router-dom'
+
+// chakra ui
+import { Input } from '@chakra-ui/react'
 
 //redux
 import { useSelector } from 'react-redux'
@@ -41,7 +44,9 @@ export default function NewProductPage() {
     const averageRating = productReviews.length > 0 ? (totalRating / productReviews.length).toFixed(1) : 0;
 
     const handleQuantityIncrease = () => {
-        setQuantity(quantity + 1)
+        if(quantity + 1 <= product.quantity) {
+            setQuantity(quantity + 1)
+        }
     }
 
     const handleQuantityDecrease = () => {
@@ -49,6 +54,23 @@ export default function NewProductPage() {
             setQuantity(quantity - 1)
         }
     }
+
+    // quantity input functionality
+    const handleInput = (e) => {
+        const inputValue = parseInt(e.target.value, 10);
+        if (inputValue > 0 && inputValue <= product.quantity) {
+          setQuantity(inputValue); // Clear the input value
+        }
+      };
+
+    const validateInput = (e) => {
+        const inputValue = e.target.value;
+        const isValid = inputValue >= 1 && inputValue <= product.quantity;
+        if (!isValid) {
+            e.target.value = inputValue.slice(0, -1); // Remove the last character if it's not valid
+        }
+        };
+          
 
   return (
     <div className="admin-orders-details-page-container">
@@ -97,7 +119,7 @@ export default function NewProductPage() {
                 <button className="adjust-quantity-btn" onClick={handleQuantityDecrease} aria-label="Decrease Quantity">
                     <div>-</div>
                 </button>
-                <div>{quantity}</div>
+                <Input placeholder={quantity} onInput={handleInput} onChange={validateInput} size='xs'/>
                 <button className="adjust-quantity-btn" onClick={handleQuantityIncrease} aria-label="Increase Quantity">
                     <div>+</div>
                 </button>
