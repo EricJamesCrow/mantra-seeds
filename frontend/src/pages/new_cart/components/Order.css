@@ -83,11 +83,13 @@
     align-items: center;
 }
 
-.order-adjust-quantity-container> .order-adjust-quantity > div {
+.order-adjust-quantity-container> .order-adjust-quantity > input {
     font-family: 'Roboto';
     font-weight: 500;
     font-size: 14px;
     color: #1A202C;
+    text-align: center;
+    width: 35px;
 }
 
 .order-adjust-quantity-container > .order-adjust-quantity > .order-adjust-quantity-btn {

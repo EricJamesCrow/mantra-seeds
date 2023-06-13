@@ -2,6 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
 // chakra ui
+import { Input } from '@chakra-ui/react'
+
+// chakra ui
 import { DeleteIcon } from '@chakra-ui/icons'
 
 // lodash
@@ -77,6 +80,23 @@ export default function Order( {item, user, setUpdatingSubtotal }) {
         updateQuantity(newQuantity);
       };
 
+          // quantity input functionality
+    const handleInput = (e) => {
+        const inputValue = parseInt(e.target.value, 10);
+        if (inputValue > 0 && inputValue <= product.quantity) {
+          setQuantity(inputValue); // Clear the input value
+          updateQuantity(inputValue);
+        }
+      };
+
+    const validateInput = (e) => {
+        const inputValue = e.target.value;
+        const isValid = inputValue >= 1 && inputValue <= product.quantity;
+        if (!isValid) {
+            e.target.value = inputValue.slice(0, -1); // Remove the last character if it's not valid
+        }
+        };
+
   return (
     <div className="cart-order-container">
         <div className="cart-order-details-container">
@@ -98,7 +118,7 @@ export default function Order( {item, user, setUpdatingSubtotal }) {
                                 <button className="order-adjust-quantity-btn" onClick={() => handleQuantityChange(-1)} aria-label={`Decrease quantity for ${product.name}`}>
                                     <div>-</div>
                                 </button>
-                                <div>{quantity}</div>
+                                <Input placeholder={quantity} onInput={handleInput} onChange={validateInput} size='xs'/>
                                 <button className="order-adjust-quantity-btn" onClick={() => handleQuantityChange(1)} aria-label={`Increase quantity for ${product.name}`}>
                                     <div>+</div>
                                 </button>
