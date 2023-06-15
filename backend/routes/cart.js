@@ -6,6 +6,9 @@ const { addItemToCart,
     updateItemQuantity } = require('../controllers/cartController')
 const router = express.Router()
 
+// auth middleware
+const requireAdmin = require('../middleware/requireAdmin')
+
 // update quantity
 router.put('/:id', updateItemQuantity); 
 
@@ -19,6 +22,6 @@ router.post('/:id', removeItemFromCart)
 router.get('/:id', getUserCart)
 
 // get all cart items
-router.get('/', getAllCarts)
+router.get('/', requireAdmin, getAllCarts)
 
 module.exports = router
