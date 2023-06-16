@@ -133,9 +133,9 @@ const signupUser = async (req, res) => {
         const id = user._id;
         const emailConfirmed = user.emailConfirmed;
 
-        res.status(200).json({id, email, token, emailConfirmed});
+        return res.status(200).json({id, email, token, emailConfirmed});
     } catch (error) {
-        res.status(400).json({error: error.message})
+        return res.status(400).json({error: error.message})
     }
 }
   
@@ -146,9 +146,9 @@ const fetchUser = async (req, res) => {
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
-        res.status(200).json(user);
+        return res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ error });
+        return res.status(500).json({ error });
     }
 };
 
@@ -185,9 +185,9 @@ const fetchUsers = async (req, res) => {
             usersWithOrderCount.push(userWithOrderCount);
         }
 
-        res.status(200).json(usersWithOrderCount);
+        return res.status(200).json(usersWithOrderCount);
     } catch (error) {
-        res.status(500).json({ error });
+        return res.status(500).json({ error });
     }
 };
 
@@ -232,7 +232,7 @@ const changePassword = async (req, res) => {
             return res.status(200).json({message: 'Password changed successfully', user: {id, email, cart, token}});
         }
     } catch (error) {
-        res.status(400).json({error: 'Server error'});
+        return res.status(400).json({error: 'Server error'});
     }
 };
 
@@ -269,9 +269,9 @@ const requestResetPassword = async (req, res) => {
         };
 
         await sendEmail(emailParams);
-        res.status(200).json({ message: 'Password reset link sent to email' });
+        return res.status(200).json({ message: 'Password reset link sent to email' });
     } catch (error) {
-        res.status(500).json({ error: 'An error occurred while processing the request' });
+        return res.status(500).json({ error: 'An error occurred while processing the request' });
     }
 };
 
@@ -288,7 +288,7 @@ const checkResetPasswordToken = async (req, res) => {
         }
         return res.status(200).json({ message: 'Valid token' });
     } catch (error) {
-        res.status(500).json({ error: 'An error occurred while processing the request' });
+        return res.status(500).json({ error: 'An error occurred while processing the request' });
     }
 };
 
@@ -330,7 +330,7 @@ const resetPassword = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: 'An error occurred while processing the request' });
+        return res.status(500).json({ error: 'An error occurred while processing the request' });
     }
 };
 
@@ -338,20 +338,20 @@ const confirmAccount = async (req, res) => {
     const { token } = req.params;
   
     try {
-    const user = await User.findOne({ confirmationToken: { $exists: true, $ne: null, $eq: token } });
+        const user = await User.findOne({ confirmationToken: { $exists: true, $ne: null, $eq: token } });
 
-    if (!user) {
-        return res.status(400).json(error);
-    }
-  
-      user.emailConfirmed = true;
-      user.confirmationToken = null;
-      await user.save();
+        if (!user) {
+            return res.status(400).json(error);
+        }
+    
+        user.emailConfirmed = true;
+        user.confirmationToken = null;
+        await user.save();
 
-      const emailConfirmed = user.emailConfirmed;
-      res.status(200).json({ emailConfirmed}); 
+        const emailConfirmed = user.emailConfirmed;
+        return res.status(200).json({ emailConfirmed}); 
     } catch (error) {
-      res.status(500).json(error);
+      return res.status(500).json(error);
     }
   };
 
@@ -370,9 +370,9 @@ const banUser = async (req, res) => {
         }
         user.isBanned = true;
         await user.save();
-        res.status(200).json({ message: `User ${id} has been banned` });
+        return res.status(200).json({ message: `User ${id} has been banned` });
     } catch (error) {
-        res.status(500).json({ error: `An error occurred while processing the request to ban user: ${id}` });
+        return res.status(500).json({ error: `An error occurred while processing the request to ban user: ${id}` });
     }
 };
 
@@ -391,9 +391,9 @@ const promoteUser = async (req, res) => {
         }
         user.role = 1;
         await user.save();
-        res.status(200).json({ message: `User ${id} has been promoted to admin` });
+        return res.status(200).json({ message: `User ${id} has been promoted to admin` });
     } catch (error) {
-        res.status(500).json({ error: `An error occurred while processing the request to promote user: ${id}` });
+        return res.status(500).json({ error: `An error occurred while processing the request to promote user: ${id}` });
     }
 }
 

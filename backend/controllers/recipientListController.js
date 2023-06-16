@@ -1,5 +1,4 @@
 const RecipientList = require('../models/recipientListModel')
-const mongoose = require('mongoose')
 
 const addToNewsletter = async (req, res) => {
     const { email } = req.body;

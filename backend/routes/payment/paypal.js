@@ -8,6 +8,7 @@ const axios = require('axios');
 const { decrypt, decryptAddress } = require('../../helpers/encryption-helper');
 
 // models
+const mongoose = require('mongoose')
 const Product = require('../../models/productModel')
 const Cart = require('../../models/cartModel')
 const Order = require('../../models/orderModel')
@@ -77,14 +78,25 @@ const createOrder = async (req, res) => {
 }
 
 const checkInventory = async (cartId) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
     try {
       // Fetch the cart from MongoDB
-      const cart = await Cart.findById(cartId);
+      const cart = await Cart.findById(cartId).session(session);
+
+      if (!cart) {
+        await session.abortTransaction();
+        session.endSession();
+        return false;
+      }
   
       // Iterate over cart items from the database
       for (const item of cart.cartItems) {
-        const product = await Product.findById(item.product);
+        const product = await Product.findById(item.product).session(session);
         if (!product) {
+          await session.abortTransaction();
+          session.endSession();
           console.log(`Product not found for item: ${item.name}`);
           return false;
         }
@@ -92,6 +104,8 @@ const checkInventory = async (cartId) => {
         const reserved = item.reservationTimestamp === null ? product.reserved : 0;
   
         if ((product.quantity - reserved) < item.quantity) {
+          await session.abortTransaction();
+          session.endSession();
           console.log(`Insufficient quantity for product: ${item.name}`);
           return false;
         }
@@ -100,18 +114,21 @@ const checkInventory = async (cartId) => {
         if (item.reservationTimestamp === null) {
           item.reservationTimestamp = new Date();
           product.reserved += item.quantity;
-          await product.save();
+          await product.save({ session });
         }
       }
   
       cart.markModified('cartItems');
-      await cart.save();
-  
+      await cart.save({ session });
+      await session.commitTransaction();
       return true;
     } catch (error) {
+      await session.abortTransaction();
       console.log(error);
       console.log("check intentory failed")
       return false;
+    } finally {
+        session.endSession();
     }
   };
   

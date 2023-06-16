@@ -8,7 +8,6 @@ const {
 } = require("../controllers/productController")
 const requireAuth = require('../middleware/requireAuth')
 const requireAdmin = require('../middleware/requireAdmin')
-// const removeEXIF = require('../middleware/removeEXIF')
 const multer = require('multer')
 const storage = multer.memoryStorage();
 const upload = multer({ storage }); // can use fileFilter to filter out files that are not images

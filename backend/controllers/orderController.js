@@ -7,58 +7,73 @@ const deliveryStatusEmail = require('../email_templates/delivery-status');
 
 const getOrder = async (req, res) => {
     const { id } = req.params;
-    const order = await getOrderWithTransaction(id);
 
-    if (!order) {
-        return res.status(404).json({ error: 'No such order' });
+    try {
+      const order = await getOrderWithTransaction(id);
+
+      if (!order) {
+          return res.status(404).json({ error: 'No such order' });
+      }
+
+      // check the user role
+      if (req.role !== 1 && req.user._id.toString() !== order.user.toString()) {
+          return res.status(401).json({ error: 'You are not authorized to access this order' });
+      }
+
+      const address = order.address;
+      order.address = decryptAddress(address);
+      const email = order.email;
+      order.email = decrypt(email);
+
+      return res.status(200).json(order);
+    } catch (err) {
+      console.log(err)
+      return res.status(500).json({ error: err.message });
     }
-
-    // check the user role
-    if (req.role !== 1 && req.user._id.toString() !== order.user.toString()) {
-        return res.status(401).json({ error: 'You are not authorized to access this order' });
-    }
-
-    const address = order.address;
-    order.address = decryptAddress(address);
-    const email = order.email;
-    order.email = decrypt(email);
-
-    res.status(200).json(order);
 };
 
 const getAllUserOrders = async (req, res) => {
   const { id } = req.params;
-  const orders = await Order.aggregate([
-    {
-      $match: {
-        user: new mongoose.Types.ObjectId(id),
-      },
-    },
-    {
-      $lookup: {
-        from: 'transactions',
-        localField: 'transaction',
-        foreignField: '_id',
-        as: 'transaction',
-      },
-    },
-    {
-      $unwind: '$transaction',
-    },
-  ]);
 
-  if (!orders) {
-    return res.status(404).json({ error: 'No orders found for this user' });
+  if (req.role !== 1 && req.user._id.toString() !== id) {
+    return res.status(401).json({ error: 'You are not authorized to access these orders' });
   }
+  try {
+    const orders = await Order.aggregate([
+      {
+        $match: {
+          user: new mongoose.Types.ObjectId(id),
+        },
+      },
+      {
+        $lookup: {
+          from: 'transactions',
+          localField: 'transaction',
+          foreignField: '_id',
+          as: 'transaction',
+        },
+      },
+      {
+        $unwind: '$transaction',
+      },
+    ]);
 
-  orders.forEach(order => {
-    const address = order.address;
-    order.address = decryptAddress(address);
-    const email = order.email;
-    order.email = decrypt(email);
-  });
+    if (!orders) {
+      return res.status(404).json({ error: 'No orders found for this user' });
+    }
 
-  res.status(200).json(orders);
+    orders.forEach(order => {
+      const address = order.address;
+      order.address = decryptAddress(address);
+      const email = order.email;
+      order.email = decrypt(email);
+    });
+
+    return res.status(200).json(orders);
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ error: err.message });
+  }
 };
 
 
@@ -96,10 +111,10 @@ const getAllOrders = async (req, res) => {
       order.email = decrypt(email);
     });
 
-    res.status(200).json(orders);
+    return res.status(200).json(orders);
   } catch (err) {
     console.log(err)
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 };
 
@@ -159,11 +174,11 @@ const updateDeliveryStatus = async (req, res) => {
       
       await sendEmail(emailParams);
   
-      res.status(200).json({ order: updatedOrderWithTransaction, message: `Order: ${id} delivery status updated to ${status}`} );
+      return res.status(200).json({ order: updatedOrderWithTransaction, message: `Order: ${id} delivery status updated to ${status}`} );
     } catch (error) {
       // Handle any errors that occurred during the update
       console.log(error);
-      res.status(500).json({ error: "Error updating delivery status" });
+      return res.status(500).json({ error: "Error updating delivery status" });
     }
 };
 

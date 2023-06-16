@@ -231,14 +231,17 @@ const getUserCart = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No such cart'})
     }
+    try {
+      const cart = await Cart.findById(id)
 
-    const cart = await Cart.findById(id)
+      if (!cart) {
+          return res.status(404).json({error: 'No such cart'})
+      }
 
-    if (!cart) {
-        return res.status(404).json({error: 'No such cart'})
+      res.status(200).json(cart)
+    } catch (error) {
+        return res.status(500).json({ error });
     }
-
-    res.status(200).json(cart)
 };
 
 const getAllCarts = async (req, res) => {

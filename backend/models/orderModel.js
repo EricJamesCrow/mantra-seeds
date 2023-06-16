@@ -139,28 +139,41 @@ const generateOrderDetailsHtml = (items) => {
     }).join('');
   };
 
-orderSchema.statics.updateInventory = async function(items, cartId) {
+  orderSchema.statics.updateInventory = async function(items, cartId) {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+  
     try {
-      const cart = await Cart.findById(cartId);
+      const cart = await Cart.findById(cartId).session(session);
+      
       for (const item of items) {
-        const product = await Product.findById(item.product);
+        const product = await Product.findById(item.product).session(session);
+        
         if (product) {
           product.quantity -= item.quantity;
           product.reserved -= item.quantity;
-          await product.save();
+          await product.save({ session });
+  
           const cartItem = cart.cartItems.find(c => c.product._id.equals(item.product));
           if (cartItem) {
-              cartItem.reservationTimestamp = null;
+            cartItem.reservationTimestamp = null;
           }
         }
       }
+  
       cart.markModified('cartItems');
-      await cart.save();
+      await cart.save({ session });
+  
+      await session.commitTransaction();
     } catch (error) {
       console.log(error);
+      await session.abortTransaction();
       throw error;
+    } finally {
+      session.endSession();
     }
-};
+  };
+  
   
 orderSchema.statics.createOrder = async (user, transaction, cart, address, items, email, shipping, total, checkInventoryResult) => {
 try {

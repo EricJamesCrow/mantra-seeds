@@ -12,29 +12,34 @@ const { resizeImage } = require('../helpers/sharp-helper');
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find({deleted: {$ne: true}}).sort({ createdAt: -1 });
-    res.status(200).json(products);
+    return res.status(200).json(products);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "An error occurred while retrieving the products." });
+    return res.status(500).json({ error: "An error occurred while retrieving the products." });
   }
 }
 
 // get a single product
 const getProduct = async (req, res) => {
-    const { id } = req.params
+  try {
+      const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such product'})
-    }
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+          return res.status(404).json({ error: 'No such product' });
+      }
 
-    const product = await Product.findById(id)
+      const product = await Product.findById(id);
 
-    if (!product) {
-        return res.status(404).json({error: 'No such product'})
-    }
+      if (!product) {
+          return res.status(404).json({ error: 'No such product' });
+      }
 
-    res.status(200).json(product)
-}
+      return res.status(200).json(product);
+  } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 // create new product
 const createProduct = async (req, res) => {
@@ -80,16 +85,17 @@ const createProduct = async (req, res) => {
     
       // Add product to database
       const product = await Product.create({ name, quantity, image: imageLocation, description, price, chakra });
-      res.status(200).json(product);
+      return res.status(200).json(product);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
 
   };
 
 // delete a product
 const deleteProduct = async (req, res) => {
+  try {
     const { id } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -102,12 +108,16 @@ const deleteProduct = async (req, res) => {
         return res.status(400).json({error: 'No such product'})
     }
 
-    res.status(200).json(product)
-
+    return res.status(200).json(product);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 }
 
 // update a product
 const updateProduct = async (req, res) => {
+  try {
     const { id } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -121,7 +131,11 @@ const updateProduct = async (req, res) => {
     if (!product) {
         return res.status(400).json({error: 'No such product'})
     }
-    res.status(200).json(product)
+    return res.status(200).json(product);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 }
 
 
