@@ -15,7 +15,7 @@ async function addToCart() {
 
   const page = await newContext.newPage();
   
-  await page.goto('http://localhost:3000/shop/products/646a666a41e3f8889dad1c6a');
+  await page.goto('https://test.mantra-seeds.com/shop/products/648a2eb430248cc08b9662e6');
   
   await page.click('.add-to-cart-btn'); // Replace with the actual selector of your "Add to Cart" button
   

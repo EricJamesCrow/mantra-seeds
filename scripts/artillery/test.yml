@@ -1,5 +1,5 @@
 config:
-  target: "http://localhost:3000/"
+  target: "https://test.mantra-seeds.com/"
   phases:
   - duration: 1
     arrivalRate: 40
