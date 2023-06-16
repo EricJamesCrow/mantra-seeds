@@ -1,21 +1,12 @@
 config:
-  target: "https://test.mantra-seeds.com/"
+  target: "http://localhost:3000/"
   phases:
-    - duration: 60
-      arrivalRate: 5
-      name: "Adding items to carts"
-  defaults:
-    headers:
-      Content-Type: "application/json"
+  - duration: 1
+    arrivalRate: 40
+  engines:
+    playwright: {}
+  processor: "../playwright/addToCart.js"
 scenarios:
-  - name: Add item to cart
-    flow:
-      - post:
-          url: "/api/carts/"
-          json:
-            id: null
-            user: null
-            cartItems: 
-              - product: "648a2eb430248cc08b9662e6"
-                quantity: 1
-                price: 100 # Assume a price here. Replace with actual one if necessary.
+  - engine: playwright
+    testFunction: "addToCart"
+
