@@ -126,7 +126,7 @@ export default function AddProduct( { setShowEditProduct, product }) {
   <div className="order-details-button-container create-product">
   <button 
   type="button"
-  className="order-details-button create-product"
+  className="order-details-button delivered"
   onClick={handleSubmit}>Save Changes</button>
 </div>
 </form>
