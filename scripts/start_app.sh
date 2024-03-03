@@ -2,7 +2,7 @@
 
 # Start the Node.js server with PM2, assuming the main entry point is named server.js
 cd /var/backend
-# testing
+# testing 123
 # npm_prefix=$(npm config get prefix)
 # export PATH=$PATH:${npm_prefix}/bin
 pm2 reload mantra-seeds-backend --update-env
